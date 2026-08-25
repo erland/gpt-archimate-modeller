@@ -2,7 +2,7 @@ project:
   id: archimate-yaml-ea-gpt
   name: ArchiMate YAML EA GPT
   package_type: gpt-development-project
-  project_version: 0.44.1
+  project_version: 0.44.2
   plan_step_completed: 44
   status: development
 architecture:
@@ -60,7 +60,7 @@ architecture:
   model_index_version: '0.1'
   user_documentation_version: '0.1'
   developer_documentation_version: '0.1'
-  release_candidate: 1.0.0-rc.3
+  release_candidate: 1.0.0-rc.4
   e2e_gpt_test_version: '0.1'
   distribution_packaging_version: '0.1'
 scope:

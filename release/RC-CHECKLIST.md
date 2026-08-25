@@ -1,4 +1,4 @@
-# Release candidate checklist — 1.0.0-rc.3
+# Release candidate checklist — 1.0.0-rc.4
 
 - [x] Canonical technical validation
 - [x] Reference projects

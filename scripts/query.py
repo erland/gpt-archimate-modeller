@@ -114,7 +114,7 @@ def main():
     ap.add_argument("project_dir"); ap.add_argument("query_file")
     ap.add_argument("--json",action="store_true"); ap.add_argument("--output")
     a=ap.parse_args()
-    logical,errors=assemble(Path(a.project_dir))
+    logical,errors,_load=load_model(Path(a.project_dir))
     if errors:
         print("FAILED")
         for e in errors: print("-",e)

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from pathlib import Path
-import argparse,datetime as dt,importlib.util,json,sys,tempfile,time,traceback,xml.etree.ElementTree as ET,yaml
+import argparse,datetime as dt,importlib.util,json,sys,tempfile,time,traceback,subprocess,xml.etree.ElementTree as ET,yaml
 ROOT=Path(__file__).resolve().parents[1]; SCRIPTS=ROOT/'scripts'; sys.path.insert(0,str(SCRIPTS))
 def lm(name,p):
     spec=importlib.util.spec_from_file_location(name,p); m=importlib.util.module_from_spec(spec); spec.loader.exec_module(m); return m
@@ -73,6 +73,17 @@ def build_tests(r):
             vr=compile_view.compile_view(logical,d,p,ref)['view_result']; ET.fromstring(export_diagram.build_drawio(vr,d)); assert export_diagram.build_mermaid(vr,d).startswith('flowchart '); vc+=1
         return {'queries':qc,'reports':rc,'views':vc}
     r.run('T-QRV-001','queries_reports_views',qrv)
+    def query_cli():
+        p=subprocess.run(
+            [sys.executable,str(SCRIPTS/'query.py'),str(ref),str(ROOT/'queries'/'all-elements.yaml'),'--json'],
+            cwd=ROOT,capture_output=True,text=True
+        )
+        assert p.returncode==0,(p.stdout,p.stderr)
+        payload=json.loads(p.stdout)
+        assert payload['query_result']['query_id']=='all-elements',payload
+        assert payload['query_result']['count']>=1,payload
+        return {'query_id':payload['query_result']['query_id'],'count':payload['query_result']['count']}
+    r.run('T-QRV-002','queries_reports_views',query_cli)
     def wf():
         spec=yaml.safe_load((ROOT/'examples'/'new-project'/'new-project.yaml').read_text())
         with tempfile.TemporaryDirectory() as td:

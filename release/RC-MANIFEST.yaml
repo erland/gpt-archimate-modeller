@@ -1,11 +1,11 @@
 release_candidate:
-  version: 1.0.0-rc.3
-  package_version: 0.44.1
+  version: 1.0.0-rc.4
+  package_version: 0.44.2
   plan_step_completed: 44
   created_date: '2026-08-25'
   canonical_contract_hashes:
   - path: project.yaml
-    sha256: 4ad0646c43262941bf97e1a35c0d121458cf2f3737531b11856cf6e802d4b0b8
+    sha256: 0fe69e98ff278f7f6337a9f0ff02cb759da7441fd5a58403bcfe92d67aa0117e
   - path: package/project-zip-contract.yaml
     sha256: fafcc5e45e59b06827bea01aabcb6a79f9fc18c10b64a29bd8e04ffa250aee4d
   - path: package/zip-robustness.yaml
