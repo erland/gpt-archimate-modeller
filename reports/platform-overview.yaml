@@ -1,0 +1,26 @@
+report:
+  id: platform-overview
+  title: Plattformsöversikt
+  sections:
+  - id: platforms
+    title: Plattformar
+    source:
+      query: queries/platforms.yaml
+    render:
+      type: table
+      columns:
+      - field: id
+        heading: ID
+        format: code
+      - field: name
+        heading: Namn
+        format: text
+      - field: properties.lifecycle
+        heading: Livscykel
+        format: text
+      - field: properties.owner
+        heading: Ägare
+        format: text
+      - field: properties.criticality
+        heading: Kritikalitet
+        format: text

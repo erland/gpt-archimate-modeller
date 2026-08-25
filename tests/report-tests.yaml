@@ -1,0 +1,26 @@
+report_format_version: '0.1'
+tests:
+- id: REPORT-001
+  description: Report references existing query
+  expected: enforced
+- id: REPORT-002
+  description: Table requires columns
+  expected: enforced
+- id: REPORT-003
+  description: List requires item_fields
+  expected: enforced
+- id: REPORT-004
+  description: Multiple sections supported
+  expected: supported
+- id: REPORT-005
+  description: Presentation sorting supported
+  expected: supported
+- id: REPORT-006
+  description: Grouping supported
+  expected: supported
+- id: REPORT-007
+  description: Summary can use query aggregation
+  expected: supported
+- id: REPORT-008
+  description: Report does not mutate model
+  expected: design_rule

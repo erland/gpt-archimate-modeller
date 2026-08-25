@@ -1,0 +1,22 @@
+release_candidate_version: 1.0.0-rc.3
+package_version: 0.44.1
+format_freeze:
+  status: candidate_frozen
+  rule: No breaking canonical format changes after RC without explicit RC reset.
+scope:
+  included: Steps 1-44
+  excluded: Steps 45-48
+release_gates:
+- canonical technical validation
+- reference projects
+- invalid fixtures
+- automated test suite
+- LLM eval catalog validation
+- user docs validation
+- developer docs validation
+- ZIP integrity
+- metadata consistency
+known_non_blockers:
+- Step 45 real EA pilot not yet executed
+- Step 46 format revision remains possible after pilot evidence
+- Step 47 backward compatibility hardening remains planned

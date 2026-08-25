@@ -1,0 +1,51 @@
+report:
+  id: lifecycle-overview
+  title: Lifecycle- och tidsöversikt
+  description: Objekt med planned, phase_out eller retired lifecycle.
+  metadata:
+    purpose: lifecycle_governance
+  sections:
+  - id: lifecycle
+    title: Lifecycle attention
+    source:
+      query: queries/lifecycle-attention.yaml
+    render:
+      type: table
+      columns:
+      - field: id
+        heading: ID
+        format: code
+      - field: type
+        heading: Typ
+        format: text
+      - field: name
+        heading: Namn
+        format: text
+      - field: properties.lifecycle
+        heading: Lifecycle
+        format: text
+      - field: temporal.valid_from
+        heading: Giltig från
+        format: text
+        default: —
+      - field: temporal.valid_to
+        heading: Giltig till
+        format: text
+        default: —
+      - field: temporal.planned_from
+        heading: Planerad från
+        format: text
+        default: —
+      - field: temporal.planned_to
+        heading: Planerad till
+        format: text
+        default: —
+      - field: temporal.retired_on
+        heading: Avvecklad
+        format: text
+        default: —
+      - field: temporal.status_source
+        heading: Tidsstatus
+        format: text
+        default: —
+    empty_message: Inga objekt kräver lifecycle-uppmärksamhet.

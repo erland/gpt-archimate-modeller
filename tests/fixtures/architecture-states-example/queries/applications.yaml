@@ -1,0 +1,17 @@
+query:
+  id: applications
+  title: Applikationer
+  select: elements
+  where:
+    type: ApplicationComponent
+  return:
+    fields:
+    - id
+    - type
+    - name
+    - specialization
+    - properties.lifecycle
+    - properties.owner
+  sort:
+  - field: name
+    direction: asc

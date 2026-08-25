@@ -1,0 +1,58 @@
+quality_profile_version: '0.1'
+score:
+  start: 100
+  deductions:
+    error: 10
+    warning: 3
+    info: 0.5
+  minimum: 0
+  maximum: 100
+checks:
+  Q-CONN-001:
+    enabled: true
+    severity: warning
+  Q-CAP-001:
+    enabled: true
+    severity: warning
+  Q-OWNER-001:
+    enabled: true
+    severity: warning
+  Q-EVID-001:
+    enabled: true
+    severity: warning
+  Q-EVID-002:
+    enabled: true
+    severity: info
+  Q-SRC-001:
+    enabled: true
+    severity: info
+  Q-DUP-001:
+    enabled: true
+    severity: warning
+  Q-BAL-001:
+    enabled: true
+    severity: warning
+  Q-BAL-002:
+    enabled: true
+    severity: warning
+  Q-REL-001:
+    enabled: true
+    severity: warning
+owner_recommended_types:
+- ApplicationComponent
+- Node
+- SystemSoftware
+- TechnologyService
+- BusinessProcess
+- Capability
+capability_support_relationships:
+- Realization
+- Serving
+- Assignment
+- Association
+precise_reference_source_types:
+- document
+- presentation
+- spreadsheet
+- repository
+- web

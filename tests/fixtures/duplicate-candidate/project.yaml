@@ -1,0 +1,40 @@
+format_version: '0.1'
+package_layout_version: '0.1'
+project:
+  id: example-enterprise-architecture
+  name: Exempelarkitektur
+  description: Uppdelat referensprojekt för package layout 0.1.
+  model_version: 0.1.0
+  created: '2026-08-25'
+  updated: '2026-08-25'
+  language: sv
+  archimate_version: '3.2'
+  tags:
+  - example
+  - split-layout
+files:
+  element_partitions:
+  - id: motivation
+    path: model/elements/motivation.yaml
+  - id: strategy
+    path: model/elements/strategy.yaml
+  - id: business
+    path: model/elements/business.yaml
+  - id: application
+    path: model/elements/application.yaml
+  - id: technology
+    path: model/elements/technology.yaml
+  - id: physical
+    path: model/elements/physical.yaml
+  - id: implementation-migration
+    path: model/elements/implementation-migration.yaml
+  - id: composite
+    path: model/elements/composite.yaml
+  relationships: model/relationships.yaml
+  sources: sources/sources.yaml
+  extensions: extensions/extensions.yaml
+  specializations: extensions/specializations.yaml
+  issues: issues/issues.yaml
+  identity_counters: identity/id-counters.yaml
+identity:
+  strategy_version: '0.1'

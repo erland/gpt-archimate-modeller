@@ -1,0 +1,44 @@
+view:
+  id: standard-capability-realization
+  title: Capability-realisering
+  description: Capabilities, applikationer och plattformar.
+  source:
+    query: queries/capabilities-applications-platforms.yaml
+  include_relationships: between_selected
+  layout:
+    direction: left_to_right
+    algorithm: layered
+  groups:
+  - id: capabilities
+    title: Capabilities
+    match:
+      types:
+      - Capability
+  - id: applications
+    title: Applikationer
+    match:
+      types:
+      - ApplicationComponent
+  - id: platforms
+    title: Plattformar
+    match:
+      specializations:
+      - Platform
+  - id: other-nodes
+    title: Övriga noder
+    match:
+      types:
+      - Node
+  nodes:
+    label:
+      primary: name
+      secondary:
+      - type
+      - specialization
+    show_properties:
+    - owner
+    - lifecycle
+  edges:
+    show_type: true
+    show_name: false
+    show_confidence: true

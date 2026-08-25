@@ -1,0 +1,26 @@
+project_zip_contract_version: '0.1'
+tests:
+- id: ZIP-001
+  description: Exactly one root
+  expected: enforced
+- id: ZIP-002
+  description: Required files
+  expected: enforced
+- id: ZIP-003
+  description: Required empty dirs
+  expected: enforced
+- id: ZIP-004
+  description: Supported versions
+  expected: enforced
+- id: ZIP-005
+  description: Manifest/checksum
+  expected: enforced
+- id: ZIP-006
+  description: Path traversal
+  expected: enforced
+- id: ZIP-007
+  description: Malformed project.yaml handled without crash
+  expected: enforced
+- id: ZIP-008
+  description: Unknown files warn
+  expected: supported

@@ -1,0 +1,14 @@
+query:
+  id: capabilities-applications-platforms
+  select: elements
+  where:
+    type_in:
+    - Capability
+    - ApplicationComponent
+    - Node
+  return:
+    fields:
+    - id
+    - type
+    - name
+    - specialization

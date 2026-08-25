@@ -1,0 +1,11 @@
+flowchart TB
+  subgraph G_motivation-strategy["Motivation & strategi"]
+    STR_000001["Ärendehantering<br/>Capability"]
+  end
+  subgraph G_application["Application"]
+    APP_000001["Ärendehanteringssystem<br/>ApplicationComponent<br/>BusinessApplication"]
+  end
+  subgraph G_technology-physical["Technology & physical"]
+    TEC_000001["Containerplattform<br/>Node<br/>Platform"]
+  end
+  APP_000001 -->|"Realization"| STR_000001

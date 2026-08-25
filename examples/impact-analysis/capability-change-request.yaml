@@ -1,0 +1,9 @@
+impact_analysis:
+  id: IMP-CAPABILITY-CHANGE
+  title: Impact from capability change
+  seeds:
+  - STR-000001
+  direction: incoming
+  max_depth: 3
+  include_seeds: false
+  include_paths: true

@@ -1,0 +1,20 @@
+query:
+  id: open-issues
+  select: issues
+  where:
+    status_in:
+    - open
+    - in_review
+  return:
+    fields:
+    - id
+    - type
+    - status
+    - priority
+    - description
+    - owner
+    - due
+    - object_refs
+  sort:
+  - field: priority
+  - field: id

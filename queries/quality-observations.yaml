@@ -1,0 +1,19 @@
+query:
+  id: quality-observations
+  select: observations
+  where:
+    type: quality_observation
+    status_in:
+    - noted
+    - reviewed
+  return:
+    fields:
+    - id
+    - status
+    - priority
+    - description
+    - owner
+    - object_refs
+  sort:
+  - field: priority
+  - field: id

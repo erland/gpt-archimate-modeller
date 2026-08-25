@@ -1,0 +1,210 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "issues": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/issue"
+      }
+    },
+    "observations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/observation"
+      }
+    }
+  },
+  "$defs": {
+    "issue": {
+      "type": "object",
+      "required": [
+        "id",
+        "type",
+        "status",
+        "description"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^ISS-[0-9]{6}$"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "possible_duplicate",
+            "conflicting_information",
+            "missing_source",
+            "invalid_relationship",
+            "open_question",
+            "model_quality",
+            "governance",
+            "migration",
+            "interoperability",
+            "other"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "open",
+            "in_review",
+            "resolved",
+            "ignored"
+          ]
+        },
+        "priority": {
+          "type": "string",
+          "enum": [
+            "critical",
+            "high",
+            "medium",
+            "low"
+          ]
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "object_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "source_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^SRC-[0-9]{6}$"
+          }
+        },
+        "reference_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^REF-[0-9]{6}$"
+          }
+        },
+        "owner": {
+          "type": "string"
+        },
+        "due": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "resolution": {
+          "type": "string"
+        },
+        "resolution_ref": {
+          "type": "string",
+          "pattern": "^RES-[0-9]{6}$"
+        },
+        "resolved_by_change": {
+          "type": "string",
+          "pattern": "^CHG-[0-9]{6}$"
+        },
+        "ignore_reason": {
+          "type": "string"
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    },
+    "observation": {
+      "type": "object",
+      "required": [
+        "id",
+        "type",
+        "status",
+        "description"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^OBS-[0-9]{6}$"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "architecture_observation",
+            "quality_observation",
+            "evidence_observation",
+            "governance_observation",
+            "interoperability_observation",
+            "other"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "noted",
+            "reviewed",
+            "promoted",
+            "dismissed"
+          ]
+        },
+        "priority": {
+          "type": "string",
+          "enum": [
+            "critical",
+            "high",
+            "medium",
+            "low"
+          ]
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "object_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "source_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^SRC-[0-9]{6}$"
+          }
+        },
+        "reference_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^REF-[0-9]{6}$"
+          }
+        },
+        "owner": {
+          "type": "string"
+        },
+        "due": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "promoted_to_issue": {
+          "type": "string",
+          "pattern": "^ISS-[0-9]{6}$"
+        },
+        "dismiss_reason": {
+          "type": "string"
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

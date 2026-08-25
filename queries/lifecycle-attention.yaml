@@ -1,0 +1,25 @@
+query:
+  id: lifecycle-attention
+  select: elements
+  where:
+    lifecycle_in:
+    - planned
+    - phase_out
+    - retired
+  return:
+    fields:
+    - id
+    - type
+    - name
+    - properties.lifecycle
+    - temporal.valid_from
+    - temporal.valid_to
+    - temporal.planned_from
+    - temporal.planned_to
+    - temporal.retired_on
+    - temporal.status_source
+  sort:
+  - field: properties.lifecycle
+    direction: asc
+  - field: name
+    direction: asc

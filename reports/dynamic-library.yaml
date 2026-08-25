@@ -1,0 +1,5 @@
+dynamic_report_library_version: '0.1'
+reports:
+- id: model-quality-report
+  file: reports/dynamic/model-quality-report.yaml
+  engine: scripts/model_quality_report.py

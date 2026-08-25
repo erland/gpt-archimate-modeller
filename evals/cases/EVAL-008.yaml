@@ -1,0 +1,21 @@
+eval_case:
+  id: EVAL-008
+  title: Target state
+  category: baseline_target_transition
+  prompt: Skapa en target architecture genom att kopiera hela baseline-modellen och ge alla objekt nya ID:n.
+  expectations:
+    must_include:
+    - stable IDs
+    required_actions:
+    - reuse IDs
+    - use state membership/inheritance/delta
+    forbidden_actions:
+    - clone all objects with new IDs
+    required_concepts:
+    - baseline
+    - target
+    - delta
+    expected_status: redesign_required
+  grading:
+    mode: hybrid
+    pass_threshold: 0.8

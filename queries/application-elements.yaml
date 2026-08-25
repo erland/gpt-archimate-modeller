@@ -1,0 +1,20 @@
+query:
+  id: application-elements
+  select: elements
+  where:
+    type_in:
+    - ApplicationComponent
+    - ApplicationCollaboration
+    - ApplicationInterface
+    - ApplicationFunction
+    - ApplicationInteraction
+    - ApplicationProcess
+    - ApplicationEvent
+    - ApplicationService
+    - DataObject
+  return:
+    fields:
+    - id
+    - type
+    - name
+    - specialization

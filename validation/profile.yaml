@@ -1,0 +1,14 @@
+validation_profile_version: '0.1'
+default:
+  extensions: strict
+  relationship_pairs: known-pairs-enforced-unknown-warn
+  schema: strict
+  referential_integrity: strict
+  identity: strict
+  evidence: strict
+  sources: strict
+  specializations: strict
+release_gate:
+  errors_allowed: 0
+  warnings_allowed: documented
+  relationship_pairs: strict-after-full-portable-matrix-coverage

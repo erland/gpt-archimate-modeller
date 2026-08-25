@@ -1,0 +1,15 @@
+strategy_version: '0.1'
+counters:
+  MOT: 0
+  STR: 1
+  BUS: 0
+  APP: 1
+  TEC: 1
+  PHY: 0
+  IMP: 0
+  CMP: 0
+  REL: 1
+  SRC: 2
+  ISS: 0
+  EV: 4
+  REF: 2

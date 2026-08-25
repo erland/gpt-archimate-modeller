@@ -1,0 +1,27 @@
+elements:
+- id: APP-000001
+  type: ApplicationComponent
+  name: Ärendehanteringssystem
+  description: Systemstöd för ärendehantering.
+  properties: &id001
+    lifecycle: active
+    owner: Verksamhetsområde X
+  evidence: &id002
+    status: document_confirmed
+    confidence: high
+    source_refs:
+    - SRC-000002
+  metadata: &id003
+    created: '2026-08-25'
+    updated: '2026-08-25'
+  aliases:
+  - ÄHS
+- id: APP-000002
+  type: ApplicationComponent
+  name: ÄRENDEHANTERINGSSYSTEM
+  description: Systemstöd för ärendehantering.
+  properties: *id001
+  evidence: *id002
+  metadata: *id003
+  aliases:
+  - Case system

@@ -1,0 +1,100 @@
+view:
+  id: architecture-layers
+  title: Arkitekturlager
+  description: Hela modellen grupperad i huvudlager.
+  source:
+    query: queries/all-elements.yaml
+  include_relationships: between_selected
+  layout:
+    direction: top_to_bottom
+    algorithm: layered
+  groups:
+  - id: motivation-strategy
+    title: Motivation & strategi
+    match:
+      types:
+      - Stakeholder
+      - Driver
+      - Assessment
+      - Goal
+      - Outcome
+      - Principle
+      - Requirement
+      - Constraint
+      - Meaning
+      - Value
+      - Resource
+      - Capability
+      - ValueStream
+      - CourseOfAction
+  - id: business
+    title: Business
+    match:
+      types:
+      - BusinessActor
+      - BusinessRole
+      - BusinessCollaboration
+      - BusinessInterface
+      - BusinessProcess
+      - BusinessFunction
+      - BusinessInteraction
+      - BusinessEvent
+      - BusinessService
+      - BusinessObject
+      - Contract
+      - Representation
+      - Product
+  - id: application
+    title: Application
+    match:
+      types:
+      - ApplicationComponent
+      - ApplicationCollaboration
+      - ApplicationInterface
+      - ApplicationFunction
+      - ApplicationInteraction
+      - ApplicationProcess
+      - ApplicationEvent
+      - ApplicationService
+      - DataObject
+  - id: technology-physical
+    title: Technology & physical
+    match:
+      types:
+      - Node
+      - Device
+      - SystemSoftware
+      - TechnologyCollaboration
+      - TechnologyInterface
+      - Path
+      - CommunicationNetwork
+      - TechnologyFunction
+      - TechnologyProcess
+      - TechnologyInteraction
+      - TechnologyEvent
+      - TechnologyService
+      - Artifact
+      - Equipment
+      - Facility
+      - DistributionNetwork
+      - Material
+  - id: implementation
+    title: Implementation & migration
+    match:
+      types:
+      - WorkPackage
+      - Deliverable
+      - ImplementationEvent
+      - Plateau
+      - Gap
+  nodes:
+    label:
+      primary: name
+      secondary:
+      - type
+      - specialization
+    show_properties: []
+  edges:
+    show_type: true
+    show_name: false
+    show_confidence: false

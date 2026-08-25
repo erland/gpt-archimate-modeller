@@ -1,0 +1,34 @@
+release_candidate:
+  version: 1.0.0-rc.3
+  package_version: 0.44.1
+  plan_step_completed: 44
+  created_date: '2026-08-25'
+  canonical_contract_hashes:
+  - path: project.yaml
+    sha256: 4ad0646c43262941bf97e1a35c0d121458cf2f3737531b11856cf6e802d4b0b8
+  - path: package/project-zip-contract.yaml
+    sha256: fafcc5e45e59b06827bea01aabcb6a79f9fc18c10b64a29bd8e04ffa250aee4d
+  - path: package/zip-robustness.yaml
+    sha256: 84b8ed95516a0da49ee646c37c497b05318232fa2b8185b7ded218110756bf51
+  - path: schemas/ea-project.schema.json
+    sha256: 3f80a38f6abba0736e056d8743746c14a2b1394070f7f422ce2f056d1d54c3aa
+  - path: schemas/ea-package.schema.json
+    sha256: 9d77421dab46971e2c10f69bd164171ce5b2d7b06af05e394a1c547799a8fd40
+  - path: schemas/change-set.schema.json
+    sha256: 00c629b31f3c470930178867c4018789418d3a303c096c2e7fb24b43276f4fcf
+  - path: schemas/query.schema.json
+    sha256: 795a3f855f2ed3632a7869a6f02280e1d73cf81ad1d0fcf141d1d94f44161799
+  - path: schemas/report.schema.json
+    sha256: eb4e33850c86df1342f4c4470f4221132692c135c33e4b7ec20cb5504d969ddb
+  - path: schemas/view.schema.json
+    sha256: 0d2046c7b30f6a13730c2bf95e37d5f82a30f9239dc0113387f2b0d985f09d7e
+  - path: schemas/architecture-states.schema.json
+    sha256: e7b857e18d367632ffd1255c726083a54bcfa5085469a2fa610324cd2ea1849c
+  - path: schemas/temporal.schema.json
+    sha256: 9d7a190eadeee456d8663d81545bd17bf838632b4a2ed09cbdf1584071b3b6b0
+  - path: schemas/impact-analysis.schema.json
+    sha256: e6ed2bdd16439d335de627266f00c50c84ef5e2b275c3e9cee6db69b9515446a
+  - path: schemas/model-index.schema.json
+    sha256: 0563a0180531472a19beb45972a6c7f7513ce1b288f15ff64538f70aaba1a86a
+  - path: gpt/runtime-policy.yaml
+    sha256: d1e494dbfcaac166497ca06f8844a566636f986f8fc4d6c0cd71b722117d44bb

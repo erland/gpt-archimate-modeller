@@ -1,0 +1,27 @@
+package_layout_version: '0.1'
+decision: hybrid_partitioning
+expected_partitions:
+- motivation
+- strategy
+- business
+- application
+- technology
+- physical
+- implementation-migration
+- composite
+tests:
+- id: PKG-001
+  description: Split example assembles to valid logical model
+  expected: valid
+- id: PKG-002
+  description: Manifest paths must remain inside project root
+  expected: enforced
+- id: PKG-003
+  description: Missing referenced file fails validation
+  expected: enforced
+- id: PKG-004
+  description: Element IDs remain globally unique across partitions
+  expected: enforced
+- id: PKG-005
+  description: Relationships may connect elements in different partitions
+  expected: supported

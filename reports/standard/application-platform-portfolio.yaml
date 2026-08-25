@@ -1,0 +1,61 @@
+report:
+  id: application-platform-portfolio
+  title: Applikations- och plattformsportfölj
+  description: Översikt över applikationer och plattformar.
+  metadata:
+    purpose: portfolio
+  sections:
+  - id: applications
+    title: Applikationer
+    source:
+      query: queries/applications.yaml
+    render:
+      type: table
+      columns:
+      - field: id
+        heading: ID
+        format: code
+      - field: name
+        heading: Namn
+        format: text
+      - field: specialization
+        heading: Specialisering
+        format: text
+        default: —
+      - field: properties.lifecycle
+        heading: Livscykel
+        format: text
+        default: —
+      - field: properties.owner
+        heading: Ägare
+        format: text
+        default: —
+  - id: platforms
+    title: Plattformar
+    source:
+      query: queries/platforms.yaml
+    render:
+      type: table
+      columns:
+      - field: id
+        heading: ID
+        format: code
+      - field: name
+        heading: Namn
+        format: text
+      - field: specialization
+        heading: Specialisering
+        format: text
+        default: —
+      - field: properties.lifecycle
+        heading: Livscykel
+        format: text
+        default: —
+      - field: properties.owner
+        heading: Ägare
+        format: text
+        default: —
+      - field: properties.criticality
+        heading: Kritikalitet
+        format: text
+        default: —

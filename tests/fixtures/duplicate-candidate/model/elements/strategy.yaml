@@ -1,0 +1,13 @@
+elements:
+- id: STR-000001
+  type: Capability
+  name: Ärendehantering
+  description: Förmåga att hantera ärenden.
+  evidence:
+    status: user_confirmed
+    confidence: high
+    source_refs:
+    - SRC-000001
+  metadata:
+    created: '2026-08-25'
+    updated: '2026-08-25'

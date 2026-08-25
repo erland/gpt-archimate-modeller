@@ -1,0 +1,8 @@
+resolution:
+  id: RES-000001
+  conflict_type: possible_duplicate
+  existing_id: APP-000001
+  incoming_id: APP-000002
+  action: keep_separate
+  reason: Objects have similar names but represent different operational systems.
+  issue_id: ISS-000010

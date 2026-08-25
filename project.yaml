@@ -1,0 +1,68 @@
+project:
+  id: archimate-yaml-ea-gpt
+  name: ArchiMate YAML EA GPT
+  package_type: gpt-development-project
+  project_version: 0.44.1
+  plan_step_completed: 44
+  status: development
+architecture:
+  semantic_core: ArchiMate
+  canonical_work_format: YAML
+  transport_format: ZIP
+  repository_agnostic: true
+  archimate_profile: '3.2'
+  ea_project_format_version: '0.1'
+  package_layout_version: '0.1'
+  file_partitioning: hybrid-by-domain
+  identity_strategy_version: '0.1'
+  identity_pattern: PREFIX-NNNNNN
+  evidence_model_version: '0.2'
+  source_reference_model_version: '0.2'
+  extension_model_version: '0.2'
+  specialization_model_version: '0.2'
+  validation_profile_version: '0.1'
+  relationship_matrix_profile: 0.1-partial-portable
+  quality_profile_version: '0.1'
+  change_workflow_version: '0.1'
+  versioning_policy_version: '0.1'
+  query_format_version: '0.2'
+  report_format_version: '0.1'
+  report_engine_version: '0.1'
+  view_format_version: '0.1'
+  diagram_export_version: '0.1'
+  diagram_export_formats:
+  - drawio
+  - mermaid
+  model_exchange_export_version: '0.1'
+  model_exchange_schema_version: '3.1'
+  model_exchange_import_version: '0.1'
+  model_exchange_direct_merge: false
+  project_zip_contract_version: '0.1'
+  project_control_version: '0.1'
+  migration_framework_version: '0.1'
+  gpt_instruction_version: '0.1'
+  runtime_policy_version: '0.1'
+  knowledge_structure_version: '0.1'
+  new_project_workflow_version: '0.1'
+  update_project_workflow_version: '0.1'
+  conflict_policy_version: '0.1'
+  issues_observations_version: '0.2'
+  standard_report_library_version: '0.1'
+  standard_view_library_version: '0.1'
+  architecture_states_version: '0.1'
+  time_lifecycle_version: '0.1'
+  impact_analysis_version: '0.1'
+  model_quality_report_version: '0.1'
+  fixtures_reference_projects_version: '0.1'
+  automated_test_suite_version: '0.1'
+  llm_eval_suite_version: '0.1'
+  zip_robustness_version: '0.1'
+  model_index_version: '0.1'
+  user_documentation_version: '0.1'
+  developer_documentation_version: '0.1'
+  release_candidate: 1.0.0-rc.3
+  e2e_gpt_test_version: '0.1'
+  distribution_packaging_version: '0.1'
+scope:
+  current: Step 44 - End-to-end GPT test
+  next: Step 45 - Real EA pilot

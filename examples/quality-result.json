@@ -1,0 +1,19 @@
+{
+  "status": "OK",
+  "quality_score": 97.0,
+  "counts": {
+    "error": 0,
+    "warning": 1,
+    "info": 0
+  },
+  "findings": [
+    {
+      "severity": "warning",
+      "code": "Q-CONN-001",
+      "object_id": "TEC-000001",
+      "related_ids": [],
+      "message": "Node 'Containerplattform' has no relationships.",
+      "recommendation": "Connect the element to relevant context or confirm intentional isolation."
+    }
+  ]
+}

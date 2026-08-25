@@ -1,0 +1,14 @@
+query:
+  id: all-relationships
+  select: relationships
+  return:
+    fields:
+    - id
+    - type
+    - source
+    - target
+    - evidence.status
+    - evidence.confidence
+  sort:
+  - field: type
+  - field: id

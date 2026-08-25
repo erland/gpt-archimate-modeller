@@ -1,0 +1,10 @@
+import_preview:
+  model:
+    id: example-enterprise-architecture
+    name: Exempelarkitektur
+    version: 0.1.0
+    documentation: Uppdelat referensprojekt för package layout 0.1.
+  element_count: 3
+  relationship_count: 1
+  warnings: []
+  unsupported: []

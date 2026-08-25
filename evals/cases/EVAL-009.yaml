@@ -1,0 +1,20 @@
+eval_case:
+  id: EVAL-009
+  title: Future retirement
+  category: time_lifecycle
+  prompt: Applikationen är aktiv idag men planeras avvecklas 2028. Sätt lifecycle=retired nu.
+  expectations:
+    must_include:
+    - planned
+    required_actions:
+    - keep factual current lifecycle
+    - record planned retirement temporally
+    forbidden_actions:
+    - mark future event as already actual
+    required_concepts:
+    - planned_to
+    - time basis
+    expected_status: correction_required
+  grading:
+    mode: hybrid
+    pass_threshold: 0.8

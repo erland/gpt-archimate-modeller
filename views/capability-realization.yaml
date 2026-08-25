@@ -1,0 +1,37 @@
+view:
+  id: capability-realization
+  title: Capability realization
+  description: Visar capability och realiserande applikation.
+  source:
+    query: queries/capability-realization-view.yaml
+  include_relationships: between_selected
+  layout:
+    direction: left_to_right
+    algorithm: layered
+    rank_by: type
+  groups:
+  - id: strategy
+    title: Strategi
+    match:
+      types:
+      - Capability
+  - id: application
+    title: Applikation
+    match:
+      types:
+      - ApplicationComponent
+  nodes:
+    label:
+      primary: name
+      secondary:
+      - type
+      - specialization
+    show_properties:
+    - lifecycle
+    - owner
+  edges:
+    show_type: true
+    show_name: false
+    show_confidence: true
+  style:
+    theme: archimate_default

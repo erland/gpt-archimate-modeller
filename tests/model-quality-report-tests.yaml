@@ -1,0 +1,32 @@
+model_quality_report_version: '0.1'
+tests:
+- id: MQR-001
+  description: Report reuses quality_check.run_quality
+  expected: enforced
+- id: MQR-002
+  description: Score equals quality checker score
+  expected: enforced
+- id: MQR-003
+  description: Counts equal quality checker counts
+  expected: enforced
+- id: MQR-004
+  description: Findings preserve code/object/recommendation
+  expected: enforced
+- id: MQR-005
+  description: Markdown output contains score and worklist
+  expected: enforced
+- id: MQR-006
+  description: CSV contains one row per finding
+  expected: enforced
+- id: MQR-007
+  description: JSON/YAML output deterministic
+  expected: enforced
+- id: MQR-008
+  description: Dynamic report remains separate from stored issues
+  expected: design_rule
+- id: MQR-009
+  description: No automatic issue creation
+  expected: design_rule
+- id: MQR-010
+  description: Quality score not presented as maturity rating
+  expected: design_rule

@@ -1,0 +1,52 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Validate tag
+        shell: bash
+        run: |
+          [[ "$GITHUB_REF_NAME" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?(\+[0-9A-Za-z.-]+)?$ ]] || {
+            echo "Taggen måste följa SemVer, exempelvis v1.0.0 eller v1.0.0-rc.3" >&2
+            exit 1
+          }
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements-dev.txt
+      - name: Install dependencies
+        run: python -m pip install -r requirements-dev.txt
+      - name: Test release candidate
+        run: |
+          python scripts/run_tests.py --format text
+          python scripts/validate_llm_evals.py
+          python scripts/validate_user_docs.py
+          python scripts/validate_developer_docs.py
+      - name: Build both release distributions
+        shell: bash
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          python scripts/build_distributions.py --version "$VERSION"
+          python scripts/validate_distributions.py --version "$VERSION"
+      - name: Create or update GitHub Release and upload both ZIPs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          if ! gh release view "$GITHUB_REF_NAME" --repo "${{ github.repository }}" >/dev/null 2>&1; then
+            gh release create "$GITHUB_REF_NAME" --verify-tag --generate-notes --title "ArchiMate YAML EA GPT ${GITHUB_REF_NAME#v}" --repo "${{ github.repository }}"
+          fi
+          gh release upload "$GITHUB_REF_NAME" dist/*.zip --clobber --repo "${{ github.repository }}"

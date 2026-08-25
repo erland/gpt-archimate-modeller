@@ -1,0 +1,23 @@
+release_candidate: 1.0.0-rc.1
+tests:
+- id: RC-001
+  description: RC metadata consistent
+  expected: enforced
+- id: RC-002
+  description: key contract hashes match
+  expected: enforced
+- id: RC-003
+  description: automated suite passes
+  expected: enforced
+- id: RC-004
+  description: user/developer docs validate
+  expected: enforced
+- id: RC-005
+  description: LLM eval catalog validates
+  expected: enforced
+- id: RC-006
+  description: release ZIP integrity passes
+  expected: enforced
+- id: RC-007
+  description: Step 44 runtime E2E not claimed complete
+  expected: design_rule

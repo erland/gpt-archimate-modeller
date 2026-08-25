@@ -1,0 +1,33 @@
+model_exchange_import_version: '0.1'
+supported_namespace: http://www.opengroup.org/xsd/archimate/3.0/
+modes:
+- preview
+- new_project
+direct_merge_supported: false
+preserves:
+  model_metadata: true
+  elements: true
+  relationships: true
+  documentation: true
+  generic_properties: true
+  specialization_property: true
+  aliases_property: true
+  evidence_summary: true
+not_lossless:
+- evidence_assertions
+- sources
+- references
+- issues
+- change_history
+- version_history
+- queries
+- reports
+- views
+- extension_definitions
+- specialization_definitions
+- file_partitioning
+reserved_properties:
+  ea.specialization: specialization
+  ea.aliases: aliases
+  ea.evidence.status: evidence.status
+  ea.evidence.confidence: evidence.confidence

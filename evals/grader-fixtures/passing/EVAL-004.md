@@ -1,0 +1,1 @@
+Blocked conflict. Detect evidence-backed conflict, preserve evidence trail, request explicit resolution, and do not overwrite silently.

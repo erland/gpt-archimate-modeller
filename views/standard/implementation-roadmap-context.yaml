@@ -1,0 +1,39 @@
+view:
+  id: implementation-roadmap-context
+  title: Implementation- och migrationskontext
+  description: Work packages, deliverables, plateaus, gaps och events.
+  source:
+    query: queries/implementation-migration-elements.yaml
+  include_relationships: between_selected
+  layout:
+    direction: left_to_right
+    algorithm: layered
+  groups:
+  - id: work
+    title: Arbete & leveranser
+    match:
+      types:
+      - WorkPackage
+      - Deliverable
+  - id: states
+    title: Tillstånd & gap
+    match:
+      types:
+      - Plateau
+      - Gap
+  - id: events
+    title: Events
+    match:
+      types:
+      - ImplementationEvent
+  nodes:
+    label:
+      primary: name
+      secondary:
+      - type
+      - specialization
+    show_properties: []
+  edges:
+    show_type: true
+    show_name: false
+    show_confidence: false

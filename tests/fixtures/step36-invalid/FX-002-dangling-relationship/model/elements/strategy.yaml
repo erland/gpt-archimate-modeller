@@ -1,0 +1,16 @@
+elements:
+- id: STR-000001
+  type: Capability
+  name: Digital Case Handling
+  properties:
+    owner: Business Architecture
+  evidence:
+    status: user_confirmed
+    confidence: high
+    assertions:
+    - id: EV-000001
+      kind: user_statement
+      supports:
+      - existence
+      - name
+      - property:owner

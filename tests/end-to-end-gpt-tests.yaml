@@ -1,0 +1,29 @@
+e2e_gpt_test_version: '0.1'
+tests:
+- id: E2EGPT-001
+  description: new project direct ZIP path works
+  expected: enforced
+- id: E2EGPT-002
+  description: flat-root ZIP update workflow works
+  expected: enforced
+- id: E2EGPT-003
+  description: model version advances 0.1.0 to 0.2.0
+  expected: enforced
+- id: E2EGPT-004
+  description: input ZIP immutable
+  expected: enforced
+- id: E2EGPT-005
+  description: duplicate and stale writes blocked without output ZIP
+  expected: enforced
+- id: E2EGPT-006
+  description: impact quality and views work read-only
+  expected: enforced
+- id: E2EGPT-007
+  description: final ZIP validates with manifest and model index
+  expected: enforced
+- id: E2EGPT-008
+  description: 12 observable LLM behavior evals pass
+  expected: enforced
+- id: E2EGPT-009
+  description: does not claim separate hosted GPT execution
+  expected: design_rule

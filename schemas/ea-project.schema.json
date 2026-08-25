@@ -1,0 +1,873 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/ea-project.schema.json",
+  "title": "EA Project Package Model",
+  "type": "object",
+  "required": [
+    "format_version",
+    "project",
+    "model"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "format_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+$"
+    },
+    "project": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "model_version"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string"
+        },
+        "model_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created": {
+          "type": "string",
+          "format": "date"
+        },
+        "updated": {
+          "type": "string",
+          "format": "date"
+        },
+        "language": {
+          "type": "string",
+          "default": "sv"
+        },
+        "archimate_version": {
+          "type": "string",
+          "const": "3.2"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "model": {
+      "type": "object",
+      "required": [
+        "elements",
+        "relationships"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "elements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/element"
+          }
+        },
+        "relationships": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/relationship"
+          }
+        }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/source"
+      }
+    },
+    "extensions": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/extensionDefinition"
+      }
+    },
+    "specializations": {
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/$defs/specializationDefinition"
+      }
+    },
+    "issues": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/issue"
+      }
+    },
+    "references": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/reference"
+      }
+    },
+    "observations": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "architecture_states": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "$defs": {
+    "commonMetadata": {
+      "type": "object",
+      "properties": {
+        "created": {
+          "type": "string",
+          "format": "date"
+        },
+        "updated": {
+          "type": "string",
+          "format": "date"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "change_note": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "evidence": {
+      "type": "object",
+      "required": [
+        "status",
+        "confidence",
+        "assertions"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "user_confirmed",
+            "document_confirmed",
+            "imported",
+            "inferred",
+            "mixed",
+            "unknown"
+          ]
+        },
+        "confidence": {
+          "type": "string",
+          "enum": [
+            "high",
+            "medium",
+            "low",
+            "unknown"
+          ]
+        },
+        "assertions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidenceAssertion"
+          }
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    },
+    "element": {
+      "type": "object",
+      "required": [
+        "id",
+        "type",
+        "name"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Z]{3}-[0-9]{6}$"
+        },
+        "type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string"
+        },
+        "documentation": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        },
+        "metadata": {
+          "$ref": "#/$defs/commonMetadata"
+        },
+        "aliases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "specialization": {
+          "type": "string"
+        },
+        "temporal": {
+          "$ref": "#/$defs/temporal"
+        }
+      }
+    },
+    "relationship": {
+      "type": "object",
+      "required": [
+        "id",
+        "type",
+        "source",
+        "target"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[A-Z]{3}-[0-9]{6}$"
+        },
+        "type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "target": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        },
+        "metadata": {
+          "$ref": "#/$defs/commonMetadata"
+        },
+        "temporal": {
+          "$ref": "#/$defs/temporal"
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "id",
+        "type",
+        "title"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^SRC-[0-9]{6}$"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "document",
+            "web",
+            "interview",
+            "workshop",
+            "system_export",
+            "user_statement",
+            "email",
+            "presentation",
+            "spreadsheet",
+            "repository",
+            "other"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string"
+        },
+        "origin": {
+          "$ref": "#/$defs/sourceOrigin"
+        },
+        "authors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "publisher": {
+          "type": "string"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "published_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "retrieved_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "effective_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "expires_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "quality": {
+          "$ref": "#/$defs/sourceQuality"
+        },
+        "fingerprint": {
+          "$ref": "#/$defs/fingerprint"
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    },
+    "extensionDefinition": {
+      "type": "object",
+      "required": [
+        "value_type",
+        "applies_to"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "value_type": {
+          "type": "string",
+          "enum": [
+            "string",
+            "integer",
+            "number",
+            "boolean",
+            "date",
+            "enum",
+            "list",
+            "reference"
+          ]
+        },
+        "allowed_values": {
+          "type": "array",
+          "items": {}
+        },
+        "item_type": {
+          "type": "string",
+          "enum": [
+            "string",
+            "integer",
+            "number",
+            "boolean",
+            "date",
+            "reference"
+          ]
+        },
+        "reference_kind": {
+          "type": "string",
+          "enum": [
+            "element",
+            "source",
+            "reference",
+            "external"
+          ]
+        },
+        "applies_to": {
+          "$ref": "#/$defs/extensionAppliesTo"
+        },
+        "required": {
+          "type": "boolean",
+          "default": false
+        },
+        "default": {},
+        "evidence_required": {
+          "type": "boolean",
+          "default": false
+        },
+        "governance": {
+          "$ref": "#/$defs/extensionGovernance"
+        }
+      }
+    },
+    "specializationDefinition": {
+      "type": "object",
+      "required": [
+        "base_type"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "base_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "parent_specialization": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "inherits_relationships": {
+          "type": "boolean",
+          "default": true
+        },
+        "governance": {
+          "$ref": "#/$defs/specializationGovernance"
+        }
+      }
+    },
+    "issue": {
+      "type": "object",
+      "required": [
+        "id",
+        "type",
+        "status"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Z]{3}-[0-9]{6}$"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "possible_duplicate",
+            "conflicting_information",
+            "missing_source",
+            "invalid_relationship",
+            "open_question",
+            "other"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "open",
+            "resolved",
+            "ignored"
+          ]
+        },
+        "description": {
+          "type": "string"
+        },
+        "element_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "relationship_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "evidenceAssertion": {
+      "type": "object",
+      "required": [
+        "id",
+        "kind",
+        "supports"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^EV-[0-9]{6}$"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "explicit",
+            "user_statement",
+            "imported",
+            "derived",
+            "inferred",
+            "contradicting"
+          ]
+        },
+        "source_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^SRC-[0-9]{6}$"
+          },
+          "uniqueItems": true
+        },
+        "supports": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "confidence": {
+          "type": "string",
+          "enum": [
+            "high",
+            "medium",
+            "low",
+            "unknown"
+          ]
+        },
+        "reason": {
+          "type": "string"
+        },
+        "note": {
+          "type": "string"
+        },
+        "reference_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^REF-[0-9]{6}$"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "sourceOrigin": {
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "file",
+            "url",
+            "conversation",
+            "external_system",
+            "other"
+          ]
+        },
+        "path": {
+          "type": "string"
+        },
+        "uri": {
+          "type": "string"
+        },
+        "conversation_ref": {
+          "type": "string"
+        },
+        "system": {
+          "type": "string"
+        },
+        "external_id": {
+          "type": "string"
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    },
+    "sourceQuality": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "authority": {
+          "type": "string",
+          "enum": [
+            "high",
+            "medium",
+            "low",
+            "unknown"
+          ]
+        },
+        "freshness": {
+          "type": "string",
+          "enum": [
+            "high",
+            "medium",
+            "low",
+            "unknown"
+          ]
+        },
+        "completeness": {
+          "type": "string",
+          "enum": [
+            "high",
+            "medium",
+            "low",
+            "unknown"
+          ]
+        }
+      }
+    },
+    "fingerprint": {
+      "type": "object",
+      "required": [
+        "algorithm",
+        "value"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "algorithm": {
+          "type": "string",
+          "enum": [
+            "sha256",
+            "sha1",
+            "md5",
+            "other"
+          ]
+        },
+        "value": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "referenceLocator": {
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "page",
+            "section",
+            "heading",
+            "line_range",
+            "paragraph",
+            "table",
+            "figure",
+            "cell_range",
+            "timestamp",
+            "record",
+            "anchor",
+            "custom"
+          ]
+        },
+        "value": {
+          "type": [
+            "string",
+            "number"
+          ]
+        },
+        "start": {
+          "type": [
+            "integer",
+            "string"
+          ]
+        },
+        "end": {
+          "type": [
+            "integer",
+            "string"
+          ]
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    },
+    "reference": {
+      "type": "object",
+      "required": [
+        "id",
+        "source_ref",
+        "locator"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^REF-[0-9]{6}$"
+        },
+        "source_ref": {
+          "type": "string",
+          "pattern": "^SRC-[0-9]{6}$"
+        },
+        "locator": {
+          "$ref": "#/$defs/referenceLocator"
+        },
+        "label": {
+          "type": "string"
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    },
+    "extensionAppliesTo": {
+      "type": "object",
+      "required": [
+        "kinds"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "kinds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "element",
+              "relationship",
+              "project"
+            ]
+          }
+        },
+        "archimate_types": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "extensionGovernance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "deprecated",
+            "experimental"
+          ]
+        },
+        "owner": {
+          "type": "string"
+        },
+        "introduced_in": {
+          "type": "string"
+        },
+        "replaced_by": {
+          "type": "string"
+        }
+      }
+    },
+    "specializationGovernance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "active",
+            "deprecated",
+            "experimental"
+          ]
+        },
+        "owner": {
+          "type": "string"
+        },
+        "introduced_in": {
+          "type": "string"
+        },
+        "replaced_by": {
+          "type": "string"
+        }
+      }
+    },
+    "temporal": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "valid_from": {
+          "type": "string",
+          "format": "date"
+        },
+        "valid_to": {
+          "type": "string",
+          "format": "date"
+        },
+        "planned_from": {
+          "type": "string",
+          "format": "date"
+        },
+        "planned_to": {
+          "type": "string",
+          "format": "date"
+        },
+        "retired_on": {
+          "type": "string",
+          "format": "date"
+        },
+        "as_of": {
+          "type": "string",
+          "format": "date"
+        },
+        "status_source": {
+          "type": "string",
+          "enum": [
+            "actual",
+            "planned",
+            "inferred",
+            "unknown"
+          ]
+        },
+        "note": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+impact_analysis_version: '0.1'
+tests:
+- id: IMPACT-001
+  description: incoming traversal finds realization source
+  expected: enforced
+- id: IMPACT-002
+  description: outgoing traversal respects direction
+  expected: enforced
+- id: IMPACT-003
+  description: max depth enforced
+  expected: enforced
+- id: IMPACT-004
+  description: relationship filters enforced
+  expected: enforced
+- id: IMPACT-005
+  description: paths preserve relationship IDs
+  expected: enforced
+- id: IMPACT-006
+  description: inferred relationship yields weak certainty
+  expected: enforced
+- id: IMPACT-007
+  description: unknown seeds rejected
+  expected: enforced
+- id: IMPACT-008
+  description: state delta can seed analysis
+  expected: enforced
+- id: IMPACT-009
+  description: change set can seed analysis
+  expected: enforced
+- id: IMPACT-010
+  description: analysis does not claim causal certainty
+  expected: design_rule

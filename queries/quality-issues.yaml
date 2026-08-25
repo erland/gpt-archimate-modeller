@@ -1,0 +1,19 @@
+query:
+  id: quality-issues
+  select: issues
+  where:
+    type: model_quality
+    status_in:
+    - open
+    - in_review
+  return:
+    fields:
+    - id
+    - status
+    - priority
+    - description
+    - owner
+    - object_refs
+  sort:
+  - field: priority
+  - field: id

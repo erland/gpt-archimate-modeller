@@ -1,0 +1,65 @@
+report:
+  id: model-quality-worklist
+  title: Modellkvalitet – arbetslista
+  description: Lagrade quality issues/observations; dynamisk quality report kommer i steg 35.
+  metadata:
+    purpose: quality_worklist
+  sections:
+  - id: issues
+    title: Kvalitetsissues
+    source:
+      query: queries/quality-issues.yaml
+    render:
+      type: table
+      columns:
+      - field: id
+        heading: ID
+        format: code
+      - field: status
+        heading: Status
+        format: text
+      - field: priority
+        heading: Prioritet
+        format: text
+        default: medium
+      - field: description
+        heading: Beskrivning
+        format: text
+      - field: owner
+        heading: Ägare
+        format: text
+        default: —
+      - field: object_refs
+        heading: Objekt
+        format: text
+        default: —
+  - id: observations
+    title: Kvalitetsobservationer
+    source:
+      query: queries/quality-observations.yaml
+    render:
+      type: table
+      columns:
+      - field: id
+        heading: ID
+        format: code
+      - field: status
+        heading: Status
+        format: text
+      - field: priority
+        heading: Prioritet
+        format: text
+        default: medium
+      - field: description
+        heading: Beskrivning
+        format: text
+      - field: owner
+        heading: Ägare
+        format: text
+        default: —
+      - field: object_refs
+        heading: Objekt
+        format: text
+        default: —
+    notes:
+    - Dynamiska quality checker-findings ingår inte i denna lagrade arbetslista.

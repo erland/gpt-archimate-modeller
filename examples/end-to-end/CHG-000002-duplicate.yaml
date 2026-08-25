@@ -1,0 +1,20 @@
+change_set:
+  id: CHG-000002
+  title: Duplicate attempt
+  created: '2026-08-25'
+  expected_model_version: 0.2.0
+  operations:
+  - op: add_element
+    element:
+      id: APP-000002
+      type: ApplicationComponent
+      name: Case Management
+      evidence:
+        status: user_confirmed
+        confidence: high
+        assertions:
+        - id: EV-000004
+          kind: user_statement
+          supports:
+          - existence
+          - name

@@ -1,0 +1,26 @@
+states:
+- id: STA-000001
+  name: Baseline 2026
+  type: baseline
+  time_basis: actual
+  effective_from: '2026-01-01'
+  include:
+    elements:
+    - APP-000001
+    - STR-000001
+    - TEC-000001
+    relationships:
+    - REL-000001
+- id: STA-000002
+  name: Target 2028
+  type: target
+  time_basis: planned
+  effective_from: '2028-01-01'
+  inherits_from: STA-000001
+transitions:
+- id: TRN-000001
+  name: Baseline to target
+  from_state: STA-000001
+  to_state: STA-000002
+  planned_start: '2027-01-01'
+  planned_end: '2027-12-31'

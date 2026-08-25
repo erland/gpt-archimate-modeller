@@ -1,0 +1,96 @@
+knowledge_routing_version: '0.1'
+routes:
+- intent: open_or_modify_project_zip
+  knowledge:
+  - 01-runtime-contract.md
+  - 03-project-format.md
+  - 04-identity-evidence.md
+  - 05-change-versioning.md
+  - 07-validation-quality.md
+  - 09-project-package-migration.md
+- intent: archimate_modeling
+  knowledge:
+  - 02-archimate-core.md
+  - 04-identity-evidence.md
+  - 05-change-versioning.md
+- intent: query_or_analysis
+  knowledge:
+  - 06-query-report-view.md
+  - 07-validation-quality.md
+- intent: report
+  knowledge:
+  - 06-query-report-view.md
+- intent: view_or_diagram
+  knowledge:
+  - 06-query-report-view.md
+  - 08-interoperability.md
+- intent: model_exchange
+  knowledge:
+  - 08-interoperability.md
+  - 03-project-format.md
+  - 04-identity-evidence.md
+- intent: migration
+  knowledge:
+  - 09-project-package-migration.md
+  - 01-runtime-contract.md
+- intent: create_new_project
+  knowledge:
+  - 01-runtime-contract.md
+  - 03-project-format.md
+  - 04-identity-evidence.md
+  - 07-validation-quality.md
+  - 09-project-package-migration.md
+  - 10-new-project-workflow.md
+- intent: update_existing_project
+  knowledge:
+  - 01-runtime-contract.md
+  - 03-project-format.md
+  - 04-identity-evidence.md
+  - 05-change-versioning.md
+  - 07-validation-quality.md
+  - 09-project-package-migration.md
+  - 11-update-project-workflow.md
+- intent: resolve_conflict_or_duplicate
+  knowledge:
+  - 04-identity-evidence.md
+  - 05-change-versioning.md
+  - 11-update-project-workflow.md
+  - 12-conflict-duplicate-handling.md
+- intent: manage_issues_or_observations
+  knowledge:
+  - 07-validation-quality.md
+  - 12-conflict-duplicate-handling.md
+  - 13-issues-observations.md
+- intent: standard_report
+  knowledge:
+  - 06-query-report-view.md
+  - 14-standard-report-library.md
+- intent: standard_view_or_diagram
+  knowledge:
+  - 06-query-report-view.md
+  - 08-interoperability.md
+  - 15-standard-views.md
+- intent: baseline_target_transition
+  knowledge:
+  - 05-change-versioning.md
+  - 16-baseline-target-transition.md
+- intent: time_or_lifecycle
+  knowledge:
+  - 16-baseline-target-transition.md
+  - 17-time-lifecycle.md
+- intent: impact_analysis
+  knowledge:
+  - 06-query-report-view.md
+  - 16-baseline-target-transition.md
+  - 18-impact-analysis.md
+- intent: model_quality_report
+  knowledge:
+  - 07-validation-quality.md
+  - 13-issues-observations.md
+  - 19-model-quality-report.md
+- intent: user_help_or_usage
+  knowledge:
+  - 25-user-docs.md
+- intent: developer_help
+  knowledge:
+  - 26-developer-docs.md

@@ -1,0 +1,20 @@
+query:
+  id: capability-realization
+  title: Objekt som realiserar capabilities
+  select: elements
+  where:
+    type: Capability
+  traverse:
+    direction: incoming
+    relationship_types:
+    - Realization
+    target_types:
+    - ApplicationComponent
+    depth: 1
+    include_start: false
+  return:
+    fields:
+    - id
+    - type
+    - name
+    - specialization

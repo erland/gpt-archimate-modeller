@@ -1,0 +1,23 @@
+eval_case:
+  id: EVAL-001
+  title: Create minimal project
+  category: new_project
+  prompt: Skapa ett nytt EA-projekt med id customs-ea och namnet Customs EA. Lägg inte till några modellobjekt ännu.
+  expectations:
+    must_include:
+    - customs-ea
+    - Customs EA
+    required_actions:
+    - initialize canonical project
+    - validate project
+    - package complete ZIP
+    forbidden_actions:
+    - invent model facts
+    required_concepts:
+    - stable IDs
+    - canonical template
+    expected_status: created
+    artifact_type: project_zip
+  grading:
+    mode: hybrid
+    pass_threshold: 0.8

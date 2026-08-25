@@ -1,0 +1,12 @@
+llm_eval_suite_version: '0.1'
+offline_structural_grading: true
+grading:
+  default_mode: hybrid
+  rule_weight: 0.7
+  manual_weight: 0.3
+  default_pass_threshold: 0.8
+principles:
+- evaluate_behavior_not_hidden_reasoning
+- prefer_observable_outputs
+- no_network_required_for_structural_grading
+- fixtures_are_stable

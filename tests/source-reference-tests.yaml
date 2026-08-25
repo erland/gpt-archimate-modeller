@@ -1,0 +1,26 @@
+source_reference_model_version: '0.2'
+tests:
+- id: SRC-TEST-001
+  description: Every REF points to an existing SRC
+  expected: enforced
+- id: SRC-TEST-002
+  description: File origin requires path
+  expected: enforced
+- id: SRC-TEST-003
+  description: URL origin requires uri
+  expected: enforced
+- id: SRC-TEST-004
+  description: Line-range locator requires start and end
+  expected: enforced
+- id: SRC-TEST-005
+  description: Duplicate source+locator references are detected
+  expected: enforced
+- id: SRC-TEST-006
+  description: Evidence may reference exact REF IDs
+  expected: supported
+- id: SRC-TEST-007
+  description: Source quality is distinct from model confidence
+  expected: design_rule
+- id: SRC-TEST-008
+  description: Same source should be reused for multiple locators
+  expected: design_rule

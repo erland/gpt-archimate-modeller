@@ -1,0 +1,32 @@
+conflict_policy_version: '0.1'
+tests:
+- id: CONF-001
+  description: Existing duplicate candidates detected
+  expected: supported
+- id: CONF-002
+  description: Incoming same ID/different type classified identity conflict
+  expected: enforced
+- id: CONF-003
+  description: Same normalized name/different type classified type conflict
+  expected: supported
+- id: CONF-004
+  description: Merge requires canonical_id
+  expected: enforced
+- id: CONF-005
+  description: Defer requires issue_id
+  expected: enforced
+- id: CONF-006
+  description: Keep-separate can generate resolved issue
+  expected: supported
+- id: CONF-007
+  description: Prefer-existing does not overwrite model
+  expected: enforced
+- id: CONF-008
+  description: Unsafe implicit merge not generated
+  expected: enforced
+- id: CONF-009
+  description: Resolution IDs use RES-NNNNNN
+  expected: enforced
+- id: CONF-010
+  description: Evidence is never discarded automatically
+  expected: design_rule

@@ -1,0 +1,20 @@
+elements:
+- id: APP-000001
+  type: ApplicationComponent
+  name: Case Management
+  specialization: BusinessApplication
+  properties:
+    lifecycle: active
+    owner: Application Team
+    nonexistent_extension: x
+  evidence:
+    status: user_confirmed
+    confidence: high
+    assertions:
+    - id: EV-000002
+      kind: user_statement
+      supports:
+      - existence
+      - name
+      - property:lifecycle
+      - property:owner

@@ -1,0 +1,10 @@
+sources:
+- id: SRC-000001
+  type: user_statement
+  title: Användarbeskrivning av förmåga
+  date: '2026-08-25'
+- id: SRC-000002
+  type: document
+  title: Systemkatalog
+  date: '2026-08-25'
+  locator: post APP-000001

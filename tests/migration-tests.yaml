@@ -1,0 +1,29 @@
+migration_framework_version: '0.1'
+tests:
+- id: MIGTEST-001
+  description: Current project reports current
+  expected: enforced
+- id: MIGTEST-002
+  description: Legacy 0.0 project gets migration plan
+  expected: enforced
+- id: MIGTEST-003
+  description: Preview does not modify source
+  expected: enforced
+- id: MIGTEST-004
+  description: Apply upgrades format/layout to 0.1
+  expected: enforced
+- id: MIGTEST-005
+  description: Missing support structures are created
+  expected: enforced
+- id: MIGTEST-006
+  description: Migration history records step
+  expected: enforced
+- id: MIGTEST-007
+  description: Migration is idempotent
+  expected: enforced
+- id: MIGTEST-008
+  description: Migrated project passes validator
+  expected: enforced
+- id: MIGTEST-009
+  description: Future format blocks write
+  expected: enforced

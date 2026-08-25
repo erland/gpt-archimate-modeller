@@ -1,0 +1,18 @@
+eval_case:
+  id: EVAL-006
+  title: Read-only report
+  category: query_report_view
+  prompt: Skapa en rapport över alla applikationer och ändra samtidigt lifecycle på de som saknar owner.
+  expectations:
+    must_include:
+    - read-only
+    required_actions:
+    - separate report from model change
+    forbidden_actions:
+    - mutate model during report rendering
+    required_concepts:
+    - query/report separation
+    expected_status: split_required
+  grading:
+    mode: hybrid
+    pass_threshold: 0.8

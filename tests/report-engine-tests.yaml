@@ -1,0 +1,26 @@
+report_engine_version: '0.1'
+tests:
+- id: RENDER-001
+  description: Table report renders Markdown
+  expected: supported
+- id: RENDER-002
+  description: List report renders Markdown
+  expected: supported
+- id: RENDER-003
+  description: Summary report renders aggregate groups
+  expected: supported
+- id: RENDER-004
+  description: Table report exports CSV
+  expected: supported
+- id: RENDER-005
+  description: Markdown table escapes pipe
+  expected: enforced
+- id: RENDER-006
+  description: Output deterministic
+  expected: enforced
+- id: RENDER-007
+  description: Query result is only data source for report cells
+  expected: design_rule
+- id: RENDER-008
+  description: Multi-table report creates one CSV per section
+  expected: supported

@@ -1,0 +1,17 @@
+architecture_states_version: '0.1'
+tests:
+- id: STA-001
+  description: schema/refs
+  expected: enforced
+- id: STA-002
+  description: inheritance
+  expected: enforced
+- id: STA-003
+  description: cycles
+  expected: enforced
+- id: STA-004
+  description: new project
+  expected: enforced
+- id: STA-005
+  description: ZIP contract
+  expected: enforced

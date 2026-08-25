@@ -1,0 +1,32 @@
+diagram_export_version: '0.1'
+formats:
+- drawio
+- mermaid
+tests:
+- id: DIAG-001
+  description: Compile view to draw.io XML
+  expected: supported
+- id: DIAG-002
+  description: Compile view to Mermaid
+  expected: supported
+- id: DIAG-003
+  description: Node stable IDs preserved in draw.io
+  expected: enforced
+- id: DIAG-004
+  description: Relationship stable IDs preserved in draw.io
+  expected: enforced
+- id: DIAG-005
+  description: Mermaid node IDs derived deterministically
+  expected: enforced
+- id: DIAG-006
+  description: Layout direction propagated
+  expected: supported
+- id: DIAG-007
+  description: Group names emitted as Mermaid subgraphs
+  expected: supported
+- id: DIAG-008
+  description: Same input yields identical export
+  expected: enforced
+- id: DIAG-009
+  description: Diagram export does not mutate model
+  expected: design_rule

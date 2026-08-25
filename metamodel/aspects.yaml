@@ -1,0 +1,12 @@
+metamodel_version: '3.2'
+aspects:
+- id: active_structure
+  name: Active Structure
+- id: behavior
+  name: Behavior
+- id: passive_structure
+  name: Passive Structure
+- id: motivation
+  name: Motivation
+- id: composite
+  name: Composite

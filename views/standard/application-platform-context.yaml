@@ -1,0 +1,40 @@
+view:
+  id: application-platform-context
+  title: Applikationer och plattformar
+  description: ApplicationComponent och Node i gemensam kontext.
+  source:
+    query: queries/application-platform-context.yaml
+  include_relationships: between_selected
+  layout:
+    direction: left_to_right
+    algorithm: layered
+  groups:
+  - id: applications
+    title: Applikationer
+    match:
+      types:
+      - ApplicationComponent
+  - id: platforms
+    title: Plattformar
+    match:
+      specializations:
+      - Platform
+  - id: other-nodes
+    title: Övriga noder
+    match:
+      types:
+      - Node
+  nodes:
+    label:
+      primary: name
+      secondary:
+      - type
+      - specialization
+    show_properties:
+    - owner
+    - lifecycle
+    - criticality
+  edges:
+    show_type: true
+    show_name: false
+    show_confidence: true

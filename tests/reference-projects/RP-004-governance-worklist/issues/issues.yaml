@@ -1,0 +1,13 @@
+issues:
+- id: ISS-000001
+  type: missing_source
+  status: open
+  description: Platform owner is not yet source-backed.
+observations:
+- id: OBS-000001
+  type: quality_observation
+  status: noted
+  priority: medium
+  description: Platform is isolated in current scope.
+  object_refs:
+  - TEC-000001

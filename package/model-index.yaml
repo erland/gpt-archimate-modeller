@@ -1,0 +1,7 @@
+model_index_version: '0.1'
+zip_path: MODEL-INDEX.json
+canonical: false
+source_of_truth: false
+rebuild_on_pack: true
+validation: SHA-256 fingerprint of project YAML/JSON source files excluding derived index and package manifest
+fallback: assemble canonical YAML when missing or stale

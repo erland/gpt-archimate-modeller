@@ -1,0 +1,10 @@
+model_index_benchmark_version: '0.1'
+fixture:
+  elements: 10000
+  relationships: 9999
+yaml_assemble_median_ms: 11643.64
+index_build_ms: 4631.39
+indexed_load_median_ms: 14.56
+indexed_load_speedup_x: 799.7
+pack_with_index_ms: 7093.89
+decision: keep derived model index

@@ -1,0 +1,58 @@
+report:
+  id: model-overview
+  title: Modellöversikt
+  description: Sammanfattande inventering av modellens element och relationer.
+  metadata:
+    purpose: inventory
+  sections:
+  - id: types
+    title: Element per typ
+    source:
+      query: queries/count-by-type.yaml
+    render:
+      type: summary
+  - id: elements
+    title: Element
+    source:
+      query: queries/all-elements.yaml
+    render:
+      type: table
+      columns:
+      - field: id
+        heading: ID
+        format: code
+      - field: type
+        heading: Typ
+        format: text
+      - field: name
+        heading: Namn
+        format: text
+      - field: specialization
+        heading: Specialisering
+        format: text
+        default: —
+  - id: relationships
+    title: Relationer
+    source:
+      query: queries/all-relationships.yaml
+    render:
+      type: table
+      columns:
+      - field: id
+        heading: ID
+        format: code
+      - field: type
+        heading: Typ
+        format: text
+      - field: source
+        heading: Källa
+        format: code
+      - field: target
+        heading: Mål
+        format: code
+      - field: evidence.status
+        heading: Evidence
+        format: text
+      - field: evidence.confidence
+        heading: Confidence
+        format: text

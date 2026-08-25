@@ -1,0 +1,17 @@
+elements:
+- id: TEC-000001
+  type: Node
+  name: Shared Platform
+  specialization: Platform
+  properties:
+    lifecycle: active
+  evidence:
+    status: user_confirmed
+    confidence: high
+    assertions:
+    - id: EV-000001
+      kind: user_statement
+      supports:
+      - existence
+      - name
+      - property:lifecycle

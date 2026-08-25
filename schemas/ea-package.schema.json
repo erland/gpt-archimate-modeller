@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/ea-package.schema.json",
+  "title": "EA Project Package Manifest",
+  "type": "object",
+  "required": [
+    "format_version",
+    "package_layout_version",
+    "project",
+    "files"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "format_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+$"
+    },
+    "package_layout_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+$"
+    },
+    "project": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "model_version",
+        "archimate_version"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string"
+        },
+        "model_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created": {
+          "type": "string",
+          "format": "date"
+        },
+        "updated": {
+          "type": "string",
+          "format": "date"
+        },
+        "language": {
+          "type": "string"
+        },
+        "archimate_version": {
+          "type": "string",
+          "const": "3.2"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "files": {
+      "type": "object",
+      "required": [
+        "element_partitions",
+        "relationships",
+        "sources",
+        "extensions",
+        "specializations",
+        "issues",
+        "identity_counters",
+        "references",
+        "architecture_states"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "element_partitions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "path"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "path": {
+                "type": "string",
+                "minLength": 1
+              },
+              "description": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "relationships": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sources": {
+          "type": "string",
+          "minLength": 1
+        },
+        "extensions": {
+          "type": "string",
+          "minLength": 1
+        },
+        "specializations": {
+          "type": "string",
+          "minLength": 1
+        },
+        "issues": {
+          "type": "string",
+          "minLength": 1
+        },
+        "identity_counters": {
+          "type": "string",
+          "minLength": 1
+        },
+        "references": {
+          "type": "string",
+          "minLength": 1
+        },
+        "architecture_states": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "identity": {
+      "type": "object",
+      "required": [
+        "strategy_version"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "strategy_version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+$"
+        }
+      }
+    }
+  }
+}

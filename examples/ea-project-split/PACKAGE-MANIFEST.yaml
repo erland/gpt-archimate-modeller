@@ -1,0 +1,84 @@
+package_manifest:
+  contract_version: '0.1'
+  project_id: example-enterprise-architecture
+  model_version: 0.1.0
+  format_version: '0.1'
+  package_layout_version: '0.1'
+  archimate_version: '3.2'
+  hash_algorithm: sha256
+  files:
+  - path: CHANGELOG.md
+    sha256: 383d649c74721c97d82234d09fd4ffb22d5f4f69e1383945fdf29c2e5c9c4681
+    role: canonical
+  - path: changes/README.md
+    sha256: c674569f36bc731703151e6bd1da42c123a11a89b15b52f13241bce269c0cbfd
+    role: canonical
+  - path: changes/index.yaml
+    sha256: 7ab038d67defb45a80bf8ca9dbfceea24b3c1b1f06d2bafe5f08c06b0344d770
+    role: canonical
+  - path: extensions/extensions.yaml
+    sha256: 6c4e30d100cb0a83f7bcdc75668bd4123502c61bb796fa306c96c582429d9f4c
+    role: canonical
+  - path: extensions/specializations.yaml
+    sha256: 8cae2235bcbbe768dc8b572f62822f1f11c03b66d00db6dcb5aeb9eb613f0050
+    role: canonical
+  - path: identity/id-counters.yaml
+    sha256: 66f2ae5b4d4e7712ba2fb3768644f08e864ae70ece9650a2f598a9424d080d5c
+    role: canonical
+  - path: issues/issues.yaml
+    sha256: 5902dacce46b171bb2762afdb7a64eb1ea6cfafa8b93472f9a60bdaee2a6dbe6
+    role: canonical
+  - path: model/elements/application.yaml
+    sha256: e1e91a0f6cf3f42fd3a03fdc571a78e39650fdd42fe868681d72394032afcc11
+    role: canonical
+  - path: model/elements/business.yaml
+    sha256: 3acd7790115e1493b636f52fea966d3af2c040b0b2b6fa38171d497a50d8207b
+    role: canonical
+  - path: model/elements/composite.yaml
+    sha256: 3acd7790115e1493b636f52fea966d3af2c040b0b2b6fa38171d497a50d8207b
+    role: canonical
+  - path: model/elements/implementation-migration.yaml
+    sha256: 3acd7790115e1493b636f52fea966d3af2c040b0b2b6fa38171d497a50d8207b
+    role: canonical
+  - path: model/elements/motivation.yaml
+    sha256: 3acd7790115e1493b636f52fea966d3af2c040b0b2b6fa38171d497a50d8207b
+    role: canonical
+  - path: model/elements/physical.yaml
+    sha256: 3acd7790115e1493b636f52fea966d3af2c040b0b2b6fa38171d497a50d8207b
+    role: canonical
+  - path: model/elements/strategy.yaml
+    sha256: 909cdcc28a9512664e75c6925b0c338c5159a292d718cca2006ff6cb0467d54a
+    role: canonical
+  - path: model/elements/technology.yaml
+    sha256: e9e27f866c184b4781d58525b859efaccaee2d00c2630bf17ddbc265faef288c
+    role: canonical
+  - path: model/relationships.yaml
+    sha256: 0f9e1905dc50e2a67916aeda67ec05980963ac5e01c5365005f647c2d622096d
+    role: canonical
+  - path: project.yaml
+    sha256: 63bc32e7522ae59904cf4af19040bc5df63dcd62da54bc0c965577432f1abbe3
+    role: canonical
+  - path: queries/applications.yaml
+    sha256: 57ccf594ea34465add78f2c5ec29bdea30b77cb41d2d55f68323d797565b0e52
+    role: canonical
+  - path: queries/capability-realization.yaml
+    sha256: 109c56698df7052152ce8565641cd1fd55eab0a8e81f0395a8d618ce62aafe93
+    role: canonical
+  - path: queries/count-by-type.yaml
+    sha256: 6d12ca652cb18411ba23cd92358ea7c39edb94ebf4db27dd367d50f2b6f437ba
+    role: canonical
+  - path: reports/application-overview.yaml
+    sha256: 2b32b54c2a165046535775977d470db85343bcf01bc11d2654e59d69d1133d07
+    role: canonical
+  - path: sources/references.yaml
+    sha256: f9abc3eb846694c52f9ee270abb8ea7dd06745000f44b119ddaec3500c052384
+    role: canonical
+  - path: sources/sources.yaml
+    sha256: 06df5c03e5dd5710f935e9d0cc18593b079addf1afb55dc4e6582df6677c1880
+    role: canonical
+  - path: versioning/history.yaml
+    sha256: 65dc1b34cf81b2bfbb3770dbb88500cd557c9880faa538893f96e52cffaaf366
+    role: canonical
+  - path: views/capability-realization.yaml
+    sha256: 2bb4ce75d0f37811c17efb89b15c90730b05f437bcb5f1780ce89c62b90c116b
+    role: canonical

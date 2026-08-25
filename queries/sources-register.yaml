@@ -1,0 +1,14 @@
+query:
+  id: sources-register
+  select: sources
+  return:
+    fields:
+    - id
+    - type
+    - title
+    - origin.kind
+    - quality.authority
+    - quality.freshness
+    - quality.completeness
+  sort:
+  - field: title

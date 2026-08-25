@@ -1,0 +1,20 @@
+developer_documentation_version: '0.1'
+tests:
+- id: DDOC-001
+  description: all developer docs exist
+  expected: enforced
+- id: DDOC-002
+  description: developer docs have H1
+  expected: enforced
+- id: DDOC-003
+  description: relative links resolve
+  expected: enforced
+- id: DDOC-004
+  description: architecture/modules/testing/release concepts covered
+  expected: enforced
+- id: DDOC-005
+  description: README links developer docs
+  expected: enforced
+- id: DDOC-006
+  description: developer docs do not redefine canonical schemas inconsistently
+  expected: design_rule

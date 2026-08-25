@@ -1,0 +1,20 @@
+e2e_suite_version: '0.1'
+scenarios:
+- id: E2E-001
+  name: new project ZIP
+- id: E2E-002
+  name: apply architecture change
+- id: E2E-003
+  name: duplicate gate
+- id: E2E-004
+  name: stale gate
+- id: E2E-005
+  name: impact analysis
+- id: E2E-006
+  name: quality report
+- id: E2E-007
+  name: standard view export
+- id: E2E-008
+  name: final ZIP roundtrip
+- id: E2E-009
+  name: observable LLM contract

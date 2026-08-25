@@ -1,0 +1,42 @@
+view_result:
+  view_id: application-platform-context
+  title: Applikationer och plattformar
+  layout:
+    direction: left_to_right
+    algorithm: layered
+  groups:
+  - id: applications
+    title: Applikationer
+    match:
+      types:
+      - ApplicationComponent
+  - id: platforms
+    title: Plattformar
+    match:
+      specializations:
+      - Platform
+  - id: other-nodes
+    title: Övriga noder
+    match:
+      types:
+      - Node
+  nodes:
+  - id: APP-000001
+    type: ApplicationComponent
+    name: Ärendehanteringssystem
+    specialization: BusinessApplication
+    group: applications
+    properties:
+      owner: Verksamhetsområde X
+      lifecycle: active
+      criticality: high
+  - id: TEC-000001
+    type: Node
+    name: Containerplattform
+    specialization: Platform
+    group: platforms
+    properties:
+      owner: Plattformsteam
+      lifecycle: active
+      criticality: high
+  edges: []

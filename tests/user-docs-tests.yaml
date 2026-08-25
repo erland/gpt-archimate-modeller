@@ -1,0 +1,23 @@
+user_documentation_version: '0.1'
+tests:
+- id: UDOC-001
+  description: all catalog documents exist
+  expected: enforced
+- id: UDOC-002
+  description: all user docs have H1
+  expected: enforced
+- id: UDOC-003
+  description: relative Markdown links resolve
+  expected: enforced
+- id: UDOC-004
+  description: quickstart includes core safety/model principles
+  expected: enforced
+- id: UDOC-005
+  description: README routes users to user docs
+  expected: enforced
+- id: UDOC-006
+  description: user docs avoid requiring CLI for normal GPT usage
+  expected: design_rule
+- id: UDOC-007
+  description: developer internals deferred to step 42
+  expected: design_rule

@@ -1,0 +1,38 @@
+states:
+- id: STA-000001
+  name: Baseline 2026
+  type: baseline
+  include:
+    elements:
+    - APP-000001
+    - STR-000001
+    - TEC-000001
+    relationships:
+    - REL-000001
+  object_status:
+    APP-000001: unchanged
+    STR-000001: unchanged
+    TEC-000001: unchanged
+- id: STA-000002
+  name: Transition 1
+  type: transition
+  inherits_from: STA-000001
+  object_status:
+    TEC-000001: temporary
+- id: STA-000003
+  name: Target
+  type: target
+  inherits_from: STA-000002
+  object_status:
+    APP-000001: change
+    STR-000001: unchanged
+    TEC-000001: unchanged
+transitions:
+- id: TRN-000001
+  name: Baseline to transition
+  from_state: STA-000001
+  to_state: STA-000002
+- id: TRN-000002
+  name: Transition to target
+  from_state: STA-000002
+  to_state: STA-000003

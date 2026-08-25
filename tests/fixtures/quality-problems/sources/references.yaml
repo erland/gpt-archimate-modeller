@@ -1,0 +1,13 @@
+references:
+- id: REF-000001
+  source_ref: SRC-000001
+  locator:
+    kind: custom
+    value: user statement
+  label: Beskrivning av capability
+- id: REF-000002
+  source_ref: SRC-000002
+  locator:
+    kind: section
+    value: APP-001
+  label: Post för Ärendehanteringssystem

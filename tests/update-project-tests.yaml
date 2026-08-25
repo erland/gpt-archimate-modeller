@@ -1,0 +1,32 @@
+update_project_workflow_version: '0.1'
+tests:
+- id: UPD-001
+  description: Valid ZIP and change set yield valid updated ZIP
+  expected: enforced
+- id: UPD-002
+  description: Input ZIP immutable
+  expected: enforced
+- id: UPD-003
+  description: Optimistic model-version lock
+  expected: enforced
+- id: UPD-004
+  description: Already-applied change rejected
+  expected: enforced
+- id: UPD-005
+  description: Duplicate candidates block default
+  expected: enforced
+- id: UPD-006
+  description: Dry-run uses canonical apply_changes engine
+  expected: enforced
+- id: UPD-007
+  description: Post-validation required
+  expected: enforced
+- id: UPD-008
+  description: Version history consistency required
+  expected: enforced
+- id: UPD-009
+  description: Final ZIP contract required
+  expected: enforced
+- id: UPD-010
+  description: Migration requires explicit flag
+  expected: enforced

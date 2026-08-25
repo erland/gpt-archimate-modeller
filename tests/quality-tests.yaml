@@ -1,0 +1,29 @@
+quality_profile_version: '0.1'
+tests:
+- id: QTEST-001
+  description: Isolated element detected
+  expected: Q-CONN-001
+- id: QTEST-002
+  description: Capability without realization/support detected
+  expected: Q-CAP-001
+- id: QTEST-003
+  description: Missing owner detected
+  expected: Q-OWNER-001
+- id: QTEST-004
+  description: Missing evidence detected
+  expected: Q-EVID-001
+- id: QTEST-005
+  description: Low confidence detected
+  expected: Q-EVID-002
+- id: QTEST-006
+  description: Locatable source without exact reference detected
+  expected: Q-SRC-001
+- id: QTEST-007
+  description: Duplicate candidate detected
+  expected: Q-DUP-001
+- id: QTEST-008
+  description: Quality score calculated
+  expected: supported
+- id: QTEST-009
+  description: Combined technical+quality check supported
+  expected: supported

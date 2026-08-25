@@ -1,0 +1,9 @@
+element:
+  id: APP-000010
+  type: ApplicationComponent
+  name: Example Future Application
+  properties:
+    lifecycle: planned
+  temporal:
+    planned_from: '2027-01-01'
+    status_source: planned

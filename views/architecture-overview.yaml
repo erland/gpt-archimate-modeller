@@ -1,0 +1,35 @@
+view:
+  id: architecture-overview
+  title: Arkitekturöversikt
+  source:
+    query: queries/all-elements.yaml
+  include_relationships: between_selected
+  layout:
+    direction: left_to_right
+    algorithm: layered
+  groups:
+  - id: strategy
+    title: Strategi
+    match:
+      types:
+      - Capability
+  - id: application
+    title: Applikation
+    match:
+      types:
+      - ApplicationComponent
+  - id: technology
+    title: Teknik
+    match:
+      types:
+      - Node
+  nodes:
+    label:
+      primary: name
+      secondary:
+      - type
+    show_properties:
+    - owner
+  edges:
+    show_type: true
+    show_confidence: true

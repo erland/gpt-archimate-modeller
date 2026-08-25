@@ -1,0 +1,30 @@
+developer_documentation_version: '0.1'
+language: sv
+documents:
+- id: DEV-INDEX
+  file: docs/developer/index.md
+  purpose: entry_point
+- id: DEV-ARCH
+  file: docs/developer/architecture.md
+  purpose: architecture
+- id: DEV-MODULES
+  file: docs/developer/modules.md
+  purpose: module_boundaries
+- id: DEV-SCHEMAS
+  file: docs/developer/schemas-and-format.md
+  purpose: schemas_format
+- id: DEV-CHANGE
+  file: docs/developer/change-migration-versioning.md
+  purpose: change_migration_versioning
+- id: DEV-TEST
+  file: docs/developer/testing.md
+  purpose: testing
+- id: DEV-INT
+  file: docs/developer/interoperability.md
+  purpose: interoperability
+- id: DEV-PERF
+  file: docs/developer/performance-and-packaging.md
+  purpose: performance_packaging
+- id: DEV-REL
+  file: docs/developer/release-and-compatibility.md
+  purpose: release_compatibility

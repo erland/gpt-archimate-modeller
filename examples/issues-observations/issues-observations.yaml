@@ -1,0 +1,16 @@
+issues:
+- id: ISS-000010
+  type: missing_source
+  status: open
+  priority: high
+  description: Application owner is known but lacks a precise source reference.
+  object_refs:
+  - APP-000001
+observations:
+- id: OBS-000001
+  type: quality_observation
+  status: noted
+  priority: medium
+  description: Platform node is currently isolated from the rest of the example model.
+  object_refs:
+  - TEC-000001

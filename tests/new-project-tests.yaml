@@ -1,0 +1,32 @@
+new_project_workflow_version: '0.1'
+tests:
+- id: NEW-001
+  description: Canonical template used
+  expected: enforced
+- id: NEW-002
+  description: Empty project technically valid
+  expected: enforced
+- id: NEW-003
+  description: files mapping preserved
+  expected: enforced
+- id: NEW-004
+  description: initial history
+  expected: enforced
+- id: NEW-005
+  description: counters initialized
+  expected: enforced
+- id: NEW-006
+  description: standard profiles retained
+  expected: enforced
+- id: NEW-007
+  description: valid evidence-bearing seed accepted
+  expected: enforced
+- id: NEW-008
+  description: seed advances APP and EV counters
+  expected: enforced
+- id: NEW-009
+  description: ZIP contract passes
+  expected: enforced
+- id: NEW-010
+  description: invalid project ID rejected
+  expected: enforced

@@ -1,0 +1,27 @@
+report:
+  id: capability-realization
+  title: Förmågerealisering
+  description: Spårbarhet till realiserande applikationer.
+  metadata:
+    purpose: traceability
+  sections:
+  - id: realization
+    title: Realiserande applikationer
+    source:
+      query: queries/capability-realization.yaml
+    render:
+      type: table
+      columns:
+      - field: id
+        heading: ID
+        format: code
+      - field: type
+        heading: Typ
+        format: text
+      - field: name
+        heading: Namn
+        format: text
+      - field: specialization
+        heading: Specialisering
+        format: text
+        default: —

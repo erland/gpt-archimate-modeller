@@ -1,0 +1,1 @@
+redesign_required. Reuse stable IDs and use baseline/target state membership, inheritance and delta. Do not clone all objects with new IDs.

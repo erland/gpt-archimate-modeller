@@ -1,0 +1,106 @@
+view_result:
+  view_id: architecture-layers
+  title: Arkitekturlager
+  layout:
+    direction: top_to_bottom
+    algorithm: layered
+  groups:
+  - id: motivation-strategy
+    title: Motivation & strategi
+    match:
+      types:
+      - Stakeholder
+      - Driver
+      - Assessment
+      - Goal
+      - Outcome
+      - Principle
+      - Requirement
+      - Constraint
+      - Meaning
+      - Value
+      - Resource
+      - Capability
+      - ValueStream
+      - CourseOfAction
+  - id: business
+    title: Business
+    match:
+      types:
+      - BusinessActor
+      - BusinessRole
+      - BusinessCollaboration
+      - BusinessInterface
+      - BusinessProcess
+      - BusinessFunction
+      - BusinessInteraction
+      - BusinessEvent
+      - BusinessService
+      - BusinessObject
+      - Contract
+      - Representation
+      - Product
+  - id: application
+    title: Application
+    match:
+      types:
+      - ApplicationComponent
+      - ApplicationCollaboration
+      - ApplicationInterface
+      - ApplicationFunction
+      - ApplicationInteraction
+      - ApplicationProcess
+      - ApplicationEvent
+      - ApplicationService
+      - DataObject
+  - id: technology-physical
+    title: Technology & physical
+    match:
+      types:
+      - Node
+      - Device
+      - SystemSoftware
+      - TechnologyCollaboration
+      - TechnologyInterface
+      - Path
+      - CommunicationNetwork
+      - TechnologyFunction
+      - TechnologyProcess
+      - TechnologyInteraction
+      - TechnologyEvent
+      - TechnologyService
+      - Artifact
+      - Equipment
+      - Facility
+      - DistributionNetwork
+      - Material
+  - id: implementation
+    title: Implementation & migration
+    match:
+      types:
+      - WorkPackage
+      - Deliverable
+      - ImplementationEvent
+      - Plateau
+      - Gap
+  nodes:
+  - id: APP-000001
+    type: ApplicationComponent
+    name: Ärendehanteringssystem
+    specialization: BusinessApplication
+    group: application
+  - id: STR-000001
+    type: Capability
+    name: Ärendehantering
+    specialization: null
+    group: motivation-strategy
+  - id: TEC-000001
+    type: Node
+    name: Containerplattform
+    specialization: Platform
+    group: technology-physical
+  edges:
+  - id: REL-000001
+    type: Realization
+    source: APP-000001
+    target: STR-000001

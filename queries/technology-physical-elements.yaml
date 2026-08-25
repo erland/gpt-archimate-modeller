@@ -1,0 +1,28 @@
+query:
+  id: technology-physical-elements
+  select: elements
+  where:
+    type_in:
+    - Node
+    - Device
+    - SystemSoftware
+    - TechnologyCollaboration
+    - TechnologyInterface
+    - Path
+    - CommunicationNetwork
+    - TechnologyFunction
+    - TechnologyProcess
+    - TechnologyInteraction
+    - TechnologyEvent
+    - TechnologyService
+    - Artifact
+    - Equipment
+    - Facility
+    - DistributionNetwork
+    - Material
+  return:
+    fields:
+    - id
+    - type
+    - name
+    - specialization

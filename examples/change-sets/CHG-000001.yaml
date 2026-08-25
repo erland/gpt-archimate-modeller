@@ -1,0 +1,16 @@
+change_set:
+  id: CHG-000001
+  title: Uppdatera plattformens beskrivning
+  created: '2026-08-25'
+  expected_model_version: 0.1.0
+  operations:
+  - op: update_element
+    id: TEC-000001
+    preconditions:
+    - path: properties.lifecycle
+      equals: active
+    set:
+      description: Teknisk plattform för containeriserade arbetslaster och standardiserad
+        applikationsdrift.
+  versioning:
+    requested_impact: patch

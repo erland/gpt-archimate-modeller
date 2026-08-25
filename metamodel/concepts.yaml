@@ -1,0 +1,22 @@
+metamodel:
+  language: ArchiMate
+  version: '3.2'
+  status: baseline
+  concept_model:
+    concept:
+    - element
+    - relationship
+    element_families:
+    - structure element
+    - behavior element
+    - motivation element
+    - composite element
+    relationship_families:
+    - structural relationship
+    - dependency relationship
+    - dynamic relationship
+    - other relationship
+counts:
+  ordinary_element_types: 60
+  relationship_types: 11
+  relationship_connector_types: 1
