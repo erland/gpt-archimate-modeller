@@ -1,0 +1,44 @@
+elements:
+- id: APP-000001
+  type: ApplicationComponent
+  name: Legacy App
+  specialization: BusinessApplication
+  properties:
+    lifecycle: phase_out
+    owner: Legacy Team
+  temporal:
+    valid_from: '2020-01-01'
+    planned_to: '2027-12-31'
+    status_source: actual
+  evidence:
+    status: user_confirmed
+    confidence: high
+    assertions:
+    - id: EV-000001
+      kind: user_statement
+      supports:
+      - existence
+      - name
+      - property:lifecycle
+      - property:owner
+- id: APP-000002
+  type: ApplicationComponent
+  name: Target App
+  specialization: BusinessApplication
+  properties:
+    lifecycle: planned
+    owner: Modernization Team
+  temporal:
+    planned_from: '2027-01-01'
+    status_source: planned
+  evidence:
+    status: user_confirmed
+    confidence: high
+    assertions:
+    - id: EV-000002
+      kind: user_statement
+      supports:
+      - existence
+      - name
+      - property:lifecycle
+      - property:owner

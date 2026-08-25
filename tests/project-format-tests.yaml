@@ -1,0 +1,15 @@
+format_version: '0.1'
+tests:
+- id: PF-001
+  description: Minimal example validates
+  input: examples/ea-project-minimal.yaml
+  expected: valid
+- id: PF-002
+  description: Relationship source and target must resolve
+  expected: enforced
+- id: PF-003
+  description: Evidence source_refs must resolve
+  expected: enforced
+- id: PF-004
+  description: Element and relationship IDs must be unique
+  expected: enforced

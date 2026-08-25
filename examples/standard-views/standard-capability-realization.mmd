@@ -1,0 +1,11 @@
+flowchart LR
+  subgraph G_capabilities["Capabilities"]
+    STR_000001["Ärendehantering<br/>Capability<br/>owner: Verksamhetsområde X"]
+  end
+  subgraph G_applications["Applikationer"]
+    APP_000001["Ärendehanteringssystem<br/>ApplicationComponent<br/>BusinessApplication<br/>owner: Verksamhetsområde X<br/>lifecycle: active"]
+  end
+  subgraph G_platforms["Plattformar"]
+    TEC_000001["Containerplattform<br/>Node<br/>Platform<br/>owner: Plattformsteam<br/>lifecycle: active"]
+  end
+  APP_000001 -->|"Realization<br/>confidence: medium"| STR_000001

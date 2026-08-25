@@ -1,0 +1,2 @@
+severity,code,object_id,message,recommendation,related_ids
+warning,Q-CONN-001,TEC-000001,Node 'Containerplattform' has no relationships.,Connect the element to relevant context or confirm intentional isolation.,

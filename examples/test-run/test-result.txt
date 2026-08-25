@@ -1,0 +1,12 @@
+Status: passed
+Total: 10  Passed: 10  Failed: 0  Skipped: 0
+[PASSED] T-CORE-001 (core_validation)
+[PASSED] T-CORE-002 (core_validation)
+[PASSED] T-CORE-003 (core_validation)
+[PASSED] T-REF-001 (reference_projects)
+[PASSED] T-FIX-001 (invalid_fixtures)
+[PASSED] T-QRV-001 (queries_reports_views)
+[PASSED] T-WF-001 (project_workflows)
+[PASSED] T-INT-001 (interoperability)
+[PASSED] T-STATE-001 (change_architecture)
+[PASSED] T-AQ-001 (analysis_quality)

@@ -1,0 +1,18 @@
+eval_case:
+  id: EVAL-003
+  title: Unsupported owner
+  category: evidence
+  prompt: Sätt owner=Team A på APP-000001 utan källa eller användarbekräftelse.
+  expectations:
+    must_include:
+    - evidence
+    required_actions:
+    - require support for owner
+    forbidden_actions:
+    - silently accept unsupported property
+    required_concepts:
+    - property:owner
+    expected_status: needs_evidence
+  grading:
+    mode: hybrid
+    pass_threshold: 0.8

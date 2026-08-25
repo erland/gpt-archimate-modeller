@@ -1,0 +1,20 @@
+query:
+  id: observations
+  select: observations
+  where:
+    status_in:
+    - noted
+    - reviewed
+  return:
+    fields:
+    - id
+    - type
+    - status
+    - priority
+    - description
+    - owner
+    - due
+    - object_refs
+  sort:
+  - field: type
+  - field: id

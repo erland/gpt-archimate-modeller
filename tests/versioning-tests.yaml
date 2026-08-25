@@ -1,0 +1,20 @@
+versioning_policy_version: '0.1'
+tests:
+- id: VER-001
+  description: Patch increments patch
+  expected: enforced
+- id: VER-002
+  description: Semantic change increments minor
+  expected: enforced
+- id: VER-003
+  description: Impact cannot be lowered
+  expected: enforced
+- id: VER-004
+  description: Duplicate change set rejected
+  expected: enforced
+- id: VER-005
+  description: Explicit add updates ID counter
+  expected: enforced
+- id: VER-006
+  description: History and index stay consistent
+  expected: enforced

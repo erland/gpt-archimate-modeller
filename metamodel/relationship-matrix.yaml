@@ -1,0 +1,71 @@
+rule_profile_version: '0.1'
+archimate_version: '3.2'
+validation_policy:
+  known_pair: enforce
+  unknown_pair: warn
+  strict_unknown_pair: error
+upstream_cross_check:
+  project: pyArchimate/pyArchimate
+  commit: 21de1955968a1639f01a858eda8c5bfddbb15370
+  file: src/pyArchimate/checker_rules.yml
+  blob_sha: 5ac2d2b160d7f1bef2de5eeaa492df12767d569c
+  license: GPL-3.0
+  bundled: false
+  note: Third-party matrix is not copied into this project. Portable rules below are independently maintained test/validation
+    rules cross-checked against the pinned source.
+relationship_keys:
+  Access: a
+  Aggregation: g
+  Assignment: i
+  Association: o
+  Composition: c
+  Flow: f
+  Influence: n
+  Realization: r
+  Serving: v
+  Specialization: s
+  Triggering: t
+validated_pairs:
+- source_type: ApplicationComponent
+  target_type: Capability
+  allowed:
+  - Association
+  - Realization
+  cross_check: pinned-pyArchimate-3.2-compatible
+- source_type: ApplicationComponent
+  target_type: ApplicationComponent
+  allowed:
+  - Composition
+  - Aggregation
+  - Flow
+  - Association
+  - Realization
+  - Specialization
+  - Triggering
+  - Serving
+  cross_check: pinned-pyArchimate-3.2-compatible
+- source_type: Node
+  target_type: Node
+  allowed:
+  - Composition
+  - Aggregation
+  - Flow
+  - Assignment
+  - Association
+  - Realization
+  - Specialization
+  - Triggering
+  - Serving
+  cross_check: pinned-pyArchimate-3.2-compatible
+- source_type: Capability
+  target_type: Capability
+  allowed:
+  - Composition
+  - Aggregation
+  - Flow
+  - Association
+  - Realization
+  - Specialization
+  - Triggering
+  - Serving
+  cross_check: pinned-pyArchimate-3.2-compatible

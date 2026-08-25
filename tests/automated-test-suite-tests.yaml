@@ -1,0 +1,14 @@
+automated_test_suite_version: '0.1'
+tests:
+- id: ATS-001
+  description: single entry point
+  expected: enforced
+- id: ATS-002
+  description: all default suites pass offline
+  expected: enforced
+- id: ATS-003
+  description: selected suites supported
+  expected: enforced
+- id: ATS-004
+  description: machine-readable result schema
+  expected: enforced

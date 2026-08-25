@@ -1,0 +1,20 @@
+specialization_model_version: '0.2'
+tests:
+- id: SPEC-001
+  description: Specialization must be declared
+  expected: enforced
+- id: SPEC-002
+  description: Element type must match base_type
+  expected: enforced
+- id: SPEC-003
+  description: Parent must exist
+  expected: enforced
+- id: SPEC-004
+  description: Inheritance cycles rejected
+  expected: enforced
+- id: SPEC-005
+  description: Child and parent same base_type
+  expected: enforced
+- id: SPEC-006
+  description: Deprecated specialization warns
+  expected: enforced

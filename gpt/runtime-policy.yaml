@@ -1,0 +1,21 @@
+runtime_policy_version: '0.1'
+project_input:
+  zip_first: true
+  must_validate_before_write: true
+  future_unknown_format: read_only
+modeling:
+  archimate_core: true
+  stable_ids: true
+  change_set_required_for_existing_project: true
+  facts_inferences_separate: true
+output:
+  complete_zip_after_project_change: true
+  validate_final_zip: true
+blocking_conditions:
+- technical_validation_error
+- zip_contract_error
+- unsupported_future_format
+- failed_migration
+non_blocking_by_default:
+- quality_warning
+- quality_info

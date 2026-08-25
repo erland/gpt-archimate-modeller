@@ -1,0 +1,29 @@
+sources:
+- id: SRC-OG-ARCHIMATE-LICENSED
+  publisher: The Open Group
+  title: ArchiMate Licensed Downloads
+  url: https://www.opengroup.org/archimate-licensed-downloads
+  used_for:
+  - supported_specification_version
+- id: SRC-OG-ARCHIMATE-CERT
+  publisher: The Open Group
+  title: ArchiMate Certification
+  url: https://www.opengroup.org/certifications/archimate
+  used_for:
+  - supported_specification_version
+  - language_purpose
+- id: SRC-OG-EXCHANGE
+  publisher: The Open Group
+  title: ArchiMate Model Exchange File Format
+  url: https://www.opengroup.org/xsd/archimate/
+  used_for:
+  - interoperability_types
+  - relationship_type_names
+- id: SRC-PYARCHIMATE
+  publisher: pyArchimate project
+  title: pyArchimate
+  url: https://github.com/pyArchimate/pyArchimate
+  used_for:
+  - independent_cross_check_of_type_names
+  - future_relationship_matrix_adapter
+  license_note: Third-party GPL project; not bundled into this package.

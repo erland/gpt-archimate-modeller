@@ -1,0 +1,38 @@
+elements:
+- id: APP-000001
+  type: ApplicationComponent
+  name: Ärendehanteringssystem
+  description: Systemstöd för ärendehantering.
+  properties:
+    lifecycle: active
+    owner: Verksamhetsområde X
+    criticality: high
+  evidence:
+    status: document_confirmed
+    confidence: high
+    assertions:
+    - id: EV-000002
+      kind: explicit
+      source_refs:
+      - SRC-000002
+      supports:
+      - description
+      - existence
+      - name
+      - property:criticality
+      - property:lifecycle
+      - property:owner
+      confidence: high
+      note: Systemkatalogen beskriver applikationen explicit.
+      reference_refs:
+      - REF-000002
+  metadata:
+    created: '2026-08-25'
+    updated: '2026-08-25'
+  aliases:
+  - ÄHS
+  specialization: BusinessApplication
+  temporal:
+    valid_from: '2025-01-01'
+    planned_to: '2028-12-31'
+    status_source: actual

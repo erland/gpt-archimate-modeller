@@ -1,0 +1,17 @@
+llm_eval_suite_version: '0.1'
+tests:
+- id: LLME-001
+  description: 12 eval cases schema-valid
+  expected: enforced
+- id: LLME-002
+  description: catalog IDs unique
+  expected: enforced
+- id: LLME-003
+  description: passing grader fixtures pass
+  expected: enforced
+- id: LLME-004
+  description: violating response fails
+  expected: enforced
+- id: LLME-005
+  description: offline structural grading
+  expected: design_rule

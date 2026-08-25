@@ -1,0 +1,4 @@
+ID,Typ,Namn,Specialisering
+STR-000001,Capability,Ärendehantering,—
+APP-000001,ApplicationComponent,Ärendehanteringssystem,BusinessApplication
+TEC-000001,Node,Containerplattform,Platform

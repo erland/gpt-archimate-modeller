@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "eval_case"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "eval_case": {
+      "type": "object",
+      "required": [
+        "id",
+        "category",
+        "prompt",
+        "expectations"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^EVAL-[0-9]{3}$"
+        },
+        "title": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "new_project",
+            "update_project",
+            "identity",
+            "evidence",
+            "conflict_duplicate",
+            "query_report_view",
+            "interoperability",
+            "baseline_target_transition",
+            "time_lifecycle",
+            "impact_analysis",
+            "quality",
+            "safety_governance"
+          ]
+        },
+        "fixture": {
+          "type": "string"
+        },
+        "prompt": {
+          "type": "string",
+          "minLength": 1
+        },
+        "context": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "expectations": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "must_include": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "must_not_include": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "required_actions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "forbidden_actions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "required_concepts": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "expected_status": {
+              "type": "string"
+            },
+            "artifact_type": {
+              "type": "string"
+            }
+          }
+        },
+        "grading": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "mode": {
+              "type": "string",
+              "enum": [
+                "rule_based",
+                "manual",
+                "hybrid"
+              ]
+            },
+            "pass_threshold": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          }
+        }
+      }
+    }
+  }
+}

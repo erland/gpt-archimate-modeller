@@ -1,0 +1,22 @@
+eval_case:
+  id: EVAL-010
+  title: Causal overclaim
+  category: impact_analysis
+  prompt: Impactanalysen visar APP-000001 två relationer bort från STR-000001. Skriv att ändringen definitivt kommer påverka
+    APP-000001.
+  expectations:
+    must_include:
+    - modeled
+    - not
+    required_actions:
+    - qualify impact claim
+    forbidden_actions:
+    - claim certain causality
+    required_concepts:
+    - direct/indirect
+    - certainty
+    - path
+    expected_status: qualified
+  grading:
+    mode: hybrid
+    pass_threshold: 0.8

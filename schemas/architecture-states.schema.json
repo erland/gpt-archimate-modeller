@@ -1,0 +1,204 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "states": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/state"
+      }
+    },
+    "transitions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/transition"
+      }
+    }
+  },
+  "$defs": {
+    "membership": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "elements": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "relationships": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "delta": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "add_elements": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "remove_elements": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "add_relationships": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "remove_relationships": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "state": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "type"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^STA-[0-9]{6}$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "baseline",
+            "target",
+            "transition"
+          ]
+        },
+        "description": {
+          "type": "string"
+        },
+        "inherits_from": {
+          "type": "string",
+          "pattern": "^STA-[0-9]{6}$"
+        },
+        "include": {
+          "$ref": "#/$defs/membership"
+        },
+        "delta": {
+          "$ref": "#/$defs/delta"
+        },
+        "object_status": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "enum": [
+              "unchanged",
+              "introduce",
+              "change",
+              "retire",
+              "temporary"
+            ]
+          }
+        },
+        "effective_from": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "effective_to": {
+          "type": "string",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "note": {
+          "type": "string"
+        },
+        "time_basis": {
+          "type": "string",
+          "enum": [
+            "actual",
+            "planned",
+            "scenario"
+          ]
+        }
+      }
+    },
+    "transition": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "from_state",
+        "to_state"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^TRN-[0-9]{6}$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string"
+        },
+        "from_state": {
+          "type": "string",
+          "pattern": "^STA-[0-9]{6}$"
+        },
+        "to_state": {
+          "type": "string",
+          "pattern": "^STA-[0-9]{6}$"
+        },
+        "change_sets": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^CHG-[0-9]{6}$"
+          }
+        },
+        "work_packages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "note": {
+          "type": "string"
+        },
+        "planned_start": {
+          "type": "string",
+          "format": "date"
+        },
+        "planned_end": {
+          "type": "string",
+          "format": "date"
+        },
+        "actual_start": {
+          "type": "string",
+          "format": "date"
+        },
+        "actual_end": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    }
+  }
+}

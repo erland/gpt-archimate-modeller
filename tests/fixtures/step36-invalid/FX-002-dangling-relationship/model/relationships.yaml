@@ -1,0 +1,25 @@
+relationships:
+- id: REL-000001
+  type: Realization
+  source: APP-000001
+  target: STR-999999
+  evidence:
+    status: user_confirmed
+    confidence: high
+    assertions:
+    - id: EV-000004
+      kind: user_statement
+      supports:
+      - relationship
+- id: REL-000002
+  type: Serving
+  source: TEC-000001
+  target: APP-000001
+  evidence:
+    status: user_confirmed
+    confidence: high
+    assertions:
+    - id: EV-000005
+      kind: user_statement
+      supports:
+      - relationship

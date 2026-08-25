@@ -1,0 +1,30 @@
+conflict_policy_version: '0.1'
+classes:
+- possible_duplicate
+- identity_conflict
+- type_conflict
+- property_conflict
+- evidence_conflict
+- relationship_conflict
+actions:
+- merge
+- keep_separate
+- prefer_existing
+- prefer_incoming
+- defer
+- reject_incoming
+automatic_actions_allowed:
+- detect
+- classify
+- propose
+automatic_actions_forbidden:
+- merge
+- delete
+- retype
+- discard_evidence
+merge:
+  canonical_id_required: true
+  stable_id_reuse_forbidden: true
+  repoint_relationships_explicitly: true
+defer:
+  issue_required: true

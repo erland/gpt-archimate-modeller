@@ -1,0 +1,13 @@
+change_set:
+  id: CHG-000100
+  title: Update application description
+  created: '2026-08-25'
+  expected_model_version: 0.1.0
+  operations:
+  - op: update_element
+    id: APP-000001
+    preconditions:
+    - path: properties.lifecycle
+      equals: active
+    set:
+      description: Updated through the end-to-end update-project workflow.

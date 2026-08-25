@@ -1,0 +1,23 @@
+standard_view_library_version: '0.1'
+export_formats:
+- drawio
+- mermaid
+views:
+- id: architecture-layers
+  file: views/standard/architecture-layers.yaml
+  purpose: overview
+- id: standard-capability-realization
+  file: views/standard/capability-realization.yaml
+  purpose: traceability
+- id: application-platform-context
+  file: views/standard/application-platform-context.yaml
+  purpose: dependency_context
+- id: application-landscape
+  file: views/standard/application-landscape.yaml
+  purpose: application_landscape
+- id: technology-platform-landscape
+  file: views/standard/technology-platform-landscape.yaml
+  purpose: technology_landscape
+- id: implementation-roadmap-context
+  file: views/standard/implementation-roadmap-context.yaml
+  purpose: implementation_migration

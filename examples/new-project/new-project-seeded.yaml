@@ -1,0 +1,27 @@
+new_project:
+  id: seeded-enterprise-architecture
+  name: Seeded Enterprise Architecture
+  seed:
+    elements:
+    - id: APP-000001
+      type: ApplicationComponent
+      name: Example Application
+      specialization: BusinessApplication
+      properties:
+        lifecycle: active
+        owner: Example Team
+      evidence:
+        status: user_confirmed
+        confidence: high
+        assertions:
+        - id: EV-000001
+          kind: user_statement
+          supports:
+          - existence
+          - name
+          - property:lifecycle
+          - property:owner
+          note: Seed data explicitly provided when the project was created.
+    relationships: []
+    sources: []
+    references: []

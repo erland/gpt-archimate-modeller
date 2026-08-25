@@ -1,0 +1,58 @@
+view_result:
+  view_id: standard-capability-realization
+  title: Capability-realisering
+  layout:
+    direction: left_to_right
+    algorithm: layered
+  groups:
+  - id: capabilities
+    title: Capabilities
+    match:
+      types:
+      - Capability
+  - id: applications
+    title: Applikationer
+    match:
+      types:
+      - ApplicationComponent
+  - id: platforms
+    title: Plattformar
+    match:
+      specializations:
+      - Platform
+  - id: other-nodes
+    title: Övriga noder
+    match:
+      types:
+      - Node
+  nodes:
+  - id: APP-000001
+    type: ApplicationComponent
+    name: Ärendehanteringssystem
+    specialization: BusinessApplication
+    group: applications
+    properties:
+      owner: Verksamhetsområde X
+      lifecycle: active
+  - id: STR-000001
+    type: Capability
+    name: Ärendehantering
+    specialization: null
+    group: capabilities
+    properties:
+      owner: Verksamhetsområde X
+      lifecycle: null
+  - id: TEC-000001
+    type: Node
+    name: Containerplattform
+    specialization: Platform
+    group: platforms
+    properties:
+      owner: Plattformsteam
+      lifecycle: active
+  edges:
+  - id: REL-000001
+    type: Realization
+    source: APP-000001
+    target: STR-000001
+    confidence: medium

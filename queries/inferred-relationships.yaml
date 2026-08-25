@@ -1,0 +1,15 @@
+query:
+  id: inferred-relationships
+  title: Infererade relationer
+  select: relationships
+  where:
+    evidence_status_in:
+    - inferred
+  return:
+    fields:
+    - id
+    - type
+    - source
+    - target
+    - evidence.status
+    - evidence.confidence

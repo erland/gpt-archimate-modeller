@@ -1,0 +1,26 @@
+view_result:
+  view_id: implementation-roadmap-context
+  title: Implementation- och migrationskontext
+  layout:
+    direction: left_to_right
+    algorithm: layered
+  groups:
+  - id: work
+    title: Arbete & leveranser
+    match:
+      types:
+      - WorkPackage
+      - Deliverable
+  - id: states
+    title: Tillstånd & gap
+    match:
+      types:
+      - Plateau
+      - Gap
+  - id: events
+    title: Events
+    match:
+      types:
+      - ImplementationEvent
+  nodes: []
+  edges: []

@@ -1,0 +1,32 @@
+model_exchange_import_version: '0.1'
+tests:
+- id: MXI-001
+  description: Import exported model metadata
+  expected: supported
+- id: MXI-002
+  description: Import elements and relationships
+  expected: supported
+- id: MXI-003
+  description: Restore specialization property
+  expected: supported
+- id: MXI-004
+  description: Restore aliases property
+  expected: supported
+- id: MXI-005
+  description: Restore evidence status/confidence summary
+  expected: supported
+- id: MXI-006
+  description: Unknown/non-internal identifiers flagged for allocation
+  expected: enforced
+- id: MXI-007
+  description: No fabricated evidence assertions
+  expected: enforced
+- id: MXI-008
+  description: Views/organizations reported unsupported
+  expected: enforced
+- id: MXI-009
+  description: Direct merge into existing project is not supported
+  expected: design_rule
+- id: MXI-010
+  description: Export-import roundtrip preserves core semantic graph
+  expected: enforced

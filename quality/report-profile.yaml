@@ -1,0 +1,20 @@
+model_quality_report_version: '0.1'
+source: quality_checker
+quality_profile: quality/profile.yaml
+outputs:
+- markdown
+- csv
+- json
+- yaml
+sections:
+- executive_summary
+- score_and_counts
+- findings_by_severity
+- findings_by_rule
+- object_worklist
+- recommendations
+principles:
+  dynamic_not_persisted: true
+  stored_issues_separate: true
+  score_is_diagnostic_not_maturity_rating: true
+  no_auto_issue_creation: true

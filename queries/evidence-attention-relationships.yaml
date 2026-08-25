@@ -1,0 +1,18 @@
+query:
+  id: evidence-attention-relationships
+  select: relationships
+  where:
+    evidence_status_in:
+    - inferred
+    - unknown
+  return:
+    fields:
+    - id
+    - type
+    - source
+    - target
+    - evidence.status
+    - evidence.confidence
+  sort:
+  - field: type
+  - field: id

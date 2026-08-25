@@ -1,0 +1,9 @@
+metamodel_version: '3.2'
+relationship_connectors:
+- type: Junction
+  kind: relationship_connector
+  variants:
+  - and
+  - or
+  abstract: false
+  notes: Used to connect relationships of the same type; modeled separately from ordinary elements.

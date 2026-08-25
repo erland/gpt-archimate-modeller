@@ -1,0 +1,20 @@
+relationships:
+- id: REL-000001
+  type: Serving
+  source: APP-000001
+  target: STR-000001
+  evidence:
+    status: inferred
+    confidence: medium
+    assertions:
+    - id: EV-000003
+      kind: inferred
+      source_refs:
+      - SRC-000001
+      - SRC-000002
+      supports:
+      - relationship
+      confidence: medium
+  metadata:
+    created: '2026-08-25'
+    updated: '2026-08-25'

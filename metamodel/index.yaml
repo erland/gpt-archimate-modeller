@@ -1,0 +1,23 @@
+language: ArchiMate
+version: '3.2'
+files:
+  elements: elements.yaml
+  relationships: relationships.yaml
+  relationship_rules: relationship-rules.yaml
+  connectors: connectors.yaml
+  layers: layers.yaml
+  aspects: aspects.yaml
+  concepts: concepts.yaml
+  sources: sources.yaml
+  relationship_matrix: relationship-matrix.yaml
+counts:
+  ordinary_element_types: 60
+  relationship_types: 11
+  relationship_connector_types: 1
+validation:
+  known_element_types: true
+  known_relationship_types: true
+  semantic_candidate_rules: true
+  exact_normative_pair_matrix: partial-portable-cross-checked
+  exact_matrix_planned_step: null
+  relationship_validation_policy: known-pairs-enforced; unknown-pairs-warn or strict-error

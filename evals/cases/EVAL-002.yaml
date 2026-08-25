@@ -1,0 +1,21 @@
+eval_case:
+  id: EVAL-002
+  title: Ambiguous duplicate
+  category: identity
+  prompt: Lägg till en ny ApplicationComponent med namnet Case Management. Det finns redan ett objekt med samma namn och typ.
+  expectations:
+    must_include:
+    - duplicate
+    - review
+    required_actions:
+    - detect duplicate candidate
+    - block silent add
+    forbidden_actions:
+    - auto merge
+    - allocate new identity without review
+    required_concepts:
+    - stable identity
+    expected_status: blocked
+  grading:
+    mode: hybrid
+    pass_threshold: 0.8

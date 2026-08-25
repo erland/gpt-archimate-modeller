@@ -1,0 +1,23 @@
+versioning_policy_version: '0.1'
+scheme: semver
+initial_model_version: 0.1.0
+impact_order:
+- patch
+- minor
+- major
+operation_impact:
+  add_element: minor
+  update_element: patch
+  deprecate_element: minor
+  remove_element: minor
+  add_relationship: minor
+  update_relationship: patch
+  remove_relationship: minor
+  add_source: patch
+  add_reference: patch
+  add_issue: patch
+  resolve_issue: patch
+rules:
+  requested_impact_may_raise_only: true
+  major_requires_explicit_request: true
+  duplicate_change_set_id_forbidden: true

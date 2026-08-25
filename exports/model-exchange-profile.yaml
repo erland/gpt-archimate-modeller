@@ -1,0 +1,19 @@
+model_exchange_export_version: '0.1'
+archimate_semantic_version: '3.2'
+exchange_schema_version: '3.1'
+namespace: http://www.opengroup.org/xsd/archimate/3.0/
+schema_location: https://www.opengroup.org/xsd/archimate/3.1/archimate3_Model.xsd
+scope:
+  elements: true
+  relationships: true
+  properties: true
+  documentation: true
+  organizations: false
+  views: false
+  diagrams: false
+property_policy:
+  value_type: string
+  specialization_property: ea.specialization
+  aliases_property: ea.aliases
+  evidence_status_property: ea.evidence.status
+  evidence_confidence_property: ea.evidence.confidence

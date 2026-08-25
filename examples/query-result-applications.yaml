@@ -1,0 +1,10 @@
+query_result:
+  query_id: applications
+  count: 1
+  rows:
+  - id: APP-000001
+    type: ApplicationComponent
+    name: Ärendehanteringssystem
+    specialization: BusinessApplication
+    properties.lifecycle: active
+    properties.owner: Verksamhetsområde X

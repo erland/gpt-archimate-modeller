@@ -1,0 +1,10 @@
+report:
+  id: architecture-summary
+  title: Arkitektursammanfattning
+  sections:
+  - id: count-by-type
+    title: Antal objekt per typ
+    source:
+      query: queries/count-by-type.yaml
+    render:
+      type: summary

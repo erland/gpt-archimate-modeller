@@ -1,0 +1,26 @@
+identity_strategy_version: '0.1'
+tests:
+- id: ID-001
+  description: All persisted IDs match PREFIX-NNNNNN
+  expected: enforced
+- id: ID-002
+  description: Element prefix matches ArchiMate family
+  expected: enforced
+- id: ID-003
+  description: Relationship prefix is REL
+  expected: enforced
+- id: ID-004
+  description: Source prefix is SRC
+  expected: enforced
+- id: ID-005
+  description: Issue prefix is ISS
+  expected: enforced
+- id: ID-006
+  description: Counters never trail existing allocated IDs
+  expected: enforced
+- id: ID-007
+  description: Aliases may assist matching but are not primary IDs
+  expected: design_rule
+- id: ID-008
+  description: Existing ID survives rename and file movement
+  expected: design_rule

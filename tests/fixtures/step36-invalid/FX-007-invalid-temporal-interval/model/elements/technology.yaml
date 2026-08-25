@@ -1,0 +1,19 @@
+elements:
+- id: TEC-000001
+  type: Node
+  name: Application Platform
+  specialization: Platform
+  properties:
+    lifecycle: active
+    owner: Platform Team
+  evidence:
+    status: user_confirmed
+    confidence: high
+    assertions:
+    - id: EV-000003
+      kind: user_statement
+      supports:
+      - existence
+      - name
+      - property:lifecycle
+      - property:owner

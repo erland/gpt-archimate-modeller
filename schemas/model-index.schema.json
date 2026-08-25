@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Derived Model Index",
+  "type": "object",
+  "required": [
+    "model_index"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "model_index": {
+      "type": "object",
+      "required": [
+        "version",
+        "source_fingerprint",
+        "logical"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "version": {
+          "const": "0.1"
+        },
+        "source_fingerprint": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "source_file_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "logical": {
+          "type": "object"
+        }
+      }
+    }
+  }
+}

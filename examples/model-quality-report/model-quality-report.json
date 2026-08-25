@@ -1,0 +1,34 @@
+{
+  "model_quality_result": {
+    "project_id": "example-enterprise-architecture",
+    "model_version": "0.1.0",
+    "quality_profile": "/mnt/data/step35-final/archimate-yaml-ea-gpt-step-35/quality/profile.yaml",
+    "summary": {
+      "score": 97.0,
+      "counts": {
+        "error": 0,
+        "warning": 1,
+        "info": 0
+      },
+      "finding_count": 1,
+      "by_rule": {
+        "Q-CONN-001": 1
+      },
+      "by_severity": {
+        "warning": 1
+      },
+      "objects_with_findings": 1
+    },
+    "findings": [
+      {
+        "severity": "warning",
+        "code": "Q-CONN-001",
+        "object_id": "TEC-000001",
+        "related_ids": [],
+        "message": "Node 'Containerplattform' has no relationships.",
+        "recommendation": "Connect the element to relevant context or confirm intentional isolation."
+      }
+    ],
+    "interpretation": "Quality score is a diagnostic signal derived from enabled checks and configured deductions. It is not an absolute architecture maturity rating."
+  }
+}

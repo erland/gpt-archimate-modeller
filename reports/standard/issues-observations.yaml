@@ -1,0 +1,69 @@
+report:
+  id: issues-observations
+  title: Issues och observations
+  description: Öppen arbetslista.
+  metadata:
+    purpose: worklist
+  sections:
+  - id: issues
+    title: Öppna issues
+    source:
+      query: queries/open-issues.yaml
+    render:
+      type: table
+      columns:
+      - field: id
+        heading: ID
+        format: code
+      - field: type
+        heading: Typ
+        format: text
+      - field: status
+        heading: Status
+        format: text
+      - field: priority
+        heading: Prioritet
+        format: text
+        default: medium
+      - field: description
+        heading: Beskrivning
+        format: text
+      - field: owner
+        heading: Ägare
+        format: text
+        default: —
+      - field: object_refs
+        heading: Objekt
+        format: text
+        default: —
+  - id: observations
+    title: Aktiva observationer
+    source:
+      query: queries/observations.yaml
+    render:
+      type: table
+      columns:
+      - field: id
+        heading: ID
+        format: code
+      - field: type
+        heading: Typ
+        format: text
+      - field: status
+        heading: Status
+        format: text
+      - field: priority
+        heading: Prioritet
+        format: text
+        default: medium
+      - field: description
+        heading: Beskrivning
+        format: text
+      - field: owner
+        heading: Ägare
+        format: text
+        default: —
+      - field: object_refs
+        heading: Objekt
+        format: text
+        default: —

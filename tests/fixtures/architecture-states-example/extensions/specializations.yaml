@@ -1,0 +1,38 @@
+specializations:
+  Platform:
+    label: Platform
+    base_type: Node
+    description: Organisationsspecifik teknisk plattform.
+    inherits_relationships: true
+    governance:
+      status: active
+      owner: EA
+      introduced_in: 0.9.0
+  IntegrationPlatform:
+    label: Integration platform
+    base_type: Node
+    parent_specialization: Platform
+    description: Plattform för integrationsförmågor och integrationskomponenter.
+    inherits_relationships: true
+    governance:
+      status: active
+      owner: EA
+      introduced_in: 0.9.0
+  BusinessApplication:
+    label: Business application
+    base_type: ApplicationComponent
+    description: Verksamhetsnära applikation eller systemstöd.
+    inherits_relationships: true
+    governance:
+      status: active
+      owner: EA
+      introduced_in: 0.9.0
+  SharedApplicationService:
+    label: Shared application service
+    base_type: ApplicationService
+    description: Delad applikationstjänst.
+    inherits_relationships: true
+    governance:
+      status: experimental
+      owner: EA
+      introduced_in: 0.9.0

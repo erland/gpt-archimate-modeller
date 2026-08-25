@@ -1,0 +1,1 @@
+This is modeled reachability, not guaranteed causality. Qualify impact claim and distinguish direct/indirect, certainty and path.

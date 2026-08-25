@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+
+# Generated build/release output
+build/
+dist/
+
+# Generated E2E evidence
+examples/end-to-end/result/
+
+# Local editor/OS files
+.DS_Store
+.idea/
+.vscode/

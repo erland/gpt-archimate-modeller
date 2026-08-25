@@ -1,0 +1,1 @@
+Report is read-only. Separate report from model change, preserve query/report separation, and do not mutate model during report rendering.

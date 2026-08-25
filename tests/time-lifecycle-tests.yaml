@@ -1,0 +1,17 @@
+time_lifecycle_version: '0.1'
+tests:
+- id: TIME-001
+  description: temporal intervals validate
+  expected: enforced
+- id: TIME-002
+  description: state/transition intervals validate
+  expected: enforced
+- id: TIME-003
+  description: unified validator includes temporal findings
+  expected: enforced
+- id: TIME-004
+  description: lifecycle query/report render
+  expected: enforced
+- id: TIME-005
+  description: planned future distinct from actual lifecycle
+  expected: design_rule

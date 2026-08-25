@@ -1,0 +1,35 @@
+format_version: '0.1'
+package_layout_version: '0.1'
+project:
+  id: rp-001-minimal-valid
+  name: Reference Project 001 - Minimal Valid
+  model_version: 0.1.0
+  archimate_version: '3.2'
+files:
+  element_partitions:
+  - id: motivation
+    path: model/elements/motivation.yaml
+  - id: strategy
+    path: model/elements/strategy.yaml
+  - id: business
+    path: model/elements/business.yaml
+  - id: application
+    path: model/elements/application.yaml
+  - id: technology
+    path: model/elements/technology.yaml
+  - id: physical
+    path: model/elements/physical.yaml
+  - id: implementation-migration
+    path: model/elements/implementation-migration.yaml
+  - id: composite
+    path: model/elements/composite.yaml
+  relationships: model/relationships.yaml
+  sources: sources/sources.yaml
+  extensions: extensions/extensions.yaml
+  specializations: extensions/specializations.yaml
+  issues: issues/issues.yaml
+  identity_counters: identity/id-counters.yaml
+  references: sources/references.yaml
+  architecture_states: architecture/states.yaml
+identity:
+  strategy_version: '0.1'

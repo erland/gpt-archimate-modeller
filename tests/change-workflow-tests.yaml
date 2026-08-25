@@ -1,0 +1,32 @@
+change_workflow_version: '0.1'
+tests:
+- id: CHGTEST-001
+  description: Rename/update preserves ID
+  expected: enforced
+- id: CHGTEST-002
+  description: Type change through update_element rejected
+  expected: enforced
+- id: CHGTEST-003
+  description: Duplicate add rejected
+  expected: enforced
+- id: CHGTEST-004
+  description: Remove element with relations rejected
+  expected: enforced
+- id: CHGTEST-005
+  description: remove_element requires reason
+  expected: enforced
+- id: CHGTEST-006
+  description: Precondition mismatch rejected
+  expected: enforced
+- id: CHGTEST-007
+  description: Expected model version enforced
+  expected: enforced
+- id: CHGTEST-008
+  description: Dry-run writes nothing
+  expected: enforced
+- id: CHGTEST-009
+  description: Successful change updates model version
+  expected: enforced
+- id: CHGTEST-010
+  description: Applied change archived under changes/
+  expected: enforced

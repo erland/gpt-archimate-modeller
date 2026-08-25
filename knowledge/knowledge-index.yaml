@@ -1,0 +1,146 @@
+knowledge_structure_version: '0.1'
+instruction:
+  full: gpt/SYSTEM_INSTRUCTION.md
+  custom: gpt/CUSTOM_GPT_INSTRUCTION.txt
+  runtime_policy: gpt/runtime-policy.yaml
+core:
+- file: knowledge/00-overview.md
+  priority: 1
+  purpose: navigation
+- file: knowledge/01-runtime-contract.md
+  priority: 1
+  purpose: runtime workflow
+- file: knowledge/02-archimate-core.md
+  priority: 1
+  purpose: ArchiMate semantics
+- file: knowledge/03-project-format.md
+  priority: 1
+  purpose: project data structure
+- file: knowledge/04-identity-evidence.md
+  priority: 1
+  purpose: identity/provenance
+- file: knowledge/05-change-versioning.md
+  priority: 1
+  purpose: safe model changes
+- file: knowledge/06-query-report-view.md
+  priority: 2
+  purpose: analysis/presentation
+- file: knowledge/07-validation-quality.md
+  priority: 1
+  purpose: validation
+- file: knowledge/08-interoperability.md
+  priority: 2
+  purpose: exports/imports
+- file: knowledge/09-project-package-migration.md
+  priority: 1
+  purpose: ZIP/control/migration
+- file: knowledge/10-new-project-workflow.md
+  priority: 1
+  purpose: new project creation
+- file: knowledge/11-update-project-workflow.md
+  priority: 1
+  purpose: existing project update
+- file: knowledge/12-conflict-duplicate-handling.md
+  priority: 1
+  purpose: conflict and duplicate resolution
+- file: knowledge/13-issues-observations.md
+  priority: 1
+  purpose: issues and observations
+- file: knowledge/14-standard-report-library.md
+  priority: 2
+  purpose: standard report selection
+- file: knowledge/15-standard-views.md
+  priority: 2
+  purpose: standard view selection
+- file: knowledge/16-baseline-target-transition.md
+  priority: 1
+  purpose: change architecture states
+- file: knowledge/17-time-lifecycle.md
+  priority: 1
+  purpose: temporal and lifecycle semantics
+- file: knowledge/18-impact-analysis.md
+  priority: 1
+  purpose: impact analysis
+- file: knowledge/19-model-quality-report.md
+  priority: 1
+  purpose: dynamic model quality reporting
+- file: knowledge/20-fixtures-reference-projects.md
+  priority: 2
+  purpose: test fixtures and reference projects
+- file: knowledge/21-automated-test-suite.md
+  priority: 2
+  purpose: automated regression testing
+- file: knowledge/22-llm-evals.md
+  priority: 2
+  purpose: LLM behavior evaluation
+- file: knowledge/23-large-zip-robustness.md
+  priority: 1
+  purpose: large ZIP safety and determinism
+- file: knowledge/24-model-index.md
+  priority: 1
+  purpose: derived model index semantics
+- file: knowledge/25-user-docs.md
+  priority: 2
+  purpose: user-facing guidance
+- file: knowledge/26-developer-docs.md
+  priority: 2
+  purpose: developer guidance
+authoritative_machine_readable:
+- metamodel/elements.yaml
+- metamodel/relationships.yaml
+- metamodel/relationship-matrix.yaml
+- schemas/ea-project.schema.json
+- schemas/change-set.schema.json
+- schemas/query.schema.json
+- schemas/report.schema.json
+- schemas/view.schema.json
+- package/project-zip-contract.yaml
+- versioning/policy.yaml
+- quality/profile.yaml
+- validation/profile.yaml
+- migrations/registry.yaml
+reference_docs:
+- docs/project-format.md
+- docs/identity-strategy.md
+- docs/provenance-evidence.md
+- docs/source-reference-model.md
+- docs/extensions-model.md
+- docs/specializations-model.md
+- docs/validation.md
+- docs/semantic-quality.md
+- docs/change-workflow.md
+- docs/versioning-changelog.md
+- docs/query-format.md
+- docs/report-format.md
+- docs/report-engine.md
+- docs/view-format.md
+- docs/diagram-export.md
+- docs/model-exchange-export.md
+- docs/model-exchange-import.md
+- docs/project-zip-contract.md
+- docs/project-control.md
+- docs/project-migration.md
+loading_guidance:
+  always_use:
+  - 01-runtime-contract.md
+  - 02-archimate-core.md
+  - 03-project-format.md
+  - 04-identity-evidence.md
+  - 05-change-versioning.md
+  - 07-validation-quality.md
+  - 09-project-package-migration.md
+  - 10-new-project-workflow.md
+  - 11-update-project-workflow.md
+  - 12-conflict-duplicate-handling.md
+  - 13-issues-observations.md
+  - 16-baseline-target-transition.md
+  - 17-time-lifecycle.md
+  - 18-impact-analysis.md
+  - 19-model-quality-report.md
+  - 23-large-zip-robustness.md
+  - 24-model-index.md
+  task_specific:
+    query_report_view:
+    - 06-query-report-view.md
+    exchange_or_diagram:
+    - 08-interoperability.md

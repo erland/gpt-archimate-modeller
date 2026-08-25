@@ -1,0 +1,26 @@
+model_index_version: '0.1'
+tests:
+- id: IDX-001
+  description: index built during pack
+  expected: enforced
+- id: IDX-002
+  description: fresh index fingerprint validates
+  expected: enforced
+- id: IDX-003
+  description: modified YAML makes index stale
+  expected: enforced
+- id: IDX-004
+  description: stale index falls back to YAML
+  expected: enforced
+- id: IDX-005
+  description: index and YAML logical model equivalent
+  expected: enforced
+- id: IDX-006
+  description: large-model indexed load materially faster than YAML assembly
+  expected: enforced
+- id: IDX-007
+  description: index is non-canonical/rebuildable
+  expected: design_rule
+- id: IDX-008
+  description: automated test suite regression passes
+  expected: enforced

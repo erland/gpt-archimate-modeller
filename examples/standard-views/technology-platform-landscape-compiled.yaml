@@ -1,0 +1,59 @@
+view_result:
+  view_id: technology-platform-landscape
+  title: Teknik- och plattformslandskap
+  layout:
+    direction: left_to_right
+    algorithm: layered
+  groups:
+  - id: platforms
+    title: Plattformar
+    match:
+      specializations:
+      - Platform
+  - id: nodes
+    title: Noder & system
+    match:
+      types:
+      - Node
+      - Device
+      - SystemSoftware
+  - id: network
+    title: Kommunikation
+    match:
+      types:
+      - Path
+      - CommunicationNetwork
+      - TechnologyInterface
+  - id: behavior
+    title: Teknikbeteende & tjänster
+    match:
+      types:
+      - TechnologyFunction
+      - TechnologyProcess
+      - TechnologyInteraction
+      - TechnologyEvent
+      - TechnologyService
+  - id: physical
+    title: Physical
+    match:
+      types:
+      - Equipment
+      - Facility
+      - DistributionNetwork
+      - Material
+  - id: artifacts
+    title: Artefakter
+    match:
+      types:
+      - Artifact
+  nodes:
+  - id: TEC-000001
+    type: Node
+    name: Containerplattform
+    specialization: Platform
+    group: platforms
+    properties:
+      owner: Plattformsteam
+      lifecycle: active
+      criticality: high
+  edges: []

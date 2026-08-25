@@ -1,0 +1,10 @@
+new_project:
+  id: e2e-enterprise-architecture
+  name: E2E Enterprise Architecture
+  description: Step 44 end-to-end project.
+  language: sv
+  model_version: 0.1.0
+  archimate_version: '3.2'
+  tags:
+  - e2e
+  - step44

@@ -1,0 +1,13 @@
+query:
+  id: application-platform-context
+  select: elements
+  where:
+    type_in:
+    - ApplicationComponent
+    - Node
+  return:
+    fields:
+    - id
+    - type
+    - name
+    - specialization

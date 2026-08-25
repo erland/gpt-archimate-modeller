@@ -1,0 +1,69 @@
+fixture_catalog_version: '0.1'
+reference_projects:
+- id: RP-001
+  path: tests/reference-projects/RP-001-minimal-valid
+  expected: valid
+  focus:
+  - minimum_project
+- id: RP-002
+  path: tests/reference-projects/RP-002-layered-example
+  expected: valid
+  focus:
+  - layers
+  - relationships
+  - evidence
+  - specializations
+- id: RP-003
+  path: tests/reference-projects/RP-003-lifecycle-transition
+  expected: valid
+  focus:
+  - temporal
+  - baseline_target_transition
+- id: RP-004
+  path: tests/reference-projects/RP-004-governance-worklist
+  expected: valid
+  focus:
+  - issues
+  - observations
+  - quality_worklist
+invalid_fixtures:
+- id: FX-001
+  path: tests/fixtures/step36-invalid/FX-001-duplicate-element-id
+  subsystem: technical_validation
+  expected_fragment: duplicate element id
+- id: FX-002
+  path: tests/fixtures/step36-invalid/FX-002-dangling-relationship
+  subsystem: technical_validation
+  expected_fragment: target not found
+- id: FX-003
+  path: tests/fixtures/step36-invalid/FX-003-invalid-relation-pair
+  subsystem: relationship_validation
+  expected_fragment: not allowed
+- id: FX-004
+  path: tests/fixtures/step36-invalid/FX-004-invalid-evidence-reference
+  subsystem: evidence
+  expected_fragment: missing source
+- id: FX-005
+  path: tests/fixtures/step36-invalid/FX-005-unknown-extension
+  subsystem: extensions
+  expected_fragment: unknown property
+- id: FX-006
+  path: tests/fixtures/step36-invalid/FX-006-invalid-specialization
+  subsystem: specializations
+  expected_fragment: base_type
+- id: FX-007
+  path: tests/fixtures/step36-invalid/FX-007-invalid-temporal-interval
+  subsystem: temporal
+  expected_fragment: valid_from is after valid_to
+- id: FX-008
+  path: tests/fixtures/step36-invalid/FX-008-state-cycle
+  subsystem: architecture_states
+  expected_fragment: cycle
+- id: FX-009
+  path: tests/fixtures/step36-invalid/FX-009-state-unknown-object
+  subsystem: architecture_states
+  expected_fragment: unknown element
+- id: FX-010
+  path: tests/fixtures/step36-invalid/FX-010-issue-unknown-object
+  subsystem: issues_observations
+  expected_fragment: unknown object_ref

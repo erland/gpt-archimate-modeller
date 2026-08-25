@@ -1,0 +1,32 @@
+project_control_version: '0.1'
+tests:
+- id: CTRL-001
+  description: inspect-zip validates without extraction
+  expected: supported
+- id: CTRL-002
+  description: safe unpack rejects unsafe members
+  expected: enforced
+- id: CTRL-003
+  description: unpack validates project before publishing workspace
+  expected: enforced
+- id: CTRL-004
+  description: workspace marker created after verified unpack
+  expected: enforced
+- id: CTRL-005
+  description: workspace marker excluded from package manifest
+  expected: enforced
+- id: CTRL-006
+  description: pack validates project before packaging
+  expected: enforced
+- id: CTRL-007
+  description: pack validates candidate ZIP before atomic replace
+  expected: enforced
+- id: CTRL-008
+  description: inspect-project returns counts and quality score
+  expected: supported
+- id: CTRL-009
+  description: roundtrip ZIP->project->ZIP succeeds
+  expected: enforced
+- id: CTRL-010
+  description: failed unpack leaves no partial published project
+  expected: enforced

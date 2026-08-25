@@ -1,0 +1,17 @@
+query:
+  id: evidence-attention-elements
+  select: elements
+  where:
+    evidence_status_in:
+    - inferred
+    - unknown
+  return:
+    fields:
+    - id
+    - type
+    - name
+    - evidence.status
+    - evidence.confidence
+  sort:
+  - field: type
+  - field: name

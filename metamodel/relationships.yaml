@@ -1,0 +1,45 @@
+metamodel_version: '3.2'
+relationships:
+- type: Composition
+  category: structural
+  directional: true
+- type: Aggregation
+  category: structural
+  directional: true
+- type: Assignment
+  category: structural
+  directional: true
+- type: Realization
+  category: structural
+  directional: true
+- type: Serving
+  category: dependency
+  directional: true
+- type: Access
+  category: dependency
+  directional: true
+  attributes:
+    access_type:
+    - read
+    - write
+    - read_write
+    - unspecified
+- type: Influence
+  category: dependency
+  directional: true
+  attributes:
+    strength: string
+- type: Association
+  category: dependency
+  directional: optional
+  attributes:
+    directed: boolean
+- type: Triggering
+  category: dynamic
+  directional: true
+- type: Flow
+  category: dynamic
+  directional: true
+- type: Specialization
+  category: other
+  directional: true

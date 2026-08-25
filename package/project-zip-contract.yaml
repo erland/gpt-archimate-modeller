@@ -1,0 +1,75 @@
+project_zip_contract_version: '0.1'
+root_policy: exactly_one_project_root
+supported_versions:
+  format_version:
+  - '0.1'
+  package_layout_version:
+  - '0.1'
+  archimate_version:
+  - '3.2'
+required_files:
+- project.yaml
+- model/relationships.yaml
+- model/elements/motivation.yaml
+- model/elements/strategy.yaml
+- model/elements/business.yaml
+- model/elements/application.yaml
+- model/elements/technology.yaml
+- model/elements/physical.yaml
+- model/elements/implementation-migration.yaml
+- model/elements/composite.yaml
+- sources/sources.yaml
+- sources/references.yaml
+- extensions/extensions.yaml
+- extensions/specializations.yaml
+- issues/issues.yaml
+- identity/id-counters.yaml
+- changes/index.yaml
+- versioning/history.yaml
+- CHANGELOG.md
+- architecture/states.yaml
+required_directories:
+- model
+- model/elements
+- sources
+- extensions
+- issues
+- identity
+- changes
+- versioning
+- queries
+- reports
+- views
+- exports
+- architecture
+manifest:
+  path: PACKAGE-MANIFEST.yaml
+  hash_algorithm: sha256
+  self_included: false
+roles:
+  canonical_prefixes:
+  - project.yaml
+  - model/
+  - sources/
+  - extensions/
+  - issues/
+  - identity/
+  - changes/
+  - versioning/
+  - queries/
+  - reports/
+  - views/
+  - CHANGELOG.md
+  - architecture/
+  generated_prefixes:
+  - exports/
+  documentation_names:
+  - README.md
+ignored_noise:
+- .DS_Store
+- Thumbs.db
+- __MACOSX/
+path_safety:
+  absolute_paths_forbidden: true
+  parent_segments_forbidden: true
+  symlinks_forbidden: true

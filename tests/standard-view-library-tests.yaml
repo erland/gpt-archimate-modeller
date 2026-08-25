@@ -1,0 +1,26 @@
+standard_view_library_version: '0.1'
+tests:
+- id: SVL-001
+  description: views schema-valid
+  expected: enforced
+- id: SVL-002
+  description: queries resolve
+  expected: enforced
+- id: SVL-003
+  description: views compile
+  expected: enforced
+- id: SVL-004
+  description: draw.io exports valid XML
+  expected: enforced
+- id: SVL-005
+  description: Mermaid exports
+  expected: enforced
+- id: SVL-006
+  description: stable IDs preserved
+  expected: enforced
+- id: SVL-007
+  description: existing view regression
+  expected: enforced
+- id: SVL-008
+  description: v0.30 observations regression fixed
+  expected: enforced

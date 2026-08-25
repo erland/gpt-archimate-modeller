@@ -1,0 +1,29 @@
+elements:
+- id: TEC-000001
+  type: Node
+  specialization: Platform
+  name: Containerplattform
+  description: Teknisk plattform för containeriserade arbetslaster.
+  properties:
+    lifecycle: active
+    criticality: high
+  evidence:
+    status: user_confirmed
+    confidence: high
+    assertions:
+    - id: EV-000004
+      kind: user_statement
+      source_refs:
+      - SRC-000001
+      reference_refs:
+      - REF-000001
+      supports:
+      - existence
+      - name
+      - type
+      - property:lifecycle
+      - property:criticality
+      confidence: high
+  metadata:
+    created: '2026-08-25'
+    updated: '2026-08-25'

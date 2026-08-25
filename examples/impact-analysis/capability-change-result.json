@@ -1,0 +1,44 @@
+{
+  "impact_analysis_result": {
+    "seeds": [
+      "STR-000001"
+    ],
+    "normalized_element_seeds": [
+      "STR-000001"
+    ],
+    "seed_relationships": [],
+    "direction": "incoming",
+    "max_depth": 3,
+    "relationship_types": [],
+    "excluded_relationship_types": [],
+    "impacted_count": 1,
+    "counts_by_basis": {
+      "direct": 1
+    },
+    "counts_by_certainty": {
+      "weak": 1
+    },
+    "impacts": [
+      {
+        "id": "APP-000001",
+        "type": "ApplicationComponent",
+        "name": "Ärendehanteringssystem",
+        "specialization": "BusinessApplication",
+        "depth": 1,
+        "impact_basis": "direct",
+        "certainty": "weak",
+        "path": [
+          {
+            "relationship_id": "REL-000001",
+            "relationship_type": "Realization",
+            "source": "APP-000001",
+            "target": "STR-000001",
+            "certainty": "weak",
+            "traversal": "reverse"
+          }
+        ]
+      }
+    ],
+    "interpretation": "Results show modeled graph reachability. They do not by themselves prove real-world causal impact."
+  }
+}

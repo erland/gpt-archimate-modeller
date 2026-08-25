@@ -1,0 +1,104 @@
+report:
+  id: evidence-review
+  title: Evidence- och spårbarhetsgranskning
+  description: Arbetslista för evidence och källor.
+  metadata:
+    purpose: evidence_review
+  sections:
+  - id: elements
+    title: Element att granska
+    source:
+      query: queries/evidence-attention-elements.yaml
+    render:
+      type: table
+      columns:
+      - field: id
+        heading: ID
+        format: code
+      - field: type
+        heading: Typ
+        format: text
+      - field: name
+        heading: Namn
+        format: text
+      - field: evidence.status
+        heading: Status
+        format: text
+      - field: evidence.confidence
+        heading: Confidence
+        format: text
+  - id: relationships
+    title: Relationer att granska
+    source:
+      query: queries/evidence-attention-relationships.yaml
+    render:
+      type: table
+      columns:
+      - field: id
+        heading: ID
+        format: code
+      - field: type
+        heading: Typ
+        format: text
+      - field: source
+        heading: Källa
+        format: code
+      - field: target
+        heading: Mål
+        format: code
+      - field: evidence.status
+        heading: Status
+        format: text
+      - field: evidence.confidence
+        heading: Confidence
+        format: text
+  - id: sources
+    title: Källregister
+    source:
+      query: queries/sources-register.yaml
+    render:
+      type: table
+      columns:
+      - field: id
+        heading: ID
+        format: code
+      - field: type
+        heading: Typ
+        format: text
+      - field: title
+        heading: Titel
+        format: text
+      - field: origin.kind
+        heading: Ursprung
+        format: text
+      - field: quality.authority
+        heading: Auktoritet
+        format: text
+        default: —
+      - field: quality.freshness
+        heading: Aktualitet
+        format: text
+        default: —
+  - id: references
+    title: Referensregister
+    source:
+      query: queries/references-register.yaml
+    render:
+      type: table
+      columns:
+      - field: id
+        heading: ID
+        format: code
+      - field: source_ref
+        heading: Källa
+        format: code
+      - field: locator.kind
+        heading: Locator
+        format: text
+      - field: locator.value
+        heading: Värde
+        format: text
+      - field: label
+        heading: Etikett
+        format: text
+        default: —

@@ -1,0 +1,15 @@
+report_preview:
+  report_id: application-overview
+  title: Applikationsöversikt
+  sections:
+  - id: applications
+    title: Applikationer
+    render_type: table
+    count: 1
+    rows:
+    - id: APP-000001
+      type: ApplicationComponent
+      name: Ärendehanteringssystem
+      specialization: BusinessApplication
+      properties.lifecycle: active
+      properties.owner: Verksamhetsområde X

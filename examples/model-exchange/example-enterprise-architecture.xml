@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model xmlns="http://www.opengroup.org/xsd/archimate/3.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" identifier="example-enterprise-architecture" version="0.1.0" xsi:schemaLocation="http://www.opengroup.org/xsd/archimate/3.0/ https://www.opengroup.org/xsd/archimate/3.1/archimate3_Model.xsd">
+  <name xml:lang="sv">Exempelarkitektur</name>
+  <documentation xml:lang="sv">Uppdelat referensprojekt för package layout 0.1.</documentation>
+  <elements>
+    <element identifier="APP-000001" xsi:type="ApplicationComponent">
+      <name xml:lang="sv">Ärendehanteringssystem</name>
+      <documentation xml:lang="sv">Systemstöd för ärendehantering.</documentation>
+      <properties>
+        <property propertyDefinitionRef="propdef-criticality">
+          <value>high</value>
+        </property>
+        <property propertyDefinitionRef="propdef-ea.aliases">
+          <value>ÄHS</value>
+        </property>
+        <property propertyDefinitionRef="propdef-ea.evidence.confidence">
+          <value>high</value>
+        </property>
+        <property propertyDefinitionRef="propdef-ea.evidence.status">
+          <value>document_confirmed</value>
+        </property>
+        <property propertyDefinitionRef="propdef-ea.specialization">
+          <value>BusinessApplication</value>
+        </property>
+        <property propertyDefinitionRef="propdef-lifecycle">
+          <value>active</value>
+        </property>
+        <property propertyDefinitionRef="propdef-owner">
+          <value>Verksamhetsområde X</value>
+        </property>
+      </properties>
+    </element>
+    <element identifier="STR-000001" xsi:type="Capability">
+      <name xml:lang="sv">Ärendehantering</name>
+      <documentation xml:lang="sv">Förmåga att hantera ärenden.</documentation>
+      <properties>
+        <property propertyDefinitionRef="propdef-ea.evidence.confidence">
+          <value>high</value>
+        </property>
+        <property propertyDefinitionRef="propdef-ea.evidence.status">
+          <value>user_confirmed</value>
+        </property>
+        <property propertyDefinitionRef="propdef-owner">
+          <value>Verksamhetsområde X</value>
+        </property>
+      </properties>
+    </element>
+    <element identifier="TEC-000001" xsi:type="Node">
+      <name xml:lang="sv">Containerplattform</name>
+      <documentation xml:lang="sv">Teknisk plattform för containeriserade arbetslaster.</documentation>
+      <properties>
+        <property propertyDefinitionRef="propdef-criticality">
+          <value>high</value>
+        </property>
+        <property propertyDefinitionRef="propdef-ea.evidence.confidence">
+          <value>high</value>
+        </property>
+        <property propertyDefinitionRef="propdef-ea.evidence.status">
+          <value>user_confirmed</value>
+        </property>
+        <property propertyDefinitionRef="propdef-ea.specialization">
+          <value>Platform</value>
+        </property>
+        <property propertyDefinitionRef="propdef-lifecycle">
+          <value>active</value>
+        </property>
+        <property propertyDefinitionRef="propdef-owner">
+          <value>Plattformsteam</value>
+        </property>
+      </properties>
+    </element>
+  </elements>
+  <relationships>
+    <relationship identifier="REL-000001" source="APP-000001" target="STR-000001" xsi:type="Realization">
+      <properties>
+        <property propertyDefinitionRef="propdef-ea.evidence.confidence">
+          <value>medium</value>
+        </property>
+        <property propertyDefinitionRef="propdef-ea.evidence.status">
+          <value>inferred</value>
+        </property>
+      </properties>
+    </relationship>
+  </relationships>
+  <propertyDefinitions>
+    <propertyDefinition identifier="propdef-criticality" type="string">
+      <name xml:lang="sv">criticality</name>
+    </propertyDefinition>
+    <propertyDefinition identifier="propdef-ea.aliases" type="string">
+      <name xml:lang="sv">ea.aliases</name>
+    </propertyDefinition>
+    <propertyDefinition identifier="propdef-ea.evidence.confidence" type="string">
+      <name xml:lang="sv">ea.evidence.confidence</name>
+    </propertyDefinition>
+    <propertyDefinition identifier="propdef-ea.evidence.status" type="string">
+      <name xml:lang="sv">ea.evidence.status</name>
+    </propertyDefinition>
+    <propertyDefinition identifier="propdef-ea.specialization" type="string">
+      <name xml:lang="sv">ea.specialization</name>
+    </propertyDefinition>
+    <propertyDefinition identifier="propdef-lifecycle" type="string">
+      <name xml:lang="sv">lifecycle</name>
+    </propertyDefinition>
+    <propertyDefinition identifier="propdef-owner" type="string">
+      <name xml:lang="sv">owner</name>
+    </propertyDefinition>
+  </propertyDefinitions>
+</model>

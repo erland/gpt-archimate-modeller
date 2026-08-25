@@ -1,0 +1,1 @@
+Blocked duplicate candidate for review. Detect duplicate candidate and block silent add while preserving stable identity. Do not auto merge and do not allocate new identity without review.

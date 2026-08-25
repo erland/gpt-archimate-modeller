@@ -1,0 +1,20 @@
+zip_robustness_version: '0.1'
+deterministic_pack:
+  enabled: true
+  timestamp: '1980-01-01T00:00:00'
+  sorted_entries: true
+  normalized_permissions: 0644/0755
+validation_limits:
+  max_entries: 20000
+  max_total_uncompressed_bytes: 1073741824
+  max_single_file_uncompressed_bytes: 134217728
+  max_compression_ratio: 200
+  max_path_length: 240
+reject:
+  duplicate_member_names: true
+  case_collisions: true
+  absolute_paths: true
+  parent_traversal: true
+  backslash_paths: true
+  symlinks: true
+  special_files: true

@@ -1,0 +1,12 @@
+migration_registry_version: '0.1'
+supported_targets:
+  format_version: '0.1'
+  package_layout_version: '0.1'
+  archimate_version: '3.2'
+migrations:
+- id: MIG-000001
+  dimension: format
+  from: '0.0'
+  to: '0.1'
+  script: migrations/mig_000001_legacy_0_0_to_0_1.py
+  description: Upgrade legacy project from format 0.0 to 0.1.

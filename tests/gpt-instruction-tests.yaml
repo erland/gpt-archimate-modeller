@@ -1,0 +1,32 @@
+gpt_instruction_version: '0.1'
+tests:
+- id: GPT-001
+  description: ZIP validation before write
+  expected: explicit
+- id: GPT-002
+  description: Stable-ID preservation
+  expected: explicit
+- id: GPT-003
+  description: Facts/inference separation
+  expected: explicit
+- id: GPT-004
+  description: Change-set workflow
+  expected: explicit
+- id: GPT-005
+  description: Migration behavior
+  expected: explicit
+- id: GPT-006
+  description: Query/report/view separation
+  expected: explicit
+- id: GPT-007
+  description: Model Exchange import/export behavior
+  expected: explicit
+- id: GPT-008
+  description: Technical vs quality blocking semantics
+  expected: explicit
+- id: GPT-009
+  description: Complete updated ZIP on model changes
+  expected: explicit
+- id: GPT-010
+  description: Custom GPT instruction <= 8000 chars
+  expected: enforced

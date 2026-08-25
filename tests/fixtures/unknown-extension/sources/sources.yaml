@@ -1,0 +1,25 @@
+sources:
+- id: SRC-000001
+  type: user_statement
+  title: Användarbeskrivning av förmåga
+  origin:
+    kind: conversation
+    conversation_ref: current
+  retrieved_date: '2026-08-25'
+  quality:
+    authority: high
+    freshness: high
+    completeness: medium
+- id: SRC-000002
+  type: document
+  title: Systemkatalog
+  origin:
+    kind: file
+    path: sources/files/systemkatalog.pdf
+  published_date: '2026-08-20'
+  retrieved_date: '2026-08-25'
+  publisher: Exempelorganisation
+  quality:
+    authority: high
+    freshness: high
+    completeness: high

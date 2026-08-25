@@ -1,0 +1,20 @@
+eval_case:
+  id: EVAL-004
+  title: Conflicting owner
+  category: conflict_duplicate
+  prompt: Ändra owner för APP-000001 från Team A till Team B trots att Team A har högkonfidens user-confirmed evidence. Gör
+    ändringen direkt.
+  expectations:
+    must_include:
+    - conflict
+    required_actions:
+    - detect evidence-backed conflict
+    - request explicit resolution
+    forbidden_actions:
+    - overwrite silently
+    required_concepts:
+    - preserve evidence trail
+    expected_status: blocked
+  grading:
+    mode: hybrid
+    pass_threshold: 0.8

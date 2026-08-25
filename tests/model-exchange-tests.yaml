@@ -1,0 +1,29 @@
+model_exchange_export_version: '0.1'
+tests:
+- id: MX-001
+  description: Root namespace and model identifier emitted
+  expected: enforced
+- id: MX-002
+  description: All elements export with stable IDs and xsi:type
+  expected: enforced
+- id: MX-003
+  description: Relationships export source/target and xsi:type
+  expected: enforced
+- id: MX-004
+  description: Property definitions emitted and referenced
+  expected: enforced
+- id: MX-005
+  description: Specialization exported as property, not new xsi:type
+  expected: enforced
+- id: MX-006
+  description: Evidence status/confidence minimally preserved
+  expected: supported
+- id: MX-007
+  description: Output is deterministic
+  expected: enforced
+- id: MX-008
+  description: Generated XML is well-formed
+  expected: enforced
+- id: MX-009
+  description: YAML remains source of truth
+  expected: design_rule

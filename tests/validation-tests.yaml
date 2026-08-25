@@ -1,0 +1,23 @@
+validation_profile_version: '0.1'
+tests:
+- id: VAL-001
+  description: Valid reference project has no errors
+  expected: pass
+- id: VAL-002
+  description: Unknown ArchiMate element type fails
+  expected: error
+- id: VAL-003
+  description: Unknown relationship type fails
+  expected: error
+- id: VAL-004
+  description: Known invalid relationship pair fails
+  expected: error
+- id: VAL-005
+  description: Uncovered pair warns by default
+  expected: warning
+- id: VAL-006
+  description: Uncovered pair fails in strict relationship mode
+  expected: error
+- id: VAL-007
+  description: Unified JSON report can be emitted
+  expected: supported

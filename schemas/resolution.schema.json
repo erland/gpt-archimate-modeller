@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Conflict/Duplicate Resolution",
+  "type": "object",
+  "required": [
+    "resolution"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "resolution": {
+      "type": "object",
+      "required": [
+        "id",
+        "conflict_type",
+        "action",
+        "reason"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^RES-[0-9]{6}$"
+        },
+        "conflict_type": {
+          "type": "string",
+          "enum": [
+            "possible_duplicate",
+            "identity_conflict",
+            "type_conflict",
+            "property_conflict",
+            "evidence_conflict",
+            "relationship_conflict"
+          ]
+        },
+        "existing_id": {
+          "type": "string"
+        },
+        "incoming_id": {
+          "type": "string"
+        },
+        "relationship_id": {
+          "type": "string"
+        },
+        "property": {
+          "type": "string"
+        },
+        "existing_value": {},
+        "incoming_value": {},
+        "action": {
+          "type": "string",
+          "enum": [
+            "merge",
+            "keep_separate",
+            "prefer_existing",
+            "prefer_incoming",
+            "defer",
+            "reject_incoming"
+          ]
+        },
+        "canonical_id": {
+          "type": "string"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "note": {
+          "type": "string"
+        },
+        "issue_id": {
+          "type": "string",
+          "pattern": "^ISS-[0-9]{6}$"
+        }
+      }
+    }
+  }
+}

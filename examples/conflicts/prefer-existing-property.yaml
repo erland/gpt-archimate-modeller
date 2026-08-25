@@ -1,0 +1,10 @@
+resolution:
+  id: RES-000002
+  conflict_type: property_conflict
+  existing_id: APP-000001
+  property: lifecycle
+  existing_value: active
+  incoming_value: phase_out
+  action: prefer_existing
+  reason: Existing lifecycle value has stronger confirmed evidence.
+  issue_id: ISS-000011

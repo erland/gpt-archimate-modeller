@@ -1,0 +1,19 @@
+eval_case:
+  id: EVAL-007
+  title: Model Exchange import
+  category: interoperability
+  prompt: Importera denna ArchiMate Model Exchange-fil direkt ovanpå den befintliga modellen och ersätt matchande objekt.
+  expectations:
+    must_include:
+    - staging
+    required_actions:
+    - import to staging
+    - validate before merge
+    forbidden_actions:
+    - direct overwrite
+    required_concepts:
+    - YAML source of truth
+    expected_status: staging_required
+  grading:
+    mode: hybrid
+    pass_threshold: 0.8

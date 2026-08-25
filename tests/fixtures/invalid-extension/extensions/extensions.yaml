@@ -1,0 +1,108 @@
+extensions:
+  lifecycle:
+    label: Lifecycle
+    description: Livscykelstatus för arkitekturobjekt.
+    value_type: enum
+    allowed_values:
+    - planned
+    - active
+    - phase_out
+    - retired
+    - unknown
+    applies_to:
+      kinds:
+      - element
+    required: false
+    evidence_required: true
+    governance:
+      status: active
+      owner: EA
+      introduced_in: 0.8.0
+  owner:
+    label: Owner
+    description: Ansvarig organisatorisk enhet eller funktion.
+    value_type: string
+    applies_to:
+      kinds:
+      - element
+    required: false
+    evidence_required: true
+    governance:
+      status: active
+      owner: EA
+      introduced_in: 0.8.0
+  criticality:
+    label: Criticality
+    description: Arkitekturobjektets verksamhets- eller IT-kritikalitet.
+    value_type: enum
+    allowed_values:
+    - low
+    - medium
+    - high
+    - critical
+    - unknown
+    applies_to:
+      kinds:
+      - element
+    required: false
+    evidence_required: true
+    governance:
+      status: active
+      owner: EA
+      introduced_in: 0.8.0
+  information_classification:
+    label: Information classification
+    description: Organisationsspecifik informationsklassning.
+    value_type: string
+    applies_to:
+      kinds:
+      - element
+    required: false
+    evidence_required: true
+    governance:
+      status: active
+      owner: EA
+      introduced_in: 0.8.0
+  strategic_fit:
+    label: Strategic fit
+    description: Bedömning av hur väl objektet stödjer strategisk riktning.
+    value_type: enum
+    allowed_values:
+    - low
+    - medium
+    - high
+    - unknown
+    applies_to:
+      kinds:
+      - element
+    required: false
+    evidence_required: false
+    governance:
+      status: experimental
+      owner: EA
+      introduced_in: 0.8.0
+  technical_debt:
+    label: Technical debt
+    description: Övergripande bedömning av teknisk skuld.
+    value_type: enum
+    allowed_values:
+    - none
+    - low
+    - medium
+    - high
+    - unknown
+    applies_to:
+      kinds:
+      - element
+      archimate_types:
+      - ApplicationComponent
+      - Node
+      - Device
+      - SystemSoftware
+      - TechnologyService
+    required: false
+    evidence_required: false
+    governance:
+      status: active
+      owner: EA
+      introduced_in: 0.8.0

@@ -1,0 +1,1 @@
+correction_required. Keep factual current lifecycle active and record planned retirement temporally with planned_to and planned time basis; do not mark future event as already actual.

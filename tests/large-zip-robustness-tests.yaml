@@ -1,0 +1,23 @@
+zip_robustness_version: '0.1'
+tests:
+- id: ZIPR-001
+  description: deterministic byte-identical pack
+  expected: enforced
+- id: ZIPR-002
+  description: required empty dirs retained
+  expected: enforced
+- id: ZIPR-003
+  description: duplicate/case collision rejected
+  expected: enforced
+- id: ZIPR-004
+  description: traversal/symlink rejected
+  expected: enforced
+- id: ZIPR-005
+  description: manifest tamper rejected
+  expected: enforced
+- id: ZIPR-006
+  description: compression bomb rejected
+  expected: enforced
+- id: ZIPR-007
+  description: large synthetic project validates
+  expected: enforced

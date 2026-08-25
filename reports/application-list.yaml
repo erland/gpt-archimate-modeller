@@ -1,0 +1,15 @@
+report:
+  id: application-list
+  title: Applikationslista
+  description: Kort lista över applikationer.
+  sections:
+  - id: applications
+    title: Applikationer
+    source:
+      query: queries/applications.yaml
+    render:
+      type: list
+      item_fields:
+      - name
+      - properties.owner
+    empty_message: Inga applikationer hittades.

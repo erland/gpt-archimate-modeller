@@ -1,0 +1,14 @@
+dynamic_report:
+  id: model-quality-report
+  title: Modellkvalitetsrapport
+  engine: scripts/model_quality_report.py
+  source: quality/profile.yaml
+  formats:
+  - markdown
+  - csv
+  - json
+  - yaml
+  description: Dynamiskt beräknad modellkvalitet från samma regler och score som quality_check.py.
+  separation:
+    stored_quality_worklist: reports/standard/model-quality-worklist.yaml
+    dynamic_quality_report: reports/dynamic/model-quality-report.yaml

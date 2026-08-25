@@ -1,0 +1,7 @@
+query:
+  id: count-by-type
+  title: Antal element per typ
+  select: elements
+  aggregate:
+    count: true
+    group_by: type

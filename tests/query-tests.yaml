@@ -1,0 +1,32 @@
+query_format_version: '0.1'
+tests:
+- id: QUERY-001
+  description: Type filter
+  expected: supported
+- id: QUERY-002
+  description: Property filter
+  expected: supported
+- id: QUERY-003
+  description: Evidence filter
+  expected: supported
+- id: QUERY-004
+  description: Incoming traversal
+  expected: supported
+- id: QUERY-005
+  description: Traversal deduplication
+  expected: enforced
+- id: QUERY-006
+  description: Nested projection
+  expected: supported
+- id: QUERY-007
+  description: Sorting
+  expected: supported
+- id: QUERY-008
+  description: Count aggregation
+  expected: supported
+- id: QUERY-009
+  description: Group-by aggregation
+  expected: supported
+- id: QUERY-010
+  description: Relationship query
+  expected: supported

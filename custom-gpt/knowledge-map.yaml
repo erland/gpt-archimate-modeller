@@ -1,0 +1,39 @@
+version: '0.1'
+bundles:
+  - file: 00-runtime-workflows.md
+    sources:
+      - knowledge/00-overview.md
+      - knowledge/01-runtime-contract.md
+      - knowledge/03-project-format.md
+      - knowledge/09-project-package-migration.md
+      - knowledge/10-new-project-workflow.md
+      - knowledge/11-update-project-workflow.md
+  - file: 01-archimate-modeling.md
+    sources:
+      - knowledge/02-archimate-core.md
+      - knowledge/04-identity-evidence.md
+      - knowledge/12-conflict-duplicate-handling.md
+      - knowledge/13-issues-observations.md
+      - knowledge/16-baseline-target-transition.md
+      - knowledge/17-time-lifecycle.md
+  - file: 02-analysis-output.md
+    sources:
+      - knowledge/06-query-report-view.md
+      - knowledge/14-standard-report-library.md
+      - knowledge/15-standard-views.md
+      - knowledge/18-impact-analysis.md
+      - knowledge/19-model-quality-report.md
+  - file: 03-validation-versioning.md
+    sources:
+      - knowledge/05-change-versioning.md
+      - knowledge/07-validation-quality.md
+  - file: 04-interoperability-packaging.md
+    sources:
+      - knowledge/08-interoperability.md
+      - knowledge/23-large-zip-robustness.md
+      - knowledge/24-model-index.md
+  - file: 05-user-guide.md
+    sources:
+      - knowledge/25-user-docs.md
+      - docs/user/quickstart.md
+      - docs/user/troubleshooting.md

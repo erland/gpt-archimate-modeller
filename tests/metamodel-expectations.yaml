@@ -1,0 +1,26 @@
+profile: '3.2'
+expected:
+  ordinary_element_types: 60
+  relationship_types: 11
+  relationship_connectors: 1
+required_element_types:
+- Capability
+- BusinessActor
+- ApplicationComponent
+- Node
+- Equipment
+- WorkPackage
+- Stakeholder
+- Grouping
+required_relationship_types:
+- Composition
+- Aggregation
+- Assignment
+- Realization
+- Serving
+- Access
+- Influence
+- Association
+- Triggering
+- Flow
+- Specialization

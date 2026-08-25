@@ -1,0 +1,78 @@
+metamodel_version: '3.2'
+rule_model: semantic-profile
+status: executable-baseline
+important_note: These rules express coarse semantic applicability and are suitable for early classification. They are not
+  a reproduction of the normative Appendix B exact source-type/target-type matrix. Exact pair validation is explicitly reserved
+  for the validation step.
+categories:
+  structural:
+  - Composition
+  - Aggregation
+  - Assignment
+  - Realization
+  dependency:
+  - Serving
+  - Access
+  - Influence
+  - Association
+  dynamic:
+  - Triggering
+  - Flow
+  other:
+  - Specialization
+general_rules:
+- id: REL-GEN-001
+  relationship: Specialization
+  rule: source_and_target_same_concrete_type_or_compatible_specialization_family
+  verdict: conditionally_allowed
+- id: REL-GEN-002
+  relationship: Access
+  source_aspects:
+  - active_structure
+  - behavior
+  target_aspects:
+  - passive_structure
+  verdict: candidate_allowed
+  note: Exact type-pair permission must additionally pass the normative matrix.
+- id: REL-GEN-003
+  relationship: Influence
+  preferred_source_domains:
+  - motivation
+  preferred_target_domains:
+  - motivation
+  verdict: candidate_allowed
+  note: ArchiMate also permits selected influence relationships outside pure motivation; exact validation is deferred.
+- id: REL-GEN-004
+  relationship: Triggering
+  source_aspects:
+  - behavior
+  target_aspects:
+  - behavior
+  verdict: candidate_allowed
+  note: Exact type-pair permission must additionally pass the normative matrix.
+- id: REL-GEN-005
+  relationship: Flow
+  source_aspects:
+  - active_structure
+  - behavior
+  target_aspects:
+  - active_structure
+  - behavior
+  verdict: candidate_allowed
+  note: Represents transfer between source and target; exact type-pair validation is deferred.
+- id: REL-GEN-006
+  relationship: Association
+  rule: broadly_applicable
+  verdict: candidate_allowed
+  note: Use more specific relationships when their semantics apply.
+validation_levels:
+- level: 1
+  id: known_types
+  implemented_in_step: 2
+- level: 2
+  id: semantic_candidate_rules
+  implemented_in_step: 2
+- level: 3
+  id: exact_normative_type_pair_matrix
+  implemented_in_step: 10
+  source: ArchiMate 3.2 Appendix B / independently licensed or compatible machine-readable rule source

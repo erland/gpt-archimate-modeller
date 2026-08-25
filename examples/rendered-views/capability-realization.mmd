@@ -1,0 +1,8 @@
+flowchart LR
+  subgraph G_strategy["Strategi"]
+    STR_000001["Ärendehantering<br/>Capability<br/>owner: Verksamhetsområde X"]
+  end
+  subgraph G_application["Applikation"]
+    APP_000001["Ärendehanteringssystem<br/>ApplicationComponent<br/>BusinessApplication<br/>lifecycle: active<br/>owner: Verksamhetsområde X"]
+  end
+  APP_000001 -->|"Realization<br/>confidence: medium"| STR_000001

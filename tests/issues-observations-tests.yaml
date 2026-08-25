@@ -1,0 +1,20 @@
+issues_observations_version: '0.2'
+tests:
+- id: IO-001
+  description: canonical issues+observations integration
+  expected: enforced
+- id: IO-002
+  description: lifecycle guards
+  expected: enforced
+- id: IO-003
+  description: reference validation
+  expected: enforced
+- id: IO-004
+  description: promotion
+  expected: supported
+- id: IO-005
+  description: OBS/RES counters
+  expected: enforced
+- id: IO-006
+  description: new/update project regression
+  expected: enforced

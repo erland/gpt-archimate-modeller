@@ -1,0 +1,44 @@
+states:
+- id: STA-000001
+  name: Baseline
+  type: baseline
+  time_basis: actual
+  effective_from: '2026-01-01'
+  include:
+    elements:
+    - APP-000001
+  inherits_from: STA-000003
+- id: STA-000002
+  name: Transition
+  type: transition
+  time_basis: planned
+  inherits_from: STA-000001
+  delta:
+    add_elements:
+    - APP-000002
+  object_status:
+    APP-000001: retire
+    APP-000002: introduce
+- id: STA-000003
+  name: Target
+  type: target
+  time_basis: planned
+  inherits_from: STA-000002
+  delta:
+    remove_elements:
+    - APP-000001
+  object_status:
+    APP-000002: unchanged
+transitions:
+- id: TRN-000001
+  name: Introduce target
+  from_state: STA-000001
+  to_state: STA-000002
+  planned_start: '2027-01-01'
+  planned_end: '2027-06-30'
+- id: TRN-000002
+  name: Retire legacy
+  from_state: STA-000002
+  to_state: STA-000003
+  planned_start: '2027-07-01'
+  planned_end: '2027-12-31'

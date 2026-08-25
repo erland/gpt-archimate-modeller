@@ -1,0 +1,41 @@
+view_result:
+  view_id: capability-realization
+  title: Capability realization
+  layout:
+    direction: left_to_right
+    algorithm: layered
+    rank_by: type
+  groups:
+  - id: strategy
+    title: Strategi
+    match:
+      types:
+      - Capability
+  - id: application
+    title: Applikation
+    match:
+      types:
+      - ApplicationComponent
+  nodes:
+  - id: APP-000001
+    type: ApplicationComponent
+    name: Ärendehanteringssystem
+    specialization: BusinessApplication
+    group: application
+    properties:
+      lifecycle: active
+      owner: Verksamhetsområde X
+  - id: STR-000001
+    type: Capability
+    name: Ärendehantering
+    specialization: null
+    group: strategy
+    properties:
+      lifecycle: null
+      owner: Verksamhetsområde X
+  edges:
+  - id: REL-000001
+    type: Realization
+    source: APP-000001
+    target: STR-000001
+    confidence: medium

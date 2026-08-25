@@ -1,0 +1,30 @@
+impact_profile_version: '0.1'
+profiles:
+  connected_context:
+    direction: both
+    max_depth: 2
+    description: Neutral connected context; does not assert causality.
+  incoming_dependencies:
+    direction: incoming
+    max_depth: 3
+    description: Objects connected through incoming relationship direction.
+  outgoing_dependencies:
+    direction: outgoing
+    max_depth: 3
+    description: Objects connected through outgoing relationship direction.
+certainty:
+  strong:
+    allowed_confidence:
+    - high
+    description: All traversed relationships have high confidence and confirmed/imported evidence.
+  moderate:
+    allowed_confidence:
+    - medium
+    description: Path contains medium confidence but no low/unknown relationship.
+  weak:
+    allowed_confidence:
+    - low
+    - unknown
+    description: Path contains low/unknown confidence or inferred/unknown evidence.
+interpretation_rule: Graph reachability is evidence of modeled dependency/context, not automatic proof of real-world causal
+  impact.

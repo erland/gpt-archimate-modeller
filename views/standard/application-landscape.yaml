@@ -1,0 +1,46 @@
+view:
+  id: application-landscape
+  title: Applikationslandskap
+  description: Applikationslagret grupperat efter struktur, beteende och data.
+  source:
+    query: queries/application-elements.yaml
+  include_relationships: between_selected
+  layout:
+    direction: left_to_right
+    algorithm: layered
+  groups:
+  - id: active
+    title: Aktiv struktur
+    match:
+      types:
+      - ApplicationComponent
+      - ApplicationCollaboration
+      - ApplicationInterface
+  - id: behavior
+    title: Beteende
+    match:
+      types:
+      - ApplicationFunction
+      - ApplicationInteraction
+      - ApplicationProcess
+      - ApplicationEvent
+      - ApplicationService
+  - id: data
+    title: Data
+    match:
+      types:
+      - DataObject
+  nodes:
+    label:
+      primary: name
+      secondary:
+      - type
+      - specialization
+    show_properties:
+    - owner
+    - lifecycle
+    - criticality
+  edges:
+    show_type: true
+    show_name: false
+    show_confidence: false

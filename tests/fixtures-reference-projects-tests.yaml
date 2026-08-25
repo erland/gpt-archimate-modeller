@@ -1,0 +1,14 @@
+fixtures_reference_projects_version: '0.1'
+tests:
+- id: FRP-001
+  description: four reference projects valid
+  expected: enforced
+- id: FRP-002
+  description: ten invalid fixtures fail expected rules
+  expected: enforced
+- id: FRP-003
+  description: catalog IDs unique and paths exist
+  expected: enforced
+- id: FRP-004
+  description: fixtures deterministic/offline/stable
+  expected: design_rule

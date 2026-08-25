@@ -1,0 +1,20 @@
+standard_report_library_version: '0.1'
+render_formats:
+- markdown
+- csv
+reports:
+- id: model-overview
+  file: reports/standard/model-overview.yaml
+- id: application-platform-portfolio
+  file: reports/standard/application-platform-portfolio.yaml
+- id: capability-realization
+  file: reports/standard/capability-realization.yaml
+- id: evidence-review
+  file: reports/standard/evidence-review.yaml
+- id: issues-observations
+  file: reports/standard/issues-observations.yaml
+- id: model-quality-worklist
+  file: reports/standard/model-quality-worklist.yaml
+- id: lifecycle-overview
+  file: reports/standard/lifecycle-overview.yaml
+  purpose: lifecycle_governance

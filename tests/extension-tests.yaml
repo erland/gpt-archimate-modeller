@@ -1,0 +1,23 @@
+extension_model_version: '0.2'
+tests:
+- id: EXT-001
+  description: Unknown property fails in strict mode
+  expected: enforced
+- id: EXT-002
+  description: Enum value must be allowed
+  expected: enforced
+- id: EXT-003
+  description: Property must apply to object kind/type
+  expected: enforced
+- id: EXT-004
+  description: Evidence-required property must have supporting assertion
+  expected: enforced
+- id: EXT-005
+  description: Deprecated extension produces warning
+  expected: enforced
+- id: EXT-006
+  description: Extension property does not change ArchiMate type
+  expected: design_rule
+- id: EXT-007
+  description: GPT does not invent undeclared standard properties
+  expected: design_rule

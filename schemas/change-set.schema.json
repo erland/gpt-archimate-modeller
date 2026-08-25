@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/change-set.schema.json",
+  "title": "EA Project Change Set",
+  "type": "object",
+  "required": [
+    "change_set"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "change_set": {
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "created",
+        "operations"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^CHG-[0-9]{6}$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "date"
+        },
+        "expected_model_version": {
+          "type": "string"
+        },
+        "operations": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/operation"
+          }
+        },
+        "versioning": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "requested_impact": {
+              "type": "string",
+              "enum": [
+                "patch",
+                "minor",
+                "major"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "precondition": {
+      "type": "object",
+      "required": [
+        "path",
+        "equals"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "equals": {}
+      }
+    },
+    "operation": {
+      "type": "object",
+      "required": [
+        "op"
+      ],
+      "properties": {
+        "op": {
+          "type": "string",
+          "enum": [
+            "add_element",
+            "update_element",
+            "deprecate_element",
+            "remove_element",
+            "add_relationship",
+            "update_relationship",
+            "remove_relationship",
+            "add_source",
+            "add_reference",
+            "add_issue",
+            "resolve_issue"
+          ]
+        },
+        "id": {
+          "type": "string"
+        },
+        "element": {
+          "type": "object"
+        },
+        "relationship": {
+          "type": "object"
+        },
+        "source": {
+          "type": "object"
+        },
+        "reference": {
+          "type": "object"
+        },
+        "issue": {
+          "type": "object"
+        },
+        "set": {
+          "type": "object"
+        },
+        "reason": {
+          "type": "string"
+        },
+        "preconditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/precondition"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

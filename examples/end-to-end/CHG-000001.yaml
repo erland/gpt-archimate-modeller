@@ -1,0 +1,59 @@
+change_set:
+  id: CHG-000001
+  title: Add capability/application
+  created: '2026-08-25'
+  expected_model_version: 0.1.0
+  operations:
+  - op: add_element
+    element:
+      id: STR-000001
+      type: Capability
+      name: Case Handling
+      properties:
+        owner: Business Architecture
+      evidence:
+        status: user_confirmed
+        confidence: high
+        assertions:
+        - id: EV-000001
+          kind: user_statement
+          supports:
+          - existence
+          - name
+          - property:owner
+  - op: add_element
+    element:
+      id: APP-000001
+      type: ApplicationComponent
+      name: Case Management
+      specialization: BusinessApplication
+      properties:
+        owner: Application Team
+        lifecycle: active
+      evidence:
+        status: user_confirmed
+        confidence: high
+        assertions:
+        - id: EV-000002
+          kind: user_statement
+          supports:
+          - existence
+          - name
+          - property:owner
+          - property:lifecycle
+  - op: add_relationship
+    relationship:
+      id: REL-000001
+      type: Realization
+      source: APP-000001
+      target: STR-000001
+      evidence:
+        status: user_confirmed
+        confidence: high
+        assertions:
+        - id: EV-000003
+          kind: user_statement
+          supports:
+          - relationship
+  versioning:
+    requested_impact: minor

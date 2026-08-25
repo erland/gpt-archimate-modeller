@@ -1,0 +1,19 @@
+counters:
+  MOT: 0
+  STR: 0
+  BUS: 0
+  APP: 0
+  TEC: 1
+  PHY: 0
+  IMP: 0
+  CMP: 0
+  REL: 0
+  SRC: 0
+  ISS: 1
+  EV: 1
+  REF: 0
+  CHG: 0
+  OBS: 1
+  RES: 0
+  STA: 0
+  TRN: 0

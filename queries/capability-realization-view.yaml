@@ -1,0 +1,18 @@
+query:
+  id: capability-realization-view
+  title: Capability med realiserande applikation
+  select: elements
+  where:
+    type: Capability
+  traverse:
+    direction: incoming
+    relationship_types:
+    - Realization
+    depth: 1
+    include_start: true
+  return:
+    fields:
+    - id
+    - type
+    - name
+    - specialization

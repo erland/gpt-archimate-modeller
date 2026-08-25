@@ -1,0 +1,14 @@
+query:
+  id: platforms
+  title: Plattformar
+  select: elements
+  where:
+    specialization: Platform
+  return:
+    fields:
+    - id
+    - type
+    - name
+    - properties.lifecycle
+    - properties.owner
+    - properties.criticality

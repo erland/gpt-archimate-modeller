@@ -1,0 +1,23 @@
+standard_report_library_version: '0.1'
+tests:
+- id: SRL-001
+  description: all reports schema-valid
+  expected: enforced
+- id: SRL-002
+  description: all query refs resolve
+  expected: enforced
+- id: SRL-003
+  description: all reports render Markdown
+  expected: enforced
+- id: SRL-004
+  description: table sections render CSV
+  expected: enforced
+- id: SRL-005
+  description: projected dotted fields render
+  expected: enforced
+- id: SRL-006
+  description: query supports sources/references/issues/observations
+  expected: enforced
+- id: SRL-007
+  description: legacy reports still render
+  expected: enforced

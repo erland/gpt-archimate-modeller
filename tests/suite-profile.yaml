@@ -1,0 +1,17 @@
+automated_test_suite_version: '0.1'
+offline: true
+entrypoint: scripts/run_tests.py
+result_schema: schemas/test-run.schema.json
+default_suites:
+- core_validation
+- reference_projects
+- invalid_fixtures
+- queries_reports_views
+- project_workflows
+- interoperability
+- change_architecture
+- analysis_quality
+exit_codes:
+  '0': all tests passed
+  '1': one or more tests failed
+  '2': test runner/configuration error

@@ -1,0 +1,26 @@
+evidence_model_version: '0.2'
+tests:
+- id: EV-TEST-001
+  description: Evidence assertion IDs are globally unique
+  expected: enforced
+- id: EV-TEST-002
+  description: Referenced sources must exist
+  expected: enforced
+- id: EV-TEST-003
+  description: Inferred assertion requires reason
+  expected: enforced
+- id: EV-TEST-004
+  description: document_confirmed requires explicit assertion
+  expected: enforced
+- id: EV-TEST-005
+  description: user_confirmed requires user_statement assertion
+  expected: enforced
+- id: EV-TEST-006
+  description: Evidence supports one or more model facts
+  expected: enforced
+- id: EV-TEST-007
+  description: Contradicting evidence is preserved
+  expected: design_rule
+- id: EV-TEST-008
+  description: Inference cannot silently replace explicit evidence
+  expected: design_rule

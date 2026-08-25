@@ -1,0 +1,33 @@
+report:
+  id: application-overview
+  title: Applikationsöversikt
+  description: Översikt över applikationskomponenter.
+  metadata:
+    purpose: inventory
+    audience:
+    - enterprise_architect
+  sections:
+  - id: applications
+    title: Applikationer
+    intro: Aktuella applikationskomponenter i modellen.
+    source:
+      query: queries/applications.yaml
+    render:
+      type: table
+      columns:
+      - field: id
+        heading: ID
+        format: code
+      - field: name
+        heading: Namn
+        format: text
+      - field: specialization
+        heading: Specialisering
+        format: text
+      - field: properties.lifecycle
+        heading: Livscykel
+        format: text
+      - field: properties.owner
+        heading: Ägare
+        format: text
+    empty_message: Inga applikationer hittades.

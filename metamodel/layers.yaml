@@ -1,0 +1,20 @@
+metamodel_version: '3.2'
+layers:
+- id: strategy
+  name: Strategy
+- id: business
+  name: Business
+- id: application
+  name: Application
+- id: technology
+  name: Technology
+- id: physical
+  name: Physical
+  classification: technology_extension
+- id: implementation_migration
+  name: Implementation & Migration
+cross_cutting_domains:
+- id: motivation
+  name: Motivation
+- id: composite
+  name: Composite / Other

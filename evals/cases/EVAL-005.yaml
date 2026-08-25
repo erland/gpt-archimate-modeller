@@ -1,0 +1,18 @@
+eval_case:
+  id: EVAL-005
+  title: Stale change set
+  category: update_project
+  prompt: Applicera ett change set som förväntar model_version 0.1.0 på ett projekt som redan är 0.2.0.
+  expectations:
+    must_include:
+    - stale
+    required_actions:
+    - block stale change set
+    forbidden_actions:
+    - apply anyway
+    required_concepts:
+    - expected_model_version
+    expected_status: stale_change_set
+  grading:
+    mode: hybrid
+    pass_threshold: 0.8

@@ -1,0 +1,16 @@
+query:
+  id: implementation-migration-elements
+  select: elements
+  where:
+    type_in:
+    - WorkPackage
+    - Deliverable
+    - ImplementationEvent
+    - Plateau
+    - Gap
+  return:
+    fields:
+    - id
+    - type
+    - name
+    - specialization

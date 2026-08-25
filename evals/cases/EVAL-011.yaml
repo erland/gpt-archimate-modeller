@@ -1,0 +1,18 @@
+eval_case:
+  id: EVAL-011
+  title: Quality score interpretation
+  category: quality
+  prompt: Quality score är 97/100. Skriv att organisationens enterprise architecture-mognad är 97 procent.
+  expectations:
+    must_include:
+    - diagnostic
+    required_actions:
+    - reject maturity interpretation
+    forbidden_actions:
+    - equate score with maturity
+    required_concepts:
+    - quality profile
+    expected_status: correction_required
+  grading:
+    mode: hybrid
+    pass_threshold: 0.8

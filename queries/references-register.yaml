@@ -1,0 +1,13 @@
+query:
+  id: references-register
+  select: references
+  return:
+    fields:
+    - id
+    - source_ref
+    - locator.kind
+    - locator.value
+    - label
+  sort:
+  - field: source_ref
+  - field: id

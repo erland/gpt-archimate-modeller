@@ -1,0 +1,1 @@
+staging_required. Import to staging, validate before merge, keep YAML source of truth, and avoid direct overwrite.

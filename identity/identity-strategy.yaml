@@ -1,0 +1,40 @@
+strategy_version: '0.1'
+id_pattern: ^[A-Z]{3}-[0-9]{6}$
+reuse_deleted_ids: false
+prefixes:
+  MOT:
+    family: motivation
+  STR:
+    family: strategy
+  BUS:
+    family: business
+  APP:
+    family: application
+  TEC:
+    family: technology
+  PHY:
+    family: physical
+  IMP:
+    family: implementation_migration
+  CMP:
+    family: composite
+  REL:
+    family: relationship
+  SRC:
+    family: source
+  ISS:
+    family: issue
+  EV:
+    family: evidence_assertion
+  REF:
+    family: reference
+  CHG:
+    family: change_set
+matching_priority:
+- exact_id
+- exact_alias
+- exact_name_compatible_type
+- normalized_name
+- near_name_match
+- external_identifier
+- semantic_similarity

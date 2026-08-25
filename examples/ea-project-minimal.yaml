@@ -1,0 +1,312 @@
+format_version: '0.1'
+project:
+  id: example-enterprise-architecture
+  name: Exempelarkitektur
+  description: Litet referensprojekt för format 0.1.
+  model_version: 0.1.0
+  created: '2026-08-25'
+  updated: '2026-08-25'
+  language: sv
+  archimate_version: '3.2'
+  tags:
+  - example
+model:
+  elements:
+  - id: STR-000001
+    type: Capability
+    name: Ärendehantering
+    description: Förmåga att hantera ärenden.
+    evidence:
+      status: user_confirmed
+      confidence: high
+      assertions:
+      - id: EV-000001
+        kind: user_statement
+        source_refs:
+        - SRC-000001
+        supports:
+        - description
+        - existence
+        - name
+        - property:owner
+        confidence: high
+        reference_refs:
+        - REF-000001
+    metadata:
+      created: '2026-08-25'
+      updated: '2026-08-25'
+    properties:
+      owner: Verksamhetsområde X
+  - id: APP-000001
+    type: ApplicationComponent
+    name: Ärendehanteringssystem
+    description: Systemstöd för ärendehantering.
+    properties:
+      lifecycle: active
+      owner: Verksamhetsområde X
+      criticality: high
+    evidence:
+      status: document_confirmed
+      confidence: high
+      assertions:
+      - id: EV-000002
+        kind: explicit
+        source_refs:
+        - SRC-000002
+        supports:
+        - description
+        - existence
+        - name
+        - property:criticality
+        - property:lifecycle
+        - property:owner
+        confidence: high
+        note: Systemkatalogen beskriver applikationen explicit.
+        reference_refs:
+        - REF-000002
+    metadata:
+      created: '2026-08-25'
+      updated: '2026-08-25'
+    aliases:
+    - ÄHS
+    specialization: BusinessApplication
+  - id: TEC-000001
+    type: Node
+    specialization: Platform
+    name: Containerplattform
+    description: Teknisk plattform för containeriserade arbetslaster.
+    properties:
+      lifecycle: active
+      criticality: high
+      owner: Plattformsteam
+    evidence:
+      status: user_confirmed
+      confidence: high
+      assertions:
+      - id: EV-000004
+        kind: user_statement
+        source_refs:
+        - SRC-000001
+        reference_refs:
+        - REF-000001
+        supports:
+        - existence
+        - name
+        - property:criticality
+        - property:lifecycle
+        - property:owner
+        - type
+        confidence: high
+    metadata:
+      created: '2026-08-25'
+      updated: '2026-08-25'
+  relationships:
+  - id: REL-000001
+    type: Realization
+    source: APP-000001
+    target: STR-000001
+    evidence:
+      status: inferred
+      confidence: medium
+      assertions:
+      - id: EV-000003
+        kind: inferred
+        source_refs:
+        - SRC-000001
+        - SRC-000002
+        supports:
+        - relationship
+        confidence: medium
+        reason: Applikationen är modellerad som realiserande arkitekturkomponent för den aktuella capabilityn. Tidigare Serving-relation
+          korrigerades i steg 10 efter strikt ArchiMate-relationskontroll.
+        reference_refs:
+        - REF-000001
+        - REF-000002
+    metadata:
+      created: '2026-08-25'
+      updated: '2026-08-25'
+sources:
+- id: SRC-000001
+  type: user_statement
+  title: Användarbeskrivning av förmåga
+  origin:
+    kind: conversation
+    conversation_ref: current
+  retrieved_date: '2026-08-25'
+  quality:
+    authority: high
+    freshness: high
+    completeness: medium
+- id: SRC-000002
+  type: document
+  title: Systemkatalog
+  origin:
+    kind: file
+    path: sources/files/systemkatalog.pdf
+  published_date: '2026-08-20'
+  retrieved_date: '2026-08-25'
+  publisher: Exempelorganisation
+  quality:
+    authority: high
+    freshness: high
+    completeness: high
+extensions:
+  lifecycle:
+    label: Lifecycle
+    description: Livscykelstatus för arkitekturobjekt.
+    value_type: enum
+    allowed_values:
+    - planned
+    - active
+    - phase_out
+    - retired
+    - unknown
+    applies_to:
+      kinds:
+      - element
+    required: false
+    evidence_required: true
+    governance:
+      status: active
+      owner: EA
+      introduced_in: 0.8.0
+  owner:
+    label: Owner
+    description: Ansvarig organisatorisk enhet eller funktion.
+    value_type: string
+    applies_to:
+      kinds:
+      - element
+    required: false
+    evidence_required: true
+    governance:
+      status: active
+      owner: EA
+      introduced_in: 0.8.0
+  criticality:
+    label: Criticality
+    description: Arkitekturobjektets verksamhets- eller IT-kritikalitet.
+    value_type: enum
+    allowed_values:
+    - low
+    - medium
+    - high
+    - critical
+    - unknown
+    applies_to:
+      kinds:
+      - element
+    required: false
+    evidence_required: true
+    governance:
+      status: active
+      owner: EA
+      introduced_in: 0.8.0
+  information_classification:
+    label: Information classification
+    description: Organisationsspecifik informationsklassning.
+    value_type: string
+    applies_to:
+      kinds:
+      - element
+    required: false
+    evidence_required: true
+    governance:
+      status: active
+      owner: EA
+      introduced_in: 0.8.0
+  strategic_fit:
+    label: Strategic fit
+    description: Bedömning av hur väl objektet stödjer strategisk riktning.
+    value_type: enum
+    allowed_values:
+    - low
+    - medium
+    - high
+    - unknown
+    applies_to:
+      kinds:
+      - element
+    required: false
+    evidence_required: false
+    governance:
+      status: experimental
+      owner: EA
+      introduced_in: 0.8.0
+  technical_debt:
+    label: Technical debt
+    description: Övergripande bedömning av teknisk skuld.
+    value_type: enum
+    allowed_values:
+    - none
+    - low
+    - medium
+    - high
+    - unknown
+    applies_to:
+      kinds:
+      - element
+      archimate_types:
+      - ApplicationComponent
+      - Node
+      - Device
+      - SystemSoftware
+      - TechnologyService
+    required: false
+    evidence_required: false
+    governance:
+      status: active
+      owner: EA
+      introduced_in: 0.8.0
+specializations:
+  Platform:
+    label: Platform
+    base_type: Node
+    description: Organisationsspecifik teknisk plattform.
+    inherits_relationships: true
+    governance:
+      status: active
+      owner: EA
+      introduced_in: 0.9.0
+  IntegrationPlatform:
+    label: Integration platform
+    base_type: Node
+    parent_specialization: Platform
+    description: Plattform för integrationsförmågor och integrationskomponenter.
+    inherits_relationships: true
+    governance:
+      status: active
+      owner: EA
+      introduced_in: 0.9.0
+  BusinessApplication:
+    label: Business application
+    base_type: ApplicationComponent
+    description: Verksamhetsnära applikation eller systemstöd.
+    inherits_relationships: true
+    governance:
+      status: active
+      owner: EA
+      introduced_in: 0.9.0
+  SharedApplicationService:
+    label: Shared application service
+    base_type: ApplicationService
+    description: Delad applikationstjänst.
+    inherits_relationships: true
+    governance:
+      status: experimental
+      owner: EA
+      introduced_in: 0.9.0
+issues: []
+references:
+- id: REF-000001
+  source_ref: SRC-000001
+  locator:
+    kind: custom
+    value: user statement
+  label: Beskrivning av capability
+- id: REF-000002
+  source_ref: SRC-000002
+  locator:
+    kind: section
+    value: APP-001
+  label: Post för Ärendehanteringssystem

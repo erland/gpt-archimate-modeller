@@ -1,0 +1,10 @@
+query:
+  id: all-elements
+  title: Alla element
+  select: elements
+  return:
+    fields:
+    - id
+    - type
+    - name
+    - specialization

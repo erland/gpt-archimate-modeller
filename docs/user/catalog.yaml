@@ -1,0 +1,37 @@
+user_documentation_version: '0.1'
+language: sv
+audience: EA practitioners using the GPT/project ZIP workflow
+documents:
+- id: USER-INDEX
+  file: docs/user/index.md
+  purpose: entry_point
+- id: USER-QUICKSTART
+  file: docs/user/quickstart.md
+  purpose: first_use
+- id: USER-WORKFLOW
+  file: docs/user/project-workflow.md
+  purpose: project_zip_workflow
+- id: USER-CONCEPTS
+  file: docs/user/concepts.md
+  purpose: concepts
+- id: USER-MODELING
+  file: docs/user/modeling-guide.md
+  purpose: model_editing
+- id: USER-EVIDENCE
+  file: docs/user/evidence-and-sources.md
+  purpose: evidence_sources_uncertainty
+- id: USER-CONFLICTS
+  file: docs/user/conflicts-and-issues.md
+  purpose: conflicts_issues
+- id: USER-ANALYSIS
+  file: docs/user/analysis-and-exports.md
+  purpose: queries_reports_views_exports
+- id: USER-CHANGE
+  file: docs/user/change-architecture.md
+  purpose: baseline_target_lifecycle
+- id: USER-QUALITY
+  file: docs/user/quality-and-impact.md
+  purpose: quality_impact
+- id: USER-TROUBLESHOOT
+  file: docs/user/troubleshooting.md
+  purpose: error_recovery

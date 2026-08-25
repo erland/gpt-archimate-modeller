@@ -1,0 +1,39 @@
+view_result:
+  view_id: application-landscape
+  title: Applikationslandskap
+  layout:
+    direction: left_to_right
+    algorithm: layered
+  groups:
+  - id: active
+    title: Aktiv struktur
+    match:
+      types:
+      - ApplicationComponent
+      - ApplicationCollaboration
+      - ApplicationInterface
+  - id: behavior
+    title: Beteende
+    match:
+      types:
+      - ApplicationFunction
+      - ApplicationInteraction
+      - ApplicationProcess
+      - ApplicationEvent
+      - ApplicationService
+  - id: data
+    title: Data
+    match:
+      types:
+      - DataObject
+  nodes:
+  - id: APP-000001
+    type: ApplicationComponent
+    name: Ärendehanteringssystem
+    specialization: BusinessApplication
+    group: active
+    properties:
+      owner: Verksamhetsområde X
+      lifecycle: active
+      criticality: high
+  edges: []

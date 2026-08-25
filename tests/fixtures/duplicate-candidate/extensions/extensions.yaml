@@ -1,0 +1,18 @@
+extensions:
+  lifecycle:
+    description: Livscykelstatus
+    value_type: enum
+    allowed_values:
+    - planned
+    - active
+    - phase_out
+    - retired
+    applies_to:
+    - element
+    required: false
+  owner:
+    description: Ansvarig organisatorisk enhet
+    value_type: string
+    applies_to:
+    - element
+    required: false

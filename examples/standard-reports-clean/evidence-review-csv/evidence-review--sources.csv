@@ -1,0 +1,3 @@
+ID,Typ,Titel,Ursprung,Auktoritet,Aktualitet
+SRC-000001,user_statement,Användarbeskrivning av förmåga,conversation,high,high
+SRC-000002,document,Systemkatalog,file,high,high

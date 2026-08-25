@@ -1,0 +1,10 @@
+change_set:
+  id: CHG-000003
+  title: Stale update
+  created: '2026-08-25'
+  expected_model_version: 0.1.0
+  operations:
+  - op: update_element
+    id: APP-000001
+    set:
+      description: Must not apply
