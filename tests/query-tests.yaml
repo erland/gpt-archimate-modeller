@@ -30,3 +30,6 @@ tests:
 - id: QUERY-010
   description: Relationship query
   expected: supported
+- id: QUERY-011
+  description: Query CLI loads project through model_loader and returns valid JSON
+  expected: enforced

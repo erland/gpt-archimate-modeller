@@ -66,7 +66,7 @@ Aktuell utvecklingsstatus: [STATUS.md](STATUS.md)
 
 ## Paketversion
 
-`0.44.1`
+`0.44.2`
 
 Genomförd utvecklingsplan: **44 / 48 steg**.
 
@@ -75,7 +75,7 @@ Nästa steg: **Steg 45 – Real EA pilot**.
 
 ## Release candidate
 
-Första release candidate är **1.0.0-rc.3**. Se `release/RC-NOTES.md` och `release/RC-CHECKLIST.md`.
+Första release candidate är **1.0.0-rc.4**. Se `release/RC-NOTES.md` och `release/RC-CHECKLIST.md`.
 
 
 ## GitHub release och distributionspaket
@@ -86,3 +86,8 @@ Repo-roten är katalogen där denna `README.md` ligger. GitHub Actions bygger tv
 - **Chat package** — för uppladdning direkt i en ChatGPT-konversation.
 
 Se [`docs/release-and-ci.md`](docs/release-and-ci.md).
+
+
+## RC.4 maintenance
+
+Query-CLI:n använder nu samma `model_loader` som övriga läsoperationer och har ett explicit CLI-regressionstest.

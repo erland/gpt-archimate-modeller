@@ -1,5 +1,5 @@
-release_candidate_version: 1.0.0-rc.3
-package_version: 0.44.1
+release_candidate_version: 1.0.0-rc.4
+package_version: 0.44.2
 format_freeze:
   status: candidate_frozen
   rule: No breaking canonical format changes after RC without explicit RC reset.

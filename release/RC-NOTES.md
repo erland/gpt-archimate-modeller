@@ -1,19 +1,12 @@
-# ArchiMate YAML EA GPT — Release Candidate 3
+# ArchiMate YAML EA GPT — Release Candidate 4
 
-Version: **1.0.0-rc.3**  
-Package version: **0.44.1**
+Version: **1.0.0-rc.4**  
+Package version: **0.44.2**
 
-## New since RC.1
-- Step 44 end-to-end GPT/project workflow.
-- 9/9 E2E scenarios pass.
-- 12/12 observable LLM contract evals pass.
-- Fixed direct new-project ZIP validation after Step 39 pack API change.
-- Fixed canonical flat-root ZIP compatibility in update/unpack workflow.
+## Maintenance fix since RC.3
 
-No breaking canonical format change was introduced by these fixes.
+A real-use failure exposed a stale call in `scripts/query.py`: the CLI imported `load_model` but still invoked the old `assemble()` path.
 
-Real EA pilot remains Step 45.
+RC.4 fixes the CLI to use `load_model()` and adds a subprocess regression that executes the actual query command.
 
-## RC.3 maintenance
-
-Added clean source packaging and GitHub Actions that publish separate Custom GPT and Chat distributions. No Step 45 pilot claim is made.
+No canonical model-format change was introduced. The development plan remains at Step 44; the real EA pilot is still Step 45.

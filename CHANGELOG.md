@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.44.2 – 2026-08-25
+
+### Fixed
+- `scripts/query.py` CLI no longer calls stale `assemble()` after the Step 40 model-loader migration.
+- Query CLI now uses `load_model()` and therefore shares model-index validation/fallback behavior with reports, views, impact and quality operations.
+
+### Tests
+- Added `QUERY-011`.
+- Added automated subprocess regression `T-QRV-002` that executes the real query CLI and validates its JSON result.
+
+### Release
+- Maintenance RC updated to `1.0.0-rc.4`.
+- Development plan remains at Step 44; no Step 45 pilot claim is made.
+
 ## 0.44.1 – 2026-08-25
 
 ### Maintenance
