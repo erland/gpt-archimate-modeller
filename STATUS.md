@@ -8,7 +8,7 @@
 | Release candidate | 1.0.0-rc.4 |
 | Package version | 0.44.2 |
 | E2E scenarios | 9 / 9 passed |
-| Observable LLM evals | 12 / 12 passed |
+| Observable LLM evals | 12 historical domain evals + 3 runtime-adherence evals |
 | Integration defects found/fixed | 2 |
 
 ## Completed plan step
@@ -22,3 +22,11 @@
 - Development plan remains at Step 44; Step 45 still requires a real EA pilot.
 
 - RC.4: fixed query CLI model-loader integration; regression covered by T-QRV-002.
+
+## Luna/runtime hardening
+
+- Chat bootstrap precedence clarified.
+- Chat runtime package slimmed to runtime-relevant scripts.
+- Knowledge `always_use` reduced to seven core files; task-specific routing enforced.
+- EVAL-013–015 add bootstrap, multi-turn retention and Knowledge-routing coverage.
+- Runtime scripts are packaged with deterministic executable permissions.

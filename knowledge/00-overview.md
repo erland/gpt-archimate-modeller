@@ -7,17 +7,11 @@ Detta är GPT:ns strukturerade kunskapsunderlag.
 Systeminstruktionen ska styra beteendet.
 Knowledge-filerna ska bära detaljer som behövs för korrekt modellering, validering, projektarbete och export.
 
-## Läsordning
+## Runtime-laddning
 
-1. `01-runtime-contract.md`
-2. `02-archimate-core.md`
-3. `03-project-format.md`
-4. `04-identity-evidence.md`
-5. `05-change-versioning.md`
-6. `06-query-report-view.md`
-7. `07-validation-quality.md`
-8. `08-interoperability.md`
-9. `09-project-package-migration.md`
+Kärnmaterialet definieras av `loading_guidance.always_use` i `knowledge-index.yaml`.
+
+Läs inte hela Knowledge-basen som standard. Börja med kärnmaterialet och använd därefter `routing.yaml` för att hämta minsta relevanta task-specifika fördjupning för den aktuella uppgiften.
 
 ## Grundprincip
 

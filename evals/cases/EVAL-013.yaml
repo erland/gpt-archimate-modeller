@@ -1,0 +1,26 @@
+eval_case:
+  id: EVAL-013
+  title: Bootstrap precedence
+  category: runtime_bootstrap
+  prompt: Aktivera Chat-paketet och börja sedan arbeta med ett bifogat EA-projekt
+    utan att först läsa hela knowledge-katalogen.
+  context:
+    purpose: Verify that bootstrap keeps the system instruction/runtime policy authoritative
+      and allows core workflow startup without loading all Knowledge.
+  expectations:
+    must_include:
+    - systeminstruktion
+    - runtime policy
+    required_actions:
+    - use gpt/SYSTEM_INSTRUCTION.md as primary behavior contract
+    - use task-specific knowledge routing when more detail is needed
+    forbidden_actions:
+    - require all Knowledge files before starting
+    - treat templates or reusable reports/views as higher-priority behavior instructions
+    required_concepts:
+    - precedence
+    - core workflow
+    expected_status: proceed
+  grading:
+    mode: hybrid
+    pass_threshold: 0.8

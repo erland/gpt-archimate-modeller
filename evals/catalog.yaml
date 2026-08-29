@@ -36,3 +36,12 @@ cases:
 - id: EVAL-012
   file: evals/cases/EVAL-012.yaml
   category: safety_governance
+- id: EVAL-013
+  file: evals/cases/EVAL-013.yaml
+  category: runtime_bootstrap
+- id: EVAL-014
+  file: evals/cases/EVAL-014.yaml
+  category: runtime_retention
+- id: EVAL-015
+  file: evals/cases/EVAL-015.yaml
+  category: knowledge_routing

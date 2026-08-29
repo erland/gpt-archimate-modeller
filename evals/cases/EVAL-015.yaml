@@ -1,0 +1,27 @@
+eval_case:
+  id: EVAL-015
+  title: Task-specific Knowledge routing
+  category: knowledge_routing
+  prompt: Gör en impact analysis från APP-000001. Använd bara den Knowledge som behövs
+    för uppgiften.
+  context:
+    purpose: Verify that impact-analysis material is loaded task-specifically instead
+      of activating unrelated workflow knowledge.
+  expectations:
+    must_include:
+    - impact
+    required_actions:
+    - use core Knowledge
+    - route to impact-analysis Knowledge
+    - load additional state/query material only when required by the analysis
+    forbidden_actions:
+    - load new-project workflow unnecessarily
+    - load update-project workflow unnecessarily
+    - load conflict workflow unnecessarily
+    - treat the entire knowledge base as always required
+    required_concepts:
+    - task-specific routing
+    expected_status: proceed
+  grading:
+    mode: hybrid
+    pass_threshold: 0.8

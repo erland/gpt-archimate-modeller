@@ -31,6 +31,44 @@ def main():
             errors.append(f"Reference doc missing: {f}")
 
     known={p.name for p in K.glob("*.md")}
+
+    loading=idx.get("loading_guidance",{})
+    always=loading.get("always_use",[])
+    if len(always)>8:
+        errors.append(f"Too many always_use knowledge files: {len(always)} (max 8)")
+    required_always={
+        "01-runtime-contract.md",
+        "02-archimate-core.md",
+        "03-project-format.md",
+        "04-identity-evidence.md",
+        "05-change-versioning.md",
+        "07-validation-quality.md",
+        "09-project-package-migration.md",
+    }
+    missing_always=sorted(required_always-set(always))
+    if missing_always:
+        errors.append(f"always_use missing core files: {missing_always}")
+    task_specific=loading.get("task_specific",{})
+    for intent, files in task_specific.items():
+        for f in files:
+            if f not in known:
+                errors.append(f"Task-specific routing {intent} points to unknown knowledge file: {f}")
+    forbidden_always={
+        "10-new-project-workflow.md",
+        "11-update-project-workflow.md",
+        "12-conflict-duplicate-handling.md",
+        "13-issues-observations.md",
+        "16-baseline-target-transition.md",
+        "17-time-lifecycle.md",
+        "18-impact-analysis.md",
+        "19-model-quality-report.md",
+        "23-large-zip-robustness.md",
+        "24-model-index.md",
+    }
+    leaked=sorted(forbidden_always & set(always))
+    if leaked:
+        errors.append(f"Task-specific knowledge must not be always_use: {leaked}")
+
     for r in route.get("routes",[]):
         for f in r.get("knowledge",[]):
             if f not in known:
