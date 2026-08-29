@@ -129,18 +129,35 @@ loading_guidance:
   - 05-change-versioning.md
   - 07-validation-quality.md
   - 09-project-package-migration.md
-  - 10-new-project-workflow.md
-  - 11-update-project-workflow.md
-  - 12-conflict-duplicate-handling.md
-  - 13-issues-observations.md
-  - 16-baseline-target-transition.md
-  - 17-time-lifecycle.md
-  - 18-impact-analysis.md
-  - 19-model-quality-report.md
-  - 23-large-zip-robustness.md
-  - 24-model-index.md
   task_specific:
+    create_new_project:
+    - 10-new-project-workflow.md
+    update_existing_project:
+    - 11-update-project-workflow.md
+    resolve_conflict_or_duplicate:
+    - 12-conflict-duplicate-handling.md
+    manage_issues_or_observations:
+    - 13-issues-observations.md
     query_report_view:
     - 06-query-report-view.md
     exchange_or_diagram:
     - 08-interoperability.md
+    standard_report:
+    - 14-standard-report-library.md
+    standard_view_or_diagram:
+    - 15-standard-views.md
+    baseline_target_transition:
+    - 16-baseline-target-transition.md
+    time_or_lifecycle:
+    - 17-time-lifecycle.md
+    impact_analysis:
+    - 18-impact-analysis.md
+    model_quality_report:
+    - 19-model-quality-report.md
+    large_zip_or_model_index:
+    - 23-large-zip-robustness.md
+    - 24-model-index.md
+    user_help_or_usage:
+    - 25-user-docs.md
+    developer_help:
+    - 26-developer-docs.md

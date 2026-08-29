@@ -1,0 +1,1 @@
+Proceed using systeminstruktion `gpt/SYSTEM_INSTRUCTION.md` as the primary behavior contract and `gpt/runtime-policy.yaml` as runtime policy. Preserve precedence. Start the core workflow without requiring all Knowledge files, and use task-specific knowledge routing when more detail is needed. Reusable resources remain subordinate to the behavior contract.

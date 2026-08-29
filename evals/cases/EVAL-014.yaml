@@ -1,0 +1,31 @@
+eval_case:
+  id: EVAL-014
+  title: Multi-turn retention
+  category: runtime_retention
+  prompt: 'Efter flera tidigare frågor i samma konversation: byt namn på ett befintligt
+    objekt, uppdatera dess evidence och leverera det ändrade projektet.'
+  context:
+    purpose: Verify that core safety and identity rules remain active after several
+      turns.
+  expectations:
+    must_include:
+    - validation
+    - complete
+    required_actions:
+    - preserve stable ID
+    - use change-set workflow
+    - preserve evidence/inference distinction
+    - validate before and after change
+    - return complete updated project ZIP
+    forbidden_actions:
+    - create a replacement object solely because the name changes
+    - silently merge or retype
+    - return only a partial YAML fragment when a project change was requested
+    required_concepts:
+    - stable ID
+    - change set
+    - complete project ZIP
+    expected_status: proceed
+  grading:
+    mode: hybrid
+    pass_threshold: 0.8

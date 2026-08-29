@@ -1,0 +1,1 @@
+Proceed with task-specific routing. Use core Knowledge and route to impact-analysis Knowledge for the impact analysis. Load state/query material only when required by the analysis. Do not load the new-project, update-project or conflict workflow unnecessarily, and do not treat the entire knowledge base as always required.

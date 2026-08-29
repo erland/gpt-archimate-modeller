@@ -1,0 +1,1 @@
+Proceed with the existing stable ID. Use the change set workflow, preserve the evidence/inference distinction, validate before and after the change, and return the complete updated project ZIP. Do not create a replacement object solely because the name changes, do not silently merge or retype, and do not return only a partial YAML fragment.

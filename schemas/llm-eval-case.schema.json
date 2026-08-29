@@ -37,7 +37,10 @@
             "time_lifecycle",
             "impact_analysis",
             "quality",
-            "safety_governance"
+            "safety_governance",
+            "runtime_bootstrap",
+            "runtime_retention",
+            "knowledge_routing"
           ]
         },
         "fixture": {
