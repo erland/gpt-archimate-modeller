@@ -66,15 +66,17 @@ Aktuell utvecklingsstatus: [STATUS.md](STATUS.md)
 
 ## Paketversion
 
-`0.47.0`
+`1.0.0`
 
-Genomförd utvecklingsplan: **47 / 48 steg**.
+Genomförd utvecklingsplan: **48 / 48 steg**.
 
-Nästa steg: **Steg 48 – v1.0.0**.
+Produktplanen för v1.0 är komplett.
 
-## Release candidate
+## Stable release
 
-Första release candidate är **1.0.0-rc.8**. Se `release/RC-NOTES.md` och `release/RC-CHECKLIST.md`.
+Version **1.0.0** är release-ready. Slutlig publicering sker via taggen `v1.0.0` efter merge
+och grön slutverifiering. Se `release/RELEASE-NOTES.md`, `release/RELEASE-CHECKLIST.md`
+och `release/RELEASE-MANIFEST.yaml`.
 
 ## GitHub release och distributionspaket
 
@@ -118,3 +120,9 @@ migreras deterministiskt till 0.2 via compatibility/plan/preview/apply. Befintli
 impact-theme-register bevaras; projekt utan sådant register får en tom controlled registry.
 
 Se [`docs/project-migration.md`](docs/project-migration.md).
+
+## v1.0.0
+
+Step 48 slutför produktplanen 48/48. v1.0.0 låser format 0.2 som write-target,
+behåller läsning av format 0.1 med explicit `MIG-000002`, och publicerar fyra
+runtime-distributioner från samma canonical contracts.

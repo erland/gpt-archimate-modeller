@@ -1,5 +1,22 @@
 # Changelog
 
+## 1.0.0 – 2026-09-21
+
+### Stable release
+- Completed the original 48-step product plan.
+- Promoted project/package version to `1.0.0`.
+- Final project format write target is 0.2 with explicit 0.1 → 0.2 migration.
+- Real-EA pilot findings are incorporated into format, validation, quality and reporting.
+- Runtime architecture supports Chat ZIP, Custom GPT, Claude Projects and OpenCode.
+- Release pipeline is registry-driven and validates instruction adherence plus five-dimensional runtime parity.
+- Stable release artifacts are generated from tag `v1.0.0` with SHA-256 checksums and release metadata.
+
+### Compatibility
+- Format 0.1 remains readable.
+- `MIG-000002` is the supported upgrade path to format 0.2.
+- Unknown future formats remain read-only.
+- Automatic downgrade is not supported.
+
 ## 0.47.0 – 2026-09-21
 
 ### Backward compatibility

@@ -4,12 +4,12 @@ Repo-roten är katalogen där `README.md` ligger. Distributionerna byggs från d
 
 ## Runtime-artefakter
 
-En release med taggen exempelvis `v1.0.0-rc.5` skapar fyra ZIP-distributioner:
+Den stabila releasen `v1.0.0` skapar fyra ZIP-distributioner:
 
-- `archimate-yaml-ea-gpt-chat-v1.0.0-rc.5.zip` — Chat ZIP, target **equivalent**.
-- `archimate-yaml-ea-gpt-custom-gpt-v1.0.0-rc.5.zip` — Custom GPT, **equivalent_with_platform_constraints**.
-- `archimate-yaml-ea-gpt-claude-projects-v1.0.0-rc.5.zip` — Claude Projects, **reduced** parity.
-- `archimate-yaml-ea-gpt-opencode-v1.0.0-rc.5.zip` — OpenCode, target **equivalent**.
+- `archimate-yaml-ea-gpt-chat-v1.0.0.zip` — Chat ZIP, target **equivalent**.
+- `archimate-yaml-ea-gpt-custom-gpt-v1.0.0.zip` — Custom GPT, **equivalent_with_platform_constraints**.
+- `archimate-yaml-ea-gpt-claude-projects-v1.0.0.zip` — Claude Projects, **reduced** parity.
+- `archimate-yaml-ea-gpt-opencode-v1.0.0.zip` — OpenCode, target **equivalent**.
 
 Releasepaketet innehåller dessutom:
 
@@ -45,10 +45,18 @@ Release-buildern:
 6. kör femdimensionell runtime parity,
 7. skapar checksummor och release metadata.
 
-Git-taggen är enda release-versionkälla; release-scriptet får inte hårdkoda versionsnummer.
+Git-taggen styr releasebygget och måste matcha repo-filen `VERSION`. En release stoppas om
+exempelvis taggen `v1.0.0` inte matchar `VERSION=1.0.0`.
 
 ## GitHub Actions
 
 - `ci.yml` — regression, contracts, registry, hygiene, release-workflow validation, registry-build, instruction adherence och parity.
 - `build-distributions.yml` — bygger registry-distributioner på push/PR/workflow_dispatch och laddar upp de fyra ZIP:arna plus build-manifest som workflow artifact. Vid `release`-event kan artefakterna också laddas upp till den publicerade releasen.
 - `release.yml` — självständigt taggdrivet releaseflöde som bygger releaseartefakterna och skapar/uppdaterar GitHub Release.
+
+
+## Stable v1.0.0
+
+Efter Step 48 ska PR:n först mergas med gröna slutgrindar. Därefter skapas taggen
+`v1.0.0`. Tag-workflowet kör hela release-buildern på nytt och publicerar först därefter
+GitHub Release-artefakterna.

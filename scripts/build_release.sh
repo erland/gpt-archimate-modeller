@@ -9,6 +9,11 @@ if [[ ! "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?(\+[0-9A-Za-z.-]+)?$
   echo "ERROR: invalid SemVer release tag: $TAG"; exit 2
 fi
 VERSION="${TAG#v}"
+FILE_VERSION="$(tr -d '[:space:]' < VERSION)"
+if [[ "$FILE_VERSION" != "$VERSION" ]]; then
+  echo "ERROR: release tag version $VERSION does not match repository VERSION $FILE_VERSION"
+  exit 2
+fi
 ARTIFACT_DIR="${ARTIFACT_DIR:-release-artifacts}"
 MANIFEST="$ARTIFACT_DIR/distribution-build-manifest.json"
 CHECKSUMS="$ARTIFACT_DIR/SHA256SUMS.txt"
@@ -25,6 +30,7 @@ $PYTHON scripts/validate_runtime_contract.py
 $PYTHON scripts/validate_archimate_tool_contract.py
 $PYTHON scripts/validate_distribution_registry.py
 $PYTHON scripts/scan_repository_hygiene.py .
+$PYTHON scripts/validate_stable_release.py
 
 $PYTHON scripts/build_all_distributions.py --version "$VERSION" --output-dir "$ARTIFACT_DIR"
 $PYTHON scripts/validate_all_distributions.py --manifest "$MANIFEST"

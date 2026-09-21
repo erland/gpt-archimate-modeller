@@ -6,43 +6,34 @@
 | Step 45 – Real EA pilot | Complete |
 | Step 46 – Revise format | Complete |
 | Step 47 – Backward compatibility/migration | Complete |
-| Step 48 – v1.0.0 | Next |
-| Release candidate | 1.0.0-rc.8 |
-| Package version | 0.47.0 |
+| Step 48 – v1.0.0 | Complete |
+| Stable version | 1.0.0 |
+| Package version | 1.0.0 |
+| Product plan | 48 / 48 |
 | E2E scenarios | 9 / 9 passed |
 | Observable LLM evals | 12 historical domain evals + 3 runtime-adherence evals |
 
-## Completed plan step
-`47 / 48`
+## Product status
 
-## Step 45 – Real EA pilot
+ArchiMate YAML EA GPT 1.0.0 är release-ready i källan. Publicering sker först efter merge,
+grön CI/distributionsbuild på slutcommitten och tagg `v1.0.0`.
 
-Pilotrapport: `docs/real-ea-pilot-step45.md`.
+## v1.0 scope
 
-## Step 46 – Format revision
+- ArchiMate 3.2 semantic core.
+- YAML project format 0.2.
+- Explicit format 0.1 → 0.2 migration via `MIG-000002`.
+- Stable IDs, evidence/provenance and controlled change workflow.
+- Queries, reports, views, impact analysis and model quality report.
+- ArchiMate Model Exchange export and staging import.
+- Deterministic project ZIP contract and derived model index.
+- Chat ZIP, Custom GPT, Claude Projects and OpenCode runtime distributions.
+- Registry-driven build/release, instruction adherence and five-dimensional runtime parity.
 
-Format 0.2 är målformat. Nya projekt skapas som 0.2 medan 0.1 fortsatt kan läsas.
+## Release sequence
 
-## Step 47 – Backward compatibility/migration
-
-Explicit `MIG-000002` migrerar format 0.1 → 0.2.
-
-Migrationen:
-
-- körs via befintligt preview/plan/apply-flöde,
-- bevarar befintlig `files.impact_themes`-path,
-- bevarar alla befintliga impact-theme-poster,
-- skapar en tom controlled registry om projektet saknar impact themes,
-- uppgraderar registry-metadata till format 0.2,
-- registrerar migrationen separat i `migrations/history.yaml`,
-- tar bort stale derived `PACKAGE-MANIFEST.yaml` och `MODEL-INDEX.json`,
-- bygger och validerar nya transportartefakter vid nästa pack,
-- gör ingen automatisk downgrade.
-
-Regressionstest verifierar preview, apply, preservation, idempotens och valid repack.
-
-Nästa steg är **Step 48 – v1.0.0**.
-
-## Runtime distributions
-
-Chat ZIP, Custom GPT, Claude Projects och OpenCode byggs fortsatt registry-drivet.
+1. final Step 48 commit passes CI,
+2. final distribution build passes,
+3. merge PR #5,
+4. create tag `v1.0.0`,
+5. tag-driven release workflow creates and validates all four distributions plus checksums/metadata.

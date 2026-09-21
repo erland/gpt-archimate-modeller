@@ -2,9 +2,9 @@ project:
   id: archimate-yaml-ea-gpt
   name: ArchiMate YAML EA GPT
   package_type: gpt-development-project
-  project_version: 0.47.0
-  plan_step_completed: 47
-  status: development
+  project_version: 1.0.0
+  plan_step_completed: 48
+  status: release_ready
 architecture:
   semantic_core: ArchiMate
   canonical_work_format: YAML
@@ -60,12 +60,12 @@ architecture:
   model_index_version: '0.1'
   user_documentation_version: '0.1'
   developer_documentation_version: '0.1'
-  release_candidate: 1.0.0-rc.8
+  release_version: 1.0.0
   e2e_gpt_test_version: '0.1'
   distribution_packaging_version: '0.1'
 scope:
-  current: Step 47 - Backward compatibility/migration
-  next: Step 48 - v1.0.0
+  current: Step 48 - v1.0.0
+  next: null
 
 runtime_migration:
   framework: gpt-builder-1.4.0
@@ -159,10 +159,10 @@ release:
   - release-metadata.yaml
 
 release_readiness:
-  candidate: 1.0.0-rc.8
+  version: 1.0.0
   migration_track_complete: true
   product_plan_preserved: true
-  product_plan_completed: 47
+  product_plan_completed: 48
   product_plan_total: 48
   full_regression_required: true
   four_runtime_parity_required: true
@@ -209,3 +209,19 @@ compatibility:
   invalidates_derived_manifest_and_index_before_repack: true
   migration_history_required: true
   downgrade_supported: false
+
+final_release:
+  step: 48
+  version: 1.0.0
+  tag: v1.0.0
+  product_plan_complete: true
+  target_project_format: '0.2'
+  backward_compatibility:
+    readable: ['0.1', '0.2']
+    migration: MIG-000002
+  runtime_distributions:
+  - chat_zip
+  - custom_gpt
+  - claude_projects
+  - opencode
+  publish_after_merge: true
