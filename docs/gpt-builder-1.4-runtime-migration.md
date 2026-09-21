@@ -128,8 +128,8 @@ Detta är ett separat runtime-spår. Den ursprungliga produktplanen 45–48
 fortsätter att vara ofullbordad tills den faktiskt genomförs.
 
 - **Steg 49 – Runtime assessment** — genomfört i denna ändring.
-- **Steg 50 – Plattformneutrala runtime contracts** — behavior/capability/artifact/workspace/tool.
-- **Steg 51 – Canonical ArchiMate tool contract** — normalisera runtime-API och tool boundaries.
+- **Steg 50 – Plattformneutrala runtime contracts** — genomfört; behavior/capability/artifact/workspace/tool finns i `runtime/runtime-contract.json` och separata schemas.
+- **Steg 51 – Canonical ArchiMate tool contract** — nästa steg; konkretisera runtime-API, typade argument och tool boundaries.
 - **Steg 52 – Claude Projects distribution** — explicit reduced parity.
 - **Steg 53 – OpenCode distribution** — root `AGENTS.md`, runtime contract och typad tool projection.
 - **Steg 54 – Registry-driven build och runtime-aware hygiene**.
@@ -147,3 +147,31 @@ Steg 49 är klart när:
 - OpenAI Plugin-beslutet är explicit,
 - OpenCode tool-strategin är explicit,
 - 50–57 är planerade utan att ändra status för produktsteg 45–48.
+
+
+## Steg 50 – Plattformneutrala runtime contracts
+
+Steg 50 inför ett gemensamt kontraktslager som ligger mellan canonical ArchiMate-beteende
+och runtime-specifika adaptrar.
+
+### Kontrakt
+
+- `behavior` — canonical instruktion och kritiska invariants.
+- `capabilities` — krav på filåtkomst, exekvering, strukturerad data, persistent workspace och ZIP.
+- `artifacts` — EA-projektpaket, validation evidence, change sets, reports, views och Model Exchange.
+- `workspace_state` — projektfiler/projekt-ZIP är auktoritet; chat history är inte state.
+- `tools` — abstrakta runtime-operationer, ännu utan runtime-specifik implementation.
+
+### Viktig gräns
+
+Steg 50 definierar endast den abstrakta tool-ytan. Kopplingen till konkreta Python-scripts
+och typade argument görs i steg 51. Därmed undviks att dagens scripts råkar bli canonical
+API bara för att de redan finns.
+
+### Runtime compatibility
+
+- Chat ZIP: implemented / equivalent
+- Custom GPT: implemented / equivalent_with_platform_constraints
+- Claude Projects: planned / reduced
+- OpenCode: planned / equivalent
+- OpenAI Plugin v1: not_planned / reduced

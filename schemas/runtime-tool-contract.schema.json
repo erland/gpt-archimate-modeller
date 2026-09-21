@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/runtime-tool-contract.schema.json",
+  "title": "Runtime Tool Contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "tools"
+  ],
+  "properties": {
+    "contract_version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "tools": {
+      "type": "array",
+      "uniqueItems": false,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "requirement",
+          "purpose",
+          "mutates_workspace",
+          "approval",
+          "working_directory"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]*$"
+          },
+          "requirement": {
+            "type": "string",
+            "enum": [
+              "required",
+              "recommended",
+              "optional"
+            ]
+          },
+          "purpose": {
+            "type": "string",
+            "minLength": 1
+          },
+          "mutates_workspace": {
+            "type": "boolean"
+          },
+          "approval": {
+            "type": "string",
+            "enum": [
+              "allow",
+              "ask",
+              "block"
+            ]
+          },
+          "working_directory": {
+            "type": "string",
+            "enum": [
+              "workspace",
+              "runtime",
+              "none"
+            ]
+          },
+          "concrete_projection": {
+            "type": "string",
+            "enum": [
+              "step-51",
+              "builtin",
+              "none"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

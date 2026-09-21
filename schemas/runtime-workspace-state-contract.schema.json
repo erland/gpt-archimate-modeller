@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/runtime-workspace-state-contract.schema.json",
+  "title": "Runtime Workspace State Contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "workspace",
+    "state"
+  ],
+  "properties": {
+    "contract_version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "workspace": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "requirement",
+        "portable",
+        "separate_from_assistant",
+        "authority"
+      ],
+      "properties": {
+        "requirement": {
+          "type": "string",
+          "enum": [
+            "required",
+            "optional"
+          ]
+        },
+        "portable": {
+          "type": "boolean"
+        },
+        "separate_from_assistant": {
+          "type": "boolean"
+        },
+        "authority": {
+          "type": "string",
+          "enum": [
+            "ea_project_zip",
+            "workspace_directory"
+          ]
+        }
+      }
+    },
+    "state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "authority",
+        "conversation_fallback"
+      ],
+      "properties": {
+        "authority": {
+          "type": "string",
+          "enum": [
+            "project_files",
+            "workspace_files"
+          ]
+        },
+        "conversation_fallback": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

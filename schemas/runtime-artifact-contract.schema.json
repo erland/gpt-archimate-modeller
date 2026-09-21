@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/runtime-artifact-contract.schema.json",
+  "title": "Runtime Artifact Contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "outputs"
+  ],
+  "properties": {
+    "contract_version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "outputs": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": [
+          "kind",
+          "requirement"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "document",
+              "data",
+              "report",
+              "package",
+              "metadata",
+              "directory"
+            ]
+          },
+          "requirement": {
+            "type": "string",
+            "enum": [
+              "required",
+              "conditional",
+              "optional"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
