@@ -44,3 +44,19 @@ History:
 - `migrations/history.yaml`
 
 Unknown future format = read-only.
+
+
+## Format 0.1 → 0.2
+
+Aktuell target är format 0.2. Format 0.1 är läsbart men ska migreras explicit innan write/update.
+
+`MIG-000002`:
+
+- bevarar befintlig impact-theme registry och dess poster,
+- skapar tom registry om den saknas,
+- uppgraderar registry metadata till 0.2,
+- invalidaterar stale derived manifest/index före repack,
+- registreras i `migrations/history.yaml`.
+
+Använd plan/preview innan apply när användaren vill granska förändringen. Migration får inte
+fabricera arkitekturfakta.

@@ -5,38 +5,44 @@
 | Steps 1–44 | Complete |
 | Step 45 – Real EA pilot | Complete |
 | Step 46 – Revise format | Complete |
-| Step 47 – Backward compatibility/migration | Next |
-| Release candidate | 1.0.0-rc.7 |
-| Package version | 0.46.0 |
+| Step 47 – Backward compatibility/migration | Complete |
+| Step 48 – v1.0.0 | Next |
+| Release candidate | 1.0.0-rc.8 |
+| Package version | 0.47.0 |
 | E2E scenarios | 9 / 9 passed |
 | Observable LLM evals | 12 historical domain evals + 3 runtime-adherence evals |
 
 ## Completed plan step
-`46 / 48`
+`47 / 48`
 
 ## Step 45 – Real EA pilot
 
 Pilotrapport: `docs/real-ea-pilot-step45.md`.
 
-Piloten prövade 462 element, 1,104 relationer, 21 sources och 14 change sets och gav
-konkreta input till formatrevisionen.
-
 ## Step 46 – Format revision
 
-Format 0.2 är nu målformat för nya projekt. 0.1 kan fortfarande läsas.
+Format 0.2 är målformat. Nya projekt skapas som 0.2 medan 0.1 fortsatt kan läsas.
 
-Pilotfynden har omsatts i:
+## Step 47 – Backward compatibility/migration
 
-- optional controlled `impact_themes` registry,
-- aggregerade unknown relationship-pair findings,
-- normaliserade quality-dimensioner för architecture/ownership/evidence,
-- bredare capability-realization query/report,
-- bounded query CLI/tool output med `matched_count`, `returned_count` och `truncated`.
+Explicit `MIG-000002` migrerar format 0.1 → 0.2.
 
-Step 47 ska nu implementera och verifiera explicit 0.1 → 0.2 migration samt
-bakåtkompatibilitet för äldre pilotprojekt.
+Migrationen:
+
+- körs via befintligt preview/plan/apply-flöde,
+- bevarar befintlig `files.impact_themes`-path,
+- bevarar alla befintliga impact-theme-poster,
+- skapar en tom controlled registry om projektet saknar impact themes,
+- uppgraderar registry-metadata till format 0.2,
+- registrerar migrationen separat i `migrations/history.yaml`,
+- tar bort stale derived `PACKAGE-MANIFEST.yaml` och `MODEL-INDEX.json`,
+- bygger och validerar nya transportartefakter vid nästa pack,
+- gör ingen automatisk downgrade.
+
+Regressionstest verifierar preview, apply, preservation, idempotens och valid repack.
+
+Nästa steg är **Step 48 – v1.0.0**.
 
 ## Runtime distributions
 
-Chat ZIP, Custom GPT, Claude Projects och OpenCode byggs registry-drivet. Runtime-migreringen
-49–57 är fortsatt komplett och oberoende av produktplanens 46/48.
+Chat ZIP, Custom GPT, Claude Projects och OpenCode byggs fortsatt registry-drivet.

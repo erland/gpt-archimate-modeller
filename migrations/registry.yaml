@@ -1,6 +1,6 @@
-migration_registry_version: '0.1'
+migration_registry_version: '0.2'
 supported_targets:
-  format_version: '0.1'
+  format_version: '0.2'
   package_layout_version: '0.1'
   archimate_version: '3.2'
 migrations:
@@ -10,3 +10,9 @@ migrations:
   to: '0.1'
   script: migrations/mig_000001_legacy_0_0_to_0_1.py
   description: Upgrade legacy project from format 0.0 to 0.1.
+- id: MIG-000002
+  dimension: format
+  from: '0.1'
+  to: '0.2'
+  script: migrations/mig_000002_0_1_to_0_2.py
+  description: Upgrade format 0.1 to 0.2 with controlled impact-theme registry support and refreshed derived package artifacts.

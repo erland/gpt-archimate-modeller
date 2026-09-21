@@ -2,8 +2,8 @@
 from pathlib import Path
 import hashlib,yaml
 ROOT=Path(__file__).resolve().parents[1]
-EXPECTED_RC="1.0.0-rc.7"
-EXPECTED_PACKAGE="0.46.0"
+EXPECTED_RC="1.0.0-rc.8"
+EXPECTED_PACKAGE="0.47.0"
 RUNTIME_CONTRACTS={
     "runtime/runtime-contract.json",
     "runtime/archimate-tool-contract.json",
@@ -15,6 +15,8 @@ FORMAT_CONTRACTS={
     "schemas/ea-project.schema.json",
     "schemas/ea-package.schema.json",
     "quality/profile.yaml",
+    "migrations/registry.yaml",
+    "migrations/mig_000002_0_1_to_0_2.py",
 }
 def sh(p):
     h=hashlib.sha256()
@@ -26,7 +28,7 @@ def main():
     rc=yaml.safe_load((ROOT/"release"/"RC-MANIFEST.yaml").read_text(encoding="utf-8"))["release_candidate"]
     if rc["version"]!=EXPECTED_RC: errors.append("Unexpected RC version")
     if rc["package_version"]!=EXPECTED_PACKAGE: errors.append("Unexpected package version")
-    if rc["plan_step_completed"]!=46: errors.append("Unexpected completed product-plan step")
+    if rc["plan_step_completed"]!=47: errors.append("Unexpected completed product-plan step")
     if rc.get("runtime_migration_step_completed")!=57: errors.append("Runtime migration step mismatch")
     if rc.get("runtime_migration_complete") is not True: errors.append("Runtime migration must be complete")
     if rc.get("active_runtime_count")!=4: errors.append("Expected four active runtimes")
@@ -44,7 +46,7 @@ def main():
         if not (ROOT/rel).is_file(): errors.append(f"Missing format contract: {rel}")
     project=yaml.safe_load((ROOT/"project.yaml").read_text(encoding="utf-8"))
     if project["project"]["project_version"]!=EXPECTED_PACKAGE: errors.append("project.yaml version mismatch")
-    if project["project"]["plan_step_completed"]!=46: errors.append("project.yaml product-plan step mismatch")
+    if project["project"]["plan_step_completed"]!=47: errors.append("project.yaml product-plan step mismatch")
     if project["architecture"].get("release_candidate")!=EXPECTED_RC: errors.append("project.yaml RC mismatch")
     if project["architecture"].get("ea_project_format_version")!="0.2": errors.append("target project format must be 0.2")
     mig=project.get("runtime_migration",{})
@@ -58,7 +60,7 @@ def main():
     print(f"Release candidate: {EXPECTED_RC}")
     print(f"Hashed legacy canonical contracts: {len(rc['canonical_contract_hashes'])}")
     print("Runtime contracts are structurally validated by dedicated CI validators")
-    print("Product plan advanced to 46/48; runtime migration remains complete at step 57")
+    print("Product plan advanced to 47/48; runtime migration remains complete at step 57")
     return 0
 if __name__=="__main__":
     raise SystemExit(main())

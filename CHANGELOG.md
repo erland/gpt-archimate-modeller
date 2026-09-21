@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.47.0 – 2026-09-21
+
+### Backward compatibility
+- Added explicit `MIG-000002` migration from project format 0.1 to 0.2.
+- Format 0.1 remains readable; target/current format is 0.2.
+- Existing impact-theme registry path and entries are preserved.
+- Projects without an impact-theme registry receive an empty controlled registry.
+- Migration invalidates stale derived package manifest/model index before repack.
+
+### Verification
+- Added regression coverage for compatibility status, preview non-mutation, apply,
+  migration history, impact-theme preservation, idempotence and valid repack.
+
+### Release
+- Package version updated to `0.47.0`.
+- Release candidate updated to `1.0.0-rc.8`.
+- Product plan advanced to Step 47/48; Step 48 v1.0.0 is next.
+
 ## 0.46.0 – 2026-09-21
 
 ### Format 0.2

@@ -66,15 +66,15 @@ Aktuell utvecklingsstatus: [STATUS.md](STATUS.md)
 
 ## Paketversion
 
-`0.46.0`
+`0.47.0`
 
-Genomförd utvecklingsplan: **46 / 48 steg**.
+Genomförd utvecklingsplan: **47 / 48 steg**.
 
-Nästa steg: **Steg 47 – Säkerställ bakåtkompatibilitet och migrering**.
+Nästa steg: **Steg 48 – v1.0.0**.
 
 ## Release candidate
 
-Första release candidate är **1.0.0-rc.7**. Se `release/RC-NOTES.md` och `release/RC-CHECKLIST.md`.
+Första release candidate är **1.0.0-rc.8**. Se `release/RC-NOTES.md` och `release/RC-CHECKLIST.md`.
 
 ## GitHub release och distributionspaket
 
@@ -110,3 +110,11 @@ normaliserad quality scoring, aggregerade relationship-coverage warnings, bredar
 capability-realization och bounded query tool output.
 
 Se [`docs/format-revision-step46.md`](docs/format-revision-step46.md).
+
+## Bakåtkompatibilitet 0.1 → 0.2
+
+Step 47 har infört explicit migration `MIG-000002`. Format 0.1 kan fortsatt läsas och
+migreras deterministiskt till 0.2 via compatibility/plan/preview/apply. Befintliga
+impact-theme-register bevaras; projekt utan sådant register får en tom controlled registry.
+
+Se [`docs/project-migration.md`](docs/project-migration.md).

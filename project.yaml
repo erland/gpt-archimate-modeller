@@ -2,8 +2,8 @@ project:
   id: archimate-yaml-ea-gpt
   name: ArchiMate YAML EA GPT
   package_type: gpt-development-project
-  project_version: 0.46.0
-  plan_step_completed: 46
+  project_version: 0.47.0
+  plan_step_completed: 47
   status: development
 architecture:
   semantic_core: ArchiMate
@@ -39,7 +39,7 @@ architecture:
   model_exchange_direct_merge: false
   project_zip_contract_version: '0.2'
   project_control_version: '0.1'
-  migration_framework_version: '0.1'
+  migration_framework_version: '0.2'
   gpt_instruction_version: '0.1'
   runtime_policy_version: '0.1'
   knowledge_structure_version: '0.1'
@@ -60,12 +60,12 @@ architecture:
   model_index_version: '0.1'
   user_documentation_version: '0.1'
   developer_documentation_version: '0.1'
-  release_candidate: 1.0.0-rc.7
+  release_candidate: 1.0.0-rc.8
   e2e_gpt_test_version: '0.1'
   distribution_packaging_version: '0.1'
 scope:
-  current: Step 46 - Revise format
-  next: Step 47 - Backward compatibility/migration
+  current: Step 47 - Backward compatibility/migration
+  next: Step 48 - v1.0.0
 
 runtime_migration:
   framework: gpt-builder-1.4.0
@@ -159,10 +159,10 @@ release:
   - release-metadata.yaml
 
 release_readiness:
-  candidate: 1.0.0-rc.7
+  candidate: 1.0.0-rc.8
   migration_track_complete: true
   product_plan_preserved: true
-  product_plan_completed: 46
+  product_plan_completed: 47
   product_plan_total: 48
   full_regression_required: true
   four_runtime_parity_required: true
@@ -193,3 +193,19 @@ format_revision:
   - normalized quality dimensions
   - broader capability realization report semantics
   - bounded query CLI/tool output with truncation metadata
+
+compatibility:
+  step: 47
+  target_format_version: '0.2'
+  readable_format_versions:
+  - '0.1'
+  - '0.2'
+  explicit_migration:
+    from: '0.1'
+    to: '0.2'
+    id: MIG-000002
+  preserves_existing_impact_themes: true
+  creates_empty_registry_when_missing: true
+  invalidates_derived_manifest_and_index_before_repack: true
+  migration_history_required: true
+  downgrade_supported: false

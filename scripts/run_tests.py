@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from pathlib import Path
-import argparse,datetime as dt,importlib.util,json,sys,tempfile,time,traceback,subprocess,xml.etree.ElementTree as ET,yaml
+import argparse,datetime as dt,importlib.util,json,sys,tempfile,time,traceback,subprocess,shutil,xml.etree.ElementTree as ET,yaml
 ROOT=Path(__file__).resolve().parents[1]; SCRIPTS=ROOT/'scripts'; sys.path.insert(0,str(SCRIPTS))
 def lm(name,p):
     spec=importlib.util.spec_from_file_location(name,p); m=importlib.util.module_from_spec(spec); spec.loader.exec_module(m); return m
@@ -14,6 +14,7 @@ export_diagram=lm('export_diagram',SCRIPTS/'export_diagram.py'); sys.modules['ex
 validate=lm('validate',SCRIPTS/'validate.py'); issues=lm('validate_issues',SCRIPTS/'validate_issues.py')
 new_project=lm('new_project',SCRIPTS/'new_project.py'); pack_project=lm('pack_project',SCRIPTS/'pack_project.py'); zipval=lm('validate_project_zip',SCRIPTS/'validate_project_zip.py')
 impact=lm('impact_analysis',SCRIPTS/'impact_analysis.py'); mqr=lm('model_quality_report',SCRIPTS/'model_quality_report.py'); render=lm('render_report',SCRIPTS/'render_report.py')
+migrate=lm('migrate_project',SCRIPTS/'migrate_project.py')
 export_mx=lm('export_model_exchange',SCRIPTS/'export_model_exchange.py'); import_mx=lm('import_model_exchange',SCRIPTS/'import_model_exchange.py')
 class R:
     def __init__(self,sel=None,ff=False): self.sel=set(sel or []); self.ff=ff; self.stop=False; self.tests=[]
@@ -120,6 +121,42 @@ def build_tests(r):
             z=Path(td)/'p.zip'; pack_project.pack(root,z); rr,ee,ww=zipval.validate_zip(z); assert not ee,ee
             return {'zip_status':rr['status'],'warnings':len(ww),'format_version':descriptor['format_version']}
     r.run('T-WF-001','project_workflows',wf)
+    def migration_01_02():
+        src=ROOT/'tests'/'reference-projects'/'RP-002-layered-example'
+        with tempfile.TemporaryDirectory() as td:
+            root=Path(td)/'legacy'
+            shutil.copytree(src,root)
+            descriptor=yaml.safe_load((root/'project.yaml').read_text(encoding='utf-8'))
+            assert descriptor['format_version']=='0.1',descriptor
+            descriptor.setdefault('files',{})['impact_themes']='extensions/impact-themes.yaml'
+            (root/'project.yaml').write_text(yaml.safe_dump(descriptor,sort_keys=False,allow_unicode=True,width=120),encoding='utf-8')
+            themes={'format_version':'0.1','impact_themes':[{'id':'privacy','label':'Privacy'}]}
+            (root/'extensions'/'impact-themes.yaml').write_text(yaml.safe_dump(themes,sort_keys=False,allow_unicode=True),encoding='utf-8')
+            before=(root/'extensions'/'impact-themes.yaml').read_text(encoding='utf-8')
+            comp=migrate.compatibility(root)
+            assert comp['status']=='migration_available' and comp['steps']==['MIG-000002'],comp
+            temp,preview_root,steps=migrate.apply_to_copy(root)
+            try:
+                pd=yaml.safe_load((preview_root/'project.yaml').read_text(encoding='utf-8'))
+                pt=yaml.safe_load((preview_root/'extensions'/'impact-themes.yaml').read_text(encoding='utf-8'))
+                assert pd['format_version']=='0.2',pd
+                assert pt['format_version']=='0.2' and pt['impact_themes'][0]['id']=='privacy',pt
+                assert (root/'project.yaml').read_text(encoding='utf-8').find("format_version: '0.1'")>=0
+            finally:
+                shutil.rmtree(temp,ignore_errors=True)
+            applied=migrate.apply(root)
+            assert applied['status']=='migrated' and applied['steps']==['MIG-000002'],applied
+            assert migrate.compatibility(root)['status']=='current'
+            hist=yaml.safe_load((root/'migrations'/'history.yaml').read_text(encoding='utf-8'))
+            assert hist['history'][-1]['id']=='MIG-000002',hist
+            after=yaml.safe_load((root/'extensions'/'impact-themes.yaml').read_text(encoding='utf-8'))
+            assert after['impact_themes']==themes['impact_themes'],after
+            assert not (root/'PACKAGE-MANIFEST.yaml').exists()
+            out=Path(td)/'migrated.zip'
+            pack_project.pack(root,out)
+            rr,ee,ww=zipval.validate_zip(out); assert not ee,ee
+            return {'migration':applied['steps'][0],'themes_preserved':len(after['impact_themes']),'zip_status':rr['status']}
+    r.run('T-WF-002','project_workflows',migration_01_02)
     def interop():
         with tempfile.TemporaryDirectory() as td:
             xml=Path(td)/'m.xml'; logical,errs=assemble.assemble(ref); assert not errs,errs; xml.write_text(export_mx.build_exchange(logical),encoding='utf-8'); assert xml.exists(); preview=import_mx.parse(xml); return {'elements':len(preview['elements']),'relationships':len(preview['relationships'])}

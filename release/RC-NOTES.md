@@ -1,24 +1,23 @@
-# ArchiMate YAML EA GPT — Release Candidate 7
+# ArchiMate YAML EA GPT — Release Candidate 8
 
-Version: **1.0.0-rc.7**  
-Package version: **0.46.0**
+Version: **1.0.0-rc.8**  
+Package version: **0.47.0**
 
-## Step 46 – Format revision
+## Step 47 – Backward compatibility/migration
 
-RC.7 converts the real-EA pilot findings into the target pre-1.0 format.
+RC.8 adds explicit backward compatibility for the format-0.2 target.
 
-Highlights:
+- format 0.1 remains readable,
+- `MIG-000002` upgrades 0.1 → 0.2,
+- existing impact-theme registries and all entries are preserved,
+- missing registries are initialized empty,
+- stale derived package manifest/model index are invalidated before repack,
+- migration history records the format step separately,
+- downgrade is not automatic or supported.
 
-- new projects use format 0.2,
-- optional controlled impact-theme registry,
-- aggregated uncovered relationship-pair findings,
-- normalized architecture/ownership/evidence quality dimensions,
-- broader capability-realization semantics,
-- bounded query CLI/tool output with truncation metadata.
-
-Format 0.1 remains readable. Explicit 0.1 → 0.2 migration is intentionally the subject of
-Step 47.
+Regression coverage verifies preview non-mutation, apply, preservation, idempotence and final
+valid ZIP packaging.
 
 ## Product-plan status
 
-The development plan is now **46 / 48**. Step 47 — Backward compatibility/migration — is next.
+The development plan is now **47 / 48**. Step 48 — v1.0.0 — is next.
