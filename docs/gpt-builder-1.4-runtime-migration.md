@@ -133,8 +133,8 @@ fortsätter att vara ofullbordad tills den faktiskt genomförs.
 - **Steg 52 – Claude Projects distribution** — genomfört; explicit reduced parity utan paketerade runtime-scripts.
 - **Steg 53 – OpenCode distribution** — genomfört; root `AGENTS.md`, runtime snapshot och typade custom tools som projicerar canonical ArchiMate-tool-kontraktet.
 - **Steg 54 – Registry-driven build och runtime-aware hygiene** — genomfört; registry styr fyra runtime-artefakter och hygiene blockerar genererade adapterprojektioner i canonical source.
-- **Steg 55 – Fyr-runtime instruction adherence och parity** — nästa steg.
-- **Steg 56 – Fyr-runtime CI, release och dokumentation**.
+- **Steg 55 – Fyr-runtime instruction adherence och parity** — genomfört; fyra runtime-instruktioner valideras och parity bedöms över fem canonical dimensioner.
+- **Steg 56 – Fyr-runtime CI, release och dokumentation** — nästa steg.
 - **Steg 57 – Full regression och ny release candidate**.
 
 ## Klart-kriterier för steg 49
@@ -324,3 +324,37 @@ Canonical kontrakt under `runtime/` är uttryckligen tillåtna. Build-output som
 `dist-ci/`, `release-artifacts/` och `build/` behandlas som genererat material.
 
 CI validerar nu registry, hygiene och använder registry-driven build/validation.
+
+
+## Steg 55 – Four-runtime instruction adherence och parity
+
+CI bygger först färska artefakter för samtliga fyra runtimes och kör därefter två
+separata statiska grindar.
+
+### Instruction adherence
+
+`scripts/run_runtime_instruction_adherence.py` läser runtime-specifik instruction entrypoint:
+
+- Chat ZIP → `gpt/SYSTEM_INSTRUCTION.md`
+- Custom GPT → `instructions.txt`
+- Claude Projects → `project-instructions.md`
+- OpenCode → `AGENTS.md`
+
+Alla måste bevara canonical behavior markers. Claude Projects måste dessutom explicit
+dokumentera reduced-parity-begränsningarna och bevara canonical behavior/state/no-false-PASS.
+
+### Runtime parity
+
+`evals/runtime-parity-contract.yaml` och `scripts/validate_runtime_parity.py` bedömer:
+
+1. behavior
+2. capability
+3. artifact
+4. workspace_state
+5. tool
+
+Claude Projects får target `reduced` och valideras mot dokumenterade begränsningar.
+OpenCode valideras för full tool mapping, explicit `projectRoot`, typade custom tools,
+blockerad direkt bash-mutation och approval på muterande canonical tools.
+
+Steg 55 ändrar inte den ursprungliga produktplanens status 44/48.

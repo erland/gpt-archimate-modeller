@@ -71,12 +71,13 @@ runtime_migration:
   framework: gpt-builder-1.4.0
   track_status: in_progress
   product_plan_status_preserved: true
-  last_completed_step: 54
-  next_step: 55
+  last_completed_step: 55
+  next_step: 56
   assessment: docs/gpt-builder-1.4-runtime-migration.md
   runtime_contract: runtime/runtime-contract.json
   tool_contract: runtime/archimate-tool-contract.json
   distribution_registry: runtime/distribution-registry.yaml
+  parity_contract: evals/runtime-parity-contract.yaml
   contract_schemas:
   - schemas/runtime-behavior-contract.schema.json
   - schemas/runtime-capability-contract.schema.json
@@ -126,3 +127,18 @@ build:
   all_distributions_builder: scripts/build_all_distributions.py
   all_distributions_validator: scripts/validate_all_distributions.py
   hygiene_validator: scripts/scan_repository_hygiene.py
+
+evals_runtime_parity:
+  instruction_adherence_runner: scripts/run_runtime_instruction_adherence.py
+  parity_validator: scripts/validate_runtime_parity.py
+  dimensions:
+  - behavior
+  - capability
+  - artifact
+  - workspace_state
+  - tool
+  runtimes:
+  - chat_zip
+  - custom_gpt
+  - claude_projects
+  - opencode

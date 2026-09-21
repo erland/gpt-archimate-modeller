@@ -49,3 +49,16 @@ jobs:
           VERSION="$(tr -d '[:space:]' < VERSION)"
           python scripts/build_all_distributions.py --version "$VERSION" --output-dir dist
           python scripts/validate_all_distributions.py --manifest dist/distribution-build-manifest.json
+          CHAT="dist/archimate-yaml-ea-gpt-chat-v$VERSION.zip"
+          CUSTOM="dist/archimate-yaml-ea-gpt-custom-gpt-v$VERSION.zip"
+          CLAUDE="dist/archimate-yaml-ea-gpt-claude-projects-v$VERSION.zip"
+          OPENCODE="dist/archimate-yaml-ea-gpt-opencode-v$VERSION.zip"
+          python scripts/run_runtime_instruction_adherence.py --contract evals/runtime-parity-contract.yaml --runtime chat_zip --artifact "$CHAT"
+          python scripts/run_runtime_instruction_adherence.py --contract evals/runtime-parity-contract.yaml --runtime custom_gpt --artifact "$CUSTOM"
+          python scripts/run_runtime_instruction_adherence.py --contract evals/runtime-parity-contract.yaml --runtime claude_projects --artifact "$CLAUDE"
+          python scripts/run_runtime_instruction_adherence.py --contract evals/runtime-parity-contract.yaml --runtime opencode --artifact "$OPENCODE"
+          python scripts/validate_runtime_parity.py \
+            --contract evals/runtime-parity-contract.yaml \
+            --runtime-contract runtime/runtime-contract.json \
+            --tool-contract runtime/archimate-tool-contract.json \
+            --chat "$CHAT" --custom "$CUSTOM" --claude "$CLAUDE" --opencode "$OPENCODE"

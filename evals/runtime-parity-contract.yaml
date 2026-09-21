@@ -1,0 +1,100 @@
+schema_version: 1
+contract_id: archimate-yaml-ea-runtime-parity
+active_runtimes:
+  - chat_zip
+  - custom_gpt
+  - claude_projects
+  - opencode
+
+dimensions:
+  behavior:
+    canonical_markers:
+      - YAML-projektet är source of truth
+      - Stable IDs
+      - change set
+      - Validera före och efter
+      - komplett uppdaterat projekt-ZIP
+      - fabricera aldrig
+      - Project ZIP contract
+    expectations:
+      chat_zip: equivalent
+      custom_gpt: equivalent_with_platform_constraints
+      claude_projects: reduced
+      opencode: equivalent
+
+  capability:
+    required:
+      - filesystem_read
+      - filesystem_write
+      - code_execution
+      - structured_data
+      - persistent_workspace
+      - archive_io
+    expectations:
+      chat_zip: equivalent
+      custom_gpt: equivalent_with_platform_constraints
+      claude_projects: reduced
+      opencode: equivalent
+
+  artifact:
+    required_outputs:
+      - ea_project_package
+      - validation_result
+    conditional_outputs:
+      - change_set
+      - report_output
+      - view_output
+      - model_exchange
+      - issue_record
+    expectations:
+      chat_zip: equivalent
+      custom_gpt: equivalent_with_platform_constraints
+      claude_projects: reduced
+      opencode: equivalent
+
+  workspace_state:
+    authority: project_files
+    portable_authority: ea_project_zip
+    conversation_fallback: false
+    expectations:
+      chat_zip: equivalent
+      custom_gpt: equivalent_with_platform_constraints
+      claude_projects: reduced
+      opencode: equivalent
+
+  tool:
+    abstract_tools:
+      - project-read
+      - project-validate
+      - project-change
+      - project-create
+      - project-package
+      - model-query
+      - model-analyze
+      - model-present
+      - model-exchange
+    concrete_tool_count: 14
+    expectations:
+      chat_zip: equivalent
+      custom_gpt: equivalent_with_platform_constraints
+      claude_projects: reduced
+      opencode: equivalent
+
+reduced_runtime_requirements:
+  claude_projects:
+    must_document_limitations:
+      - local command execution
+      - deterministic project verification
+      - workspace mutation
+      - GitHub write actions
+    must_preserve:
+      - canonical behavior
+      - workspace-file authority
+      - unrun verification
+      - false pass
+
+opencode_requirements:
+  project_root_argument: projectRoot
+  typed_custom_tools: true
+  direct_shell_for_canonical_mutation: false
+  mutating_tools_approval: ask

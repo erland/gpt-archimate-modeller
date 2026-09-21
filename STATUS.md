@@ -45,7 +45,8 @@ Detta är ett separat migrationsspår och ändrar **inte** produktplanens status
 | Step 52 – Claude Projects distribution | Complete |
 | Step 53 – OpenCode distribution | Complete |
 | Step 54 – Registry-driven build and runtime-aware hygiene | Complete |
-| Step 55 – Four-runtime instruction adherence and parity | Next |
+| Step 55 – Four-runtime instruction adherence and parity | Complete |
+| Step 56 – Four-runtime CI, release and documentation | Next |
 | Target runtimes | Chat ZIP, Custom GPT, Claude Projects, OpenCode |
 | OpenAI Plugin v1 | Assessed, not planned |
 | Main baseline CI | PASS |
