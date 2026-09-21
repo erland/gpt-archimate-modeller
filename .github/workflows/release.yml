@@ -4,6 +4,12 @@ on:
   push:
     tags:
       - 'v*.*.*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Release tag, for example v1.0.0-rc.5'
+        required: true
+        type: string
 
 permissions:
   contents: write
@@ -15,13 +21,6 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Validate tag
-        shell: bash
-        run: |
-          [[ "$GITHUB_REF_NAME" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?(\+[0-9A-Za-z.-]+)?$ ]] || {
-            echo "Taggen måste följa SemVer, exempelvis v1.0.0 eller v1.0.0-rc.3" >&2
-            exit 1
-          }
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -29,24 +28,39 @@ jobs:
           cache-dependency-path: requirements-dev.txt
       - name: Install dependencies
         run: python -m pip install -r requirements-dev.txt
-      - name: Test release candidate
-        run: |
-          python scripts/run_tests.py --format text
-          python scripts/validate_llm_evals.py
-          python scripts/validate_user_docs.py
-          python scripts/validate_developer_docs.py
-      - name: Build both release distributions
+      - name: Resolve release tag
+        id: tag
         shell: bash
         run: |
-          VERSION="${GITHUB_REF_NAME#v}"
-          python scripts/build_distributions.py --version "$VERSION"
-          python scripts/validate_distributions.py --version "$VERSION"
-      - name: Create or update GitHub Release and upload both ZIPs
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            TAG="${{ inputs.tag }}"
+          else
+            TAG="$GITHUB_REF_NAME"
+          fi
+          if [[ ! "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?(\+[0-9A-Za-z.-]+)?$ ]]; then
+            echo "Invalid SemVer release tag: $TAG" >&2
+            exit 1
+          fi
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+      - name: Build and validate release artifacts
+        env:
+          RELEASE_TAG: ${{ steps.tag.outputs.tag }}
+        run: bash scripts/build_release.sh
+      - name: Upload workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: archimate-yaml-ea-gpt-${{ steps.tag.outputs.tag }}
+          path: release-artifacts/*
+          if-no-files-found: error
+          retention-days: 14
+      - name: Create or update GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.tag.outputs.tag }}
         shell: bash
         run: |
-          if ! gh release view "$GITHUB_REF_NAME" --repo "${{ github.repository }}" >/dev/null 2>&1; then
-            gh release create "$GITHUB_REF_NAME" --verify-tag --generate-notes --title "ArchiMate YAML EA GPT ${GITHUB_REF_NAME#v}" --repo "${{ github.repository }}"
+          if gh release view "$TAG" --repo "${{ github.repository }}" >/dev/null 2>&1; then
+            gh release upload "$TAG" release-artifacts/* --clobber --repo "${{ github.repository }}"
+          else
+            gh release create "$TAG" release-artifacts/* --generate-notes --title "ArchiMate YAML EA GPT ${TAG#v}" --repo "${{ github.repository }}"
           fi
-          gh release upload "$GITHUB_REF_NAME" dist/*.zip --clobber --repo "${{ github.repository }}"

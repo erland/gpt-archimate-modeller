@@ -41,15 +41,17 @@ jobs:
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
       - name: Test before packaging
         run: python scripts/run_tests.py --format text
-      - name: Build distributions
-        run: python scripts/build_distributions.py --version "${{ steps.version.outputs.version }}"
-      - name: Validate distributions
-        run: python scripts/validate_distributions.py --version "${{ steps.version.outputs.version }}"
+      - name: Build registry distributions
+        run: python scripts/build_all_distributions.py --version "${{ steps.version.outputs.version }}" --output-dir dist
+      - name: Validate registry distributions
+        run: python scripts/validate_all_distributions.py --manifest dist/distribution-build-manifest.json
       - name: Upload workflow artifacts
         uses: actions/upload-artifact@v4
         with:
           name: archimate-yaml-ea-gpt-v${{ steps.version.outputs.version }}
-          path: dist/*.zip
+          path: |
+            dist/*.zip
+            dist/distribution-build-manifest.json
           if-no-files-found: error
           retention-days: 14
 
@@ -65,7 +67,7 @@ jobs:
         with:
           name: archimate-yaml-ea-gpt-v${{ needs.build.outputs.version }}
           path: dist
-      - name: Attach both distributions to GitHub Release
+      - name: Attach runtime distributions to GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release upload "${{ github.event.release.tag_name }}" dist/*.zip --clobber --repo "${{ github.repository }}"
+        run: gh release upload "${{ github.event.release.tag_name }}" dist/*.zip dist/distribution-build-manifest.json --clobber --repo "${{ github.repository }}"

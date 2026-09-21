@@ -134,8 +134,8 @@ fortsätter att vara ofullbordad tills den faktiskt genomförs.
 - **Steg 53 – OpenCode distribution** — genomfört; root `AGENTS.md`, runtime snapshot och typade custom tools som projicerar canonical ArchiMate-tool-kontraktet.
 - **Steg 54 – Registry-driven build och runtime-aware hygiene** — genomfört; registry styr fyra runtime-artefakter och hygiene blockerar genererade adapterprojektioner i canonical source.
 - **Steg 55 – Fyr-runtime instruction adherence och parity** — genomfört; fyra runtime-instruktioner valideras och parity bedöms över fem canonical dimensioner.
-- **Steg 56 – Fyr-runtime CI, release och dokumentation** — nästa steg.
-- **Steg 57 – Full regression och ny release candidate**.
+- **Steg 56 – Fyr-runtime CI, release och dokumentation** — genomfört; registry-driven release bygger/validerar fyra runtimes och publicerar checksummor/metadata.
+- **Steg 57 – Full regression och ny release candidate** — nästa steg.
 
 ## Klart-kriterier för steg 49
 
@@ -358,3 +358,28 @@ OpenCode valideras för full tool mapping, explicit `projectRoot`, typade custom
 blockerad direkt bash-mutation och approval på muterande canonical tools.
 
 Steg 55 ändrar inte den ursprungliga produktplanens status 44/48.
+
+
+## Steg 56 – Four-runtime CI, release och dokumentation
+
+Releaseflödet är nu registry-driven och använder samma runtime-målbild som CI.
+
+### Release builder
+
+`scripts/build_release.sh` använder release-taggen som versionskälla och kör regression,
+canonical validators, registry/hygiene, fyra runtime-builds, instruction adherence,
+femdimensionell parity samt generering av checksummor och release metadata.
+
+### Workflows
+
+`.github/workflows/release.yml` stödjer SemVer-tagg och explicit `workflow_dispatch`,
+anropar release-buildern och publicerar allt under `release-artifacts/`.
+
+`.github/workflows/build-distributions.yml` använder registry-driven build/validation och
+laddar upp de fyra ZIP-filerna plus `distribution-build-manifest.json`.
+
+`scripts/validate_release_workflow.py` körs i ordinarie CI för att blockera återfall till
+två-runtime- eller hårdkodad release-logik.
+
+README och `docs/release-and-ci.md` beskriver nu fyra runtime-distributioner,
+compatibility-status, registry som source of truth och taggdriven versionshantering.

@@ -43,6 +43,7 @@ jobs:
           python scripts/validate_archimate_tool_contract.py
           python scripts/validate_distribution_registry.py
           python scripts/scan_repository_hygiene.py .
+          python scripts/validate_release_workflow.py
       - name: Build and validate distributions
         shell: bash
         run: |

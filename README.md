@@ -72,25 +72,26 @@ Genomförd utvecklingsplan: **44 / 48 steg**.
 
 Nästa steg: **Steg 45 – Real EA pilot**.
 
-
 ## Release candidate
 
 Första release candidate är **1.0.0-rc.4**. Se `release/RC-NOTES.md` och `release/RC-CHECKLIST.md`.
 
-
 ## GitHub release och distributionspaket
 
-Repo-roten är katalogen där denna `README.md` ligger. GitHub Actions bygger två releaseartefakter:
+Repo-roten är katalogen där denna `README.md` ligger. GitHub Actions bygger fyra runtime-distributioner från samma canonical kontrakt:
 
+- **Chat ZIP** — för uppladdning direkt i en ChatGPT-konversation.
 - **Custom GPT** — för registrering i GPT Builder.
-- **Chat package** — för uppladdning direkt i en ChatGPT-konversation.
+- **Claude Projects** — reduced parity med canonical behavior men utan antagen lokal tool-exekvering.
+- **OpenCode** — equivalent peer runtime med typade ArchiMate-tools och explicit `projectRoot`.
 
 Se [`docs/release-and-ci.md`](docs/release-and-ci.md).
+
+`runtime/distribution-registry.yaml` är source of truth för aktiva runtimes och releaseartefakternas namn. Taggen styr versionsnumret; releasebygget skapar även `SHA256SUMS.txt`, `release-metadata.yaml` och `distribution-build-manifest.json`.
 
 ## GPT Byggaren 1.4 runtime migration
 
 Ett separat runtime-migrationsspår har startats utan att ändra den ursprungliga produktplanens status 44/48. Målbilden är Chat ZIP, Custom GPT, Claude Projects och OpenCode från gemensamma plattformsneutrala contracts. Se [`docs/gpt-builder-1.4-runtime-migration.md`](docs/gpt-builder-1.4-runtime-migration.md).
-
 
 ## RC.4 maintenance
 

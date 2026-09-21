@@ -71,8 +71,8 @@ runtime_migration:
   framework: gpt-builder-1.4.0
   track_status: in_progress
   product_plan_status_preserved: true
-  last_completed_step: 55
-  next_step: 56
+  last_completed_step: 56
+  next_step: 57
   assessment: docs/gpt-builder-1.4-runtime-migration.md
   runtime_contract: runtime/runtime-contract.json
   tool_contract: runtime/archimate-tool-contract.json
@@ -108,7 +108,6 @@ distributions:
     runtime_contract_snapshot: runtime-contract.json
     tool_contract_snapshot: archimate-tool-contract.json
     executable_scripts_packaged: false
-
   opencode:
     status: implemented
     compatibility: equivalent
@@ -142,3 +141,19 @@ evals_runtime_parity:
   - custom_gpt
   - claude_projects
   - opencode
+
+release:
+  workflow: .github/workflows/release.yml
+  builder: scripts/build_release.sh
+  validator: scripts/validate_release_workflow.py
+  version_source: git_tag
+  runtime_count: 4
+  registry_driven: true
+  artifacts:
+  - archimate-yaml-ea-gpt-chat-v<version>.zip
+  - archimate-yaml-ea-gpt-custom-gpt-v<version>.zip
+  - archimate-yaml-ea-gpt-claude-projects-v<version>.zip
+  - archimate-yaml-ea-gpt-opencode-v<version>.zip
+  - distribution-build-manifest.json
+  - SHA256SUMS.txt
+  - release-metadata.yaml
