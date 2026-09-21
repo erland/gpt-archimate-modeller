@@ -30,8 +30,9 @@ def main():
     with zipfile.ZipFile(a.artifact) as zf:
         text=read_member(zf,ENTRYPOINTS[a.runtime]).casefold()
         for marker in markers:
-            if marker.casefold() not in text:
-                errors.append(f"missing behavior marker: {marker}")
+            variants=marker.get("any_of",[])
+            if not any(v.casefold() in text for v in variants):
+                errors.append(f"missing behavior marker: {marker.get('id')} (expected one of {variants})")
 
         if a.runtime=="claude_projects":
             compat=read_member(zf,"compatibility.md").casefold()

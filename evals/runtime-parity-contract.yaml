@@ -9,13 +9,29 @@ active_runtimes:
 dimensions:
   behavior:
     canonical_markers:
-      - YAML-projektet är source of truth
-      - Stable IDs
-      - change set
-      - Validera före och efter
-      - komplett uppdaterat projekt-ZIP
-      - fabricera aldrig
-      - Project ZIP contract
+      - id: source_of_truth
+        any_of:
+          - YAML-projektet är source of truth
+      - id: stable_ids
+        any_of:
+          - Stable IDs
+      - id: change_set
+        any_of:
+          - change set
+          - change-set
+      - id: validation_before_after
+        any_of:
+          - Validera före och efter
+      - id: complete_updated_project_zip
+        any_of:
+          - komplett uppdaterat projekt-ZIP
+          - komplett uppdaterat ZIP
+      - id: no_fabrication
+        any_of:
+          - fabricera aldrig
+      - id: project_zip_contract
+        any_of:
+          - Project ZIP contract
     expectations:
       chat_zip: equivalent
       custom_gpt: equivalent_with_platform_constraints
