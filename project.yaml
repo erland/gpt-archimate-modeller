@@ -71,8 +71,8 @@ runtime_migration:
   framework: gpt-builder-1.4.0
   track_status: in_progress
   product_plan_status_preserved: true
-  last_completed_step: 51
-  next_step: 52
+  last_completed_step: 52
+  next_step: 53
   assessment: docs/gpt-builder-1.4-runtime-migration.md
   runtime_contract: runtime/runtime-contract.json
   tool_contract: runtime/archimate-tool-contract.json
@@ -95,3 +95,14 @@ runtime_migration:
   - artifact
   - workspace_state
   - tool
+
+distributions:
+  claude_projects:
+    status: implemented
+    compatibility: reduced
+    artifact_pattern: archimate-yaml-ea-gpt-claude-projects-v<version>.zip
+    instructions: project-instructions.md
+    compatibility_document: compatibility.md
+    runtime_contract_snapshot: runtime-contract.json
+    tool_contract_snapshot: archimate-tool-contract.json
+    executable_scripts_packaged: false

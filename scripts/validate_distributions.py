@@ -8,8 +8,11 @@ def members(z): return [i.filename for i in z.infolist() if not i.is_dir()]
 def main():
     ap=argparse.ArgumentParser(); ap.add_argument('--version',required=True); ap.add_argument('--dist-dir',default='dist'); a=ap.parse_args()
     d=ROOT/a.dist_dir; version=a.version
-    custom=d/f'archimate-yaml-ea-gpt-custom-gpt-v{version}.zip'; chat=d/f'archimate-yaml-ea-gpt-chat-v{version}.zip'; errors=[]
-    for p in (custom,chat):
+    custom=d/f'archimate-yaml-ea-gpt-custom-gpt-v{version}.zip'
+    chat=d/f'archimate-yaml-ea-gpt-chat-v{version}.zip'
+    claude=d/f'archimate-yaml-ea-gpt-claude-projects-v{version}.zip'
+    errors=[]
+    for p in (custom,chat,claude):
         if not p.exists(): errors.append(f'Missing {p.name}'); continue
         with zipfile.ZipFile(p) as z:
             if z.testzip(): errors.append(f'Corrupt {p.name}')
@@ -25,6 +28,30 @@ def main():
             inst=z.read(root+'instructions.txt').decode('utf-8')
             if len(inst)>8000: errors.append(f'custom instructions exceed 8000 chars: {len(inst)}')
             if any('/tests/' in '/'+x or '/evals/' in '/'+x for x in n): errors.append('custom: contains development test/eval files')
+    if claude.exists():
+        with zipfile.ZipFile(claude) as z:
+            n=members(z); root=n[0].split('/')[0]+'/'
+            required=[
+                'README.md','project-instructions.md','compatibility.md',
+                'runtime-contract.json','archimate-tool-contract.json',
+                'knowledge/01-runtime-contract.md','knowledge/02-archimate-core.md',
+                'knowledge/03-project-format.md','knowledge/07-validation-quality.md'
+            ]
+            for req in required:
+                if root+req not in n: errors.append(f'claude: missing {req}')
+            if any(x.startswith(root+'scripts/') for x in n):
+                errors.append('claude: executable runtime scripts must not be packaged')
+            inst=z.read(root+'project-instructions.md').decode('utf-8').casefold()
+            for marker in ['yaml-projektet är source of truth','stable ids','change set','project zip contract']:
+                if marker.casefold() not in inst: errors.append(f'claude: project instructions missing {marker}')
+            compat=z.read(root+'compatibility.md').decode('utf-8').casefold()
+            for marker in [
+                'reduced parity','canonical behavior','local command execution',
+                'deterministic project verification','workspace mutation','github write actions',
+                'workspace-file authority','unrun verification','false pass'
+            ]:
+                if marker.casefold() not in compat: errors.append(f'claude: compatibility missing {marker}')
+
     if chat.exists():
         with zipfile.ZipFile(chat) as z:
             infos=[i for i in z.infolist() if not i.is_dir()]
@@ -45,5 +72,9 @@ def main():
                     if mode != 0o755: errors.append(f'chat: runtime script is not executable: {rel} mode={oct(mode)}')
     if errors:
         print('FAILED'); [print('-',e) for e in errors]; return 1
-    print('OK'); print(f'Custom GPT: {custom.name}'); print(f'Chat: {chat.name}'); return 0
+    print('OK')
+    print(f'Custom GPT: {custom.name}')
+    print(f'Chat: {chat.name}')
+    print(f'Claude Projects: {claude.name}')
+    return 0
 if __name__=='__main__': raise SystemExit(main())

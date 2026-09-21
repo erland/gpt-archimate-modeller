@@ -73,6 +73,70 @@ def main():
             encoding='utf-8')
         zip_tree(cgroot,outdir/f'archimate-yaml-ea-gpt-custom-gpt-v{version}.zip')
 
+        clauderoot=td/f'archimate-yaml-ea-gpt-claude-projects-v{version}'
+        (clauderoot/'knowledge').mkdir(parents=True)
+        shutil.copy2(ROOT/'gpt'/'SYSTEM_INSTRUCTION.md',clauderoot/'project-instructions.md')
+        shutil.copy2(ROOT/'runtime'/'runtime-contract.json',clauderoot/'runtime-contract.json')
+        shutil.copy2(ROOT/'runtime'/'archimate-tool-contract.json',clauderoot/'archimate-tool-contract.json')
+        for name in [
+            '00-overview.md','01-runtime-contract.md','02-archimate-core.md',
+            '03-project-format.md','04-identity-evidence.md','05-change-versioning.md',
+            '06-query-report-view.md','07-validation-quality.md','08-interoperability.md',
+            '09-project-package-migration.md','10-new-project-workflow.md',
+            '11-update-project-workflow.md','12-conflict-duplicate-handling.md',
+            '13-issues-observations.md','18-impact-analysis.md','19-model-quality-report.md'
+        ]:
+            shutil.copy2(ROOT/'knowledge'/name,clauderoot/'knowledge'/name)
+        (clauderoot/'compatibility.md').write_text(
+            '''# Claude Projects compatibility
+
+This distribution has **reduced parity** relative to the canonical ArchiMate runtime contract.
+
+It preserves **canonical behavior** from `project-instructions.md`, but a plain Claude Project
+must not assume the following runtime capabilities are available:
+
+- **local command execution**
+- **deterministic project verification**
+- **workspace mutation**
+- **GitHub write actions**
+
+The supplied EA project files / project ZIP remain the **workspace-file authority**.
+Conversation history is not authoritative project state.
+
+The JSON runtime/tool contracts are reference contracts. They describe the operations a fully
+capable runtime would expose, but their presence does not mean those tools can execute here.
+
+When an operation requires unavailable execution capability:
+
+- do not claim the Python tool ran,
+- do not claim technical validation passed,
+- mark **unrun verification** explicitly as unrun,
+- do not convert missing execution into a false PASS,
+- produce analysis, change-set proposals or file content only when it can be done honestly,
+- require execution in a capable runtime before claiming a changed project package is validated.
+
+A complete updated project ZIP may only be claimed when the actual package was created and
+validated. Otherwise state the limitation explicitly.
+''',
+            encoding='utf-8'
+        )
+        (clauderoot/'README.md').write_text(
+            f'''# ArchiMate YAML EA GPT — Claude Projects v{version}
+
+Use `project-instructions.md` as Claude Project Instructions and add the files under
+`knowledge/` as project knowledge.
+
+Read `compatibility.md` before use. This runtime intentionally has reduced parity:
+the package contains no executable Python runtime scripts and must not claim local
+validation, mutation or packaging unless the host environment actually provides them.
+
+`runtime-contract.json` and `archimate-tool-contract.json` are contract snapshots
+for transparency and parity assessment, not executable tools.
+''',
+            encoding='utf-8'
+        )
+        zip_tree(clauderoot,outdir/f'archimate-yaml-ea-gpt-claude-projects-v{version}.zip')
+
         chatroot=td/f'archimate-yaml-ea-gpt-chat-v{version}'
         for rel in CHAT_FILES:
             if (ROOT/rel).exists(): clean_copy(ROOT/rel,chatroot/rel)

@@ -218,8 +218,15 @@
       "target": "equivalent_with_platform_constraints"
     },
     "claude_projects": {
-      "status": "planned",
-      "target": "reduced"
+      "status": "implemented",
+      "target": "reduced",
+      "distribution": "archimate-yaml-ea-gpt-claude-projects-v<version>.zip",
+      "limitations": [
+        "local command execution",
+        "deterministic project verification",
+        "workspace mutation",
+        "GitHub write actions"
+      ]
     },
     "opencode": {
       "status": "planned",

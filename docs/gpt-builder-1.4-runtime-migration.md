@@ -130,8 +130,8 @@ fortsätter att vara ofullbordad tills den faktiskt genomförs.
 - **Steg 49 – Runtime assessment** — genomfört i denna ändring.
 - **Steg 50 – Plattformneutrala runtime contracts** — genomfört; behavior/capability/artifact/workspace/tool finns i `runtime/runtime-contract.json` och separata schemas.
 - **Steg 51 – Canonical ArchiMate tool contract** — genomfört; typad runtime-API-yta mappar canonical tools till utvalda Python-operationer.
-- **Steg 52 – Claude Projects distribution** — nästa steg; explicit reduced parity.
-- **Steg 53 – OpenCode distribution** — root `AGENTS.md`, runtime contract och typad tool projection.
+- **Steg 52 – Claude Projects distribution** — genomfört; explicit reduced parity utan paketerade runtime-scripts.
+- **Steg 53 – OpenCode distribution** — nästa steg; root `AGENTS.md`, runtime contract och typad tool projection.
 - **Steg 54 – Registry-driven build och runtime-aware hygiene**.
 - **Steg 55 – Fyr-runtime instruction adherence och parity**.
 - **Steg 56 – Fyr-runtime CI, release och dokumentation**.
@@ -216,3 +216,39 @@ i linje med canonical domänregler.
 
 Runtime-adaptrar ska projicera detta kontrakt. De får inte betrakta generell shell-access
 eller hela `scripts/` som canonical API.
+
+
+## Steg 52 – Claude Projects distribution
+
+Claude Projects är nu en byggbar distribution med **reduced parity**.
+
+### Innehåll
+
+Distributionen innehåller:
+
+- `project-instructions.md` från canonical `gpt/SYSTEM_INSTRUCTION.md`,
+- ett kuraterat Knowledge-set för modellering, format, evidence, change, validation och analys,
+- snapshot av `runtime-contract.json`,
+- snapshot av `archimate-tool-contract.json`,
+- `compatibility.md`,
+- README för installation/användning.
+
+Den innehåller avsiktligt **inga Python runtime-scripts**. Tool-kontrakten är därför
+transparens-/parityartefakter och får inte tolkas som att Claude Projects kan exekvera dem.
+
+### Explicit reduced parity
+
+Adaptern dokumenterar att den inte får anta:
+
+- local command execution,
+- deterministic project verification,
+- workspace mutation,
+- GitHub write actions.
+
+Canonical behavior bevaras. EA-projektfiler/projekt-ZIP är workspace-file authority och
+unrun verification måste förbli unrun; saknad exekvering får aldrig rapporteras som PASS.
+
+### Release policy
+
+Claude Projects är nu `implemented / reduced` i runtime compatibility. Full fyr-runtime
+releasehantering införs först i migrationssteg 56.
