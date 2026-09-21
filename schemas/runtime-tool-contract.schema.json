@@ -6,12 +6,27 @@
   "additionalProperties": false,
   "required": [
     "contract_version",
-    "tools"
+    "tools",
+    "concrete_contract",
+    "project_root_argument",
+    "generic_shell_is_canonical_api"
   ],
   "properties": {
     "contract_version": {
       "type": "integer",
       "minimum": 1
+    },
+    "concrete_contract": {
+      "type": "string",
+      "const": "runtime/archimate-tool-contract.json"
+    },
+    "project_root_argument": {
+      "type": "string",
+      "const": "projectRoot"
+    },
+    "generic_shell_is_canonical_api": {
+      "type": "boolean",
+      "const": false
     },
     "tools": {
       "type": "array",
@@ -25,7 +40,8 @@
           "purpose",
           "mutates_workspace",
           "approval",
-          "working_directory"
+          "working_directory",
+          "concrete_projection"
         ],
         "properties": {
           "id": {
@@ -65,11 +81,7 @@
           },
           "concrete_projection": {
             "type": "string",
-            "enum": [
-              "step-51",
-              "builtin",
-              "none"
-            ]
+            "const": "runtime/archimate-tool-contract.json"
           }
         }
       }
