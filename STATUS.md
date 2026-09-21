@@ -5,8 +5,8 @@
 | Steps 1–43 | Complete |
 | Step 44 – End-to-end GPT test | Complete |
 | Step 45 – Real EA pilot | Not started |
-| Release candidate | 1.0.0-rc.4 |
-| Package version | 0.44.2 |
+| Release candidate | 1.0.0-rc.5 |
+| Package version | 0.44.3 |
 | E2E scenarios | 9 / 9 passed |
 | Observable LLM evals | 12 historical domain evals + 3 runtime-adherence evals |
 | Integration defects found/fixed | 2 |
@@ -32,7 +32,7 @@
 
 ## GPT Byggaren 1.4 runtime migration
 
-Detta är ett separat migrationsspår och ändrar **inte** produktplanens status
+Det separata runtime-migrationsspåret är nu komplett och ändrar **inte** produktplanens status
 `44 / 48`. Steg 45 – Real EA pilot är fortfarande inte genomfört.
 
 | Migration item | Status |
@@ -45,10 +45,18 @@ Detta är ett separat migrationsspår och ändrar **inte** produktplanens status
 | Step 54 – Registry-driven build and runtime-aware hygiene | Complete |
 | Step 55 – Four-runtime instruction adherence and parity | Complete |
 | Step 56 – Four-runtime CI, release and documentation | Complete |
-| Step 57 – Full regression and new release candidate | Next |
+| Step 57 – Full regression and new release candidate | Complete |
 | Target runtimes | Chat ZIP, Custom GPT, Claude Projects, OpenCode |
 | OpenAI Plugin v1 | Assessed, not planned |
 | Main baseline CI | PASS |
 | Main baseline distribution build | PASS |
 
 Se `docs/gpt-builder-1.4-runtime-migration.md`.
+
+## RC.5 runtime migration readiness
+
+- Runtime migration steps 49–57 complete.
+- Four runtime targets: Chat ZIP, Custom GPT, Claude Projects and OpenCode.
+- OpenAI Plugin v1 remains assessed/not planned.
+- Product plan remains 44/48; Step 45 Real EA pilot is still not started.
+- Final acceptance requires green CI and green Build GPT distributions on the RC.5 commit.

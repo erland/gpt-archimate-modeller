@@ -1,19 +1,21 @@
-# Release candidate checklist — 1.0.0-rc.4
+# Release candidate checklist — 1.0.0-rc.5
 
-- [x] Canonical technical validation
-- [x] Reference projects
-- [x] Invalid fixtures
-- [x] Automated test suite
+- [x] Canonical technical validation represented in CI
+- [x] Reference projects and invalid fixtures
+- [x] Automated regression suite
 - [x] LLM eval catalog
 - [x] User/developer documentation
 - [x] End-to-end deterministic GPT/project workflow
-- [x] 12/12 observable LLM contract evals
-- [x] ZIP integrity
+- [x] Four runtime distributions configured
+- [x] Distribution registry and runtime-aware hygiene
+- [x] Four-runtime instruction adherence gate
+- [x] Five-dimensional runtime parity gate
+- [x] Registry-driven release workflow
+- [x] Release checksums and metadata
+- [ ] RC.5 commit CI green
+- [ ] RC.5 commit Build GPT distributions green
 
-## E2E
-9/9 scenarios passed. Two integration defects found by E2E were fixed and regression-covered.
-
-## Remaining
+## Remaining product plan
 - Step 45 – Real EA pilot
 - Step 46 – Revise format
 - Step 47 – Backward compatibility/migration

@@ -66,7 +66,7 @@ Aktuell utvecklingsstatus: [STATUS.md](STATUS.md)
 
 ## Paketversion
 
-`0.44.2`
+`0.44.3`
 
 Genomförd utvecklingsplan: **44 / 48 steg**.
 
@@ -74,7 +74,7 @@ Nästa steg: **Steg 45 – Real EA pilot**.
 
 ## Release candidate
 
-Första release candidate är **1.0.0-rc.4**. Se `release/RC-NOTES.md` och `release/RC-CHECKLIST.md`.
+Första release candidate är **1.0.0-rc.5**. Se `release/RC-NOTES.md` och `release/RC-CHECKLIST.md`.
 
 ## GitHub release och distributionspaket
 
@@ -93,6 +93,6 @@ Se [`docs/release-and-ci.md`](docs/release-and-ci.md).
 
 Ett separat runtime-migrationsspår har startats utan att ändra den ursprungliga produktplanens status 44/48. Målbilden är Chat ZIP, Custom GPT, Claude Projects och OpenCode från gemensamma plattformsneutrala contracts. Se [`docs/gpt-builder-1.4-runtime-migration.md`](docs/gpt-builder-1.4-runtime-migration.md).
 
-## RC.4 maintenance
+## RC.5 runtime migration
 
-Query-CLI:n använder nu samma `model_loader` som övriga läsoperationer och har ett explicit CLI-regressionstest.
+GPT Byggaren 1.4-migreringen är genomförd för Chat ZIP, Custom GPT, Claude Projects och OpenCode. Full regression, fyr-runtime instruction adherence/parity och registry-driven release är del av RC.5.

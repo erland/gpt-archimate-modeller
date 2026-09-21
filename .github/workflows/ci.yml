@@ -44,6 +44,7 @@ jobs:
           python scripts/validate_distribution_registry.py
           python scripts/scan_repository_hygiene.py .
           python scripts/validate_release_workflow.py
+          python scripts/validate_release_candidate.py
       - name: Build and validate distributions
         shell: bash
         run: |

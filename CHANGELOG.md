@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.44.3 – 2026-09-21
+
+### Runtime migration
+- Completed GPT Byggaren 1.4 runtime migration steps 49–57.
+- Added platform-neutral behavior, capability, artifact, workspace/state and tool contracts.
+- Added canonical typed ArchiMate tool contract.
+- Added Claude Projects distribution with explicit reduced parity.
+- Added OpenCode distribution with root AGENTS.md, typed custom tools, explicit projectRoot and guarded canonical mutations.
+- Added registry-driven four-runtime build and runtime-aware repository hygiene.
+- Added four-runtime instruction adherence and five-dimensional runtime parity validation.
+- Updated CI and release workflows for Chat ZIP, Custom GPT, Claude Projects and OpenCode.
+- Added tag-driven release checksums and release metadata.
+
+### Release
+- Maintenance release candidate updated to `1.0.0-rc.5`.
+- Product development plan intentionally remains at Step 44/48.
+- Step 45 Real EA pilot is still not claimed as complete.
+
 ## 0.44.2 – 2026-08-25
 
 ### Fixed

@@ -135,7 +135,7 @@ fortsätter att vara ofullbordad tills den faktiskt genomförs.
 - **Steg 54 – Registry-driven build och runtime-aware hygiene** — genomfört; registry styr fyra runtime-artefakter och hygiene blockerar genererade adapterprojektioner i canonical source.
 - **Steg 55 – Fyr-runtime instruction adherence och parity** — genomfört; fyra runtime-instruktioner valideras och parity bedöms över fem canonical dimensioner.
 - **Steg 56 – Fyr-runtime CI, release och dokumentation** — genomfört; registry-driven release bygger/validerar fyra runtimes och publicerar checksummor/metadata.
-- **Steg 57 – Full regression och ny release candidate** — nästa steg.
+- **Steg 57 – Full regression och ny release candidate** — genomfört i källan; RC.5 verifieras av CI/build på denna commit.
 
 ## Klart-kriterier för steg 49
 
@@ -383,3 +383,18 @@ två-runtime- eller hårdkodad release-logik.
 
 README och `docs/release-and-ci.md` beskriver nu fyra runtime-distributioner,
 compatibility-status, registry som source of truth och taggdriven versionshantering.
+
+
+## Steg 57 – Full regression och ny release candidate
+
+Runtime-migrationsspåret är nu källmässigt komplett.
+
+- package version: `0.44.3`
+- release candidate: `1.0.0-rc.5`
+- migrationsstatus: complete
+- produktplan: fortsatt `44 / 48`
+- Step 45 Real EA pilot: fortsatt ej genomfört
+
+RC.5 kräver grön ordinarie CI och grön `Build GPT distributions` på samma commit innan
+den betraktas som verifierad release candidate. Release-taggen ska vara `v1.0.0-rc.5`
+efter merge om dessa grindar är gröna.

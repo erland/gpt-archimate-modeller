@@ -2,7 +2,7 @@ project:
   id: archimate-yaml-ea-gpt
   name: ArchiMate YAML EA GPT
   package_type: gpt-development-project
-  project_version: 0.44.2
+  project_version: 0.44.3
   plan_step_completed: 44
   status: development
 architecture:
@@ -60,7 +60,7 @@ architecture:
   model_index_version: '0.1'
   user_documentation_version: '0.1'
   developer_documentation_version: '0.1'
-  release_candidate: 1.0.0-rc.4
+  release_candidate: 1.0.0-rc.5
   e2e_gpt_test_version: '0.1'
   distribution_packaging_version: '0.1'
 scope:
@@ -69,10 +69,10 @@ scope:
 
 runtime_migration:
   framework: gpt-builder-1.4.0
-  track_status: in_progress
+  track_status: complete
   product_plan_status_preserved: true
-  last_completed_step: 56
-  next_step: 57
+  last_completed_step: 57
+  next_step: null
   assessment: docs/gpt-builder-1.4-runtime-migration.md
   runtime_contract: runtime/runtime-contract.json
   tool_contract: runtime/archimate-tool-contract.json
@@ -157,3 +157,12 @@ release:
   - distribution-build-manifest.json
   - SHA256SUMS.txt
   - release-metadata.yaml
+
+release_readiness:
+  candidate: 1.0.0-rc.5
+  migration_track_complete: true
+  product_plan_preserved: true
+  product_plan_completed: 44
+  product_plan_total: 48
+  full_regression_required: true
+  four_runtime_parity_required: true
