@@ -44,12 +44,7 @@ def main():
 
     if BUILD_WF.is_file():
         text=BUILD_WF.read_text(encoding="utf-8")
-        for marker in [
-            "build_all_distributions.py",
-            "validate_all_distributions.py",
-            "distribution-build-manifest.json",
-            "dist/*.zip",
-        ]:
+        for marker in ["build_all_distributions.py","validate_all_distributions.py","distribution-build-manifest.json","dist/*.zip"]:
             if marker not in text:
                 errors.append(f"build workflow missing {marker}")
         if re.search(r"(?m)^\s*release:\s*$",text):
@@ -67,7 +62,7 @@ def main():
             "distribution-build-manifest.json",
             "SHA256SUMS.txt",
             "release-metadata.yaml",
-            'VERSION="${TAG#v}"'.replace("\",""),
+            'VERSION="${TAG#v}"',
             "source_of_version",
             '"release_tag"',
             'validate_stable_release.py --distribution-version "$VERSION"',
