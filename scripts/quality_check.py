@@ -29,6 +29,42 @@ def finding(results, profile, code, message, object_id=None, related_ids=None, r
         "recommendation": recommendation
     })
 
+def score_quality(logical, results, profile):
+    cfg=profile.get("score",{})
+    if cfg.get("mode")!="normalized_dimensions":
+        score=float(cfg.get("start",100))
+        deductions=cfg.get("deductions",{})
+        for r in results:
+            score-=float(deductions.get(r["severity"],0))
+        score=max(float(cfg.get("minimum",0)),min(float(cfg.get("maximum",100)),score))
+        return round(score,1), {}
+
+    severity_weights=cfg.get("severity_weights",{"error":1.0,"warning":1.0,"info":0.25})
+    elements=logical["model"]["elements"]
+    relationships=logical["model"]["relationships"]
+    owner_types=set(profile.get("owner_recommended_types",[]))
+    denominators={
+        "elements": max(len(elements),1),
+        "owner_recommended": max(sum(1 for e in elements if e.get("type") in owner_types),1),
+        "evidence_objects": max(len(elements)+len(relationships),1),
+    }
+    dimensions={}
+    weighted=0.0
+    weight_sum=0.0
+    for name,dcfg in (cfg.get("dimensions") or {}).items():
+        rules=set(dcfg.get("rules") or [])
+        denom=denominators.get(dcfg.get("denominator"),max(len(elements),1))
+        penalty=sum(float(severity_weights.get(r.get("severity"),1.0)) for r in results if r.get("code") in rules)
+        dscore=max(0.0,100.0*(1.0-min(1.0,penalty/denom)))
+        weight=float(dcfg.get("weight",0))
+        dimensions[name]={"score":round(dscore,1),"findings":sum(1 for r in results if r.get("code") in rules),
+                          "denominator":denom,"weight":weight}
+        weighted+=dscore*weight
+        weight_sum+=weight
+    overall=weighted/weight_sum if weight_sum else 100.0
+    overall=max(float(cfg.get("minimum",0)),min(float(cfg.get("maximum",100)),overall))
+    return round(overall,1), dimensions
+
 def run_quality(logical, profile):
     results=[]
     elements=logical["model"]["elements"]
@@ -143,11 +179,7 @@ def run_quality(logical, profile):
             "Model contains Application/Technology elements but no Business/Strategy context.",
             recommendation="Add business/strategy context if within model scope.")
 
-    score=float(profile["score"]["start"])
-    deductions=profile["score"]["deductions"]
-    for r in results:
-        score-=float(deductions.get(r["severity"],0))
-    score=max(float(profile["score"]["minimum"]),min(float(profile["score"]["maximum"]),score))
+    score,_dimensions=score_quality(logical,results,profile)
     counts={s:sum(1 for x in results if x["severity"]==s) for s in ("error","warning","info")}
     return results,score,counts
 

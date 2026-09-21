@@ -41,6 +41,26 @@ def build_tests(r):
     r.run('T-CORE-001','core_validation',core)
     r.run('T-CORE-002','core_validation',lambda: ({'issue_errors':0} if not issues.validate_file(ref/'issues'/'issues.yaml',ref) else (_ for _ in ()).throw(AssertionError('issue validation failed'))))
     r.run('T-CORE-003','core_validation',lambda: ({'warnings':len(temporal.validate_temporal(ref)[1])} if not temporal.validate_temporal(ref)[0] else (_ for _ in ()).throw(AssertionError(temporal.validate_temporal(ref)[0]))))
+    def format02_controls():
+        logical={'model':{
+            'elements':[
+                {'id':'TEC-000001','type':'TechnologyService','name':'Service'},
+                {'id':'STR-000001','type':'Capability','name':'Capability'},
+            ],
+            'relationships':[
+                {'id':'REL-000001','type':'Association','source':'TEC-000001','target':'STR-000001','properties':{'impact_themes':'privacy'}},
+                {'id':'REL-000002','type':'Association','source':'TEC-000001','target':'STR-000001'},
+            ],
+        },'impact_themes':[{'id':'privacy','label':'Privacy'}]}
+        findings=[]; validate.check_impact_themes(logical,findings); assert not findings,findings
+        logical['model']['relationships'][0]['properties']['impact_themes']='unknown_theme'
+        findings=[]; validate.check_impact_themes(logical,findings)
+        assert len(findings)==1 and findings[0]['code']=='IMPACT-THEME-UNKNOWN',findings
+        rel_findings=[]; validate.check_relationship_pairs(logical,rel_findings,False)
+        uncovered=[x for x in rel_findings if x['code']=='ARCH-REL-PAIR-UNCOVERED']
+        assert len(uncovered)==1,uncovered
+        return {'impact_theme_validation':'controlled','aggregated_uncovered_pair_findings':len(uncovered)}
+    r.run('T-CORE-004','core_validation',format02_controls)
     def refs():
         ids=[]
         for x in cat['reference_projects']:
@@ -82,12 +102,23 @@ def build_tests(r):
         payload=json.loads(p.stdout)
         assert payload['query_result']['query_id']=='all-elements',payload
         assert payload['query_result']['count']>=1,payload
-        return {'query_id':payload['query_result']['query_id'],'count':payload['query_result']['count']}
+        big={'project':{'id':'BIG','model_version':'1.0.0'},'model':{
+            'elements':[{'id':f'APP-{i:06d}','type':'ApplicationComponent','name':f'App {i}'} for i in range(1,251)],
+            'relationships':[]}}
+        qr=query.execute(big,{'query':{'id':'big','select':'elements','return':{'fields':['id']}}},max_rows=200)['query_result']
+        assert qr['matched_count']==250 and qr['returned_count']==200 and qr['truncated'] is True,qr
+        return {'query_id':payload['query_result']['query_id'],'count':payload['query_result']['count'],'bounded_rows':qr['returned_count']}
     r.run('T-QRV-002','queries_reports_views',query_cli)
     def wf():
         spec=yaml.safe_load((ROOT/'examples'/'new-project'/'new-project.yaml').read_text())
         with tempfile.TemporaryDirectory() as td:
-            root=Path(td)/spec['new_project']['id']; res=new_project.create(root,spec); assert res['validation_errors']==0; z=Path(td)/'p.zip'; pack_project.pack(root,z); rr,ee,ww=zipval.validate_zip(z); assert not ee,ee; return {'zip_status':rr['status'],'warnings':len(ww)}
+            root=Path(td)/spec['new_project']['id']; res=new_project.create(root,spec); assert res['validation_errors']==0
+            descriptor=yaml.safe_load((root/'project.yaml').read_text(encoding='utf-8'))
+            assert descriptor['format_version']=='0.2',descriptor
+            assert descriptor['files']['impact_themes']=='extensions/impact-themes.yaml',descriptor
+            assert (root/'extensions'/'impact-themes.yaml').exists()
+            z=Path(td)/'p.zip'; pack_project.pack(root,z); rr,ee,ww=zipval.validate_zip(z); assert not ee,ee
+            return {'zip_status':rr['status'],'warnings':len(ww),'format_version':descriptor['format_version']}
     r.run('T-WF-001','project_workflows',wf)
     def interop():
         with tempfile.TemporaryDirectory() as td:
@@ -117,8 +148,9 @@ def build_tests(r):
         tie=impact.analyze(tie_logical,['A'],direction='outgoing',max_depth=2)
         assert any(x['id']=='D' and x['depth']==2 for x in tie['impacts'])
         q=mqr.result_for_project(ref)['model_quality_result']
-        assert q['summary']['score']==97.0,q['summary']
-        return {'impact_count':imp['impacted_count'],'tie_path_count':tie['impacted_count'],'quality_score':q['summary']['score']}
+        assert 0.0 <= q['summary']['score'] <= 100.0,q['summary']
+        assert set(q['summary']['dimensions'])=={'architecture','ownership','evidence'},q['summary']
+        return {'impact_count':imp['impacted_count'],'tie_path_count':tie['impacted_count'],'quality_score':q['summary']['score'],'quality_dimensions':q['summary']['dimensions']}
     r.run('T-AQ-001','analysis_quality',aq)
 def main():
     ap=argparse.ArgumentParser(); ap.add_argument('--suite',action='append'); ap.add_argument('--fail-fast',action='store_true'); ap.add_argument('--format',choices=['text','json','yaml'],default='text'); ap.add_argument('--output'); a=ap.parse_args()

@@ -1,43 +1,41 @@
-quality_profile_version: '0.1'
+quality_profile_version: '0.2'
 score:
+  mode: normalized_dimensions
   start: 100
   deductions:
     error: 10
     warning: 3
     info: 0.5
+  severity_weights:
+    error: 1.0
+    warning: 1.0
+    info: 0.25
+  dimensions:
+    architecture:
+      weight: 0.60
+      denominator: elements
+      rules: [Q-CONN-001, Q-CAP-001, Q-DUP-001, Q-BAL-001, Q-BAL-002]
+    ownership:
+      weight: 0.15
+      denominator: owner_recommended
+      rules: [Q-OWNER-001]
+    evidence:
+      weight: 0.25
+      denominator: evidence_objects
+      rules: [Q-EVID-001, Q-EVID-002, Q-SRC-001, Q-REL-001]
   minimum: 0
   maximum: 100
 checks:
-  Q-CONN-001:
-    enabled: true
-    severity: warning
-  Q-CAP-001:
-    enabled: true
-    severity: warning
-  Q-OWNER-001:
-    enabled: true
-    severity: warning
-  Q-EVID-001:
-    enabled: true
-    severity: warning
-  Q-EVID-002:
-    enabled: true
-    severity: info
-  Q-SRC-001:
-    enabled: true
-    severity: info
-  Q-DUP-001:
-    enabled: true
-    severity: warning
-  Q-BAL-001:
-    enabled: true
-    severity: warning
-  Q-BAL-002:
-    enabled: true
-    severity: warning
-  Q-REL-001:
-    enabled: true
-    severity: warning
+  Q-CONN-001: {enabled: true, severity: warning}
+  Q-CAP-001: {enabled: true, severity: warning}
+  Q-OWNER-001: {enabled: true, severity: warning}
+  Q-EVID-001: {enabled: true, severity: warning}
+  Q-EVID-002: {enabled: true, severity: info}
+  Q-SRC-001: {enabled: true, severity: info}
+  Q-DUP-001: {enabled: true, severity: warning}
+  Q-BAL-001: {enabled: true, severity: warning}
+  Q-BAL-002: {enabled: true, severity: warning}
+  Q-REL-001: {enabled: true, severity: warning}
 owner_recommended_types:
 - ApplicationComponent
 - Node

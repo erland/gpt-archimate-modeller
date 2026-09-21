@@ -58,12 +58,14 @@ def create(root,spec):
     (root/"PACKAGE-MANIFEST.yaml").unlink(missing_ok=True)
 
     doc=read_yaml(root/"project.yaml")
-    doc["format_version"]="0.1"; doc["package_layout_version"]="0.1"
+    doc["format_version"]="0.2"; doc["package_layout_version"]="0.1"
     doc["project"]={"id":p["id"],"name":p["name"],"model_version":p["model_version"],
                     "archimate_version":p["archimate_version"],"language":p["language"],"tags":p["tags"]}
     if p.get("description"): doc["project"]["description"]=p["description"]
     doc.setdefault("identity",{})["strategy_version"]="0.1"
+    doc.setdefault("files",{})["impact_themes"]="extensions/impact-themes.yaml"
     write_yaml(root/"project.yaml",doc)
+    write_yaml(root/"extensions"/"impact-themes.yaml",{"format_version":"0.2","impact_themes":[]})
 
     parts={name:[] for name in PARTITION_BY_PREFIX.values()}
     for e in p["seed"]["elements"]:

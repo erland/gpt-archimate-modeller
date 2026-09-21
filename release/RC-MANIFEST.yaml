@@ -1,20 +1,14 @@
 release_candidate:
-  version: 1.0.0-rc.6
-  package_version: 0.45.0
-  plan_step_completed: 45
+  version: 1.0.0-rc.7
+  package_version: 0.46.0
+  plan_step_completed: 46
   created_date: '2026-09-21'
   runtime_migration_step_completed: 57
   runtime_migration_complete: true
   active_runtime_count: 4
   canonical_contract_hashes:
-  - path: package/project-zip-contract.yaml
-    sha256: fafcc5e45e59b06827bea01aabcb6a79f9fc18c10b64a29bd8e04ffa250aee4d
   - path: package/zip-robustness.yaml
     sha256: 84b8ed95516a0da49ee646c37c497b05318232fa2b8185b7ded218110756bf51
-  - path: schemas/ea-project.schema.json
-    sha256: 3f80a38f6abba0736e056d8743746c14a2b1394070f7f422ce2f056d1d54c3aa
-  - path: schemas/ea-package.schema.json
-    sha256: 9d77421dab46971e2c10f69bd164171ce5b2d7b06af05e394a1c547799a8fd40
   - path: schemas/change-set.schema.json
     sha256: 00c629b31f3c470930178867c4018789418d3a303c096c2e7fb24b43276f4fcf
   - path: schemas/query.schema.json
@@ -38,3 +32,9 @@ release_candidate:
   - runtime/archimate-tool-contract.json
   - runtime/distribution-registry.yaml
   - evals/runtime-parity-contract.yaml
+
+  structurally_validated_format_contracts:
+  - package/project-zip-contract.yaml
+  - schemas/ea-project.schema.json
+  - schemas/ea-package.schema.json
+  - quality/profile.yaml

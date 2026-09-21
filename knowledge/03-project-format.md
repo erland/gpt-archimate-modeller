@@ -61,3 +61,18 @@ Relationer ligger globalt eftersom de ofta korsar lager.
 - project.archimate_version
 
 Dessa är separata versionsdimensioner.
+
+
+## Format 0.2
+
+Nya projekt skapas med `format_version: '0.2'`. Package layout är fortsatt 0.1.
+
+Split-projekt kan optional deklarera:
+
+```yaml
+files:
+  impact_themes: extensions/impact-themes.yaml
+```
+
+Impact-theme-registret är ett kontrollerat semantiskt stöd och är inte en ArchiMate-elementtyp.
+Format 0.1 ska fortfarande kunna läsas; write-upgrade hanteras genom explicit migration.

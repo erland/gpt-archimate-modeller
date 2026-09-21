@@ -66,15 +66,15 @@ Aktuell utvecklingsstatus: [STATUS.md](STATUS.md)
 
 ## Paketversion
 
-`0.45.0`
+`0.46.0`
 
-Genomförd utvecklingsplan: **45 / 48 steg**.
+Genomförd utvecklingsplan: **46 / 48 steg**.
 
-Nästa steg: **Steg 46 – Revidera formatet utifrån pilot**.
+Nästa steg: **Steg 47 – Säkerställ bakåtkompatibilitet och migrering**.
 
 ## Release candidate
 
-Första release candidate är **1.0.0-rc.6**. Se `release/RC-NOTES.md` och `release/RC-CHECKLIST.md`.
+Första release candidate är **1.0.0-rc.7**. Se `release/RC-NOTES.md` och `release/RC-CHECKLIST.md`.
 
 ## GitHub release och distributionspaket
 
@@ -101,3 +101,12 @@ GPT Byggaren 1.4-migreringen är genomförd för Chat ZIP, Custom GPT, Claude Pr
 
 Step 45 har genomförts mot en verklig större EA-modell. Pilotresultat och identifierade
 format-/rapportproblem finns i [`docs/real-ea-pilot-step45.md`](docs/real-ea-pilot-step45.md).
+
+## Format 0.2
+
+Step 46 har reviderat projektformatet utifrån real-EA-piloten. Nya projekt skapas som
+format 0.2; format 0.1 kan fortfarande läsas. Viktiga ändringar är controlled impact themes,
+normaliserad quality scoring, aggregerade relationship-coverage warnings, bredare
+capability-realization och bounded query tool output.
+
+Se [`docs/format-revision-step46.md`](docs/format-revision-step46.md).

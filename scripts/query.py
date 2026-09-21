@@ -88,7 +88,7 @@ def aggregate(rows,cfg):
         out["groups"]=dict(sorted(groups.items()))
     return out
 
-def execute(logical,doc):
+def execute(logical,doc,max_rows=None):
     q=doc["query"]
     kind=q["select"]
     if kind=="elements":
@@ -103,9 +103,20 @@ def execute(logical,doc):
                      "observations":logical.get("observations",[])}
         rows=[r for r in collections[kind] if matches(r,q.get("where"),kind.rstrip("s"))]
     sort_rows(rows,q.get("sort"))
+    matched_count=len(rows)
     if q.get("limit"): rows=rows[:q["limit"]]
     agg=aggregate(rows,q.get("aggregate"))
-    result={"query_result":{"query_id":q["id"],"count":len(rows),"rows":project(rows,q.get("return"))}}
+    if max_rows is not None and max_rows>0:
+        rows=rows[:max_rows]
+    returned_count=len(rows)
+    result={"query_result":{
+        "query_id":q["id"],
+        "count":returned_count,
+        "matched_count":matched_count,
+        "returned_count":returned_count,
+        "truncated":returned_count < min(matched_count, q.get("limit") or matched_count),
+        "rows":project(rows,q.get("return"))
+    }}
     result["query_result"].update(agg)
     return result
 
@@ -113,6 +124,8 @@ def main():
     ap=argparse.ArgumentParser()
     ap.add_argument("project_dir"); ap.add_argument("query_file")
     ap.add_argument("--json",action="store_true"); ap.add_argument("--output")
+    ap.add_argument("--max-rows",type=int,default=200,
+                    help="Maximum rows emitted by CLI/tool output; 0 means unlimited. Query aggregate is computed before this runtime cap.")
     a=ap.parse_args()
     logical,errors,_load=load_model(Path(a.project_dir))
     if errors:
@@ -120,7 +133,7 @@ def main():
         for e in errors: print("-",e)
         return 1
     try:
-        result=execute(logical,read_yaml(a.query_file))
+        result=execute(logical,read_yaml(a.query_file),max_rows=a.max_rows)
     except Exception as e:
         print("FAILED"); print("-",str(e)); return 1
     text=json.dumps(result,indent=2,ensure_ascii=False) if a.json else yaml.safe_dump(result,sort_keys=False,allow_unicode=True,width=120)

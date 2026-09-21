@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.46.0 – 2026-09-21
+
+### Format 0.2
+- Added optional controlled impact-theme registry to split-project descriptors and logical model.
+- New projects are created as format 0.2 while 0.1 remains readable.
+- Controlled impact-theme values are validated when a registry is present.
+
+### Validation and quality
+- Uncovered relationship-pair findings are aggregated by source type, target type and relationship type instead of emitted once per relationship.
+- Quality profile 0.2 separates architecture, ownership and evidence dimensions and calculates a normalized weighted diagnostic score.
+
+### Query and reporting
+- Query CLI/tool output is capped at 200 rows by default and reports matched_count, returned_count and truncated.
+- Capability-realization query/report now includes TechnologyService and other relevant realization/support element types and supports Realization, Serving, Assignment and Association.
+
+### Release
+- Package version updated to `0.46.0`.
+- Release candidate updated to `1.0.0-rc.7`.
+- Product plan advanced to Step 46/48; Step 47 is next.
+
 ## 0.45.0 – 2026-09-21
 
 ### Pilot

@@ -124,6 +124,12 @@
     "architecture_states": {
       "type": "object",
       "additionalProperties": true
+    },
+    "impact_themes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/impactTheme"
+      }
     }
   },
   "$defs": {
@@ -866,6 +872,41 @@
         },
         "note": {
           "type": "string"
+        }
+      }
+    },
+    "impactTheme": {
+      "type": "object",
+      "required": [
+        "id",
+        "label"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_-]*$"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string"
+        },
+        "aliases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
         }
       }
     }

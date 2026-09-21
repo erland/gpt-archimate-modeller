@@ -92,6 +92,24 @@ def assemble(project_root):
         issues = issues_data.get("issues", [])
         observations = issues_data.get("observations", [])
 
+    impact_themes = []
+    if files.get("impact_themes"):
+        impact_path = safe_resolve(project_root, files["impact_themes"])
+        if not impact_path.exists():
+            errors.append(f"Missing file: {files['impact_themes']}")
+        else:
+            impact_data = read_yaml(impact_path) or {}
+            extra = set(impact_data.keys()) - {"format_version", "impact_themes"}
+            if extra:
+                errors.append(f"Unexpected keys in {files['impact_themes']}: {sorted(extra)}")
+            impact_themes = impact_data.get("impact_themes", []) or []
+            ids = [x.get("id") for x in impact_themes if isinstance(x, dict)]
+            seen = set()
+            for theme_id in ids:
+                if theme_id in seen:
+                    errors.append(f"Duplicate impact theme id: {theme_id}")
+                seen.add(theme_id)
+
     architecture_states = {"states": [], "transitions": []}
     architecture_path = safe_resolve(project_root, files["architecture_states"])
     if not architecture_path.exists():
@@ -119,6 +137,7 @@ def assemble(project_root):
         "specializations": specializations,
         "issues": issues,
         "observations": observations,
+        "impact_themes": impact_themes,
         "architecture_states": architecture_states,
     }
 

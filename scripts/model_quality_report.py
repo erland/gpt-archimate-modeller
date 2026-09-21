@@ -4,9 +4,9 @@ import argparse,csv,io,json,collections,yaml,sys
 
 sys.path.insert(0,str(Path(__file__).resolve().parent))
 from model_loader import load_model
-from quality_check import load_yaml,run_quality,DEFAULT_PROFILE
+from quality_check import load_yaml,run_quality,score_quality,DEFAULT_PROFILE
 
-def summarize(findings,score,counts):
+def summarize(findings,score,counts,dimensions=None):
     by_rule=collections.Counter(x["code"] for x in findings)
     by_severity=collections.Counter(x["severity"] for x in findings)
     objects=collections.defaultdict(list)
@@ -19,7 +19,8 @@ def summarize(findings,score,counts):
         "finding_count":len(findings),
         "by_rule":dict(sorted(by_rule.items())),
         "by_severity":dict(sorted(by_severity.items())),
-        "objects_with_findings":len(objects)
+        "objects_with_findings":len(objects),
+        "dimensions":dimensions or {}
     }
 
 def result_for_project(project_dir,profile_path=None):
@@ -28,12 +29,13 @@ def result_for_project(project_dir,profile_path=None):
         raise ValueError("; ".join(errors))
     profile=load_yaml(profile_path or DEFAULT_PROFILE)
     findings,score,counts=run_quality(logical,profile)
+    _overall,dimensions=score_quality(logical,findings,profile)
     return {
         "model_quality_result":{
             "project_id":logical["project"]["id"],
             "model_version":logical["project"]["model_version"],
             "quality_profile":str(profile_path or DEFAULT_PROFILE),
-            "summary":summarize(findings,score,counts),
+            "summary":summarize(findings,score,counts,dimensions),
             "findings":findings,
             "interpretation":"Quality score is a diagnostic signal derived from enabled checks and configured deductions. It is not an absolute architecture maturity rating."
         }
@@ -53,6 +55,11 @@ def to_markdown(result):
         f"- Quality score: **{s['score']:.1f}/100**",
         f"- Findings: **{s['finding_count']}**",
         f"- Objekt med findings: **{s['objects_with_findings']}**","",
+        "## Dimensions",""
+    ]
+    for name,dim in s.get("dimensions",{}).items():
+        lines.append(f"- {name}: **{dim['score']:.1f}/100** ({dim['findings']} findings; denominator {dim['denominator']})")
+    lines += ["",
         "> "+r["interpretation"],"",
         "## Sammanfattning","",
         f"- Errors: {s['counts'].get('error',0)}",

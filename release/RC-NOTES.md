@@ -1,25 +1,24 @@
-# ArchiMate YAML EA GPT — Release Candidate 6
+# ArchiMate YAML EA GPT — Release Candidate 7
 
-Version: **1.0.0-rc.6**  
-Package version: **0.45.0**
+Version: **1.0.0-rc.7**  
+Package version: **0.46.0**
 
-## Step 45 – Real EA pilot
+## Step 46 – Format revision
 
-RC.6 completes the real EA pilot using a large ArchiMate 3.2 project with:
+RC.7 converts the real-EA pilot findings into the target pre-1.0 format.
 
-- 462 elements,
-- 1,104 relationships,
-- 21 sources,
-- 14 change sets.
+Highlights:
 
-The pilot verified ZIP inspection, representative queries/reports and ArchiMate Model Exchange
-export. It also exposed one implementation defect in impact analysis, now fixed and
-regression-covered.
+- new projects use format 0.2,
+- optional controlled impact-theme registry,
+- aggregated uncovered relationship-pair findings,
+- normalized architecture/ownership/evidence quality dimensions,
+- broader capability-realization semantics,
+- bounded query CLI/tool output with truncation metadata.
 
-The pilot identified format/report/quality findings that are intentionally deferred to Step 46,
-including support for a controlled impact-theme file, broader portable relationship-pair
-coverage, and better capability-realization semantics for TechnologyService-heavy models.
+Format 0.1 remains readable. Explicit 0.1 → 0.2 migration is intentionally the subject of
+Step 47.
 
 ## Product-plan status
 
-The development plan is now **45 / 48**. Step 46 — Revise format — is next.
+The development plan is now **46 / 48**. Step 47 — Backward compatibility/migration — is next.
