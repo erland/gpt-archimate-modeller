@@ -41,9 +41,11 @@ jobs:
           python scripts/validate_fixture_catalog.py
           python scripts/validate_runtime_contract.py
           python scripts/validate_archimate_tool_contract.py
+          python scripts/validate_distribution_registry.py
+          python scripts/scan_repository_hygiene.py .
       - name: Build and validate distributions
         shell: bash
         run: |
           VERSION="$(tr -d '[:space:]' < VERSION)"
-          python scripts/build_distributions.py --version "$VERSION"
-          python scripts/validate_distributions.py --version "$VERSION"
+          python scripts/build_all_distributions.py --version "$VERSION" --output-dir dist
+          python scripts/validate_all_distributions.py --manifest dist/distribution-build-manifest.json

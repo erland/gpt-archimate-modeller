@@ -132,8 +132,8 @@ fortsätter att vara ofullbordad tills den faktiskt genomförs.
 - **Steg 51 – Canonical ArchiMate tool contract** — genomfört; typad runtime-API-yta mappar canonical tools till utvalda Python-operationer.
 - **Steg 52 – Claude Projects distribution** — genomfört; explicit reduced parity utan paketerade runtime-scripts.
 - **Steg 53 – OpenCode distribution** — genomfört; root `AGENTS.md`, runtime snapshot och typade custom tools som projicerar canonical ArchiMate-tool-kontraktet.
-- **Steg 54 – Registry-driven build och runtime-aware hygiene** — nästa steg.
-- **Steg 55 – Fyr-runtime instruction adherence och parity**.
+- **Steg 54 – Registry-driven build och runtime-aware hygiene** — genomfört; registry styr fyra runtime-artefakter och hygiene blockerar genererade adapterprojektioner i canonical source.
+- **Steg 55 – Fyr-runtime instruction adherence och parity** — nästa steg.
 - **Steg 56 – Fyr-runtime CI, release och dokumentation**.
 - **Steg 57 – Full regression och ny release candidate**.
 
@@ -290,3 +290,37 @@ Samtliga concrete tools från `runtime/archimate-tool-contract.json` projiceras 
 OpenCode custom tools. Development-, test- och release-scripts exponeras inte.
 
 OpenCode är därmed `implemented / equivalent` i runtime compatibility.
+
+
+## Steg 54 – Registry-driven build och runtime-aware hygiene
+
+`runtime/distribution-registry.yaml` är nu source of truth för aktiva runtime-distributioner,
+artefaktnamn och compatibility-mål.
+
+### Registry-driven build
+
+Projektet behåller sin befintliga deterministiska unified builder men orkestreringen är nu
+registry-driven:
+
+- `scripts/build_all_distributions.py` kör unified builder en gång,
+- exakt de fyra registrerade ZIP-artefakterna måste skapas,
+- `distribution-build-manifest.json` binder runtime-id till faktisk artefakt,
+- `scripts/validate_all_distributions.py` kräver exakt samma runtime-set och kör unified validator.
+
+Detta undviker både duplicerad bygglogik och hårdkodad runtime-lista i CI.
+
+### Runtime-aware hygiene
+
+`scripts/scan_repository_hygiene.py` läser hygiene-policy från registret och blockerar
+genererade runtimeprojektioner i canonical source root, bland annat:
+
+- root `AGENTS.md`,
+- root `opencode.json`,
+- root `.opencode/`,
+- `project-instructions.md`,
+- `compatibility.md`.
+
+Canonical kontrakt under `runtime/` är uttryckligen tillåtna. Build-output som `dist/`,
+`dist-ci/`, `release-artifacts/` och `build/` behandlas som genererat material.
+
+CI validerar nu registry, hygiene och använder registry-driven build/validation.

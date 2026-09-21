@@ -1,0 +1,51 @@
+schema_version: 1
+registry_id: archimate-yaml-ea-gpt-distributions
+active_targets:
+  - chat_zip
+  - custom_gpt
+  - claude_projects
+  - opencode
+unified_builder:
+  command:
+    - "{python}"
+    - scripts/build_distributions.py
+    - --version
+    - "{version}"
+    - --output-dir
+    - "{output_dir}"
+unified_validator:
+  command:
+    - "{python}"
+    - scripts/validate_distributions.py
+    - --version
+    - "{version}"
+    - --dist-dir
+    - "{output_dir}"
+targets:
+  chat_zip:
+    artifact_pattern: archimate-yaml-ea-gpt-chat-v{version}.zip
+    compatibility: equivalent
+  custom_gpt:
+    artifact_pattern: archimate-yaml-ea-gpt-custom-gpt-v{version}.zip
+    compatibility: equivalent_with_platform_constraints
+  claude_projects:
+    artifact_pattern: archimate-yaml-ea-gpt-claude-projects-v{version}.zip
+    compatibility: reduced
+  opencode:
+    artifact_pattern: archimate-yaml-ea-gpt-opencode-v{version}.zip
+    compatibility: equivalent
+hygiene:
+  generated_roots:
+    - dist
+    - dist-ci
+    - release-artifacts
+    - build
+  forbidden_runtime_projection_paths:
+    - AGENTS.md
+    - opencode.json
+    - .opencode
+    - project-instructions.md
+    - compatibility.md
+  allowed_canonical_runtime_paths:
+    - runtime/runtime-contract.json
+    - runtime/archimate-tool-contract.json

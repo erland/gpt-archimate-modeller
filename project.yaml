@@ -71,11 +71,12 @@ runtime_migration:
   framework: gpt-builder-1.4.0
   track_status: in_progress
   product_plan_status_preserved: true
-  last_completed_step: 53
-  next_step: 54
+  last_completed_step: 54
+  next_step: 55
   assessment: docs/gpt-builder-1.4-runtime-migration.md
   runtime_contract: runtime/runtime-contract.json
   tool_contract: runtime/archimate-tool-contract.json
+  distribution_registry: runtime/distribution-registry.yaml
   contract_schemas:
   - schemas/runtime-behavior-contract.schema.json
   - schemas/runtime-capability-contract.schema.json
@@ -118,3 +119,10 @@ distributions:
     typed_tools: .opencode/tools/archimate.ts
     project_root_argument: projectRoot
     direct_shell_for_canonical_mutation: false
+
+build:
+  registry_driven: true
+  registry: runtime/distribution-registry.yaml
+  all_distributions_builder: scripts/build_all_distributions.py
+  all_distributions_validator: scripts/validate_all_distributions.py
+  hygiene_validator: scripts/scan_repository_hygiene.py
