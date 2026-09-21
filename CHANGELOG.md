@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.45.0 – 2026-09-21
+
+### Pilot
+- Completed Step 45 using a real, large ArchiMate 3.2 EA project.
+- Pilot covered 462 elements, 1,104 relationships, 21 sources and 14 change sets.
+- Verified representative query, report and ArchiMate Model Exchange export workflows.
+- Documented format, relationship-validation, reporting and quality-profile findings for Step 46.
+
+### Fixed
+- Impact analysis no longer compares lists of dictionaries when two equal-depth paths reach the same object.
+- Added regression coverage for deterministic tie-breaking between equal-depth impact paths.
+
+### Release
+- Package version updated to `0.45.0`.
+- Release candidate updated to `1.0.0-rc.6`.
+- Product plan advanced to Step 45/48; Step 46 is next.
+
 ## 0.44.3 – 2026-09-21
 
 ### Runtime migration

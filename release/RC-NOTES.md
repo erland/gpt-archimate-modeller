@@ -1,28 +1,25 @@
-# ArchiMate YAML EA GPT — Release Candidate 5
+# ArchiMate YAML EA GPT — Release Candidate 6
 
-Version: **1.0.0-rc.5**  
-Package version: **0.44.3**
+Version: **1.0.0-rc.6**  
+Package version: **0.45.0**
 
-## Runtime migration since RC.4
+## Step 45 – Real EA pilot
 
-RC.5 completes the separate GPT Byggaren 1.4 runtime migration without advancing the
-original product plan beyond Step 44.
+RC.6 completes the real EA pilot using a large ArchiMate 3.2 project with:
 
-Four runtime distributions are now built from explicit canonical contracts:
+- 462 elements,
+- 1,104 relationships,
+- 21 sources,
+- 14 change sets.
 
-- Chat ZIP — equivalent
-- Custom GPT — equivalent_with_platform_constraints
-- Claude Projects — reduced parity with explicit limitations
-- OpenCode — equivalent with typed ArchiMate custom tools
+The pilot verified ZIP inspection, representative queries/reports and ArchiMate Model Exchange
+export. It also exposed one implementation defect in impact analysis, now fixed and
+regression-covered.
 
-The migration adds platform-neutral runtime contracts, a canonical typed tool contract,
-registry-driven builds, runtime-aware hygiene, instruction adherence, five-dimensional
-runtime parity, and four-runtime CI/release packaging.
+The pilot identified format/report/quality findings that are intentionally deferred to Step 46,
+including support for a controlled impact-theme file, broader portable relationship-pair
+coverage, and better capability-realization semantics for TechnologyService-heavy models.
 
 ## Product-plan status
 
-The development plan remains **44 / 48**. Step 45 — Real EA pilot — is still not complete.
-
-## Verification
-
-RC.5 is accepted only after the RC.5 commit has green CI and green Build GPT distributions.
+The development plan is now **45 / 48**. Step 46 — Revise format — is next.

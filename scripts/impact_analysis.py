@@ -70,7 +70,17 @@ def analyze(logical,seeds,direction="both",max_depth=3,relationship_types=None,
             nc=combine_certainty(certainty,edge["certainty"])
             npath=path+[edge]
             old=best.get(nxt)
-            if old is None or nd<old["depth"] or (nd==old["depth"] and npath<old["path"]):
+            def path_key(items):
+                return tuple(
+                    (
+                        x.get("relationship_type",""),
+                        x.get("relationship_id",""),
+                        x.get("source",""),
+                        x.get("target",""),
+                    )
+                    for x in items
+                )
+            if old is None or nd<old["depth"] or (nd==old["depth"] and path_key(npath)<path_key(old["path"])):
                 best[nxt]={"depth":nd,"path":npath,"certainty":nc}
                 queue.append((nxt,nd,npath,nc))
 

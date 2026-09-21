@@ -66,15 +66,15 @@ Aktuell utvecklingsstatus: [STATUS.md](STATUS.md)
 
 ## Paketversion
 
-`0.44.3`
+`0.45.0`
 
-Genomförd utvecklingsplan: **44 / 48 steg**.
+Genomförd utvecklingsplan: **45 / 48 steg**.
 
-Nästa steg: **Steg 45 – Real EA pilot**.
+Nästa steg: **Steg 46 – Revidera formatet utifrån pilot**.
 
 ## Release candidate
 
-Första release candidate är **1.0.0-rc.5**. Se `release/RC-NOTES.md` och `release/RC-CHECKLIST.md`.
+Första release candidate är **1.0.0-rc.6**. Se `release/RC-NOTES.md` och `release/RC-CHECKLIST.md`.
 
 ## GitHub release och distributionspaket
 
@@ -96,3 +96,8 @@ Ett separat runtime-migrationsspår har startats utan att ändra den ursprunglig
 ## RC.5 runtime migration
 
 GPT Byggaren 1.4-migreringen är genomförd för Chat ZIP, Custom GPT, Claude Projects och OpenCode. Full regression, fyr-runtime instruction adherence/parity och registry-driven release är del av RC.5.
+
+## Real EA pilot
+
+Step 45 har genomförts mot en verklig större EA-modell. Pilotresultat och identifierade
+format-/rapportproblem finns i [`docs/real-ea-pilot-step45.md`](docs/real-ea-pilot-step45.md).

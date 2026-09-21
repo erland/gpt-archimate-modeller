@@ -2,8 +2,8 @@ project:
   id: archimate-yaml-ea-gpt
   name: ArchiMate YAML EA GPT
   package_type: gpt-development-project
-  project_version: 0.44.3
-  plan_step_completed: 44
+  project_version: 0.45.0
+  plan_step_completed: 45
   status: development
 architecture:
   semantic_core: ArchiMate
@@ -60,12 +60,12 @@ architecture:
   model_index_version: '0.1'
   user_documentation_version: '0.1'
   developer_documentation_version: '0.1'
-  release_candidate: 1.0.0-rc.5
+  release_candidate: 1.0.0-rc.6
   e2e_gpt_test_version: '0.1'
   distribution_packaging_version: '0.1'
 scope:
-  current: Step 44 - End-to-end GPT test
-  next: Step 45 - Real EA pilot
+  current: Step 45 - Real EA pilot
+  next: Step 46 - Revise format
 
 runtime_migration:
   framework: gpt-builder-1.4.0
@@ -159,10 +159,23 @@ release:
   - release-metadata.yaml
 
 release_readiness:
-  candidate: 1.0.0-rc.5
+  candidate: 1.0.0-rc.6
   migration_track_complete: true
   product_plan_preserved: true
-  product_plan_completed: 44
+  product_plan_completed: 45
   product_plan_total: 48
   full_regression_required: true
   four_runtime_parity_required: true
+
+pilot:
+  step: 45
+  report: docs/real-ea-pilot-step45.md
+  source_artifact: it-formagemodell-standard-archimate-v1.11.0.zip
+  source_artifact_committed: false
+  executed_with_runtime: 1.0.0-rc.5
+  result: completed_with_findings
+  step46_inputs:
+  - files.impact_themes is not represented in the current project schema
+  - portable exact relationship-pair coverage is too narrow for the pilot model
+  - standard capability-realization report does not represent TechnologyService/Association-based realization semantics
+  - quality scoring is dominated by missing owner/source metadata in imported real-world models

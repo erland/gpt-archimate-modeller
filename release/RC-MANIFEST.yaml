@@ -1,7 +1,7 @@
 release_candidate:
-  version: 1.0.0-rc.5
-  package_version: 0.44.3
-  plan_step_completed: 44
+  version: 1.0.0-rc.6
+  package_version: 0.45.0
+  plan_step_completed: 45
   created_date: '2026-09-21'
   runtime_migration_step_completed: 57
   runtime_migration_complete: true

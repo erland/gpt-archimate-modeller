@@ -4,15 +4,15 @@
 |---|---|
 | Steps 1–43 | Complete |
 | Step 44 – End-to-end GPT test | Complete |
-| Step 45 – Real EA pilot | Not started |
-| Release candidate | 1.0.0-rc.5 |
-| Package version | 0.44.3 |
+| Step 45 – Real EA pilot | Complete |
+| Release candidate | 1.0.0-rc.6 |
+| Package version | 0.45.0 |
 | E2E scenarios | 9 / 9 passed |
 | Observable LLM evals | 12 historical domain evals + 3 runtime-adherence evals |
 | Integration defects found/fixed | 2 |
 
 ## Completed plan step
-`44 / 48`
+`45 / 48`
 
 ## RC maintenance
 
@@ -33,7 +33,7 @@
 ## GPT Byggaren 1.4 runtime migration
 
 Det separata runtime-migrationsspåret är nu komplett och ändrar **inte** produktplanens status
-`44 / 48`. Steg 45 – Real EA pilot är fortfarande inte genomfört.
+`44 / 48`. Steg 45 – Real EA pilot är genomfört; nästa ordinarie steg är Step 46 – Revise format.
 
 | Migration item | Status |
 |---|---|
@@ -58,5 +58,13 @@ Se `docs/gpt-builder-1.4-runtime-migration.md`.
 - Runtime migration steps 49–57 complete.
 - Four runtime targets: Chat ZIP, Custom GPT, Claude Projects and OpenCode.
 - OpenAI Plugin v1 remains assessed/not planned.
-- Product plan remains 44/48; Step 45 Real EA pilot is still not started.
-- Final acceptance requires green CI and green Build GPT distributions on the RC.5 commit.
+- Product plan is now 45/48; Step 45 Real EA pilot is complete.
+- Step 45 findings are documented in `docs/real-ea-pilot-step45.md`.
+
+## Step 45 – Real EA pilot
+
+- Pilot: `it-formagemodell-standard-archimate-v1.11.0.zip`.
+- 462 elements, 1,104 relationships, 21 sources and 14 change sets.
+- Query/report and Model Exchange export worked on the normalized pilot copy.
+- Impact analysis exposed a deterministic equal-depth path comparison defect; fixed and regression-covered.
+- Format/report/quality findings are carried into Step 46 rather than silently changing the schema in Step 45.

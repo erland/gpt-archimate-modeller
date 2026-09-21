@@ -97,7 +97,28 @@ def build_tests(r):
         p=ROOT/'tests'/'fixtures'/'architecture-states-example'; assert not states.validate_states(p); x=states.resolve_state(p,'STA-000003'); return {'elements':len(x['elements']),'relationships':len(x['relationships'])}
     r.run('T-STATE-001','change_architecture',st)
     def aq():
-        logical,e=assemble.assemble(ref); assert not e; imp=impact.analyze(logical,['STR-000001'],direction='incoming',max_depth=3); assert any(x['id']=='APP-000001' for x in imp['impacts']); q=mqr.result_for_project(ref)['model_quality_result']; assert q['summary']['score']==97.0,q['summary']; return {'impact_count':imp['impacted_count'],'quality_score':q['summary']['score']}
+        logical,e=assemble.assemble(ref); assert not e
+        imp=impact.analyze(logical,['STR-000001'],direction='incoming',max_depth=3)
+        assert any(x['id']=='APP-000001' for x in imp['impacts'])
+        tie_logical={'model':{
+            'elements':[
+                {'id':'A','type':'Capability','name':'A'},
+                {'id':'B','type':'Capability','name':'B'},
+                {'id':'C','type':'Capability','name':'C'},
+                {'id':'D','type':'Capability','name':'D'},
+            ],
+            'relationships':[
+                {'id':'R1','type':'Association','source':'A','target':'B'},
+                {'id':'R2','type':'Association','source':'A','target':'C'},
+                {'id':'R3','type':'Association','source':'B','target':'D'},
+                {'id':'R4','type':'Association','source':'C','target':'D'},
+            ],
+        }}
+        tie=impact.analyze(tie_logical,['A'],direction='outgoing',max_depth=2)
+        assert any(x['id']=='D' and x['depth']==2 for x in tie['impacts'])
+        q=mqr.result_for_project(ref)['model_quality_result']
+        assert q['summary']['score']==97.0,q['summary']
+        return {'impact_count':imp['impacted_count'],'tie_path_count':tie['impacted_count'],'quality_score':q['summary']['score']}
     r.run('T-AQ-001','analysis_quality',aq)
 def main():
     ap=argparse.ArgumentParser(); ap.add_argument('--suite',action='append'); ap.add_argument('--fail-fast',action='store_true'); ap.add_argument('--format',choices=['text','json','yaml'],default='text'); ap.add_argument('--output'); a=ap.parse_args()
