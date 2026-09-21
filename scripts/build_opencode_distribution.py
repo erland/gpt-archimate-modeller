@@ -271,12 +271,13 @@ export const import_model_exchange_preview = tool({
 })
 '''
 
-def zip_tree(src: Path, out: Path):
+def zip_tree(src: Path, out: Path, root_name: str):
     out.parent.mkdir(parents=True,exist_ok=True)
     with zipfile.ZipFile(out,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=9) as z:
         for p in sorted(x for x in src.rglob('*') if x.is_file()):
             rel=p.relative_to(src).as_posix()
-            zi=zipfile.ZipInfo(rel,FIXED); zi.compress_type=zipfile.ZIP_DEFLATED; zi.create_system=3
+            archive_name=f"{root_name}/{rel}"
+            zi=zipfile.ZipInfo(archive_name,FIXED); zi.compress_type=zipfile.ZIP_DEFLATED; zi.create_system=3
             mode=0o100755 if rel.startswith('runtime/scripts/') and p.suffix=='.py' else 0o100644
             zi.external_attr=(mode&0xffff)<<16
             z.writestr(zi,p.read_bytes())
@@ -372,7 +373,7 @@ Extract this ZIP into a dedicated OpenCode workspace and open that workspace in 
 - `.opencode/runtime-contract.json` and `.opencode/tool-mapping.json` are generated projections, not canonical sources.
 ''',encoding='utf-8')
 
-        zip_tree(root,output)
+        zip_tree(root,output,f"archimate-yaml-ea-gpt-opencode-v{version}")
     print(output)
     return 0
 

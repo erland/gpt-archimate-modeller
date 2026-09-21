@@ -32,20 +32,27 @@ def main():
     with zipfile.ZipFile(a.zipfile) as z:
         if z.testzip(): errors.append('corrupt OpenCode distribution')
         names=set(z.namelist())
+        roots={n.split('/')[0] for n in names if n}
+        if len(roots)!=1:
+            errors.append('expected one distribution root')
+            root=''
+        else:
+            root=next(iter(roots))+'/'
+        relnames={n[len(root):] for n in names if n.startswith(root)}
         for req in sorted(REQUIRED):
-            if req not in names: errors.append('missing '+req)
-        if 'CLAUDE.md' in names: errors.append('CLAUDE.md must not be used for OpenCode')
-        forbidden=[n for n in names if n.startswith('runtime/scripts/') and Path(n).name in {
+            if req not in relnames: errors.append('missing '+req)
+        if 'CLAUDE.md' in relnames: errors.append('CLAUDE.md must not be used for OpenCode')
+        forbidden=[n for n in relnames if n.startswith('runtime/scripts/') and Path(n).name in {
             'build_distributions.py','validate_distributions.py','run_tests.py',
             'build_custom_gpt_knowledge.py','validate_llm_evals.py'
         }]
         if forbidden: errors.append('development scripts packaged: '+', '.join(sorted(forbidden)))
 
-        agents=z.read('AGENTS.md').decode('utf-8').casefold()
+        agents=z.read(root+'AGENTS.md').decode('utf-8').casefold()
         for marker in ['yaml-projektet är source of truth','stable ids','change set','project zip contract']:
             if marker.casefold() not in agents: errors.append('AGENTS.md missing '+marker)
 
-        cfg=json.loads(z.read('opencode.json').decode('utf-8'))
+        cfg=json.loads(z.read(root+'opencode.json').decode('utf-8'))
         permissions=cfg.get('permission',{})
         for builtin in ['bash','edit','write']:
             if permissions.get(builtin)!='deny': errors.append(f'{builtin} must be denied')
@@ -53,7 +60,7 @@ def main():
             expected='ask' if tool in MUTATING else 'allow'
             if permissions.get(tool)!=expected: errors.append(f'{tool} permission must be {expected}')
 
-        snap=json.loads(z.read('.opencode/runtime-contract.json').decode('utf-8'))
+        snap=json.loads(z.read(root+'.opencode/runtime-contract.json').decode('utf-8'))
         if snap.get('runtime')!='opencode' or snap.get('compatibility')!='equivalent':
             errors.append('OpenCode runtime snapshot must be equivalent')
         pr=snap.get('project_root',{})
@@ -64,7 +71,7 @@ def main():
         if oc.get('status')!='implemented' or oc.get('target')!='equivalent':
             errors.append('canonical OpenCode status must be implemented/equivalent')
 
-        mapping=json.loads(z.read('.opencode/tool-mapping.json').decode('utf-8')).get('tools',{})
+        mapping=json.loads(z.read(root+'.opencode/tool-mapping.json').decode('utf-8')).get('tools',{})
         if {x['opencode_tool'] for x in mapping.values()}!=EXPECTED:
             errors.append('OpenCode tool mapping set mismatch')
         for entry in mapping.values():
@@ -73,7 +80,7 @@ def main():
             if not entry.get('input_schema',{}).get('properties',{}).get('projectRoot'):
                 errors.append('mapped tool missing projectRoot schema')
 
-        ts=z.read('.opencode/tools/archimate.ts').decode('utf-8')
+        ts=z.read(root+'.opencode/tools/archimate.ts').decode('utf-8')
         if 'from "@opencode-ai/plugin"' not in ts: errors.append('typed OpenCode tool helper missing')
         if 'tool.schema' not in ts: errors.append('typed argument schemas missing')
         if 'Bun.spawn' not in ts: errors.append('Python runtime invocation missing')
