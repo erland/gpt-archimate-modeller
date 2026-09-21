@@ -87,6 +87,10 @@ Repo-roten är katalogen där denna `README.md` ligger. GitHub Actions bygger tv
 
 Se [`docs/release-and-ci.md`](docs/release-and-ci.md).
 
+## GPT Byggaren 1.4 runtime migration
+
+Ett separat runtime-migrationsspår har startats utan att ändra den ursprungliga produktplanens status 44/48. Målbilden är Chat ZIP, Custom GPT, Claude Projects och OpenCode från gemensamma plattformsneutrala contracts. Se [`docs/gpt-builder-1.4-runtime-migration.md`](docs/gpt-builder-1.4-runtime-migration.md).
+
 
 ## RC.4 maintenance
 

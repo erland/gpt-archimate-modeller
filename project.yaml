@@ -66,3 +66,24 @@ architecture:
 scope:
   current: Step 44 - End-to-end GPT test
   next: Step 45 - Real EA pilot
+
+runtime_migration:
+  framework: gpt-builder-1.4.0
+  track_status: in_progress
+  product_plan_status_preserved: true
+  last_completed_step: 49
+  next_step: 50
+  assessment: docs/gpt-builder-1.4-runtime-migration.md
+  active_runtime_targets:
+  - chat_zip
+  - custom_gpt
+  - claude_projects
+  - opencode
+  assessed_not_planned:
+  - openai_plugin
+  parity_dimensions:
+  - behavior
+  - capability
+  - artifact
+  - workspace_state
+  - tool

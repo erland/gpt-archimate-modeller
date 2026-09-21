@@ -30,3 +30,20 @@
 - Knowledge `always_use` reduced to seven core files; task-specific routing enforced.
 - EVAL-013–015 add bootstrap, multi-turn retention and Knowledge-routing coverage.
 - Runtime scripts are packaged with deterministic executable permissions.
+
+
+## GPT Byggaren 1.4 runtime migration
+
+Detta är ett separat migrationsspår och ändrar **inte** produktplanens status
+`44 / 48`. Steg 45 – Real EA pilot är fortfarande inte genomfört.
+
+| Migration item | Status |
+|---|---|
+| Step 49 – Runtime assessment | Complete |
+| Step 50 – Platform-neutral runtime contracts | Next |
+| Target runtimes | Chat ZIP, Custom GPT, Claude Projects, OpenCode |
+| OpenAI Plugin v1 | Assessed, not planned |
+| Main baseline CI | PASS |
+| Main baseline distribution build | PASS |
+
+Se `docs/gpt-builder-1.4-runtime-migration.md`.
