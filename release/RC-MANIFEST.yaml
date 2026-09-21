@@ -1,11 +1,12 @@
 release_candidate:
-  version: 1.0.0-rc.4
-  package_version: 0.44.2
+  version: 1.0.0-rc.5
+  package_version: 0.44.3
   plan_step_completed: 44
-  created_date: '2026-08-25'
+  created_date: '2026-09-21'
+  runtime_migration_step_completed: 57
+  runtime_migration_complete: true
+  active_runtime_count: 4
   canonical_contract_hashes:
-  - path: project.yaml
-    sha256: 0fe69e98ff278f7f6337a9f0ff02cb759da7441fd5a58403bcfe92d67aa0117e
   - path: package/project-zip-contract.yaml
     sha256: fafcc5e45e59b06827bea01aabcb6a79f9fc18c10b64a29bd8e04ffa250aee4d
   - path: package/zip-robustness.yaml
@@ -32,3 +33,8 @@ release_candidate:
     sha256: 0563a0180531472a19beb45972a6c7f7513ce1b288f15ff64538f70aaba1a86a
   - path: gpt/runtime-policy.yaml
     sha256: d1e494dbfcaac166497ca06f8844a566636f986f8fc4d6c0cd71b722117d44bb
+  structurally_validated_runtime_contracts:
+  - runtime/runtime-contract.json
+  - runtime/archimate-tool-contract.json
+  - runtime/distribution-registry.yaml
+  - evals/runtime-parity-contract.yaml

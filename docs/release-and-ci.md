@@ -1,31 +1,54 @@
 # GitHub release och distributionspaket
 
-Repo-roten är katalogen där `README.md` ligger. När den checkas in i GitHub kan två distributionspaket byggas automatiskt.
+Repo-roten är katalogen där `README.md` ligger. Distributionerna byggs från det gemensamma registret `runtime/distribution-registry.yaml`.
 
-## Artefakter
+## Runtime-artefakter
 
-En release med taggen exempelvis `v1.0.0-rc.3` skapar:
+En release med taggen exempelvis `v1.0.0-rc.5` skapar fyra ZIP-distributioner:
 
-- `archimate-yaml-ea-gpt-custom-gpt-v1.0.0-rc.3.zip` — för registrering i Custom GPT Builder.
-- `archimate-yaml-ea-gpt-chat-v1.0.0-rc.3.zip` — för uppladdning direkt i en vanlig ChatGPT-konversation.
+- `archimate-yaml-ea-gpt-chat-v1.0.0-rc.5.zip` — Chat ZIP, target **equivalent**.
+- `archimate-yaml-ea-gpt-custom-gpt-v1.0.0-rc.5.zip` — Custom GPT, **equivalent_with_platform_constraints**.
+- `archimate-yaml-ea-gpt-claude-projects-v1.0.0-rc.5.zip` — Claude Projects, **reduced** parity.
+- `archimate-yaml-ea-gpt-opencode-v1.0.0-rc.5.zip` — OpenCode, target **equivalent**.
 
-## Custom GPT-paket
+Releasepaketet innehåller dessutom:
 
-Innehåller endast Builder Instructions, Builder-konfiguration och ett kompakt, deterministiskt Knowledge-paket.
+- `distribution-build-manifest.json`
+- `SHA256SUMS.txt`
+- `release-metadata.yaml`
 
-## Chat-paket
+OpenAI Plugin v1 är bedömd men inte aktiverad och publiceras inte.
 
-Innehåller runtime Knowledge, scripts, schemas, templates och konfigurationsfiler som behövs för ZIP→ZIP-arbetsflödet. Testsvit, fixtures och utvecklardokumentation följer inte med.
+## Build och validering
+
+Registry-driven lokal build:
+
+```bash
+VERSION="$(tr -d '[:space:]' < VERSION)"
+python scripts/build_all_distributions.py --version "$VERSION" --output-dir dist
+python scripts/validate_all_distributions.py --manifest dist/distribution-build-manifest.json
+```
+
+Ordinarie CI kör dessutom instruction adherence och runtime parity över behavior, capability, artifact, workspace_state och tool.
+
+## Release från tagg
+
+`.github/workflows/release.yml` triggas av SemVer-taggar `v*.*.*` och kan även startas manuellt med en explicit tagg. Workflowet anropar `scripts/build_release.sh`.
+
+Release-buildern:
+
+1. kör regression och canonical validators,
+2. validerar registry och repository hygiene,
+3. bygger samtliga fyra runtimes,
+4. validerar build-manifestet,
+5. kör instruction adherence för alla fyra,
+6. kör femdimensionell runtime parity,
+7. skapar checksummor och release metadata.
+
+Git-taggen är enda release-versionkälla; release-scriptet får inte hårdkoda versionsnummer.
 
 ## GitHub Actions
 
-- `ci.yml` kör regression, dokumentations-/evalvalidering och bygger distributionspaketen på push/PR.
-- `build-distributions.yml` bygger paket på push/PR/workflow_dispatch och bifogar båda ZIP:arna till en publicerad GitHub Release.
-- `release.yml` bygger och validerar båda paketen samt skapar/uppdaterar GitHub Release direkt när en SemVer-tagg `v*.*.*` pushas. Detta är avsiktligt självständigt eftersom GitHub normalt inte kedjar nya workflow-körningar från events skapade med `GITHUB_TOKEN`.
-
-## Lokal kontroll
-
-```bash
-python scripts/build_distributions.py --version 1.0.0-rc.3
-python scripts/validate_distributions.py --version 1.0.0-rc.3
-```
+- `ci.yml` — regression, contracts, registry, hygiene, release-workflow validation, registry-build, instruction adherence och parity.
+- `build-distributions.yml` — bygger registry-distributioner på push/PR/workflow_dispatch och laddar upp de fyra ZIP:arna plus build-manifest som workflow artifact. Vid `release`-event kan artefakterna också laddas upp till den publicerade releasen.
+- `release.yml` — självständigt taggdrivet releaseflöde som bygger releaseartefakterna och skapar/uppdaterar GitHub Release.

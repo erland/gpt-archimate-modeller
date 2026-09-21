@@ -39,9 +39,28 @@ jobs:
           python scripts/validate_developer_docs.py
           python scripts/validate_reference_projects.py
           python scripts/validate_fixture_catalog.py
+          python scripts/validate_runtime_contract.py
+          python scripts/validate_archimate_tool_contract.py
+          python scripts/validate_distribution_registry.py
+          python scripts/scan_repository_hygiene.py .
+          python scripts/validate_release_workflow.py
+          python scripts/validate_release_candidate.py
       - name: Build and validate distributions
         shell: bash
         run: |
           VERSION="$(tr -d '[:space:]' < VERSION)"
-          python scripts/build_distributions.py --version "$VERSION"
-          python scripts/validate_distributions.py --version "$VERSION"
+          python scripts/build_all_distributions.py --version "$VERSION" --output-dir dist
+          python scripts/validate_all_distributions.py --manifest dist/distribution-build-manifest.json
+          CHAT="dist/archimate-yaml-ea-gpt-chat-v$VERSION.zip"
+          CUSTOM="dist/archimate-yaml-ea-gpt-custom-gpt-v$VERSION.zip"
+          CLAUDE="dist/archimate-yaml-ea-gpt-claude-projects-v$VERSION.zip"
+          OPENCODE="dist/archimate-yaml-ea-gpt-opencode-v$VERSION.zip"
+          python scripts/run_runtime_instruction_adherence.py --contract evals/runtime-parity-contract.yaml --runtime chat_zip --artifact "$CHAT"
+          python scripts/run_runtime_instruction_adherence.py --contract evals/runtime-parity-contract.yaml --runtime custom_gpt --artifact "$CUSTOM"
+          python scripts/run_runtime_instruction_adherence.py --contract evals/runtime-parity-contract.yaml --runtime claude_projects --artifact "$CLAUDE"
+          python scripts/run_runtime_instruction_adherence.py --contract evals/runtime-parity-contract.yaml --runtime opencode --artifact "$OPENCODE"
+          python scripts/validate_runtime_parity.py \
+            --contract evals/runtime-parity-contract.yaml \
+            --runtime-contract runtime/runtime-contract.json \
+            --tool-contract runtime/archimate-tool-contract.json \
+            --chat "$CHAT" --custom "$CUSTOM" --claude "$CLAUDE" --opencode "$OPENCODE"

@@ -1,0 +1,245 @@
+{
+  "schema_version": 1,
+  "runtime_id": "archimate-yaml-ea-gpt",
+  "behavior": {
+    "contract_version": 1,
+    "canonical_instruction": "gpt/SYSTEM_INSTRUCTION.md",
+    "critical_behavior_location": "canonical_instruction",
+    "knowledge_may_not_be_required_for_core_behavior": true,
+    "required_markers": [
+      "YAML-projektet är source of truth",
+      "Stable IDs",
+      "change set",
+      "Validera före och efter",
+      "komplett uppdaterat projekt-ZIP",
+      "fabricera aldrig",
+      "Project ZIP contract"
+    ]
+  },
+  "capabilities": {
+    "contract_version": 1,
+    "requirements": {
+      "filesystem_read": {
+        "level": "required",
+        "reason": "EA project, schemas, policies and model files must be readable."
+      },
+      "filesystem_write": {
+        "level": "required",
+        "reason": "Project changes and generated outputs must be written to a workspace."
+      },
+      "code_execution": {
+        "level": "required",
+        "reason": "Validation, change application, analysis and packaging are executable toolchain operations."
+      },
+      "structured_data": {
+        "level": "required",
+        "reason": "YAML/JSON/XML are first-class project and exchange formats."
+      },
+      "persistent_workspace": {
+        "level": "required",
+        "reason": "The EA project must remain authoritative outside chat memory."
+      },
+      "archive_io": {
+        "level": "required",
+        "reason": "ZIP is the primary portable project transport."
+      },
+      "shell": {
+        "level": "recommended",
+        "reason": "Useful for adapters such as OpenCode but not itself the canonical tool API."
+      },
+      "web": {
+        "level": "optional",
+        "reason": "Only needed for explicit public research, not core modeling."
+      },
+      "external_repository": {
+        "level": "optional",
+        "reason": "Repository integration is useful for source projects but not required for ZIP-first operation."
+      }
+    }
+  },
+  "artifacts": {
+    "contract_version": 1,
+    "outputs": {
+      "ea_project_package": {
+        "kind": "package",
+        "format": "zip",
+        "requirement": "required",
+        "condition": "project_changed",
+        "description": "Complete validated EA project ZIP."
+      },
+      "validation_result": {
+        "kind": "report",
+        "format": "structured",
+        "requirement": "required",
+        "description": "Technical validation evidence before and after mutation."
+      },
+      "change_set": {
+        "kind": "data",
+        "format": "yaml",
+        "requirement": "conditional",
+        "condition": "existing_project_changed",
+        "description": "Explicit model mutation set."
+      },
+      "report_output": {
+        "kind": "report",
+        "format": "markdown_csv_json_yaml",
+        "requirement": "conditional",
+        "condition": "report_requested"
+      },
+      "view_output": {
+        "kind": "document",
+        "format": "drawio_mermaid",
+        "requirement": "conditional",
+        "condition": "view_requested"
+      },
+      "model_exchange": {
+        "kind": "document",
+        "format": "xml",
+        "requirement": "conditional",
+        "condition": "interoperability_requested"
+      },
+      "issue_record": {
+        "kind": "data",
+        "format": "yaml",
+        "requirement": "conditional",
+        "condition": "uncertainty_or_conflict_requires_tracking"
+      }
+    }
+  },
+  "workspace_state": {
+    "contract_version": 1,
+    "workspace": {
+      "requirement": "required",
+      "portable": true,
+      "separate_from_assistant": true,
+      "authority": "ea_project_zip"
+    },
+    "state": {
+      "authority": "project_files",
+      "conversation_fallback": false
+    }
+  },
+  "tools": {
+    "contract_version": 1,
+    "tools": [
+      {
+        "id": "project-read",
+        "requirement": "required",
+        "purpose": "Inspect and load the active EA project and package metadata.",
+        "mutates_workspace": false,
+        "approval": "allow",
+        "working_directory": "workspace",
+        "concrete_projection": "runtime/archimate-tool-contract.json"
+      },
+      {
+        "id": "project-validate",
+        "requirement": "required",
+        "purpose": "Run technical project/package validation and surface blockers.",
+        "mutates_workspace": false,
+        "approval": "allow",
+        "working_directory": "workspace",
+        "concrete_projection": "runtime/archimate-tool-contract.json"
+      },
+      {
+        "id": "project-change",
+        "requirement": "required",
+        "purpose": "Apply an explicit change set to an existing EA project.",
+        "mutates_workspace": true,
+        "approval": "ask",
+        "working_directory": "workspace",
+        "concrete_projection": "runtime/archimate-tool-contract.json"
+      },
+      {
+        "id": "project-create",
+        "requirement": "recommended",
+        "purpose": "Create a new EA project from structured input.",
+        "mutates_workspace": true,
+        "approval": "ask",
+        "working_directory": "workspace",
+        "concrete_projection": "runtime/archimate-tool-contract.json"
+      },
+      {
+        "id": "project-package",
+        "requirement": "required",
+        "purpose": "Build and validate the complete portable project ZIP.",
+        "mutates_workspace": false,
+        "approval": "allow",
+        "working_directory": "workspace",
+        "concrete_projection": "runtime/archimate-tool-contract.json"
+      },
+      {
+        "id": "model-query",
+        "requirement": "recommended",
+        "purpose": "Execute model queries and traversals without mutating canonical model facts.",
+        "mutates_workspace": false,
+        "approval": "allow",
+        "working_directory": "workspace",
+        "concrete_projection": "runtime/archimate-tool-contract.json"
+      },
+      {
+        "id": "model-analyze",
+        "requirement": "recommended",
+        "purpose": "Run impact and quality analysis against the canonical model.",
+        "mutates_workspace": false,
+        "approval": "allow",
+        "working_directory": "workspace",
+        "concrete_projection": "runtime/archimate-tool-contract.json"
+      },
+      {
+        "id": "model-present",
+        "requirement": "recommended",
+        "purpose": "Render reports and compile/export views from model/query results.",
+        "mutates_workspace": false,
+        "approval": "allow",
+        "working_directory": "workspace",
+        "concrete_projection": "runtime/archimate-tool-contract.json"
+      },
+      {
+        "id": "model-exchange",
+        "requirement": "optional",
+        "purpose": "Import to staging or export ArchiMate Model Exchange XML.",
+        "mutates_workspace": false,
+        "approval": "allow",
+        "working_directory": "workspace",
+        "concrete_projection": "runtime/archimate-tool-contract.json"
+      }
+    ],
+    "concrete_contract": "runtime/archimate-tool-contract.json",
+    "project_root_argument": "projectRoot",
+    "generic_shell_is_canonical_api": false
+  },
+  "runtime_compatibility": {
+    "chat_zip": {
+      "status": "implemented",
+      "target": "equivalent"
+    },
+    "custom_gpt": {
+      "status": "implemented",
+      "target": "equivalent_with_platform_constraints"
+    },
+    "claude_projects": {
+      "status": "implemented",
+      "target": "reduced",
+      "distribution": "archimate-yaml-ea-gpt-claude-projects-v<version>.zip",
+      "limitations": [
+        "local command execution",
+        "deterministic project verification",
+        "workspace mutation",
+        "GitHub write actions"
+      ]
+    },
+    "opencode": {
+      "status": "implemented",
+      "target": "equivalent",
+      "distribution": "archimate-yaml-ea-gpt-opencode-v<version>.zip",
+      "instructions": "AGENTS.md",
+      "project_root_argument": "projectRoot",
+      "custom_tools": ".opencode/tools/archimate.ts",
+      "direct_shell_for_canonical_mutation": false
+    },
+    "openai_plugin": {
+      "status": "not_planned",
+      "target": "reduced"
+    }
+  }
+}
