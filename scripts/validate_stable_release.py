@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from pathlib import Path
-import yaml
+import argparse,re,yaml
 
 ROOT=Path(__file__).resolve().parents[1]
 EXPECTED="1.0.0"
@@ -21,10 +21,15 @@ FORMAT_CONTRACTS={
 }
 
 def main():
+    ap=argparse.ArgumentParser()
+    ap.add_argument("--distribution-version")
+    args=ap.parse_args()
     errors=[]
-    version=(ROOT/"VERSION").read_text(encoding="utf-8").strip()
-    if version!=EXPECTED:
-        errors.append(f"VERSION must be {EXPECTED}, got {version}")
+    source_version=(ROOT/"VERSION").read_text(encoding="utf-8").strip()
+    if source_version!=EXPECTED:
+        errors.append(f"source VERSION must be {EXPECTED}, got {source_version}")
+    if args.distribution_version and not re.fullmatch(r"[0-9]+\.[0-9]+\.[0-9]+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?",args.distribution_version):
+        errors.append(f"invalid distribution version: {args.distribution_version}")
 
     manifest=yaml.safe_load((ROOT/"release"/"RELEASE-MANIFEST.yaml").read_text(encoding="utf-8"))["release"]
     if manifest.get("version")!=EXPECTED: errors.append("release manifest version mismatch")
@@ -78,7 +83,9 @@ def main():
         for e in errors: print("-",e)
         return 1
     print("OK")
-    print("Stable release readiness: 1.0.0")
+    print("Stable source readiness: 1.0.0")
+    if args.distribution_version:
+        print(f"Distribution version from release tag: {args.distribution_version}")
     print("Product plan: 48/48")
     print("Runtime distributions: 4")
     return 0

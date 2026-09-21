@@ -31,9 +31,14 @@ python scripts/validate_all_distributions.py --manifest dist/distribution-build-
 
 Ordinarie CI kör dessutom instruction adherence och runtime parity över behavior, capability, artifact, workspace_state och tool.
 
-## Release från tagg
+## Release från publicerad GitHub Release
 
-`.github/workflows/release.yml` triggas av SemVer-taggar `v*.*.*` och kan även startas manuellt med en explicit tagg. Workflowet anropar `scripts/build_release.sh`.
+Normalflödet är att användaren först skapar och publicerar en GitHub Release med en SemVer-tagg,
+till exempel `v1.0.0`. Händelsen `release: published` startar därefter
+`.github/workflows/release.yml`.
+
+Workflowet checkoutar exakt release-taggen och anropar `scripts/build_release.sh`.
+En manuell `workflow_dispatch` finns kvar för omkörning mot en redan existerande release.
 
 Release-buildern:
 
@@ -45,18 +50,22 @@ Release-buildern:
 6. kör femdimensionell runtime parity,
 7. skapar checksummor och release metadata.
 
-Git-taggen styr releasebygget och måste matcha repo-filen `VERSION`. En release stoppas om
-exempelvis taggen `v1.0.0` inte matchar `VERSION=1.0.0`.
+**GitHub Release-taggen är release-versionens source of truth.** Prefixet `v` tas bort och
+resten används direkt som distributionsversion. Exempel: `v1.2.3` ger
+`archimate-yaml-ea-gpt-chat-v1.2.3.zip`.
+
+Repo-filen `VERSION` används för vanliga push/PR-builds och beskriver källans basversion,
+men styr inte versionsnumret i en publicerad release.
 
 ## GitHub Actions
 
 - `ci.yml` — regression, contracts, registry, hygiene, release-workflow validation, registry-build, instruction adherence och parity.
-- `build-distributions.yml` — bygger registry-distributioner på push/PR/workflow_dispatch och laddar upp de fyra ZIP:arna plus build-manifest som workflow artifact. Vid `release`-event kan artefakterna också laddas upp till den publicerade releasen.
-- `release.yml` — självständigt taggdrivet releaseflöde som bygger releaseartefakterna och skapar/uppdaterar GitHub Release.
+- `build-distributions.yml` — bygger registry-distributioner på push/PR/workflow_dispatch och laddar upp de fyra ZIP:arna plus build-manifest som workflow artifact.
+- `release.yml` — triggas när en GitHub Release publiceras, bygger releaseartefakterna från release-taggen och laddar upp dem till den redan skapade releasen.
 
 
 ## Stable v1.0.0
 
-Efter Step 48 ska PR:n först mergas med gröna slutgrindar. Därefter skapas taggen
-`v1.0.0`. Tag-workflowet kör hela release-buildern på nytt och publicerar först därefter
-GitHub Release-artefakterna.
+Efter Step 48 ska PR:n först mergas med gröna slutgrindar. Därefter skapar och publicerar
+du GitHub Release, exempelvis med taggen `v1.0.0`. Publiceringen startar release-workflowet,
+som bygger och laddar upp de fyra distributionspaketen, manifest, checksummor och metadata.

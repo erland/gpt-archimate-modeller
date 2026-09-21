@@ -74,8 +74,8 @@ Produktplanen för v1.0 är komplett.
 
 ## Stable release
 
-Version **1.0.0** är release-ready. Slutlig publicering sker via taggen `v1.0.0` efter merge
-och grön slutverifiering. Se `release/RELEASE-NOTES.md`, `release/RELEASE-CHECKLIST.md`
+Version **1.0.0** är release-ready. Efter merge skapar och publicerar du en GitHub Release;
+release-taggen blir automatiskt versionskälla för distributionspaketen. Se `release/RELEASE-NOTES.md`, `release/RELEASE-CHECKLIST.md`
 och `release/RELEASE-MANIFEST.yaml`.
 
 ## GitHub release och distributionspaket

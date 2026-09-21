@@ -18,25 +18,44 @@ def main():
         text=WF.read_text(encoding="utf-8")
         data=yaml.safe_load(text)
         trigger=data.get("on",data.get(True))
-        push=(trigger or {}).get("push",{}) if isinstance(trigger,dict) else {}
-        tags=push.get("tags",[]) if isinstance(push,dict) else []
-        if "v*.*.*" not in tags and "v*" not in tags:
-            errors.append("release tag trigger missing")
+        release=(trigger or {}).get("release",{}) if isinstance(trigger,dict) else {}
+        types=release.get("types",[]) if isinstance(release,dict) else []
+        if "published" not in types:
+            errors.append("release workflow must trigger on release: published")
+        if isinstance(trigger,dict) and "push" in trigger:
+            errors.append("release workflow must not use tag push as primary trigger")
         if not isinstance(trigger,dict) or "workflow_dispatch" not in trigger:
-            errors.append("release workflow_dispatch missing")
+            errors.append("release workflow_dispatch fallback missing")
         if data.get("permissions",{}).get("contents")!="write":
             errors.append("contents: write missing")
-        for marker in ["bash scripts/build_release.sh","release-artifacts/*","gh release","actions/upload-artifact@v4"]:
+        for marker in [
+            "github.event.release.tag_name",
+            "Checkout released tag",
+            "ref: ${{ steps.tag.outputs.tag }}",
+            "bash scripts/build_release.sh",
+            "release-artifacts/*",
+            "gh release upload",
+            "actions/upload-artifact@v4",
+        ]:
             if marker not in text:
                 errors.append(f"release workflow missing {marker}")
+        if "gh release create" in text:
+            errors.append("release workflow must attach to an existing release, not create one")
 
     if BUILD_WF.is_file():
         text=BUILD_WF.read_text(encoding="utf-8")
-        for marker in ["build_all_distributions.py","validate_all_distributions.py","distribution-build-manifest.json","dist/*.zip"]:
+        for marker in [
+            "build_all_distributions.py",
+            "validate_all_distributions.py",
+            "distribution-build-manifest.json",
+            "dist/*.zip",
+        ]:
             if marker not in text:
                 errors.append(f"build workflow missing {marker}")
-        if "both distributions" in text.lower() or "båda" in text.lower():
-            errors.append("two-runtime wording remains")
+        if re.search(r"(?m)^\s*release:\s*$",text):
+            errors.append("build-distributions must not also trigger on release")
+        if "release-assets:" in text:
+            errors.append("duplicate release-assets job remains in build-distributions")
 
     if SCRIPT.is_file():
         text=SCRIPT.read_text(encoding="utf-8")
@@ -48,13 +67,17 @@ def main():
             "distribution-build-manifest.json",
             "SHA256SUMS.txt",
             "release-metadata.yaml",
-            'VERSION="${TAG#v}"',
+            'VERSION="${TAG#v}"'.replace("\",""),
             "source_of_version",
-            "distribution_registry",
+            '"release_tag"',
+            'validate_stable_release.py --distribution-version "$VERSION"',
         ]
         for marker in required:
             if marker not in text:
                 errors.append(f"release script missing {marker}")
+
+        if "FILE_VERSION=" in text or "does not match repository VERSION" in text:
+            errors.append("release script still makes repository VERSION authoritative")
 
         for marker in [
             "archimate-yaml-ea-gpt-chat-v$VERSION.zip",
@@ -69,10 +92,6 @@ def main():
             if f"--runtime {runtime}" not in text:
                 errors.append(f"release adherence missing {runtime}")
 
-        for flag in ["--chat","--custom","--claude","--opencode"]:
-            if flag not in text:
-                errors.append(f"release parity missing {flag}")
-
         if re.search(r'VERSION\s*=\s*"[0-9]+\.[0-9]+\.[0-9]+',text):
             errors.append("hardcoded release version found")
 
@@ -82,7 +101,7 @@ def main():
             print("-",e)
         return 1
     print("OK")
-    print("Four-runtime release workflow validated")
+    print("Release-published workflow uses GitHub Release tag as distribution version source")
     return 0
 
 if __name__=="__main__":

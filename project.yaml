@@ -146,7 +146,7 @@ release:
   workflow: .github/workflows/release.yml
   builder: scripts/build_release.sh
   validator: scripts/validate_release_workflow.py
-  version_source: git_tag
+  version_source: github_release_tag
   runtime_count: 4
   registry_driven: true
   artifacts:
@@ -225,3 +225,5 @@ final_release:
   - claude_projects
   - opencode
   publish_after_merge: true
+  release_trigger: github_release_published
+  distribution_version_source: github_release_tag
