@@ -44,6 +44,7 @@ def check_relationship_pairs(logical, results, strict_relationships=False):
     }
     elements = {e["id"]: e for e in logical["model"]["elements"]}
 
+    uncovered = {}
     for r in logical["model"]["relationships"]:
         s = elements.get(r.get("source"))
         t = elements.get(r.get("target"))
@@ -51,12 +52,8 @@ def check_relationship_pairs(logical, results, strict_relationships=False):
             continue
         pair = (s["type"], t["type"])
         if pair not in table:
-            sev = "error" if strict_relationships else "warning"
-            add(
-                results, sev, "ARCH-REL-PAIR-UNCOVERED",
-                f"No portable exact pair rule yet for {pair[0]} -> {pair[1]}; relationship {r['type']} not asserted valid.",
-                r["id"]
-            )
+            key = (pair[0], pair[1], r["type"])
+            uncovered.setdefault(key, []).append(r["id"])
             continue
         allowed = table[pair]
         if r["type"] not in allowed:
@@ -65,6 +62,16 @@ def check_relationship_pairs(logical, results, strict_relationships=False):
                 f"{r['type']} is not allowed for {pair[0]} -> {pair[1]}; allowed: {', '.join(sorted(allowed))}",
                 r["id"]
             )
+    for (source_type, target_type, rel_type), ids in sorted(uncovered.items()):
+        sev = "error" if strict_relationships else "warning"
+        sample = ", ".join(ids[:5])
+        suffix = "" if len(ids) <= 5 else f", +{len(ids)-5} more"
+        add(
+            results, sev, "ARCH-REL-PAIR-UNCOVERED",
+            f"No portable exact pair rule yet for {source_type} -> {target_type}; "
+            f"{rel_type} occurs {len(ids)} time(s). Sample: {sample}{suffix}.",
+            ids[0] if ids else None
+        )
 
 def check_evidence(logical, results):
     source_ids = {s["id"] for s in logical.get("sources", [])}
@@ -188,6 +195,21 @@ def check_specializations(logical, results):
         elif e.get("type") != specs[s].get("base_type"):
             add(results,"error","SPEC-TYPE",f"{s} base_type is {specs[s].get('base_type')}",e["id"])
 
+def check_impact_themes(logical, results):
+    themes = logical.get("impact_themes") or []
+    if not themes:
+        return
+    known = {x.get("id") for x in themes if isinstance(x, dict) and x.get("id")}
+    for obj in logical["model"]["elements"] + logical["model"]["relationships"]:
+        raw = (obj.get("properties") or {}).get("impact_themes")
+        if raw is None:
+            continue
+        values = raw if isinstance(raw, list) else [x.strip() for x in str(raw).split(",") if x.strip()]
+        unknown = sorted(set(values) - known)
+        if unknown:
+            add(results, "error", "IMPACT-THEME-UNKNOWN",
+                f"Unknown controlled impact theme(s): {', '.join(unknown)}", obj.get("id"))
+
 def check_temporal(project_dir, results):
     errors, warnings = validate_temporal(project_dir)
     for message in errors:
@@ -212,6 +234,7 @@ def validate(project_dir, strict_relationships=False, strict_extensions=True):
     check_evidence(logical,results)
     check_extensions(logical,results,strict_extensions)
     check_specializations(logical,results)
+    check_impact_themes(logical,results)
     check_temporal(project_dir,results)
     return logical,results
 

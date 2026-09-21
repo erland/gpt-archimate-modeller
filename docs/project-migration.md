@@ -1,4 +1,4 @@
-# Project migration – steg 23
+# Project migration
 
 ## Syfte
 
@@ -42,19 +42,28 @@ Formatmigrationer sparas separat från EA-modellens versionshistorik:
 migrations/history.yaml
 ```
 
-## Reference migration
-
-Steg 23 innehåller en testmigration:
+## Registrerade migrationer
 
 ```text
-format 0.0 -> 0.1
+MIG-000001: format 0.0 -> 0.1
+MIG-000002: format 0.1 -> 0.2
 ```
 
-Legacy-fixturen bygger på en semantiskt komplett modell men saknar strukturer som införts senare,
-exempelvis `changes/index.yaml`, `versioning/history.yaml`, vissa tomma partitioner och
-migrationshistorik.
+### MIG-000002
 
-Migrationen skapar dessa utan att ändra modellens arkitekturfakta.
+0.1 → 0.2 är den produktionsmigration som infördes efter real-EA-piloten.
+
+Den:
+
+- ändrar `project.yaml.format_version` till `0.2`,
+- bevarar en befintlig `files.impact_themes`-path,
+- uppgraderar den befintliga impact-theme-filens metadata till `format_version: '0.2'`,
+- bevarar samtliga befintliga theme-poster oförändrade,
+- skapar `extensions/impact-themes.yaml` med tom lista om registry saknas,
+- invalidaterar stale `PACKAGE-MANIFEST.yaml` och `MODEL-INDEX.json` i workspacet.
+
+Derived manifest/index regenereras vid pack. Migrationen ändrar inga ArchiMate-element,
+relationer, sources eller evidence.
 
 ## Idempotens
 
@@ -72,3 +81,15 @@ Read-only inspection är tillåten men write/migration stoppas.
 - migration fabricerar inte arkitekturfakta,
 - migration valideras innan publicering,
 - downgrade görs inte automatiskt.
+
+
+## Step 47 compatibility contract
+
+- läsbart: format 0.1 och 0.2,
+- write target: 0.2,
+- 0.1 write/update kräver explicit migration,
+- preview får inte mutera source,
+- apply är atomisk,
+- migrationshistorik är separat från modellens versionshistorik,
+- downgrade 0.2 → 0.1 stöds inte,
+- unknown future format är read-only.

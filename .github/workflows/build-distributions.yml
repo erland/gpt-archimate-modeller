@@ -4,8 +4,6 @@ on:
   push:
   pull_request:
   workflow_dispatch:
-  release:
-    types: [published]
 
 permissions:
   contents: read
@@ -24,20 +22,11 @@ jobs:
           cache-dependency-path: requirements-dev.txt
       - name: Install dependencies
         run: python -m pip install -r requirements-dev.txt
-      - name: Resolve version
+      - name: Resolve development build version
         id: version
         shell: bash
         run: |
-          if [[ "${{ github.event_name }}" == "release" ]]; then
-            TAG='${{ github.event.release.tag_name }}'
-            if [[ ! "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?(\+[0-9A-Za-z.-]+)?$ ]]; then
-              echo "Invalid release tag: $TAG (expected v<semver>)" >&2
-              exit 1
-            fi
-            VERSION="${TAG#v}"
-          else
-            VERSION="$(tr -d '[:space:]' < VERSION)"
-          fi
+          VERSION="$(tr -d '[:space:]' < VERSION)"
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
       - name: Test before packaging
         run: python scripts/run_tests.py --format text
@@ -54,20 +43,3 @@ jobs:
             dist/distribution-build-manifest.json
           if-no-files-found: error
           retention-days: 14
-
-  release-assets:
-    if: github.event_name == 'release'
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      actions: read
-      contents: write
-    steps:
-      - uses: actions/download-artifact@v4
-        with:
-          name: archimate-yaml-ea-gpt-v${{ needs.build.outputs.version }}
-          path: dist
-      - name: Attach runtime distributions to GitHub Release
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: gh release upload "${{ github.event.release.tag_name }}" dist/*.zip dist/distribution-build-manifest.json --clobber --repo "${{ github.repository }}"

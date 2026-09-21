@@ -1,6 +1,6 @@
 query:
   id: capability-realization
-  title: Objekt som realiserar capabilities
+  title: Arkitekturobjekt som realiserar eller stödjer capabilities
   select: elements
   where:
     type: Capability
@@ -8,8 +8,15 @@ query:
     direction: incoming
     relationship_types:
     - Realization
+    - Serving
+    - Assignment
+    - Association
     target_types:
     - ApplicationComponent
+    - TechnologyService
+    - Node
+    - SystemSoftware
+    - BusinessProcess
     depth: 1
     include_start: false
   return:

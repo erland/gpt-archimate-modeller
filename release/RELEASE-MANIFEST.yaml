@@ -1,0 +1,40 @@
+release:
+  version: 1.0.0
+  tag: v1.0.0
+  package_version: 1.0.0
+  plan_step_completed: 48
+  created_date: '2026-09-21'
+  product_plan_complete: true
+  target_project_format: '0.2'
+  readable_project_formats:
+  - '0.1'
+  - '0.2'
+  migration_from_0_1: MIG-000002
+  active_runtime_count: 4
+  active_runtimes:
+  - chat_zip
+  - custom_gpt
+  - claude_projects
+  - opencode
+  runtime_migration_complete: true
+  runtime_migration_step_completed: 57
+  structurally_validated_runtime_contracts:
+  - runtime/runtime-contract.json
+  - runtime/archimate-tool-contract.json
+  - runtime/distribution-registry.yaml
+  - evals/runtime-parity-contract.yaml
+  structurally_validated_format_contracts:
+  - package/project-zip-contract.yaml
+  - schemas/ea-project.schema.json
+  - schemas/ea-package.schema.json
+  - quality/profile.yaml
+  - migrations/registry.yaml
+  - migrations/mig_000002_0_1_to_0_2.py
+  release_artifacts:
+  - archimate-yaml-ea-gpt-chat-v1.0.0.zip
+  - archimate-yaml-ea-gpt-custom-gpt-v1.0.0.zip
+  - archimate-yaml-ea-gpt-claude-projects-v1.0.0.zip
+  - archimate-yaml-ea-gpt-opencode-v1.0.0.zip
+  - distribution-build-manifest.json
+  - SHA256SUMS.txt
+  - release-metadata.yaml

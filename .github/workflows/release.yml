@@ -1,13 +1,12 @@
 name: Release
 
 on:
-  push:
-    tags:
-      - 'v*.*.*'
+  release:
+    types: [published]
   workflow_dispatch:
     inputs:
       tag:
-        description: 'Release tag, for example v1.0.0-rc.5'
+        description: 'Existing GitHub Release tag, for example v1.0.0'
         required: true
         type: string
 
@@ -18,34 +17,42 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-          cache: pip
-          cache-dependency-path: requirements-dev.txt
-      - name: Install dependencies
-        run: python -m pip install -r requirements-dev.txt
       - name: Resolve release tag
         id: tag
         shell: bash
         run: |
-          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
-            TAG="${{ inputs.tag }}"
+          if [[ "${{ github.event_name }}" == "release" ]]; then
+            TAG="${{ github.event.release.tag_name }}"
           else
-            TAG="$GITHUB_REF_NAME"
+            TAG="${{ inputs.tag }}"
           fi
           if [[ ! "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?(\+[0-9A-Za-z.-]+)?$ ]]; then
             echo "Invalid SemVer release tag: $TAG" >&2
             exit 1
           fi
           echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "version=${TAG#v}" >> "$GITHUB_OUTPUT"
+
+      - name: Checkout released tag
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.tag.outputs.tag }}
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements-dev.txt
+
+      - name: Install dependencies
+        run: python -m pip install -r requirements-dev.txt
+
       - name: Build and validate release artifacts
         env:
           RELEASE_TAG: ${{ steps.tag.outputs.tag }}
         run: bash scripts/build_release.sh
+
       - name: Upload workflow artifact
         uses: actions/upload-artifact@v4
         with:
@@ -53,14 +60,12 @@ jobs:
           path: release-artifacts/*
           if-no-files-found: error
           retention-days: 14
-      - name: Create or update GitHub Release
+
+      - name: Attach artifacts to existing GitHub Release
         env:
           GH_TOKEN: ${{ github.token }}
           TAG: ${{ steps.tag.outputs.tag }}
         shell: bash
         run: |
-          if gh release view "$TAG" --repo "${{ github.repository }}" >/dev/null 2>&1; then
-            gh release upload "$TAG" release-artifacts/* --clobber --repo "${{ github.repository }}"
-          else
-            gh release create "$TAG" release-artifacts/* --generate-notes --title "ArchiMate YAML EA GPT ${TAG#v}" --repo "${{ github.repository }}"
-          fi
+          gh release view "$TAG" --repo "${{ github.repository }}" >/dev/null
+          gh release upload "$TAG" release-artifacts/* --clobber --repo "${{ github.repository }}"

@@ -1,12 +1,12 @@
 report:
   id: capability-realization
-  title: Förmågerealisering
-  description: Spårbarhet till realiserande applikationer.
+  title: Förmågerealisering och stöd
+  description: Spårbarhet från capabilities till realiserande eller stödjande arkitekturobjekt.
   metadata:
     purpose: traceability
   sections:
   - id: realization
-    title: Realiserande applikationer
+    title: Realiserande eller stödjande objekt
     source:
       query: queries/capability-realization.yaml
     render:

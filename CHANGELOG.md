@@ -1,5 +1,77 @@
 # Changelog
 
+## 1.0.0 – 2026-09-21
+
+### Stable release
+- Completed the original 48-step product plan.
+- Promoted project/package version to `1.0.0`.
+- Final project format write target is 0.2 with explicit 0.1 → 0.2 migration.
+- Real-EA pilot findings are incorporated into format, validation, quality and reporting.
+- Runtime architecture supports Chat ZIP, Custom GPT, Claude Projects and OpenCode.
+- Release pipeline is registry-driven and validates instruction adherence plus five-dimensional runtime parity.
+- Stable release artifacts are generated from tag `v1.0.0` with SHA-256 checksums and release metadata.
+
+### Compatibility
+- Format 0.1 remains readable.
+- `MIG-000002` is the supported upgrade path to format 0.2.
+- Unknown future formats remain read-only.
+- Automatic downgrade is not supported.
+
+## 0.47.0 – 2026-09-21
+
+### Backward compatibility
+- Added explicit `MIG-000002` migration from project format 0.1 to 0.2.
+- Format 0.1 remains readable; target/current format is 0.2.
+- Existing impact-theme registry path and entries are preserved.
+- Projects without an impact-theme registry receive an empty controlled registry.
+- Migration invalidates stale derived package manifest/model index before repack.
+
+### Verification
+- Added regression coverage for compatibility status, preview non-mutation, apply,
+  migration history, impact-theme preservation, idempotence and valid repack.
+
+### Release
+- Package version updated to `0.47.0`.
+- Release candidate updated to `1.0.0-rc.8`.
+- Product plan advanced to Step 47/48; Step 48 v1.0.0 is next.
+
+## 0.46.0 – 2026-09-21
+
+### Format 0.2
+- Added optional controlled impact-theme registry to split-project descriptors and logical model.
+- New projects are created as format 0.2 while 0.1 remains readable.
+- Controlled impact-theme values are validated when a registry is present.
+
+### Validation and quality
+- Uncovered relationship-pair findings are aggregated by source type, target type and relationship type instead of emitted once per relationship.
+- Quality profile 0.2 separates architecture, ownership and evidence dimensions and calculates a normalized weighted diagnostic score.
+
+### Query and reporting
+- Query CLI/tool output is capped at 200 rows by default and reports matched_count, returned_count and truncated.
+- Capability-realization query/report now includes TechnologyService and other relevant realization/support element types and supports Realization, Serving, Assignment and Association.
+
+### Release
+- Package version updated to `0.46.0`.
+- Release candidate updated to `1.0.0-rc.7`.
+- Product plan advanced to Step 46/48; Step 47 is next.
+
+## 0.45.0 – 2026-09-21
+
+### Pilot
+- Completed Step 45 using a real, large ArchiMate 3.2 EA project.
+- Pilot covered 462 elements, 1,104 relationships, 21 sources and 14 change sets.
+- Verified representative query, report and ArchiMate Model Exchange export workflows.
+- Documented format, relationship-validation, reporting and quality-profile findings for Step 46.
+
+### Fixed
+- Impact analysis no longer compares lists of dictionaries when two equal-depth paths reach the same object.
+- Added regression coverage for deterministic tie-breaking between equal-depth impact paths.
+
+### Release
+- Package version updated to `0.45.0`.
+- Release candidate updated to `1.0.0-rc.6`.
+- Product plan advanced to Step 45/48; Step 46 is next.
+
 ## 0.44.3 – 2026-09-21
 
 ### Runtime migration

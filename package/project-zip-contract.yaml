@@ -1,8 +1,9 @@
-project_zip_contract_version: '0.1'
+project_zip_contract_version: '0.2'
 root_policy: exactly_one_project_root
 supported_versions:
   format_version:
   - '0.1'
+  - '0.2'
   package_layout_version:
   - '0.1'
   archimate_version:
@@ -28,6 +29,8 @@ required_files:
 - versioning/history.yaml
 - CHANGELOG.md
 - architecture/states.yaml
+optional_files:
+- extensions/impact-themes.yaml
 required_directories:
 - model
 - model/elements

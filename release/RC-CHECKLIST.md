@@ -1,22 +1,18 @@
-# Release candidate checklist — 1.0.0-rc.5
+# Release candidate checklist — 1.0.0-rc.8
 
-- [x] Canonical technical validation represented in CI
-- [x] Reference projects and invalid fixtures
-- [x] Automated regression suite
-- [x] LLM eval catalog
-- [x] User/developer documentation
-- [x] End-to-end deterministic GPT/project workflow
-- [x] Four runtime distributions configured
-- [x] Distribution registry and runtime-aware hygiene
-- [x] Four-runtime instruction adherence gate
-- [x] Five-dimensional runtime parity gate
-- [x] Registry-driven release workflow
-- [x] Release checksums and metadata
-- [ ] RC.5 commit CI green
-- [ ] RC.5 commit Build GPT distributions green
+- [x] Runtime migration complete
+- [x] Real EA pilot complete
+- [x] Format 0.2 revision complete
+- [x] Explicit 0.1 → 0.2 migration
+- [x] Existing impact-theme registry preservation
+- [x] Empty registry creation without fabricated EA facts
+- [x] Preview non-mutation
+- [x] Migration history
+- [x] Derived manifest/index invalidation before repack
+- [x] Valid migrated ZIP regression
+- [x] Four runtime distribution/parity gates retained
+- [ ] RC.8 commit CI green
+- [ ] RC.8 commit Build GPT distributions green
 
 ## Remaining product plan
-- Step 45 – Real EA pilot
-- Step 46 – Revise format
-- Step 47 – Backward compatibility/migration
 - Step 48 – v1.0.0

@@ -2,61 +2,38 @@
 
 | Item | Status |
 |---|---|
-| Steps 1–43 | Complete |
-| Step 44 – End-to-end GPT test | Complete |
-| Step 45 – Real EA pilot | Not started |
-| Release candidate | 1.0.0-rc.5 |
-| Package version | 0.44.3 |
+| Steps 1–44 | Complete |
+| Step 45 – Real EA pilot | Complete |
+| Step 46 – Revise format | Complete |
+| Step 47 – Backward compatibility/migration | Complete |
+| Step 48 – v1.0.0 | Complete |
+| Stable version | 1.0.0 |
+| Package version | 1.0.0 |
+| Product plan | 48 / 48 |
 | E2E scenarios | 9 / 9 passed |
 | Observable LLM evals | 12 historical domain evals + 3 runtime-adherence evals |
-| Integration defects found/fixed | 2 |
 
-## Completed plan step
-`44 / 48`
+## Product status
 
-## RC maintenance
+ArchiMate YAML EA GPT 1.0.0 är release-ready i källan. Publicering sker först efter merge,
+grön CI/distributionsbuild på slutcommitten och tagg `v1.0.0`.
 
-- Safe cleanup complete: Python cache and generated E2E result files removed.
-- GitHub Actions release packaging added.
-- Four runtime distributions: Chat ZIP, Custom GPT, Claude Projects and OpenCode.
-- Development plan remains at Step 44; Step 45 still requires a real EA pilot.
-- RC.4: fixed query CLI model-loader integration; regression covered by T-QRV-002.
+## v1.0 scope
 
-## Luna/runtime hardening
+- ArchiMate 3.2 semantic core.
+- YAML project format 0.2.
+- Explicit format 0.1 → 0.2 migration via `MIG-000002`.
+- Stable IDs, evidence/provenance and controlled change workflow.
+- Queries, reports, views, impact analysis and model quality report.
+- ArchiMate Model Exchange export and staging import.
+- Deterministic project ZIP contract and derived model index.
+- Chat ZIP, Custom GPT, Claude Projects and OpenCode runtime distributions.
+- Registry-driven build/release, instruction adherence and five-dimensional runtime parity.
 
-- Chat bootstrap precedence clarified.
-- Chat runtime package slimmed to runtime-relevant scripts.
-- Knowledge `always_use` reduced to seven core files; task-specific routing enforced.
-- EVAL-013–015 add bootstrap, multi-turn retention and Knowledge-routing coverage.
-- Runtime scripts are packaged with deterministic executable permissions.
+## Release sequence
 
-## GPT Byggaren 1.4 runtime migration
-
-Det separata runtime-migrationsspåret är nu komplett och ändrar **inte** produktplanens status
-`44 / 48`. Steg 45 – Real EA pilot är fortfarande inte genomfört.
-
-| Migration item | Status |
-|---|---|
-| Step 49 – Runtime assessment | Complete |
-| Step 50 – Platform-neutral runtime contracts | Complete |
-| Step 51 – Canonical ArchiMate tool contract | Complete |
-| Step 52 – Claude Projects distribution | Complete |
-| Step 53 – OpenCode distribution | Complete |
-| Step 54 – Registry-driven build and runtime-aware hygiene | Complete |
-| Step 55 – Four-runtime instruction adherence and parity | Complete |
-| Step 56 – Four-runtime CI, release and documentation | Complete |
-| Step 57 – Full regression and new release candidate | Complete |
-| Target runtimes | Chat ZIP, Custom GPT, Claude Projects, OpenCode |
-| OpenAI Plugin v1 | Assessed, not planned |
-| Main baseline CI | PASS |
-| Main baseline distribution build | PASS |
-
-Se `docs/gpt-builder-1.4-runtime-migration.md`.
-
-## RC.5 runtime migration readiness
-
-- Runtime migration steps 49–57 complete.
-- Four runtime targets: Chat ZIP, Custom GPT, Claude Projects and OpenCode.
-- OpenAI Plugin v1 remains assessed/not planned.
-- Product plan remains 44/48; Step 45 Real EA pilot is still not started.
-- Final acceptance requires green CI and green Build GPT distributions on the RC.5 commit.
+1. final Step 48 commit passes CI,
+2. final distribution build passes,
+3. merge PR #5,
+4. create tag `v1.0.0`,
+5. tag-driven release workflow creates and validates all four distributions plus checksums/metadata.

@@ -66,15 +66,17 @@ Aktuell utvecklingsstatus: [STATUS.md](STATUS.md)
 
 ## Paketversion
 
-`0.44.3`
+`1.0.0`
 
-Genomförd utvecklingsplan: **44 / 48 steg**.
+Genomförd utvecklingsplan: **48 / 48 steg**.
 
-Nästa steg: **Steg 45 – Real EA pilot**.
+Produktplanen för v1.0 är komplett.
 
-## Release candidate
+## Stable release
 
-Första release candidate är **1.0.0-rc.5**. Se `release/RC-NOTES.md` och `release/RC-CHECKLIST.md`.
+Version **1.0.0** är release-ready. Efter merge skapar och publicerar du en GitHub Release;
+release-taggen blir automatiskt versionskälla för distributionspaketen. Se `release/RELEASE-NOTES.md`, `release/RELEASE-CHECKLIST.md`
+och `release/RELEASE-MANIFEST.yaml`.
 
 ## GitHub release och distributionspaket
 
@@ -96,3 +98,31 @@ Ett separat runtime-migrationsspår har startats utan att ändra den ursprunglig
 ## RC.5 runtime migration
 
 GPT Byggaren 1.4-migreringen är genomförd för Chat ZIP, Custom GPT, Claude Projects och OpenCode. Full regression, fyr-runtime instruction adherence/parity och registry-driven release är del av RC.5.
+
+## Real EA pilot
+
+Step 45 har genomförts mot en verklig större EA-modell. Pilotresultat och identifierade
+format-/rapportproblem finns i [`docs/real-ea-pilot-step45.md`](docs/real-ea-pilot-step45.md).
+
+## Format 0.2
+
+Step 46 har reviderat projektformatet utifrån real-EA-piloten. Nya projekt skapas som
+format 0.2; format 0.1 kan fortfarande läsas. Viktiga ändringar är controlled impact themes,
+normaliserad quality scoring, aggregerade relationship-coverage warnings, bredare
+capability-realization och bounded query tool output.
+
+Se [`docs/format-revision-step46.md`](docs/format-revision-step46.md).
+
+## Bakåtkompatibilitet 0.1 → 0.2
+
+Step 47 har infört explicit migration `MIG-000002`. Format 0.1 kan fortsatt läsas och
+migreras deterministiskt till 0.2 via compatibility/plan/preview/apply. Befintliga
+impact-theme-register bevaras; projekt utan sådant register får en tom controlled registry.
+
+Se [`docs/project-migration.md`](docs/project-migration.md).
+
+## v1.0.0
+
+Step 48 slutför produktplanen 48/48. v1.0.0 låser format 0.2 som write-target,
+behåller läsning av format 0.1 med explicit `MIG-000002`, och publicerar fyra
+runtime-distributioner från samma canonical contracts.

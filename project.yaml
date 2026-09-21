@@ -2,16 +2,16 @@ project:
   id: archimate-yaml-ea-gpt
   name: ArchiMate YAML EA GPT
   package_type: gpt-development-project
-  project_version: 0.44.3
-  plan_step_completed: 44
-  status: development
+  project_version: 1.0.0
+  plan_step_completed: 48
+  status: release_ready
 architecture:
   semantic_core: ArchiMate
   canonical_work_format: YAML
   transport_format: ZIP
   repository_agnostic: true
   archimate_profile: '3.2'
-  ea_project_format_version: '0.1'
+  ea_project_format_version: '0.2'
   package_layout_version: '0.1'
   file_partitioning: hybrid-by-domain
   identity_strategy_version: '0.1'
@@ -20,9 +20,9 @@ architecture:
   source_reference_model_version: '0.2'
   extension_model_version: '0.2'
   specialization_model_version: '0.2'
-  validation_profile_version: '0.1'
+  validation_profile_version: '0.2'
   relationship_matrix_profile: 0.1-partial-portable
-  quality_profile_version: '0.1'
+  quality_profile_version: '0.2'
   change_workflow_version: '0.1'
   versioning_policy_version: '0.1'
   query_format_version: '0.2'
@@ -37,22 +37,22 @@ architecture:
   model_exchange_schema_version: '3.1'
   model_exchange_import_version: '0.1'
   model_exchange_direct_merge: false
-  project_zip_contract_version: '0.1'
+  project_zip_contract_version: '0.2'
   project_control_version: '0.1'
-  migration_framework_version: '0.1'
+  migration_framework_version: '0.2'
   gpt_instruction_version: '0.1'
   runtime_policy_version: '0.1'
   knowledge_structure_version: '0.1'
-  new_project_workflow_version: '0.1'
+  new_project_workflow_version: '0.2'
   update_project_workflow_version: '0.1'
   conflict_policy_version: '0.1'
   issues_observations_version: '0.2'
-  standard_report_library_version: '0.1'
+  standard_report_library_version: '0.2'
   standard_view_library_version: '0.1'
   architecture_states_version: '0.1'
   time_lifecycle_version: '0.1'
   impact_analysis_version: '0.1'
-  model_quality_report_version: '0.1'
+  model_quality_report_version: '0.2'
   fixtures_reference_projects_version: '0.1'
   automated_test_suite_version: '0.1'
   llm_eval_suite_version: '0.1'
@@ -60,12 +60,12 @@ architecture:
   model_index_version: '0.1'
   user_documentation_version: '0.1'
   developer_documentation_version: '0.1'
-  release_candidate: 1.0.0-rc.5
+  release_version: 1.0.0
   e2e_gpt_test_version: '0.1'
   distribution_packaging_version: '0.1'
 scope:
-  current: Step 44 - End-to-end GPT test
-  next: Step 45 - Real EA pilot
+  current: Step 48 - v1.0.0
+  next: null
 
 runtime_migration:
   framework: gpt-builder-1.4.0
@@ -146,7 +146,7 @@ release:
   workflow: .github/workflows/release.yml
   builder: scripts/build_release.sh
   validator: scripts/validate_release_workflow.py
-  version_source: git_tag
+  version_source: github_release_tag
   runtime_count: 4
   registry_driven: true
   artifacts:
@@ -159,10 +159,71 @@ release:
   - release-metadata.yaml
 
 release_readiness:
-  candidate: 1.0.0-rc.5
+  version: 1.0.0
   migration_track_complete: true
   product_plan_preserved: true
-  product_plan_completed: 44
+  product_plan_completed: 48
   product_plan_total: 48
   full_regression_required: true
   four_runtime_parity_required: true
+
+pilot:
+  step: 45
+  report: docs/real-ea-pilot-step45.md
+  source_artifact: it-formagemodell-standard-archimate-v1.11.0.zip
+  source_artifact_committed: false
+  executed_with_runtime: 1.0.0-rc.5
+  result: completed_with_findings
+  step46_inputs:
+  - files.impact_themes is not represented in the current project schema
+  - portable exact relationship-pair coverage is too narrow for the pilot model
+  - standard capability-realization report does not represent TechnologyService/Association-based realization semantics
+  - quality scoring is dominated by missing owner/source metadata in imported real-world models
+
+format_revision:
+  step: 46
+  report: docs/format-revision-step46.md
+  target_format_version: '0.2'
+  package_layout_version: '0.1'
+  reads_legacy_format_versions: ['0.1', '0.2']
+  migration_required_for_write_upgrade: true
+  changes:
+  - controlled optional impact theme registry
+  - aggregated uncovered relationship-pair findings
+  - normalized quality dimensions
+  - broader capability realization report semantics
+  - bounded query CLI/tool output with truncation metadata
+
+compatibility:
+  step: 47
+  target_format_version: '0.2'
+  readable_format_versions:
+  - '0.1'
+  - '0.2'
+  explicit_migration:
+    from: '0.1'
+    to: '0.2'
+    id: MIG-000002
+  preserves_existing_impact_themes: true
+  creates_empty_registry_when_missing: true
+  invalidates_derived_manifest_and_index_before_repack: true
+  migration_history_required: true
+  downgrade_supported: false
+
+final_release:
+  step: 48
+  version: 1.0.0
+  tag: v1.0.0
+  product_plan_complete: true
+  target_project_format: '0.2'
+  backward_compatibility:
+    readable: ['0.1', '0.2']
+    migration: MIG-000002
+  runtime_distributions:
+  - chat_zip
+  - custom_gpt
+  - claude_projects
+  - opencode
+  publish_after_merge: true
+  release_trigger: github_release_published
+  distribution_version_source: github_release_tag

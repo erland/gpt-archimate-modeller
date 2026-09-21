@@ -65,3 +65,13 @@ Report:
 View:
 - draw.io/diagrams.net XML
 - Mermaid
+
+
+## Large-result runtime policy
+
+Query-CLI/tool output begränsas som standard till 200 rows för att undvika onödigt stora
+LLM-payloads. Resultatet anger `matched_count`, `returned_count` och `truncated`.
+`--max-rows 0` tillåter explicit obegränsad CLI-output.
+
+Report engine kör queryn utan denna runtime-cap eftersom rapporten är en avsiktlig artefakt;
+query-definitionens eget `limit` gäller fortfarande.
