@@ -229,8 +229,13 @@
       ]
     },
     "opencode": {
-      "status": "planned",
-      "target": "equivalent"
+      "status": "implemented",
+      "target": "equivalent",
+      "distribution": "archimate-yaml-ea-gpt-opencode-v<version>.zip",
+      "instructions": "AGENTS.md",
+      "project_root_argument": "projectRoot",
+      "custom_tools": ".opencode/tools/archimate.ts",
+      "direct_shell_for_canonical_mutation": false
     },
     "openai_plugin": {
       "status": "not_planned",

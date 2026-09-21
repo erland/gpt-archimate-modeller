@@ -137,6 +137,12 @@ for transparency and parity assessment, not executable tools.
         )
         zip_tree(clauderoot,outdir/f'archimate-yaml-ea-gpt-claude-projects-v{version}.zip')
 
+        subprocess.run([
+            sys.executable,str(ROOT/'scripts'/'build_opencode_distribution.py'),
+            '--version',version,
+            '--output',str(outdir/f'archimate-yaml-ea-gpt-opencode-v{version}.zip')
+        ],check=True)
+
         chatroot=td/f'archimate-yaml-ea-gpt-chat-v{version}'
         for rel in CHAT_FILES:
             if (ROOT/rel).exists(): clean_copy(ROOT/rel,chatroot/rel)

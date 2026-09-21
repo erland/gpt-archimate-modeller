@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from pathlib import Path
-import argparse, zipfile
+import argparse, zipfile, subprocess, sys
 ROOT=Path(__file__).resolve().parents[1]
 
 def members(z): return [i.filename for i in z.infolist() if not i.is_dir()]
@@ -11,8 +11,9 @@ def main():
     custom=d/f'archimate-yaml-ea-gpt-custom-gpt-v{version}.zip'
     chat=d/f'archimate-yaml-ea-gpt-chat-v{version}.zip'
     claude=d/f'archimate-yaml-ea-gpt-claude-projects-v{version}.zip'
+    opencode=d/f'archimate-yaml-ea-gpt-opencode-v{version}.zip'
     errors=[]
-    for p in (custom,chat,claude):
+    for p in (custom,chat,claude,opencode):
         if not p.exists(): errors.append(f'Missing {p.name}'); continue
         with zipfile.ZipFile(p) as z:
             if z.testzip(): errors.append(f'Corrupt {p.name}')
@@ -70,11 +71,15 @@ def main():
                 if rel.startswith('scripts/') and Path(rel).suffix in {'.py','.sh'}:
                     mode=(info.external_attr>>16)&0o777
                     if mode != 0o755: errors.append(f'chat: runtime script is not executable: {rel} mode={oct(mode)}')
+    if opencode.exists():
+        p=subprocess.run([sys.executable,str(ROOT/'scripts'/'validate_opencode_distribution.py'),str(opencode)])
+        if p.returncode: errors.append('opencode: dedicated validation failed')
     if errors:
         print('FAILED'); [print('-',e) for e in errors]; return 1
     print('OK')
     print(f'Custom GPT: {custom.name}')
     print(f'Chat: {chat.name}')
     print(f'Claude Projects: {claude.name}')
+    print(f'OpenCode: {opencode.name}')
     return 0
 if __name__=='__main__': raise SystemExit(main())

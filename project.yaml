@@ -71,8 +71,8 @@ runtime_migration:
   framework: gpt-builder-1.4.0
   track_status: in_progress
   product_plan_status_preserved: true
-  last_completed_step: 52
-  next_step: 53
+  last_completed_step: 53
+  next_step: 54
   assessment: docs/gpt-builder-1.4-runtime-migration.md
   runtime_contract: runtime/runtime-contract.json
   tool_contract: runtime/archimate-tool-contract.json
@@ -106,3 +106,15 @@ distributions:
     runtime_contract_snapshot: runtime-contract.json
     tool_contract_snapshot: archimate-tool-contract.json
     executable_scripts_packaged: false
+
+  opencode:
+    status: implemented
+    compatibility: equivalent
+    artifact_pattern: archimate-yaml-ea-gpt-opencode-v<version>.zip
+    instructions: AGENTS.md
+    config: opencode.json
+    runtime_contract_snapshot: .opencode/runtime-contract.json
+    tool_mapping: .opencode/tool-mapping.json
+    typed_tools: .opencode/tools/archimate.ts
+    project_root_argument: projectRoot
+    direct_shell_for_canonical_mutation: false

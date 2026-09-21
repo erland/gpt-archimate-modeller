@@ -131,8 +131,8 @@ fortsätter att vara ofullbordad tills den faktiskt genomförs.
 - **Steg 50 – Plattformneutrala runtime contracts** — genomfört; behavior/capability/artifact/workspace/tool finns i `runtime/runtime-contract.json` och separata schemas.
 - **Steg 51 – Canonical ArchiMate tool contract** — genomfört; typad runtime-API-yta mappar canonical tools till utvalda Python-operationer.
 - **Steg 52 – Claude Projects distribution** — genomfört; explicit reduced parity utan paketerade runtime-scripts.
-- **Steg 53 – OpenCode distribution** — nästa steg; root `AGENTS.md`, runtime contract och typad tool projection.
-- **Steg 54 – Registry-driven build och runtime-aware hygiene**.
+- **Steg 53 – OpenCode distribution** — genomfört; root `AGENTS.md`, runtime snapshot och typade custom tools som projicerar canonical ArchiMate-tool-kontraktet.
+- **Steg 54 – Registry-driven build och runtime-aware hygiene** — nästa steg.
 - **Steg 55 – Fyr-runtime instruction adherence och parity**.
 - **Steg 56 – Fyr-runtime CI, release och dokumentation**.
 - **Steg 57 – Full regression och ny release candidate**.
@@ -252,3 +252,41 @@ unrun verification måste förbli unrun; saknad exekvering får aldrig rapporter
 
 Claude Projects är nu `implemented / reduced` i runtime compatibility. Full fyr-runtime
 releasehantering införs först i migrationssteg 56.
+
+
+## Steg 53 – OpenCode distribution
+
+OpenCode är nu en byggbar peer runtime med target **equivalent**.
+
+### Adapterstruktur
+
+Distributionen innehåller:
+
+- root `AGENTS.md` genererad från canonical systeminstruktion,
+- `opencode.json` med explicit permission policy,
+- `.opencode/runtime-contract.json`,
+- `.opencode/tool-mapping.json`,
+- `.opencode/tools/archimate.ts` med typade custom tools,
+- runtime-implementation scripts under `runtime/scripts/`,
+- runtime-relevant Knowledge.
+
+OpenCode custom tools följer OpenCodes lokala TypeScript-toolmodell och använder
+`tool.schema` för typade argument. Python-scripts anropas bakom wrappern; scriptsen
+är implementation och blir inte själva implicit tool-yta.
+
+### Workspace- och säkerhetsregler
+
+- `projectRoot` är explicit på varje canonical tool.
+- runtime-workspace och target EA-project är separata begrepp.
+- path traversal utanför OpenCode-worktree blockeras av wrappern.
+- direkt `bash`, `edit` och `write` är blockerade i adapterkonfigurationen.
+- canonical mutation sker endast via deklarerade tools.
+- `create_project` och `apply_project_change` kräver approval=`ask`.
+- read/validate/query/analyze/present/export får köras utan mutationsapproval.
+
+### Tool parity
+
+Samtliga concrete tools från `runtime/archimate-tool-contract.json` projiceras till
+OpenCode custom tools. Development-, test- och release-scripts exponeras inte.
+
+OpenCode är därmed `implemented / equivalent` i runtime compatibility.
