@@ -71,10 +71,11 @@ runtime_migration:
   framework: gpt-builder-1.4.0
   track_status: in_progress
   product_plan_status_preserved: true
-  last_completed_step: 50
-  next_step: 51
+  last_completed_step: 51
+  next_step: 52
   assessment: docs/gpt-builder-1.4-runtime-migration.md
   runtime_contract: runtime/runtime-contract.json
+  tool_contract: runtime/archimate-tool-contract.json
   contract_schemas:
   - schemas/runtime-behavior-contract.schema.json
   - schemas/runtime-capability-contract.schema.json

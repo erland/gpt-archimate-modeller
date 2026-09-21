@@ -41,7 +41,8 @@ Detta är ett separat migrationsspår och ändrar **inte** produktplanens status
 |---|---|
 | Step 49 – Runtime assessment | Complete |
 | Step 50 – Platform-neutral runtime contracts | Complete |
-| Step 51 – Canonical ArchiMate tool contract | Next |
+| Step 51 – Canonical ArchiMate tool contract | Complete |
+| Step 52 – Claude Projects distribution | Next |
 | Target runtimes | Chat ZIP, Custom GPT, Claude Projects, OpenCode |
 | OpenAI Plugin v1 | Assessed, not planned |
 | Main baseline CI | PASS |

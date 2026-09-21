@@ -52,8 +52,14 @@ def main() -> int:
     for tool in tools:
         if tool["mutates_workspace"] and tool["approval"]!="ask":
             errors.append(f"mutating tool {tool['id']} must require approval")
-    if any(t.get("concrete_projection")!="step-51" for t in tools):
-        errors.append("concrete tool projection must be deferred to step 51")
+    if data["tools"].get("concrete_contract")!="runtime/archimate-tool-contract.json":
+        errors.append("concrete tool contract path mismatch")
+    if data["tools"].get("project_root_argument")!="projectRoot":
+        errors.append("projectRoot must be the explicit workspace argument")
+    if data["tools"].get("generic_shell_is_canonical_api") is not False:
+        errors.append("generic shell must not be the canonical tool API")
+    if any(t.get("concrete_projection")!="runtime/archimate-tool-contract.json" for t in tools):
+        errors.append("abstract tools must project through the canonical ArchiMate tool contract")
 
     markers=data["behavior"]["required_markers"]
     instruction=(ROOT/data["behavior"]["canonical_instruction"]).read_text(encoding="utf-8")

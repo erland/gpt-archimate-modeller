@@ -129,7 +129,7 @@
         "mutates_workspace": false,
         "approval": "allow",
         "working_directory": "workspace",
-        "concrete_projection": "step-51"
+        "concrete_projection": "runtime/archimate-tool-contract.json"
       },
       {
         "id": "project-validate",
@@ -138,7 +138,7 @@
         "mutates_workspace": false,
         "approval": "allow",
         "working_directory": "workspace",
-        "concrete_projection": "step-51"
+        "concrete_projection": "runtime/archimate-tool-contract.json"
       },
       {
         "id": "project-change",
@@ -147,7 +147,7 @@
         "mutates_workspace": true,
         "approval": "ask",
         "working_directory": "workspace",
-        "concrete_projection": "step-51"
+        "concrete_projection": "runtime/archimate-tool-contract.json"
       },
       {
         "id": "project-create",
@@ -156,7 +156,7 @@
         "mutates_workspace": true,
         "approval": "ask",
         "working_directory": "workspace",
-        "concrete_projection": "step-51"
+        "concrete_projection": "runtime/archimate-tool-contract.json"
       },
       {
         "id": "project-package",
@@ -165,7 +165,7 @@
         "mutates_workspace": false,
         "approval": "allow",
         "working_directory": "workspace",
-        "concrete_projection": "step-51"
+        "concrete_projection": "runtime/archimate-tool-contract.json"
       },
       {
         "id": "model-query",
@@ -174,7 +174,7 @@
         "mutates_workspace": false,
         "approval": "allow",
         "working_directory": "workspace",
-        "concrete_projection": "step-51"
+        "concrete_projection": "runtime/archimate-tool-contract.json"
       },
       {
         "id": "model-analyze",
@@ -183,7 +183,7 @@
         "mutates_workspace": false,
         "approval": "allow",
         "working_directory": "workspace",
-        "concrete_projection": "step-51"
+        "concrete_projection": "runtime/archimate-tool-contract.json"
       },
       {
         "id": "model-present",
@@ -192,7 +192,7 @@
         "mutates_workspace": false,
         "approval": "allow",
         "working_directory": "workspace",
-        "concrete_projection": "step-51"
+        "concrete_projection": "runtime/archimate-tool-contract.json"
       },
       {
         "id": "model-exchange",
@@ -201,9 +201,12 @@
         "mutates_workspace": false,
         "approval": "allow",
         "working_directory": "workspace",
-        "concrete_projection": "step-51"
+        "concrete_projection": "runtime/archimate-tool-contract.json"
       }
-    ]
+    ],
+    "concrete_contract": "runtime/archimate-tool-contract.json",
+    "project_root_argument": "projectRoot",
+    "generic_shell_is_canonical_api": false
   },
   "runtime_compatibility": {
     "chat_zip": {

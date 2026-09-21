@@ -129,8 +129,8 @@ fortsätter att vara ofullbordad tills den faktiskt genomförs.
 
 - **Steg 49 – Runtime assessment** — genomfört i denna ändring.
 - **Steg 50 – Plattformneutrala runtime contracts** — genomfört; behavior/capability/artifact/workspace/tool finns i `runtime/runtime-contract.json` och separata schemas.
-- **Steg 51 – Canonical ArchiMate tool contract** — nästa steg; konkretisera runtime-API, typade argument och tool boundaries.
-- **Steg 52 – Claude Projects distribution** — explicit reduced parity.
+- **Steg 51 – Canonical ArchiMate tool contract** — genomfört; typad runtime-API-yta mappar canonical tools till utvalda Python-operationer.
+- **Steg 52 – Claude Projects distribution** — nästa steg; explicit reduced parity.
 - **Steg 53 – OpenCode distribution** — root `AGENTS.md`, runtime contract och typad tool projection.
 - **Steg 54 – Registry-driven build och runtime-aware hygiene**.
 - **Steg 55 – Fyr-runtime instruction adherence och parity**.
@@ -175,3 +175,44 @@ API bara för att de redan finns.
 - Claude Projects: planned / reduced
 - OpenCode: planned / equivalent
 - OpenAI Plugin v1: not_planned / reduced
+
+
+## Steg 51 – Canonical ArchiMate tool contract
+
+Den abstrakta tool-ytan från steg 50 har nu konkretiserats i
+`runtime/archimate-tool-contract.json`.
+
+### Principer
+
+- varje tool har stabil tool-id och typat input-schema,
+- `projectRoot` är obligatoriskt och skiljer target workspace från runtime-paketet,
+- endast utvalda runtime-scripts exponeras,
+- development-, test- och release-scripts är inte del av API:t,
+- path traversal är förbjuden,
+- canonical mutation kräver approval=`ask`,
+- outputgenerering som inte ändrar canonical model state kan vara approval=`allow`.
+
+### Canonical runtime-API
+
+Tool-kontraktet täcker:
+
+- project/ZIP inspection,
+- project/ZIP validation,
+- new project,
+- explicit project change,
+- packaging,
+- model query,
+- impact analysis,
+- model quality,
+- report rendering,
+- view export,
+- Model Exchange export,
+- Model Exchange staging preview.
+
+Direkt Model Exchange merge exponeras inte som tool; import förblir staging/preview
+i linje med canonical domänregler.
+
+### Adapterregel
+
+Runtime-adaptrar ska projicera detta kontrakt. De får inte betrakta generell shell-access
+eller hela `scripts/` som canonical API.

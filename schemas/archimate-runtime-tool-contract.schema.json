@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/schemas/archimate-runtime-tool-contract.schema.json",
+  "title": "ArchiMate Runtime Tool Contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "contract_id",
+    "project_root",
+    "path_policy",
+    "tools"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "contract_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "project_root": {
+      "type": "object",
+      "required": [
+        "argument",
+        "type",
+        "required",
+        "path_policy"
+      ],
+      "additionalProperties": true
+    },
+    "path_policy": {
+      "type": "object",
+      "required": [
+        "canonical_inputs",
+        "canonical_outputs",
+        "traversal"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "canonical_inputs": {
+          "type": "string"
+        },
+        "canonical_outputs": {
+          "type": "string"
+        },
+        "traversal": {
+          "const": "forbidden"
+        }
+      }
+    },
+    "tools": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "abstract_tool",
+          "purpose",
+          "mutates_canonical_state",
+          "approval",
+          "implementation",
+          "input_schema"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]*$"
+          },
+          "abstract_tool": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]*$"
+          },
+          "purpose": {
+            "type": "string",
+            "minLength": 1
+          },
+          "mutates_canonical_state": {
+            "type": "boolean"
+          },
+          "approval": {
+            "enum": [
+              "allow",
+              "ask",
+              "block"
+            ]
+          },
+          "artifact_output": {
+            "type": "boolean"
+          },
+          "implementation": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "script",
+              "command"
+            ],
+            "properties": {
+              "script": {
+                "type": "string",
+                "pattern": "^scripts/.+\\.py$"
+              },
+              "command": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "input_schema": {
+            "type": "object"
+          },
+          "optional_cli_flags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

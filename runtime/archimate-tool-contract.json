@@ -1,0 +1,640 @@
+{
+  "schema_version": 1,
+  "contract_id": "archimate-yaml-ea-runtime-tools",
+  "project_root": {
+    "argument": "projectRoot",
+    "type": "string",
+    "required": true,
+    "path_policy": "workspace_relative_or_absolute",
+    "description": "Explicit root for the active EA project/workspace. Runtime package files are not the target project."
+  },
+  "path_policy": {
+    "canonical_inputs": "must resolve under projectRoot unless explicitly declared external_input",
+    "canonical_outputs": "must resolve under projectRoot unless artifact_output is true",
+    "traversal": "forbidden"
+  },
+  "tools": [
+    {
+      "id": "inspect-project",
+      "abstract_tool": "project-read",
+      "purpose": "Inspect an unpacked EA project without mutation.",
+      "mutates_canonical_state": false,
+      "approval": "allow",
+      "implementation": {
+        "script": "scripts/project_control.py",
+        "command": [
+          "inspect-project",
+          "{projectRoot}",
+          "--json"
+        ]
+      },
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "projectRoot"
+        ],
+        "properties": {
+          "projectRoot": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "inspect-project-zip",
+      "abstract_tool": "project-read",
+      "purpose": "Inspect and validate package metadata for an EA project ZIP.",
+      "mutates_canonical_state": false,
+      "approval": "allow",
+      "implementation": {
+        "script": "scripts/project_control.py",
+        "command": [
+          "inspect-zip",
+          "{zipFile}",
+          "--json"
+        ]
+      },
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "projectRoot",
+          "zipFile"
+        ],
+        "properties": {
+          "projectRoot": {
+            "type": "string",
+            "minLength": 1
+          },
+          "zipFile": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Workspace-relative or external input ZIP path."
+          }
+        }
+      }
+    },
+    {
+      "id": "validate-project",
+      "abstract_tool": "project-validate",
+      "purpose": "Run technical, version-history and quality validation for an unpacked EA project.",
+      "mutates_canonical_state": false,
+      "approval": "allow",
+      "implementation": {
+        "script": "scripts/project_control.py",
+        "command": [
+          "validate-project",
+          "{projectRoot}",
+          "--json"
+        ]
+      },
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "projectRoot"
+        ],
+        "properties": {
+          "projectRoot": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "validate-project-zip",
+      "abstract_tool": "project-validate",
+      "purpose": "Validate a complete EA project ZIP against the package contract.",
+      "mutates_canonical_state": false,
+      "approval": "allow",
+      "implementation": {
+        "script": "scripts/validate_project_zip.py",
+        "command": [
+          "{zipFile}"
+        ]
+      },
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "projectRoot",
+          "zipFile"
+        ],
+        "properties": {
+          "projectRoot": {
+            "type": "string",
+            "minLength": 1
+          },
+          "zipFile": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "create-project",
+      "abstract_tool": "project-create",
+      "purpose": "Create a new EA project from a structured specification or explicit project identity.",
+      "mutates_canonical_state": true,
+      "approval": "ask",
+      "implementation": {
+        "script": "scripts/new_project.py",
+        "command": [
+          "--spec",
+          "{specFile}",
+          "--output-dir",
+          "{outputDir}",
+          "--output-zip",
+          "{outputZip}",
+          "--json"
+        ]
+      },
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "projectRoot",
+          "specFile",
+          "outputDir",
+          "outputZip"
+        ],
+        "properties": {
+          "projectRoot": {
+            "type": "string",
+            "minLength": 1
+          },
+          "specFile": {
+            "type": "string",
+            "minLength": 1
+          },
+          "outputDir": {
+            "type": "string",
+            "minLength": 1
+          },
+          "outputZip": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "apply-project-change",
+      "abstract_tool": "project-change",
+      "purpose": "Apply an explicit change set to an existing project ZIP and produce a complete updated ZIP.",
+      "mutates_canonical_state": true,
+      "approval": "ask",
+      "implementation": {
+        "script": "scripts/update_project.py",
+        "command": [
+          "{inputZip}",
+          "{changeSet}",
+          "--output",
+          "{outputZip}",
+          "--json"
+        ]
+      },
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "projectRoot",
+          "inputZip",
+          "changeSet",
+          "outputZip"
+        ],
+        "properties": {
+          "projectRoot": {
+            "type": "string",
+            "minLength": 1
+          },
+          "inputZip": {
+            "type": "string",
+            "minLength": 1
+          },
+          "changeSet": {
+            "type": "string",
+            "minLength": 1
+          },
+          "outputZip": {
+            "type": "string",
+            "minLength": 1
+          },
+          "allowMigration": {
+            "type": "boolean",
+            "default": false
+          },
+          "allowDuplicateCandidates": {
+            "type": "boolean",
+            "default": false
+          }
+        }
+      },
+      "optional_cli_flags": {
+        "allowMigration": "--allow-migration",
+        "allowDuplicateCandidates": "--allow-duplicate-candidates"
+      }
+    },
+    {
+      "id": "package-project",
+      "abstract_tool": "project-package",
+      "purpose": "Package and validate the current EA workspace as a complete project ZIP.",
+      "mutates_canonical_state": false,
+      "approval": "allow",
+      "artifact_output": true,
+      "implementation": {
+        "script": "scripts/project_control.py",
+        "command": [
+          "pack",
+          "{projectRoot}",
+          "--output",
+          "{outputZip}"
+        ]
+      },
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "projectRoot",
+          "outputZip"
+        ],
+        "properties": {
+          "projectRoot": {
+            "type": "string",
+            "minLength": 1
+          },
+          "outputZip": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "query-model",
+      "abstract_tool": "model-query",
+      "purpose": "Execute a canonical model query.",
+      "mutates_canonical_state": false,
+      "approval": "allow",
+      "implementation": {
+        "script": "scripts/query.py",
+        "command": [
+          "{projectRoot}",
+          "{queryFile}",
+          "--json"
+        ]
+      },
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "projectRoot",
+          "queryFile"
+        ],
+        "properties": {
+          "projectRoot": {
+            "type": "string",
+            "minLength": 1
+          },
+          "queryFile": {
+            "type": "string",
+            "minLength": 1
+          },
+          "output": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "optional_cli_flags": {
+        "output": "--output"
+      }
+    },
+    {
+      "id": "impact-analysis",
+      "abstract_tool": "model-analyze",
+      "purpose": "Analyze incoming/outgoing dependency impact from model seeds or a change set.",
+      "mutates_canonical_state": false,
+      "approval": "allow",
+      "implementation": {
+        "script": "scripts/impact_analysis.py",
+        "command": [
+          "{projectRoot}",
+          "--format",
+          "{format}"
+        ]
+      },
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "projectRoot"
+        ],
+        "properties": {
+          "projectRoot": {
+            "type": "string",
+            "minLength": 1
+          },
+          "seeds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "changeSet": {
+            "type": "string",
+            "minLength": 1
+          },
+          "fromState": {
+            "type": "string",
+            "minLength": 1
+          },
+          "toState": {
+            "type": "string",
+            "minLength": 1
+          },
+          "direction": {
+            "type": "string",
+            "enum": [
+              "outgoing",
+              "incoming",
+              "both"
+            ],
+            "default": "both"
+          },
+          "maxDepth": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 20,
+            "default": 3
+          },
+          "relationshipTypes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "excludeRelationshipTypes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "includeSeeds": {
+            "type": "boolean",
+            "default": false
+          },
+          "stopTypes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "includePaths": {
+            "type": "boolean",
+            "default": true
+          },
+          "format": {
+            "type": "string",
+            "enum": [
+              "yaml",
+              "json",
+              "markdown"
+            ],
+            "default": "yaml"
+          },
+          "output": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "model-quality-report",
+      "abstract_tool": "model-analyze",
+      "purpose": "Generate a model quality report using the selected quality profile.",
+      "mutates_canonical_state": false,
+      "approval": "allow",
+      "implementation": {
+        "script": "scripts/model_quality_report.py",
+        "command": [
+          "{projectRoot}",
+          "--format",
+          "{format}"
+        ]
+      },
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "projectRoot"
+        ],
+        "properties": {
+          "projectRoot": {
+            "type": "string",
+            "minLength": 1
+          },
+          "profile": {
+            "type": "string",
+            "minLength": 1
+          },
+          "format": {
+            "type": "string",
+            "enum": [
+              "markdown",
+              "csv",
+              "json",
+              "yaml"
+            ],
+            "default": "markdown"
+          },
+          "output": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "render-report",
+      "abstract_tool": "model-present",
+      "purpose": "Render a report definition against the current project.",
+      "mutates_canonical_state": false,
+      "approval": "allow",
+      "artifact_output": true,
+      "implementation": {
+        "script": "scripts/render_report.py",
+        "command": [
+          "{projectRoot}",
+          "{reportFile}",
+          "--format",
+          "{format}"
+        ]
+      },
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "projectRoot",
+          "reportFile"
+        ],
+        "properties": {
+          "projectRoot": {
+            "type": "string",
+            "minLength": 1
+          },
+          "reportFile": {
+            "type": "string",
+            "minLength": 1
+          },
+          "format": {
+            "type": "string",
+            "enum": [
+              "markdown",
+              "csv"
+            ],
+            "default": "markdown"
+          },
+          "output": {
+            "type": "string",
+            "minLength": 1
+          },
+          "outputDir": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "export-view",
+      "abstract_tool": "model-present",
+      "purpose": "Compile and export a view as draw.io or Mermaid.",
+      "mutates_canonical_state": false,
+      "approval": "allow",
+      "artifact_output": true,
+      "implementation": {
+        "script": "scripts/export_diagram.py",
+        "command": [
+          "{projectRoot}",
+          "{viewFile}",
+          "--format",
+          "{format}",
+          "--output",
+          "{output}"
+        ]
+      },
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "projectRoot",
+          "viewFile",
+          "format",
+          "output"
+        ],
+        "properties": {
+          "projectRoot": {
+            "type": "string",
+            "minLength": 1
+          },
+          "viewFile": {
+            "type": "string",
+            "minLength": 1
+          },
+          "format": {
+            "type": "string",
+            "enum": [
+              "drawio",
+              "mermaid"
+            ]
+          },
+          "output": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "export-model-exchange",
+      "abstract_tool": "model-exchange",
+      "purpose": "Export the current canonical YAML model to ArchiMate Model Exchange XML.",
+      "mutates_canonical_state": false,
+      "approval": "allow",
+      "artifact_output": true,
+      "implementation": {
+        "script": "scripts/export_model_exchange.py",
+        "command": [
+          "{projectRoot}",
+          "--output",
+          "{outputXml}"
+        ]
+      },
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "projectRoot",
+          "outputXml"
+        ],
+        "properties": {
+          "projectRoot": {
+            "type": "string",
+            "minLength": 1
+          },
+          "outputXml": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    {
+      "id": "import-model-exchange-preview",
+      "abstract_tool": "model-exchange",
+      "purpose": "Parse Model Exchange XML as staging input without merging it into the canonical model.",
+      "mutates_canonical_state": false,
+      "approval": "allow",
+      "implementation": {
+        "script": "scripts/import_model_exchange.py",
+        "command": [
+          "{xmlFile}",
+          "--preview",
+          "--json"
+        ]
+      },
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "projectRoot",
+          "xmlFile"
+        ],
+        "properties": {
+          "projectRoot": {
+            "type": "string",
+            "minLength": 1
+          },
+          "xmlFile": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  ]
+}
