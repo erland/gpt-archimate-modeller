@@ -22,6 +22,8 @@ $PYTHON scripts/validate_developer_docs.py
 $PYTHON scripts/validate_reference_projects.py
 $PYTHON scripts/validate_fixture_catalog.py
 $PYTHON scripts/validate_runtime_contract.py
+$PYTHON scripts/validate_gpt_builder_1_5_contract.py
+$PYTHON scripts/validate_openai_plugin_1_5_assessment.py
 $PYTHON scripts/validate_archimate_tool_contract.py
 $PYTHON scripts/validate_distribution_registry.py
 $PYTHON scripts/scan_repository_hygiene.py .
@@ -36,9 +38,13 @@ CLAUDE="$ARTIFACT_DIR/archimate-yaml-ea-gpt-claude-projects-v$VERSION.zip"
 OPENCODE="$ARTIFACT_DIR/archimate-yaml-ea-gpt-opencode-v$VERSION.zip"
 
 $PYTHON scripts/run_runtime_instruction_adherence.py --contract evals/runtime-parity-contract.yaml --runtime chat_zip --artifact "$CHAT"
+$PYTHON scripts/validate_chat_gpt_builder_1_5.py --artifact "$CHAT"
 $PYTHON scripts/run_runtime_instruction_adherence.py --contract evals/runtime-parity-contract.yaml --runtime custom_gpt --artifact "$CUSTOM"
+$PYTHON scripts/validate_custom_gpt_builder_1_5.py --artifact "$CUSTOM"
 $PYTHON scripts/run_runtime_instruction_adherence.py --contract evals/runtime-parity-contract.yaml --runtime claude_projects --artifact "$CLAUDE"
+$PYTHON scripts/validate_claude_gpt_builder_1_5.py --artifact "$CLAUDE"
 $PYTHON scripts/run_runtime_instruction_adherence.py --contract evals/runtime-parity-contract.yaml --runtime opencode --artifact "$OPENCODE"
+$PYTHON scripts/validate_opencode_gpt_builder_1_5.py --artifact "$OPENCODE"
 $PYTHON scripts/validate_runtime_parity.py \
   --contract evals/runtime-parity-contract.yaml \
   --runtime-contract runtime/runtime-contract.json \
@@ -66,4 +72,5 @@ metadata.write_text(yaml.safe_dump({
     "runtime_count":len(arts),"artifacts":arts,"checksums":checksums.name
 },sort_keys=False,allow_unicode=True),encoding="utf-8")
 PY
+$PYTHON scripts/validate_release_assets_1_5.py --version "$VERSION" --dir "$ARTIFACT_DIR"
 echo "PASS: release artifacts built for $TAG"
