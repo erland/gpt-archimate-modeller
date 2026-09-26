@@ -13,8 +13,8 @@ migration:
   total_steps: 9
 
 progress:
-  current_step: 8
-  last_completed_step: 7
+  current_step: 9
+  last_completed_step: 8
   completed_steps:
     - 1
     - 2
@@ -23,6 +23,7 @@ progress:
     - 5
     - 6
     - 7
+    - 8
   skipped_steps: []
   inserted_steps: []
 
@@ -148,10 +149,32 @@ openai_plugin_assessment:
   no_false_pass: true
   activation_requires_ci_verified_capabilities: true
 
+release_readiness:
+  release_builder: scripts/build_release.sh
+  release_asset_validation: scripts/validate_release_assets_1_5.py
+  workflow_validation: scripts/validate_release_workflow.py
+  runtime_assets_from_registry: true
+  exact_active_runtime_asset_set: true
+  release_metadata:
+    - distribution-build-manifest.json
+    - SHA256SUMS.txt
+    - release-metadata.yaml
+  wildcard_release_upload: false
+  release_gates:
+    - gpt_builder_1_5_contract
+    - openai_plugin_assessment
+    - chat_zip_1_5
+    - custom_gpt_1_5
+    - claude_projects_1_5
+    - opencode_1_5
+    - runtime_parity
+  ci_passed: true
+  distribution_workflow_passed: true
+
 next_step:
-  recommended: 8
-  title: Generalisera CI, release och readiness
-  reason: "OpenAI Plugin-bedömningen är nu explicit dokumenterad och CI-låst som not_active/reduced advisory only. Ingen plugin-distribution eller full runtime parity påstås så länge kärnkraven för workspace, exekvering, ZIP och deterministisk validering saknas."
+  recommended: 9
+  title: Slutlig release-readiness
+  reason: "CI och release följer nu samma GPT Byggaren 1.5.0-kontrakt. Release-assets härleds exakt från active_targets i distribution registry och samma runtime-/plugin-gates körs före publicering."
 
 resume:
   supported: true
@@ -163,4 +186,4 @@ resume:
     - runtime/archimate-tool-contract.json
     - runtime/distribution-registry.yaml
     - STATUS.md
-  human_readable_status: "Steg 1–7 av 9 i GPT Byggaren 1.5.0-migreringen är klara."
+  human_readable_status: "Steg 1–8 av 9 i GPT Byggaren 1.5.0-migreringen är klara."
