@@ -53,11 +53,18 @@ jobs:
           RELEASE_TAG: ${{ steps.tag.outputs.tag }}
         run: bash scripts/build_release.sh
 
+      - name: Validate exact release asset set
+        run: python scripts/validate_release_assets_1_5.py --version "${{ steps.tag.outputs.version }}" --dir release-artifacts
+
       - name: Upload workflow artifact
         uses: actions/upload-artifact@v4
         with:
           name: archimate-yaml-ea-gpt-${{ steps.tag.outputs.tag }}
-          path: release-artifacts/*
+          path: |
+            release-artifacts/*.zip
+            release-artifacts/distribution-build-manifest.json
+            release-artifacts/SHA256SUMS.txt
+            release-artifacts/release-metadata.yaml
           if-no-files-found: error
           retention-days: 14
 
@@ -68,4 +75,5 @@ jobs:
         shell: bash
         run: |
           gh release view "$TAG" --repo "${{ github.repository }}" >/dev/null
-          gh release upload "$TAG" release-artifacts/* --clobber --repo "${{ github.repository }}"
+          mapfile -t assets < <(python scripts/validate_release_assets_1_5.py             --version "${{ steps.tag.outputs.version }}"             --dir release-artifacts             --print-paths)
+          gh release upload "$TAG" "${assets[@]}" --clobber --repo "${{ github.repository }}"
