@@ -57,6 +57,7 @@ jobs:
           CLAUDE="dist/archimate-yaml-ea-gpt-claude-projects-v$VERSION.zip"
           OPENCODE="dist/archimate-yaml-ea-gpt-opencode-v$VERSION.zip"
           python scripts/run_runtime_instruction_adherence.py --contract evals/runtime-parity-contract.yaml --runtime chat_zip --artifact "$CHAT"
+          python scripts/validate_chat_gpt_builder_1_5.py --artifact "$CHAT"
           python scripts/run_runtime_instruction_adherence.py --contract evals/runtime-parity-contract.yaml --runtime custom_gpt --artifact "$CUSTOM"
           python scripts/run_runtime_instruction_adherence.py --contract evals/runtime-parity-contract.yaml --runtime claude_projects --artifact "$CLAUDE"
           python scripts/run_runtime_instruction_adherence.py --contract evals/runtime-parity-contract.yaml --runtime opencode --artifact "$OPENCODE"
