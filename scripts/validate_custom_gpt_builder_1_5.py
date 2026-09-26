@@ -22,6 +22,7 @@ def main():
 
     errors=[]
     contract=yaml.safe_load((ROOT/"runtime/gpt-builder-1.5-contract.yaml").read_text(encoding="utf-8"))
+    parity=yaml.safe_load((ROOT/"evals/runtime-parity-contract.yaml").read_text(encoding="utf-8"))
     if not artifact.is_file():
         print(f"FAILED: missing Custom GPT ZIP: {artifact}")
         return 1
@@ -45,9 +46,14 @@ def main():
             instructions=zf.read(member(zf,"instructions.txt")).decode("utf-8")
             if len(instructions)>8000:
                 errors.append(f"Custom GPT instructions exceed 8000 chars: {len(instructions)}")
-            for marker in contract["invariants"]:
-                if marker.casefold() not in instructions.casefold():
-                    errors.append(f"Custom GPT instructions missing invariant: {marker}")
+            folded=instructions.casefold()
+            for marker in parity["dimensions"]["behavior"]["canonical_markers"]:
+                variants=marker.get("any_of",[])
+                if not any(v.casefold() in folded for v in variants):
+                    errors.append(
+                        f"Custom GPT instructions missing behavior marker: {marker.get('id')} "
+                        f"(expected one of {variants})"
+                    )
         except ValueError as exc:
             errors.append(str(exc))
 
