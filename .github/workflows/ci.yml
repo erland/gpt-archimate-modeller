@@ -61,7 +61,9 @@ jobs:
           python scripts/run_runtime_instruction_adherence.py --contract evals/runtime-parity-contract.yaml --runtime custom_gpt --artifact "$CUSTOM"
           python scripts/validate_custom_gpt_builder_1_5.py --artifact "$CUSTOM"
           python scripts/run_runtime_instruction_adherence.py --contract evals/runtime-parity-contract.yaml --runtime claude_projects --artifact "$CLAUDE"
+          python scripts/validate_claude_gpt_builder_1_5.py --artifact "$CLAUDE"
           python scripts/run_runtime_instruction_adherence.py --contract evals/runtime-parity-contract.yaml --runtime opencode --artifact "$OPENCODE"
+          python scripts/validate_opencode_gpt_builder_1_5.py --artifact "$OPENCODE"
           python scripts/validate_runtime_parity.py \
             --contract evals/runtime-parity-contract.yaml \
             --runtime-contract runtime/runtime-contract.json \
