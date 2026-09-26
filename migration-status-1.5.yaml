@@ -13,10 +13,11 @@ migration:
   total_steps: 9
 
 progress:
-  current_step: 2
-  last_completed_step: 1
+  current_step: 3
+  last_completed_step: 2
   completed_steps:
     - 1
+    - 2
   skipped_steps: []
   inserted_steps: []
 
@@ -24,7 +25,7 @@ state:
   overall: warning
   blocking_issues: []
   warnings:
-    - "1.5.0-normalisering av befintliga runtime-kontrakt återstår."
+    - "Distribution registry och build metadata behöver normaliseras uttryckligt för GPT Byggaren 1.5.0."
     - "OpenAI Plugin compatibility assessment återstår."
 
 preservation:
@@ -38,6 +39,22 @@ preservation:
   preserve_evals: true
   preserve_runtime_behavior: true
 
+gpt_builder_1_5:
+  normalized_contract: runtime/gpt-builder-1.5-contract.yaml
+  validation: scripts/validate_gpt_builder_1_5_contract.py
+  required_capabilities:
+    - filesystem_read
+    - filesystem_write
+    - code_execution
+    - structured_data
+    - persistent_workspace
+    - archive_io
+  state_authority: project_files
+  portable_authority: ea_project_zip
+  conversation_authoritative: false
+  project_root_argument: projectRoot
+  mutation_approval: ask
+
 runtime_baseline:
   active:
     - chat_zip
@@ -50,17 +67,18 @@ runtime_baseline:
     reason: "Kritiska filesystem/write/code execution/persistent workspace/archive/tool-krav saknar full parity."
 
 next_step:
-  recommended: 2
-  title: Normalisera kontrakten mot GPT Byggaren 1.5.0
-  reason: "Separat 1.5.0-migrationsspår finns nu. Nästa steg är att normalisera befintliga runtime-kontrakt utan att ändra canonical ArchiMate-beteende."
+  recommended: 3
+  title: Normalisera registry och build metadata
+  reason: "Befintliga behavior-, capability-, artifact-, state- och tool-kontrakt är nu explicit mappade och validerade mot GPT Byggaren 1.5.0 utan att ändra ArchiMate-domänbeteendet."
 
 resume:
   supported: true
   required_files:
     - migration-status-1.5.yaml
     - docs/gpt-builder-1.5-runtime-migration.md
+    - runtime/gpt-builder-1.5-contract.yaml
     - runtime/runtime-contract.json
     - runtime/archimate-tool-contract.json
     - runtime/distribution-registry.yaml
     - STATUS.md
-  human_readable_status: "Steg 1 av 9 i GPT Byggaren 1.5.0-migreringen är klart."
+  human_readable_status: "Steg 1–2 av 9 i GPT Byggaren 1.5.0-migreringen är klara."
