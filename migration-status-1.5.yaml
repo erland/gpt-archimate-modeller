@@ -1,0 +1,190 @@
+schema_version: 1
+project:
+  id: archimate-yaml-ea-gpt
+  name: ArchiMate YAML EA GPT
+  stable_product_version: 1.0.0
+  product_plan_status: 48/48
+
+migration:
+  target_builder_version: 1.5.0
+  source_builder_version: 1.4.0
+  strategy: behavior_preserving
+  plan: docs/gpt-builder-1.5-runtime-migration.md
+  total_steps: 9
+
+progress:
+  current_step: 9
+  last_completed_step: 9
+  completed_steps:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+  skipped_steps: []
+  inserted_steps: []
+
+state:
+  overall: pass
+  blocking_issues: []
+  warnings: []
+
+preservation:
+  canonical_instruction: gpt/SYSTEM_INSTRUCTION.md
+  runtime_contract: runtime/runtime-contract.json
+  tool_contract: runtime/archimate-tool-contract.json
+  distribution_registry: runtime/distribution-registry.yaml
+  product_status: STATUS.md
+  product_version: VERSION
+  preserve_product_plan: true
+  preserve_evals: true
+  preserve_runtime_behavior: true
+
+gpt_builder_1_5:
+  normalized_contract: runtime/gpt-builder-1.5-contract.yaml
+  validation: scripts/validate_gpt_builder_1_5_contract.py
+  required_capabilities:
+    - filesystem_read
+    - filesystem_write
+    - code_execution
+    - structured_data
+    - persistent_workspace
+    - archive_io
+  state_authority: project_files
+  portable_authority: ea_project_zip
+  conversation_authoritative: false
+  project_root_argument: projectRoot
+  mutation_approval: ask
+
+registry:
+  source_of_truth: runtime/distribution-registry.yaml
+  builder_target_version: 1.5.0
+  runtime_selection: active_targets
+  artifact_policy: exact_active_target_set
+  development_version_source: VERSION
+  release_version_source: github_release_tag
+  active_targets:
+    - chat_zip
+    - custom_gpt
+    - claude_projects
+    - opencode
+  release_metadata:
+    - distribution-build-manifest.json
+    - SHA256SUMS.txt
+    - release-metadata.yaml
+  openai_plugin:
+    status: not_active
+    compatibility: reduced
+
+chat_zip_verification:
+  validation: scripts/validate_chat_gpt_builder_1_5.py
+  canonical_instruction_byte_identical: true
+  runtime_toolchain_present: true
+  workspace_state_authority: project_files
+  portable_authority: ea_project_zip
+  conversation_authoritative: false
+  project_zip_contract_preserved: true
+  artifact_parity: equivalent
+  ci_passed: true
+
+custom_gpt_verification:
+  validation: scripts/validate_custom_gpt_builder_1_5.py
+  compiled_instruction_within_limit: true
+  behavior_markers_preserved: true
+  knowledge_package_present: true
+  capability_model: equivalent_with_platform_constraints
+  code_interpreter_required_for_full_project_work: true
+  workspace_state_authority: project_files
+  portable_authority: ea_project_zip
+  conversation_authoritative: false
+  unrun_verification_must_remain_unrun: true
+  false_pass_forbidden: true
+  ci_passed: true
+
+claude_projects_verification:
+  validation: scripts/validate_claude_gpt_builder_1_5.py
+  parity: reduced
+  canonical_instruction_byte_identical: true
+  executable_runtime_scripts_packaged: false
+  workspace_state_authority: project_files
+  conversation_authoritative: false
+  limitations_explicit:
+    - local_command_execution
+    - deterministic_project_verification
+    - workspace_mutation
+    - github_write_actions
+  unrun_verification_preserved: true
+  false_pass_forbidden: true
+
+opencode_verification:
+  validation: scripts/validate_opencode_gpt_builder_1_5.py
+  parity: equivalent
+  canonical_instruction_byte_identical: true
+  project_root_argument: projectRoot
+  runtime_workspace_separate_from_target_project: true
+  path_traversal: forbidden
+  typed_custom_tools: true
+  generic_bash_for_canonical_mutation: denied
+  mutating_tool_approval: ask
+  full_abstract_tool_mapping: true
+
+openai_plugin_assessment:
+  document: docs/openai-plugin-1.5-assessment.md
+  validation: scripts/validate_openai_plugin_1_5_assessment.py
+  status: not_active
+  runtime_contract_status: not_planned
+  compatibility: reduced
+  advisory_only: true
+  active_distribution: false
+  full_parity_blocked_by:
+    - filesystem_write
+    - code_execution
+    - persistent_workspace
+    - archive_io
+    - deterministic_validation
+    - controlled_mutation
+  no_false_pass: true
+  activation_requires_ci_verified_capabilities: true
+
+release_readiness:
+  release_builder: scripts/build_release.sh
+  release_asset_validation: scripts/validate_release_assets_1_5.py
+  workflow_validation: scripts/validate_release_workflow.py
+  runtime_assets_from_registry: true
+  exact_active_runtime_asset_set: true
+  release_metadata:
+    - distribution-build-manifest.json
+    - SHA256SUMS.txt
+    - release-metadata.yaml
+  wildcard_release_upload: false
+  release_gates:
+    - gpt_builder_1_5_contract
+    - openai_plugin_assessment
+    - chat_zip_1_5
+    - custom_gpt_1_5
+    - claude_projects_1_5
+    - opencode_1_5
+    - runtime_parity
+  ci_passed: true
+  distribution_workflow_passed: true
+
+next_step:
+  recommended: merge
+  title: Merge migrations-PR
+  reason: "GPT Byggaren 1.5.0-migreringen är komplett 9/9. Fyra aktiva runtimes är verifierade, OpenAI Plugin är explicit advisory only och CI/release följer samma registry-driven kontrakt."
+
+resume:
+  supported: true
+  required_files:
+    - migration-status-1.5.yaml
+    - docs/gpt-builder-1.5-runtime-migration.md
+    - runtime/gpt-builder-1.5-contract.yaml
+    - runtime/runtime-contract.json
+    - runtime/archimate-tool-contract.json
+    - runtime/distribution-registry.yaml
+    - STATUS.md
+  human_readable_status: "GPT Byggaren 1.5.0-migreringen är klar 9/9. PR kan mergas när slutlig CI är grön."

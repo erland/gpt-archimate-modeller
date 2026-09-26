@@ -33,7 +33,7 @@ def main():
             "Checkout released tag",
             "ref: ${{ steps.tag.outputs.tag }}",
             "bash scripts/build_release.sh",
-            "release-artifacts/*",
+            "validate_release_assets_1_5.py",
             "gh release upload",
             "actions/upload-artifact@v4",
         ]:
@@ -59,6 +59,13 @@ def main():
             "validate_all_distributions.py",
             "run_runtime_instruction_adherence.py",
             "validate_runtime_parity.py",
+            "validate_gpt_builder_1_5_contract.py",
+            "validate_openai_plugin_1_5_assessment.py",
+            "validate_chat_gpt_builder_1_5.py",
+            "validate_custom_gpt_builder_1_5.py",
+            "validate_claude_gpt_builder_1_5.py",
+            "validate_opencode_gpt_builder_1_5.py",
+            "validate_release_assets_1_5.py",
             "distribution-build-manifest.json",
             "SHA256SUMS.txt",
             "release-metadata.yaml",
@@ -74,14 +81,8 @@ def main():
         if "FILE_VERSION=" in text or "does not match repository VERSION" in text:
             errors.append("release script still makes repository VERSION authoritative")
 
-        for marker in [
-            "archimate-yaml-ea-gpt-chat-v$VERSION.zip",
-            "archimate-yaml-ea-gpt-custom-gpt-v$VERSION.zip",
-            "archimate-yaml-ea-gpt-claude-projects-v$VERSION.zip",
-            "archimate-yaml-ea-gpt-opencode-v$VERSION.zip",
-        ]:
-            if marker not in text:
-                errors.append(f"release script missing runtime artifact {marker}")
+        if "runtime/distribution-registry.yaml" not in (ROOT/"scripts/validate_release_assets_1_5.py").read_text(encoding="utf-8"):
+            errors.append("release asset validator must derive runtime assets from distribution registry")
 
         for runtime in ["chat_zip","custom_gpt","claude_projects","opencode"]:
             if f"--runtime {runtime}" not in text:

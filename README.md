@@ -91,13 +91,18 @@ Se [`docs/release-and-ci.md`](docs/release-and-ci.md).
 
 `runtime/distribution-registry.yaml` är source of truth för aktiva runtimes och releaseartefakternas namn. Taggen styr versionsnumret; releasebygget skapar även `SHA256SUMS.txt`, `release-metadata.yaml` och `distribution-build-manifest.json`.
 
-## GPT Byggaren 1.4 runtime migration
+## GPT Byggaren 1.5 runtime migration
 
-Ett separat runtime-migrationsspår har startats utan att ändra den ursprungliga produktplanens status 44/48. Målbilden är Chat ZIP, Custom GPT, Claude Projects och OpenCode från gemensamma plattformsneutrala contracts. Se [`docs/gpt-builder-1.4-runtime-migration.md`](docs/gpt-builder-1.4-runtime-migration.md).
+Projektet är migrerat till GPT Byggaren 1.5.0 utan att ändra canonical ArchiMate-beteende, projektformat eller stabil produktversion.
 
-## RC.5 runtime migration
+Aktiva peer runtimes är fortsatt Chat ZIP, Custom GPT, Claude Projects och OpenCode. OpenAI Plugin är explicit bedömd som `not_active / reduced / advisory only` eftersom full parity kräver filesystem write, code execution, persistent workspace, archive I/O samt deterministisk validation/mutation.
 
-GPT Byggaren 1.4-migreringen är genomförd för Chat ZIP, Custom GPT, Claude Projects och OpenCode. Full regression, fyr-runtime instruction adherence/parity och registry-driven release är del av RC.5.
+Se:
+- [`docs/gpt-builder-1.5-runtime-migration.md`](docs/gpt-builder-1.5-runtime-migration.md)
+- [`docs/openai-plugin-1.5-assessment.md`](docs/openai-plugin-1.5-assessment.md)
+- [`migration-status-1.5.yaml`](migration-status-1.5.yaml)
+
+CI och release använder samma 1.5-kontrakt och registry-driven exact asset selection.
 
 ## Real EA pilot
 

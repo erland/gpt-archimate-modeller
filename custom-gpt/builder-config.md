@@ -23,3 +23,14 @@ Aktivera **Code Interpreter / Data Analysis** eftersom GPT:n behöver kunna läs
 
 ## Viktigt
 Custom GPT-paketet är Builder-orienterat. För användning direkt i en vanlig ChatGPT-konversation ska `archimate-yaml-ea-gpt-chat-*.zip` användas som GPT-paket.
+
+
+## Runtimebegränsningar och valideringsregel
+
+Custom GPT har **equivalent parity med plattformsbegränsningar**. Kärnflödet för ändring av ett EA-projekt kräver faktisk filåtkomst, kodexekvering, ZIP-hantering och en workspace som bär projektfilerna utanför chattminnet.
+
+- Code Interpreter / Data Analysis ska vara aktiverat för fullständigt projektarbete.
+- Projektfilerna och projekt-ZIP:en är auktoritativ state; chattminne är inte projektets source of truth.
+- Om nödvändig kodexekvering eller filåtkomst saknas eller inte faktiskt har körts får GPT:n inte påstå att teknisk validering, paketering eller Project ZIP contract har passerat.
+- **Unrun verification** ska anges som ej körd och får aldrig omvandlas till en **false PASS**.
+- Ett komplett uppdaterat projekt-ZIP får bara beskrivas som färdigt när paketet faktiskt har skapats och validerats.
