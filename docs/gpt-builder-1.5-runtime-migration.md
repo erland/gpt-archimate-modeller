@@ -64,3 +64,20 @@ Säkerställ att registry, parity, evals och release assets följer 1.5.0-modell
 
 ### 9. Slutlig release-readiness
 Synka README/PROJECT/STATUS och verifiera att migreringen är mergeklar.
+
+
+## Slutstatus
+
+Migreringen är genomförd **9/9**.
+
+Slutlig runtime-status:
+
+- Chat ZIP — equivalent
+- Custom GPT — equivalent_with_platform_constraints
+- Claude Projects — reduced
+- OpenCode — equivalent
+- OpenAI Plugin — not_active / reduced / advisory only
+
+CI och release använder samma GPT Byggaren 1.5.0-kontrakt. Release-assets härleds exakt från `runtime/distribution-registry.yaml`, och full plugin-parity får inte påstås utan verifierade filesystem/write/code execution/persistent workspace/archive/validation/mutation-capabilities.
+
+Den stabila produktversionen är fortsatt **1.0.0**, och produktplanen är fortsatt **48/48**.
