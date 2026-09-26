@@ -1,0 +1,72 @@
+schema_version: 1
+builder:
+  target_version: 1.5.0
+  source_version: 1.4.0
+  strategy: normalize_existing_contracts
+  behavior_preserving: true
+
+canonical:
+  instruction: gpt/SYSTEM_INSTRUCTION.md
+  runtime_contract: runtime/runtime-contract.json
+  tool_contract: runtime/archimate-tool-contract.json
+  distribution_registry: runtime/distribution-registry.yaml
+  parity_contract: evals/runtime-parity-contract.yaml
+
+contracts:
+  behavior:
+    source: runtime/runtime-contract.json
+    key: behavior
+    authority: canonical_instruction
+  capabilities:
+    source: runtime/runtime-contract.json
+    key: capabilities
+    required:
+      - filesystem_read
+      - filesystem_write
+      - code_execution
+      - structured_data
+      - persistent_workspace
+      - archive_io
+  artifacts:
+    source: runtime/runtime-contract.json
+    key: artifacts
+    required:
+      - ea_project_package
+      - validation_result
+  state:
+    source: runtime/runtime-contract.json
+    key: workspace_state
+    authority: project_files
+    portable_authority: ea_project_zip
+    conversation_authoritative: false
+  tools:
+    abstract_source: runtime/runtime-contract.json
+    concrete_source: runtime/archimate-tool-contract.json
+    project_root_argument: projectRoot
+    generic_shell_is_canonical_api: false
+    mutation_approval: ask
+
+runtime_policy:
+  active:
+    - chat_zip
+    - custom_gpt
+    - claude_projects
+    - opencode
+  compatibility:
+    chat_zip: equivalent
+    custom_gpt: equivalent_with_platform_constraints
+    claude_projects: reduced
+    opencode: equivalent
+  openai_plugin:
+    status: not_active
+    target: reduced
+    assessment_required: true
+
+invariants:
+  - YAML-projektet är source of truth
+  - Stable IDs
+  - change set
+  - Validera före och efter
+  - komplett uppdaterat projekt-ZIP
+  - fabricera aldrig
+  - Project ZIP contract
