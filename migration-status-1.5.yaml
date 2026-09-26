@@ -13,12 +13,13 @@ migration:
   total_steps: 9
 
 progress:
-  current_step: 4
-  last_completed_step: 3
+  current_step: 5
+  last_completed_step: 4
   completed_steps:
     - 1
     - 2
     - 3
+    - 4
   skipped_steps: []
   inserted_steps: []
 
@@ -26,7 +27,7 @@ state:
   overall: warning
   blocking_issues: []
   warnings:
-    - "Chat ZIP, Custom GPT, Claude Projects och OpenCode behöver verifieras explicit mot den normaliserade 1.5.0-modellen."
+    - "Custom GPT, Claude Projects och OpenCode behöver verifieras explicit mot den normaliserade 1.5.0-modellen."
     - "OpenAI Plugin compatibility assessment återstår."
 
 preservation:
@@ -76,10 +77,21 @@ registry:
     status: not_active
     compatibility: reduced
 
+chat_zip_verification:
+  validation: scripts/validate_chat_gpt_builder_1_5.py
+  canonical_instruction_byte_identical: true
+  runtime_toolchain_present: true
+  workspace_state_authority: project_files
+  portable_authority: ea_project_zip
+  conversation_authoritative: false
+  project_zip_contract_preserved: true
+  artifact_parity: equivalent
+  ci_passed: true
+
 next_step:
-  recommended: 4
-  title: Verifiera Chat ZIP
-  reason: "Distribution registry och build metadata är nu explicit normaliserade för GPT Byggaren 1.5.0. Registry-driven build skapar fortfarande exakt fyra aktiva runtime-ZIP:ar och både CI samt distributions-workflow passerar."
+  recommended: 5
+  title: Verifiera Custom GPT
+  reason: "Chat ZIP passerar nu en separat GPT Byggaren 1.5.0-gate för canonical instruktion, runtime-toolchain, workspace-/ZIP-authoritet, Project ZIP contract och equivalent artifact parity. Både CI och distributions-workflow är gröna."
 
 resume:
   supported: true
@@ -91,4 +103,4 @@ resume:
     - runtime/archimate-tool-contract.json
     - runtime/distribution-registry.yaml
     - STATUS.md
-  human_readable_status: "Steg 1–3 av 9 i GPT Byggaren 1.5.0-migreringen är klara."
+  human_readable_status: "Steg 1–4 av 9 i GPT Byggaren 1.5.0-migreringen är klara."
