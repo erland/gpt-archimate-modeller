@@ -20,6 +20,16 @@ def main():
     project=yaml.safe_load(PROJECT.read_text(encoding="utf-8"))
     contract=json.loads(CONTRACT.read_text(encoding="utf-8"))
 
+    builder=registry.get("builder_contract",{})
+    if builder.get("target_version")!="1.5.0":
+        errors.append("builder_contract.target_version must be 1.5.0")
+    if builder.get("normalized_contract")!="runtime/gpt-builder-1.5-contract.yaml":
+        errors.append("builder_contract.normalized_contract mismatch")
+    if builder.get("runtime_selection")!="active_targets":
+        errors.append("builder_contract.runtime_selection must be active_targets")
+    if builder.get("artifact_policy")!="exact_active_target_set":
+        errors.append("builder_contract.artifact_policy must be exact_active_target_set")
+
     active=registry.get("active_targets",[])
     if active!=EXPECTED:
         errors.append(f"active targets must be {EXPECTED!r}, got {active!r}")
@@ -37,6 +47,12 @@ def main():
         if not cfg:
             errors.append(f"missing target config: {runtime}")
             continue
+        if cfg.get("status")!="active":
+            errors.append(f"{runtime}: target status must be active")
+        if cfg.get("adapter_id")!=runtime:
+            errors.append(f"{runtime}: adapter_id mismatch")
+        if not cfg.get("instruction_entrypoint"):
+            errors.append(f"{runtime}: instruction_entrypoint missing")
         pattern=cfg.get("artifact_pattern")
         if not isinstance(pattern,str) or "{version}" not in pattern:
             errors.append(f"{runtime}: artifact_pattern must contain {{version}}")
@@ -58,6 +74,22 @@ def main():
         for rel in script_refs(cmd):
             if not (ROOT/rel).is_file():
                 errors.append(f"{section}: referenced script missing: {rel}")
+
+    inactive=registry.get("inactive_targets",{}).get("openai_plugin",{})
+    plugin=contract.get("runtime_compatibility",{}).get("openai_plugin",{})
+    if inactive.get("status")!="not_active":
+        errors.append("openai_plugin registry status must be not_active")
+    if inactive.get("compatibility")!=plugin.get("target"):
+        errors.append("openai_plugin registry compatibility must match runtime contract target")
+
+    release=registry.get("release",{})
+    if release.get("runtime_assets_from")!="active_targets":
+        errors.append("release.runtime_assets_from must be active_targets")
+    if release.get("wildcard_runtime_selection") is not False:
+        errors.append("release wildcard runtime selection must be false")
+    expected_meta={"distribution-build-manifest.json","SHA256SUMS.txt","release-metadata.yaml"}
+    if set(release.get("include_metadata") or [])!=expected_meta:
+        errors.append("release metadata set mismatch")
 
     hygiene=registry.get("hygiene",{})
     if not hygiene.get("generated_roots"):
