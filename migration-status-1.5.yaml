@@ -13,11 +13,12 @@ migration:
   total_steps: 9
 
 progress:
-  current_step: 3
-  last_completed_step: 2
+  current_step: 4
+  last_completed_step: 3
   completed_steps:
     - 1
     - 2
+    - 3
   skipped_steps: []
   inserted_steps: []
 
@@ -25,7 +26,7 @@ state:
   overall: warning
   blocking_issues: []
   warnings:
-    - "Distribution registry och build metadata behöver normaliseras uttryckligt för GPT Byggaren 1.5.0."
+    - "Chat ZIP, Custom GPT, Claude Projects och OpenCode behöver verifieras explicit mot den normaliserade 1.5.0-modellen."
     - "OpenAI Plugin compatibility assessment återstår."
 
 preservation:
@@ -55,21 +56,30 @@ gpt_builder_1_5:
   project_root_argument: projectRoot
   mutation_approval: ask
 
-runtime_baseline:
-  active:
+registry:
+  source_of_truth: runtime/distribution-registry.yaml
+  builder_target_version: 1.5.0
+  runtime_selection: active_targets
+  artifact_policy: exact_active_target_set
+  development_version_source: VERSION
+  release_version_source: github_release_tag
+  active_targets:
     - chat_zip
     - custom_gpt
     - claude_projects
     - opencode
+  release_metadata:
+    - distribution-build-manifest.json
+    - SHA256SUMS.txt
+    - release-metadata.yaml
   openai_plugin:
     status: not_active
-    previous_assessment: not_planned_reduced
-    reason: "Kritiska filesystem/write/code execution/persistent workspace/archive/tool-krav saknar full parity."
+    compatibility: reduced
 
 next_step:
-  recommended: 3
-  title: Normalisera registry och build metadata
-  reason: "Befintliga behavior-, capability-, artifact-, state- och tool-kontrakt är nu explicit mappade och validerade mot GPT Byggaren 1.5.0 utan att ändra ArchiMate-domänbeteendet."
+  recommended: 4
+  title: Verifiera Chat ZIP
+  reason: "Distribution registry och build metadata är nu explicit normaliserade för GPT Byggaren 1.5.0. Registry-driven build skapar fortfarande exakt fyra aktiva runtime-ZIP:ar och både CI samt distributions-workflow passerar."
 
 resume:
   supported: true
@@ -81,4 +91,4 @@ resume:
     - runtime/archimate-tool-contract.json
     - runtime/distribution-registry.yaml
     - STATUS.md
-  human_readable_status: "Steg 1–2 av 9 i GPT Byggaren 1.5.0-migreringen är klara."
+  human_readable_status: "Steg 1–3 av 9 i GPT Byggaren 1.5.0-migreringen är klara."
