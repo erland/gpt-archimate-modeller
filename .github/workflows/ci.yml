@@ -47,6 +47,7 @@ jobs:
           python scripts/scan_repository_hygiene.py .
           python scripts/validate_release_workflow.py
           python scripts/validate_stable_release.py
+          python scripts/validate_gpt_builder_1_5_release_readiness.py
       - name: Build and validate distributions
         shell: bash
         run: |
