@@ -1,0 +1,66 @@
+schema_version: 1
+project:
+  id: archimate-yaml-ea-gpt
+  name: ArchiMate YAML EA GPT
+  stable_product_version: 1.0.0
+  product_plan_status: 48/48
+
+migration:
+  target_builder_version: 1.5.0
+  source_builder_version: 1.4.0
+  strategy: behavior_preserving
+  plan: docs/gpt-builder-1.5-runtime-migration.md
+  total_steps: 9
+
+progress:
+  current_step: 2
+  last_completed_step: 1
+  completed_steps:
+    - 1
+  skipped_steps: []
+  inserted_steps: []
+
+state:
+  overall: warning
+  blocking_issues: []
+  warnings:
+    - "1.5.0-normalisering av befintliga runtime-kontrakt återstår."
+    - "OpenAI Plugin compatibility assessment återstår."
+
+preservation:
+  canonical_instruction: gpt/SYSTEM_INSTRUCTION.md
+  runtime_contract: runtime/runtime-contract.json
+  tool_contract: runtime/archimate-tool-contract.json
+  distribution_registry: runtime/distribution-registry.yaml
+  product_status: STATUS.md
+  product_version: VERSION
+  preserve_product_plan: true
+  preserve_evals: true
+  preserve_runtime_behavior: true
+
+runtime_baseline:
+  active:
+    - chat_zip
+    - custom_gpt
+    - claude_projects
+    - opencode
+  openai_plugin:
+    status: not_active
+    previous_assessment: not_planned_reduced
+    reason: "Kritiska filesystem/write/code execution/persistent workspace/archive/tool-krav saknar full parity."
+
+next_step:
+  recommended: 2
+  title: Normalisera kontrakten mot GPT Byggaren 1.5.0
+  reason: "Separat 1.5.0-migrationsspår finns nu. Nästa steg är att normalisera befintliga runtime-kontrakt utan att ändra canonical ArchiMate-beteende."
+
+resume:
+  supported: true
+  required_files:
+    - migration-status-1.5.yaml
+    - docs/gpt-builder-1.5-runtime-migration.md
+    - runtime/runtime-contract.json
+    - runtime/archimate-tool-contract.json
+    - runtime/distribution-registry.yaml
+    - STATUS.md
+  human_readable_status: "Steg 1 av 9 i GPT Byggaren 1.5.0-migreringen är klart."
