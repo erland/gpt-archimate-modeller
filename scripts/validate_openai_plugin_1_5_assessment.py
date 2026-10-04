@@ -22,38 +22,37 @@ def main():
     assessment=(ROOT/"docs/openai-plugin-1.5-assessment.md").read_text(encoding="utf-8").casefold()
 
     plugin=runtime["runtime_compatibility"].get("openai_plugin",{})
-    if plugin.get("status")!="not_planned":
-        errors.append("runtime contract OpenAI Plugin status must remain not_planned")
-    if plugin.get("target")!="reduced":
-        errors.append("runtime contract OpenAI Plugin target must remain reduced")
+    if plugin.get("status")!="implemented":
+        errors.append("runtime contract OpenAI Plugin status must be implemented")
+    if plugin.get("target")!="equivalent_runtime_dependent":
+        errors.append("runtime contract OpenAI Plugin target must be equivalent_runtime_dependent")
 
     nplugin=normalized["runtime_policy"]["openai_plugin"]
-    if nplugin.get("status")!="not_active" or nplugin.get("target")!="reduced":
-        errors.append("normalized 1.5 plugin policy must remain not_active/reduced")
+    if nplugin.get("status")!="active" or nplugin.get("target")!="equivalent_runtime_dependent":
+        errors.append("normalized 1.5 plugin policy must be active/equivalent_runtime_dependent")
     if nplugin.get("assessment_required") is not True:
         errors.append("OpenAI Plugin assessment must remain required")
 
-    rplugin=registry.get("inactive_targets",{}).get("openai_plugin",{})
-    if rplugin.get("status")!="not_active" or rplugin.get("compatibility")!="reduced":
-        errors.append("distribution registry plugin policy must remain not_active/reduced")
-    if "openai_plugin" in registry.get("active_targets",[]):
-        errors.append("OpenAI Plugin must not appear in active_targets")
-    if "openai_plugin" in registry.get("targets",{}):
-        errors.append("OpenAI Plugin must not have an active distribution target")
+    rplugin=registry.get("targets",{}).get("openai_plugin",{})
+    if rplugin.get("status")!="active" or rplugin.get("compatibility")!="equivalent_runtime_dependent":
+        errors.append("distribution registry plugin policy must be active/equivalent_runtime_dependent")
+    if "openai_plugin" not in registry.get("active_targets",[]):
+        errors.append("OpenAI Plugin must appear in active_targets")
 
     caps={k for k,v in runtime["capabilities"]["requirements"].items() if v["level"]=="required"}
     if caps!=REQUIRED_FULL_PARITY_CAPS:
         errors.append(f"required full-parity capability set changed: {sorted(caps)}")
 
     markers=[
-        "reduced / advisory only",
+        "equivalent_runtime_dependent",
         "filesystem read",
         "filesystem write",
         "code execution",
         "persistent workspace",
         "archive i/o",
         "no-false-pass",
-        "ingen",
+        "approval",
+        "project zip contract",
     ]
     for marker in markers:
         if marker not in assessment:
@@ -65,8 +64,7 @@ def main():
             print("-",e)
         return 1
 
-    print("OK: OpenAI Plugin remains not_active/reduced advisory only")
-    print("No distribution or full runtime parity is claimed")
+    print("OK: OpenAI Plugin active/equivalent_runtime_dependent")
     return 0
 
 if __name__=="__main__":
