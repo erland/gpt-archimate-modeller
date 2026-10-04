@@ -4,7 +4,7 @@ import argparse,re,yaml
 
 ROOT=Path(__file__).resolve().parents[1]
 EXPECTED="1.0.0"
-RUNTIMES={"chat_zip","custom_gpt","claude_projects","opencode"}
+RUNTIMES={"chat_zip","custom_gpt","claude_projects","opencode","openai_plugin"}
 RUNTIME_CONTRACTS={
     "runtime/runtime-contract.json",
     "runtime/archimate-tool-contract.json",
@@ -44,8 +44,8 @@ def main():
         errors.append("stable 0.1 migration mismatch")
     if set(manifest.get("active_runtimes",[]))!=RUNTIMES:
         errors.append("stable runtime set mismatch")
-    if manifest.get("active_runtime_count")!=4:
-        errors.append("stable runtime count must be four")
+    if manifest.get("active_runtime_count")!=5:
+        errors.append("stable runtime count must be five")
     if set(manifest.get("structurally_validated_runtime_contracts",[]))!=RUNTIME_CONTRACTS:
         errors.append("runtime contract set mismatch")
     if set(manifest.get("structurally_validated_format_contracts",[]))!=FORMAT_CONTRACTS:
@@ -87,7 +87,7 @@ def main():
     if args.distribution_version:
         print(f"Distribution version from release tag: {args.distribution_version}")
     print("Product plan: 48/48")
-    print("Runtime distributions: 4")
+    print("Runtime distributions: 5")
     return 0
 
 if __name__=="__main__":
