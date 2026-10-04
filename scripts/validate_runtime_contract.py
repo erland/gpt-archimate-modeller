@@ -16,7 +16,7 @@ SCHEMAS={
     "workspace_state":ROOT/"schemas"/"runtime-workspace-state-contract.schema.json",
     "tools":ROOT/"schemas"/"runtime-tool-contract.schema.json",
 }
-EXPECTED_ACTIVE=["chat_zip","custom_gpt","claude_projects","opencode"]
+EXPECTED_ACTIVE=["chat_zip","custom_gpt","claude_projects","opencode","openai_plugin"]
 
 def main() -> int:
     errors=[]
@@ -39,8 +39,8 @@ def main() -> int:
         errors.append(f"runtime contract active targets mismatch: {active}")
 
     plugin=compat.get("openai_plugin",{})
-    if plugin.get("status")!="not_planned" or plugin.get("target")!="reduced":
-        errors.append("OpenAI Plugin v1 decision must remain explicit not_planned/reduced")
+    if plugin.get("status")!="implemented" or plugin.get("target")!="equivalent_runtime_dependent":
+        errors.append("OpenAI Plugin must be implemented/equivalent_runtime_dependent")
 
     if data["workspace_state"]["state"].get("conversation_fallback") is not False:
         errors.append("chat memory must not be workspace state authority")
