@@ -12,8 +12,9 @@ def main():
     chat=d/f'archimate-yaml-ea-gpt-chat-v{version}.zip'
     claude=d/f'archimate-yaml-ea-gpt-claude-projects-v{version}.zip'
     opencode=d/f'archimate-yaml-ea-gpt-opencode-v{version}.zip'
+    plugin=d/f'archimate-yaml-ea-gpt-plugin-v{version}.zip'
     errors=[]
-    for p in (custom,chat,claude,opencode):
+    for p in (custom,chat,claude,opencode,plugin):
         if not p.exists(): errors.append(f'Missing {p.name}'); continue
         with zipfile.ZipFile(p) as z:
             if z.testzip(): errors.append(f'Corrupt {p.name}')
@@ -74,6 +75,41 @@ def main():
     if opencode.exists():
         p=subprocess.run([sys.executable,str(ROOT/'scripts'/'validate_opencode_distribution.py'),str(opencode)])
         if p.returncode: errors.append('opencode: dedicated validation failed')
+    if plugin.exists():
+        with zipfile.ZipFile(plugin) as z:
+            n=members(z); root=n[0].split('/')[0]+'/'
+            required=[
+                'plugin.json','README.md','runtime-contract.json','archimate-tool-contract.json',
+                'skills/archimate-modeller/SKILL.md',
+                'skills/archimate-modeller/scripts/new_project.py',
+                'skills/archimate-modeller/scripts/update_project.py',
+                'skills/archimate-modeller/scripts/validate_project_zip.py',
+                'skills/archimate-modeller/scripts/project_control.py',
+                'skills/archimate-modeller/schemas/ea-project.schema.json',
+                'skills/archimate-modeller/metamodel',
+            ]
+            for req in required:
+                if req.endswith('/metamodel'):
+                    if not any(x.startswith(root+req+'/') for x in n): errors.append('plugin: missing metamodel runtime data')
+                elif root+req not in n: errors.append(f'plugin: missing {req}')
+            skill=z.read(root+'skills/archimate-modeller/SKILL.md').decode('utf-8')
+            for marker in [
+                'Python code execution is required',
+                'Never report unrun verification as PASS',
+                'Canonical mutation requires explicit approval',
+                'YAML-projektet är source of truth',
+                'Project ZIP contract'
+            ]:
+                if marker not in skill: errors.append(f'plugin: SKILL.md missing {marker}')
+            contract=__import__('json').loads(z.read(root+'runtime-contract.json').decode('utf-8'))
+            if contract.get('runtime_id')!='openai_plugin': errors.append('plugin: runtime_id mismatch')
+            pc=contract.get('plugin_adapter',{})
+            req=pc.get('runtime_requirements',{})
+            if req.get('filesystem_write')!='required': errors.append('plugin: filesystem write must be required')
+            ce=req.get('code_execution',{})
+            if ce.get('level')!='required' or ce.get('fallback')!='block': errors.append('plugin: code execution must be required/block')
+            if pc.get('script_resources',{}).get('mcp_required_for_resource_use') is not False:
+                errors.append('plugin: script resources must not require MCP')
     if errors:
         print('FAILED'); [print('-',e) for e in errors]; return 1
     print('OK')
@@ -81,5 +117,6 @@ def main():
     print(f'Chat: {chat.name}')
     print(f'Claude Projects: {claude.name}')
     print(f'OpenCode: {opencode.name}')
+    print(f'OpenAI Plugin: {plugin.name}')
     return 0
 if __name__=='__main__': raise SystemExit(main())
