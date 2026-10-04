@@ -2,15 +2,15 @@
 
 ## Beslut
 
-OpenAI Plugin är **inte en aktiv runtime-distribution** för ArchiMate YAML EA GPT 1.5.0.
+OpenAI Plugin är en **aktiv peer runtime** för ArchiMate YAML EA GPT.
 
-Compatibility-målet är **reduced / advisory only**.
+Compatibility är `equivalent_runtime_dependent`.
 
-Pluginen får användas för rådgivande ArchiMate-stöd, förklaringar, modellgranskning och förslag när användaren tillhandahåller tillräckligt underlag, men den får inte presenteras som fullvärdig peer runtime för projektets ZIP-first change/validate/package-flöde.
+Det betyder att canonical ArchiMate-beteende, projektstate, mutation, validering och paketering kan bevaras när hosten erbjuder de required capabilities som projektet redan deklarerar. Pluginpaketet provisionerar inte själv workspace eller Python-runtime.
 
-## Varför full parity inte är möjlig
+## Required host capabilities
 
-Projektets canonical runtime contract kräver följande capabilities för full funktion:
+Full canonical körning kräver:
 
 1. filesystem read,
 2. filesystem write,
@@ -19,52 +19,58 @@ Projektets canonical runtime contract kräver följande capabilities för full f
 5. persistent workspace,
 6. archive I/O.
 
-Dessutom kräver kärnflödet:
+Därutöver krävs verklig exekvering av canonical toolchain, teknisk validering före och efter mutation samt komplett Project ZIP contract-verifiering.
 
-- explicit projectRoot/workspace,
-- verklig exekvering av valideringsverktyg,
-- kontrollerad canonical mutation via change-set,
-- teknisk validering före och efter mutation,
-- komplett projekt-ZIP efter ändring,
-- faktisk Project ZIP contract-verifiering,
-- no-false-PASS.
+## Packaged runtime tools
 
-En skills-first plugin får därför inte anta att dessa capabilities finns bara för att instruktioner eller referensfiler kan paketeras.
+Pluginen återanvänder den etablerade runtime-script-allowlisten från Chat-distributionen. Den innehåller bland annat:
 
-## Tillåtet advisory-beteende
+- `new_project.py`
+- `update_project.py`
+- `validate_project_zip.py`
+- `project_control.py`
+- `query.py`
+- `impact_analysis.py`
+- `model_quality_report.py`
+- `render_report.py`
+- `export_diagram.py`
+- `export_model_exchange.py`
+- `import_model_exchange.py`
 
-En framtida advisory-plugin får:
+samt deras supportverktyg.
 
-- förklara ArchiMate-semantik,
-- resonera om element, relationer och specializations,
-- föreslå change sets,
-- analysera användartillhandahållet modellunderlag,
-- föreslå queries, reports och views,
-- förklara valideringsfel som användaren tillhandahåller.
+Skillen paketerar även runtime-relevanta schemas, metamodel, package contracts, migrations, validation policies, queries, reports, views och templates så verktygen kan köras med samma relativa runtime-layout som i Chat ZIP.
 
-Den får inte, utan faktisk capability:
+Scripts är resources och behöver inte MCP-wrapper enbart för att användas. Hostens kompatibla Python code execution kan köra dem direkt.
 
-- hävda att ett script har körts,
-- hävda att teknisk validering har passerat,
-- hävda att workspace har muterats,
-- hävda att ett komplett projekt-ZIP har skapats,
-- hävda att Project ZIP contract har passerat,
-- behandla chattminne som projektets auktoritativa state.
+## Mutation och approval
 
-## Aktiveringskriterier
+Canonical mutation kräver fortsatt explicit approval enligt tool-contractet.
 
-OpenAI Plugin får inte flyttas till aktiv peer runtime förrän en konkret implementation kan demonstrera och CI-verifiera:
+Pluginen får inte:
 
-- filesystem read,
-- filesystem write,
-- code execution,
-- persistent workspace,
-- archive I/O,
-- deterministisk validation/mutation mot canonical tool-contract.
+- mutera canonical projektstate utan approval,
+- hoppa över pre-validation eller post-validation,
+- hävda att validation har passerat om den inte faktiskt körts,
+- behandla chat history som project state,
+- hävda att ett komplett projekt-ZIP finns om det inte faktiskt skapats och validerats.
 
-Fram till dess gäller:
+No-false-PASS gäller alltid.
 
-- registry status: `not_active`
-- runtime contract status: `not_planned`
-- compatibility target: `reduced`
-- distribution artifact: ingen
+## Runtime-dependent parity
+
+`equivalent_runtime_dependent` är korrekt eftersom parity beror på hosten.
+
+Om filesystem write, code execution, persistent workspace eller archive I/O saknas kan pluginen fortfarande ge rådgivande ArchiMate-stöd, men den får inte hävda att det canonical ZIP-first change/validate/package-flödet genomförts.
+
+## Project ZIP contract
+
+Det kompletta EA project ZIP är den portabla auktoriteten. Efter en projektändring ska ett komplett validerat ZIP produceras enligt Project ZIP contract.
+
+## Release
+
+Plugin-distributionen byggs och valideras som:
+
+`archimate-yaml-ea-gpt-plugin-v<version>.zip`
+
+Den ingår i registry-driven build, runtime parity, checksums, release metadata och exact release asset set.
