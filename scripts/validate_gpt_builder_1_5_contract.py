@@ -64,8 +64,8 @@ def main():
 
     plugin=compat.get("openai_plugin",{})
     pc=contract["runtime_policy"]["openai_plugin"]
-    if plugin.get("status")!="not_planned" or plugin.get("target")!=pc["target"]:
-        errors.append("OpenAI Plugin assessment baseline changed unexpectedly")
+    if plugin.get("status")!="implemented" or plugin.get("target")!=pc["target"]:
+        errors.append("OpenAI Plugin runtime policy mismatch")
 
     for marker in contract["invariants"]:
         if marker.casefold() not in instruction.casefold():
@@ -78,7 +78,7 @@ def main():
         return 1
 
     print("OK: GPT Builder 1.5 normalized contract")
-    print("Preserved behavior/capability/artifact/state/tool contracts for four active runtimes")
+    print("Preserved behavior/capability/artifact/state/tool contracts for five active runtimes")
     return 0
 
 if __name__=="__main__":
