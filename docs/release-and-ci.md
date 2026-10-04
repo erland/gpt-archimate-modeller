@@ -4,12 +4,13 @@ Repo-roten är katalogen där `README.md` ligger. Distributionerna byggs från d
 
 ## Runtime-artefakter
 
-Den stabila releasen `v1.0.0` skapar fyra ZIP-distributioner:
+Den stabila releasen `v1.0.0` skapar fem ZIP-distributioner:
 
 - `archimate-yaml-ea-gpt-chat-v1.0.0.zip` — Chat ZIP, target **equivalent**.
 - `archimate-yaml-ea-gpt-custom-gpt-v1.0.0.zip` — Custom GPT, **equivalent_with_platform_constraints**.
 - `archimate-yaml-ea-gpt-claude-projects-v1.0.0.zip` — Claude Projects, **reduced** parity.
 - `archimate-yaml-ea-gpt-opencode-v1.0.0.zip` — OpenCode, target **equivalent**.
+- `archimate-yaml-ea-gpt-plugin-v1.0.0.zip` — OpenAI Plugin, **equivalent_runtime_dependent**.
 
 Releasepaketet innehåller dessutom:
 
@@ -17,7 +18,7 @@ Releasepaketet innehåller dessutom:
 - `SHA256SUMS.txt`
 - `release-metadata.yaml`
 
-OpenAI Plugin v1 är bedömd men inte aktiverad och publiceras inte.
+OpenAI Plugin är aktiv skills-first runtime. Full canonical körning kräver kompatibel filesystem/code-execution/persistent-workspace/archive-I/O hos hosten.
 
 ## Build och validering
 
@@ -44,9 +45,9 @@ Release-buildern:
 
 1. kör regression och canonical validators,
 2. validerar registry och repository hygiene,
-3. bygger samtliga fyra runtimes,
+3. bygger samtliga fem runtimes,
 4. validerar build-manifestet,
-5. kör instruction adherence för alla fyra,
+5. kör instruction adherence för alla fem,
 6. kör femdimensionell runtime parity,
 7. skapar checksummor och release metadata.
 
@@ -60,7 +61,7 @@ men styr inte versionsnumret i en publicerad release.
 ## GitHub Actions
 
 - `ci.yml` — regression, contracts, registry, hygiene, release-workflow validation, registry-build, instruction adherence och parity.
-- `build-distributions.yml` — bygger registry-distributioner på push/PR/workflow_dispatch och laddar upp de fyra ZIP:arna plus build-manifest som workflow artifact.
+- `build-distributions.yml` — bygger registry-distributioner på push/PR/workflow_dispatch och laddar upp de fem ZIP:arna plus build-manifest som workflow artifact.
 - `release.yml` — triggas när en GitHub Release publiceras, bygger releaseartefakterna från release-taggen och laddar upp dem till den redan skapade releasen.
 
 
@@ -68,4 +69,4 @@ men styr inte versionsnumret i en publicerad release.
 
 Efter Step 48 ska PR:n först mergas med gröna slutgrindar. Därefter skapar och publicerar
 du GitHub Release, exempelvis med taggen `v1.0.0`. Publiceringen startar release-workflowet,
-som bygger och laddar upp de fyra distributionspaketen, manifest, checksummor och metadata.
+som bygger och laddar upp de fem distributionspaketen, manifest, checksummor och metadata.
