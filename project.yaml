@@ -89,8 +89,8 @@ runtime_migration:
   - custom_gpt
   - claude_projects
   - opencode
-  assessed_not_planned:
   - openai_plugin
+  assessed_not_planned: []
   parity_dimensions:
   - behavior
   - capability
@@ -119,6 +119,14 @@ distributions:
     typed_tools: .opencode/tools/archimate.ts
     project_root_argument: projectRoot
     direct_shell_for_canonical_mutation: false
+  openai_plugin:
+    status: implemented
+    compatibility: equivalent_runtime_dependent
+    artifact_pattern: archimate-yaml-ea-gpt-plugin-v<version>.zip
+    instructions: skills/archimate-modeller/SKILL.md
+    runtime_contract_snapshot: runtime-contract.json
+    tool_contract_snapshot: archimate-tool-contract.json
+    runtime_scripts: packaged_python_resources
 
 build:
   registry_driven: true
@@ -141,19 +149,21 @@ evals_runtime_parity:
   - custom_gpt
   - claude_projects
   - opencode
+  - openai_plugin
 
 release:
   workflow: .github/workflows/release.yml
   builder: scripts/build_release.sh
   validator: scripts/validate_release_workflow.py
   version_source: github_release_tag
-  runtime_count: 4
+  runtime_count: 5
   registry_driven: true
   artifacts:
   - archimate-yaml-ea-gpt-chat-v<version>.zip
   - archimate-yaml-ea-gpt-custom-gpt-v<version>.zip
   - archimate-yaml-ea-gpt-claude-projects-v<version>.zip
   - archimate-yaml-ea-gpt-opencode-v<version>.zip
+  - archimate-yaml-ea-gpt-plugin-v<version>.zip
   - distribution-build-manifest.json
   - SHA256SUMS.txt
   - release-metadata.yaml
@@ -165,7 +175,7 @@ release_readiness:
   product_plan_completed: 48
   product_plan_total: 48
   full_regression_required: true
-  four_runtime_parity_required: true
+  five_runtime_parity_required: true
 
 pilot:
   step: 45
@@ -224,6 +234,7 @@ final_release:
   - custom_gpt
   - claude_projects
   - opencode
+  - openai_plugin
   publish_after_merge: true
   release_trigger: github_release_published
   distribution_version_source: github_release_tag
