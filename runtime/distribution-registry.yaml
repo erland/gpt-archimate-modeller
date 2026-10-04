@@ -14,12 +14,9 @@ active_targets:
   - custom_gpt
   - claude_projects
   - opencode
+  - openai_plugin
 
-inactive_targets:
-  openai_plugin:
-    compatibility: reduced
-    status: not_active
-    reason: "Full parity saknas för filesystem write, code execution, persistent workspace, archive I/O och deterministisk mutation/validation."
+inactive_targets: {}
 
 unified_builder:
   command:
@@ -64,6 +61,12 @@ targets:
     artifact_pattern: archimate-yaml-ea-gpt-opencode-v{version}.zip
     compatibility: equivalent
     instruction_entrypoint: AGENTS.md
+  openai_plugin:
+    status: active
+    adapter_id: openai_plugin
+    artifact_pattern: archimate-yaml-ea-gpt-plugin-v{version}.zip
+    compatibility: equivalent_runtime_dependent
+    instruction_entrypoint: skills/archimate-modeller/SKILL.md
 
 release:
   include_metadata:
