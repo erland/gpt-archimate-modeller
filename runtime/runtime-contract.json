@@ -238,8 +238,22 @@
       "direct_shell_for_canonical_mutation": false
     },
     "openai_plugin": {
-      "status": "not_planned",
-      "target": "reduced"
+      "status": "implemented",
+      "target": "equivalent_runtime_dependent",
+      "distribution": "archimate-yaml-ea-gpt-plugin-v<version>.zip",
+      "instructions": "skills/archimate-modeller/SKILL.md",
+      "runtime_requirements": {
+        "filesystem_read": "required",
+        "filesystem_write": "required",
+        "code_execution": {
+          "level": "required",
+          "language": "python",
+          "fallback": "block"
+        },
+        "structured_data": "required",
+        "persistent_workspace": "required",
+        "archive_io": "required"
+      }
     }
   }
 }
