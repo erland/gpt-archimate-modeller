@@ -59,6 +59,18 @@ def zip_tree(src,out):
             zi.external_attr=(mode&0xffff)<<16
             z.writestr(zi,p.read_bytes())
 
+def zip_plugin_tree(src,out):
+    src=Path(src); out=Path(out); out.parent.mkdir(parents=True,exist_ok=True)
+    with zipfile.ZipFile(out,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=9) as z:
+        for p in sorted(x for x in src.rglob('*') if x.is_file()):
+            rel=p.relative_to(src).as_posix()
+            zi=zipfile.ZipInfo(rel,FIXED); zi.compress_type=zipfile.ZIP_DEFLATED; zi.create_system=3
+            rel_path=Path(rel)
+            is_script = 'scripts' in rel_path.parts and p.suffix in {'.py','.sh'}
+            mode = 0o100755 if is_script else 0o100644
+            zi.external_attr=(mode&0xffff)<<16
+            z.writestr(zi,p.read_bytes())
+
 def main():
     ap=argparse.ArgumentParser(); ap.add_argument('--version',required=True); ap.add_argument('--output-dir',default='dist'); a=ap.parse_args()
     version=a.version.strip(); outdir=ROOT/a.output_dir; shutil.rmtree(outdir,ignore_errors=True); outdir.mkdir(parents=True)
@@ -227,7 +239,7 @@ See ../../archimate-tool-contract.json and ../../runtime-contract.json for the c
             'Full canonical project work requires a writable persistent workspace, archive I/O and compatible Python execution.\n',
             encoding='utf-8'
         )
-        zip_tree(pluginroot,outdir/f'archimate-yaml-ea-gpt-plugin-v{version}.zip')
+        zip_plugin_tree(pluginroot,outdir/f'archimate-yaml-ea-gpt-plugin-v{version}.zip')
 
         chatroot=td/f'archimate-yaml-ea-gpt-chat-v{version}'
         for rel in CHAT_FILES:
