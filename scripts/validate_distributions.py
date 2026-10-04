@@ -18,8 +18,10 @@ def main():
         if not p.exists(): errors.append(f'Missing {p.name}'); continue
         with zipfile.ZipFile(p) as z:
             if z.testzip(): errors.append(f'Corrupt {p.name}')
-            names=members(z); roots={n.split('/')[0] for n in names}
-            if len(roots)!=1: errors.append(f'{p.name}: expected one root')
+            names=members(z)
+            if p != plugin:
+                roots={n.split('/')[0] for n in names}
+                if len(roots)!=1: errors.append(f'{p.name}: expected one root')
             bad=[n for n in names if '__pycache__/' in n or n.endswith(('.pyc','.pyo'))]
             if bad: errors.append(f'{p.name}: cache files: {bad[:5]}')
     if custom.exists():
@@ -77,7 +79,7 @@ def main():
         if p.returncode: errors.append('opencode: dedicated validation failed')
     if plugin.exists():
         with zipfile.ZipFile(plugin) as z:
-            n=members(z); root=n[0].split('/')[0]+'/'
+            n=members(z); root=''
             required=[
                 'plugin.json','README.md','runtime-contract.json','archimate-tool-contract.json',
                 'skills/archimate-modeller/SKILL.md',
