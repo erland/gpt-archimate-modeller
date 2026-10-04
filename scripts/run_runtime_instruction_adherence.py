@@ -9,6 +9,7 @@ ENTRYPOINTS={
   "custom_gpt":"instructions.txt",
   "claude_projects":"project-instructions.md",
   "opencode":"AGENTS.md",
+  "openai_plugin":"skills/archimate-modeller/SKILL.md",
 }
 
 def read_member(zf, suffix):

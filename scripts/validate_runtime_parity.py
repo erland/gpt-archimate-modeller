@@ -22,6 +22,7 @@ def main():
     ap.add_argument("--custom",required=True)
     ap.add_argument("--claude",required=True)
     ap.add_argument("--opencode",required=True)
+    ap.add_argument("--plugin",required=True)
     a=ap.parse_args()
 
     parity=yaml.safe_load(Path(a.contract).read_text(encoding="utf-8"))
@@ -76,6 +77,26 @@ def main():
         for marker in parity["reduced_runtime_requirements"]["claude_projects"]["must_preserve"]:
             if marker.casefold() not in compat_text:
                 errors.append(f"Claude reduced parity preservation not explicit: {marker}")
+
+    with zipfile.ZipFile(a.plugin) as zf:
+        snap=jmember(zf,"runtime-contract.json")
+        req=snap.get("plugin_adapter",{}).get("runtime_requirements",{})
+        if snap.get("runtime_id")!="openai_plugin":
+            errors.append("Plugin runtime_id mismatch")
+        if snap.get("runtime_compatibility",{}).get("openai_plugin",{}).get("target")!="equivalent_runtime_dependent":
+            errors.append("Plugin compatibility mismatch")
+        if req.get("filesystem_read")!="required" or req.get("filesystem_write")!="required":
+            errors.append("Plugin filesystem requirements mismatch")
+        code=req.get("code_execution",{})
+        if code.get("level")!="required" or code.get("fallback")!="block":
+            errors.append("Plugin code execution must be required/block")
+        adapter=snap.get("plugin_adapter",{})
+        if adapter.get("script_resources",{}).get("mcp_required_for_resource_use") is not False:
+            errors.append("Plugin script resources must not require MCP wrapper")
+        skill=zf.read(member(zf,"skills/archimate-modeller/SKILL.md")).decode("utf-8").casefold()
+        for marker in ["yaml-projektet är source of truth","stable ids","change set","validera före och efter","project zip contract","never report unrun verification as pass"]:
+            if marker.casefold() not in skill:
+                errors.append(f"Plugin skill missing canonical/runtime marker: {marker}")
 
     with zipfile.ZipFile(a.opencode) as zf:
         snap=jmember(zf,".opencode/runtime-contract.json")

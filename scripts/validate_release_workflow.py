@@ -84,7 +84,7 @@ def main():
         if "runtime/distribution-registry.yaml" not in (ROOT/"scripts/validate_release_assets_1_5.py").read_text(encoding="utf-8"):
             errors.append("release asset validator must derive runtime assets from distribution registry")
 
-        for runtime in ["chat_zip","custom_gpt","claude_projects","opencode"]:
+        for runtime in ["chat_zip","custom_gpt","claude_projects","opencode","openai_plugin"]:
             if f"--runtime {runtime}" not in text:
                 errors.append(f"release adherence missing {runtime}")
 

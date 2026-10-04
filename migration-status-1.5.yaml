@@ -72,13 +72,14 @@ registry:
     - custom_gpt
     - claude_projects
     - opencode
+    - openai_plugin
   release_metadata:
     - distribution-build-manifest.json
     - SHA256SUMS.txt
     - release-metadata.yaml
   openai_plugin:
-    status: not_active
-    compatibility: reduced
+    status: active
+    compatibility: equivalent_runtime_dependent
 
 chat_zip_verification:
   validation: scripts/validate_chat_gpt_builder_1_5.py
@@ -135,12 +136,12 @@ opencode_verification:
 openai_plugin_assessment:
   document: docs/openai-plugin-1.5-assessment.md
   validation: scripts/validate_openai_plugin_1_5_assessment.py
-  status: not_active
-  runtime_contract_status: not_planned
-  compatibility: reduced
-  advisory_only: true
-  active_distribution: false
-  full_parity_blocked_by:
+  status: active
+  runtime_contract_status: implemented
+  compatibility: equivalent_runtime_dependent
+  advisory_only: false
+  active_distribution: true
+  full_parity_requires:
     - filesystem_write
     - code_execution
     - persistent_workspace
@@ -149,6 +150,8 @@ openai_plugin_assessment:
     - controlled_mutation
   no_false_pass: true
   activation_requires_ci_verified_capabilities: true
+  packaged_runtime_scripts: true
+  mcp_wrapper_required_for_scripts: false
 
 release_readiness:
   release_builder: scripts/build_release.sh
@@ -168,6 +171,7 @@ release_readiness:
     - custom_gpt_1_5
     - claude_projects_1_5
     - opencode_1_5
+    - openai_plugin_1_5
     - runtime_parity
   ci_passed: true
   distribution_workflow_passed: true
@@ -175,7 +179,7 @@ release_readiness:
 next_step:
   recommended: merge
   title: Merge migrations-PR
-  reason: "GPT Byggaren 1.5.0-migreringen är komplett 9/9. Fyra aktiva runtimes är verifierade, OpenAI Plugin är explicit advisory only och CI/release följer samma registry-driven kontrakt."
+  reason: "GPT Byggaren 1.5.0-migreringen är komplett 9/9. Fem aktiva runtimes är verifierade, inklusive OpenAI Plugin som equivalent_runtime_dependent, och CI/release följer samma registry-driven kontrakt."
 
 resume:
   supported: true

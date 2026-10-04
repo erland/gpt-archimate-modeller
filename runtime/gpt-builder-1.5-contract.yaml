@@ -52,14 +52,16 @@ runtime_policy:
     - custom_gpt
     - claude_projects
     - opencode
+    - openai_plugin
   compatibility:
     chat_zip: equivalent
     custom_gpt: equivalent_with_platform_constraints
     claude_projects: reduced
     opencode: equivalent
+    openai_plugin: equivalent_runtime_dependent
   openai_plugin:
-    status: not_active
-    target: reduced
+    status: active
+    target: equivalent_runtime_dependent
     assessment_required: true
 
 invariants:

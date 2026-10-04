@@ -36,6 +36,7 @@ CHAT="$ARTIFACT_DIR/archimate-yaml-ea-gpt-chat-v$VERSION.zip"
 CUSTOM="$ARTIFACT_DIR/archimate-yaml-ea-gpt-custom-gpt-v$VERSION.zip"
 CLAUDE="$ARTIFACT_DIR/archimate-yaml-ea-gpt-claude-projects-v$VERSION.zip"
 OPENCODE="$ARTIFACT_DIR/archimate-yaml-ea-gpt-opencode-v$VERSION.zip"
+PLUGIN="$ARTIFACT_DIR/archimate-yaml-ea-gpt-plugin-v$VERSION.zip"
 
 $PYTHON scripts/run_runtime_instruction_adherence.py --contract evals/runtime-parity-contract.yaml --runtime chat_zip --artifact "$CHAT"
 $PYTHON scripts/validate_chat_gpt_builder_1_5.py --artifact "$CHAT"
@@ -45,11 +46,12 @@ $PYTHON scripts/run_runtime_instruction_adherence.py --contract evals/runtime-pa
 $PYTHON scripts/validate_claude_gpt_builder_1_5.py --artifact "$CLAUDE"
 $PYTHON scripts/run_runtime_instruction_adherence.py --contract evals/runtime-parity-contract.yaml --runtime opencode --artifact "$OPENCODE"
 $PYTHON scripts/validate_opencode_gpt_builder_1_5.py --artifact "$OPENCODE"
+$PYTHON scripts/run_runtime_instruction_adherence.py --contract evals/runtime-parity-contract.yaml --runtime openai_plugin --artifact "$PLUGIN"
 $PYTHON scripts/validate_runtime_parity.py \
   --contract evals/runtime-parity-contract.yaml \
   --runtime-contract runtime/runtime-contract.json \
   --tool-contract runtime/archimate-tool-contract.json \
-  --chat "$CHAT" --custom "$CUSTOM" --claude "$CLAUDE" --opencode "$OPENCODE"
+  --chat "$CHAT" --custom "$CUSTOM" --claude "$CLAUDE" --opencode "$OPENCODE" --plugin "$PLUGIN"
 
 $PYTHON - "$MANIFEST" "$CHECKSUMS" "$METADATA" "$TAG" "$VERSION" <<'PY'
 from pathlib import Path

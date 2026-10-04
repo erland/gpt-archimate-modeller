@@ -9,7 +9,7 @@ ROOT=Path(__file__).resolve().parents[1]
 REGISTRY=ROOT/"runtime"/"distribution-registry.yaml"
 PROJECT=ROOT/"project.yaml"
 CONTRACT=ROOT/"runtime"/"runtime-contract.json"
-EXPECTED=["chat_zip","custom_gpt","claude_projects","opencode"]
+EXPECTED=["chat_zip","custom_gpt","claude_projects","opencode","openai_plugin"]
 
 def script_refs(command):
     return [x for x in command if isinstance(x,str) and x.startswith("scripts/")]
@@ -74,13 +74,6 @@ def main():
         for rel in script_refs(cmd):
             if not (ROOT/rel).is_file():
                 errors.append(f"{section}: referenced script missing: {rel}")
-
-    inactive=registry.get("inactive_targets",{}).get("openai_plugin",{})
-    plugin=contract.get("runtime_compatibility",{}).get("openai_plugin",{})
-    if inactive.get("status")!="not_active":
-        errors.append("openai_plugin registry status must be not_active")
-    if inactive.get("compatibility")!=plugin.get("target"):
-        errors.append("openai_plugin registry compatibility must match runtime contract target")
 
     release=registry.get("release",{})
     if release.get("runtime_assets_from")!="active_targets":

@@ -5,6 +5,7 @@ active_runtimes:
   - custom_gpt
   - claude_projects
   - opencode
+  - openai_plugin
 
 dimensions:
   behavior:
@@ -37,6 +38,7 @@ dimensions:
       custom_gpt: equivalent_with_platform_constraints
       claude_projects: reduced
       opencode: equivalent
+      openai_plugin: equivalent_runtime_dependent
 
   capability:
     required:
@@ -51,6 +53,7 @@ dimensions:
       custom_gpt: equivalent_with_platform_constraints
       claude_projects: reduced
       opencode: equivalent
+      openai_plugin: equivalent_runtime_dependent
 
   artifact:
     required_outputs:
@@ -67,6 +70,7 @@ dimensions:
       custom_gpt: equivalent_with_platform_constraints
       claude_projects: reduced
       opencode: equivalent
+      openai_plugin: equivalent_runtime_dependent
 
   workspace_state:
     authority: project_files
@@ -77,6 +81,7 @@ dimensions:
       custom_gpt: equivalent_with_platform_constraints
       claude_projects: reduced
       opencode: equivalent
+      openai_plugin: equivalent_runtime_dependent
 
   tool:
     abstract_tools:
@@ -95,6 +100,7 @@ dimensions:
       custom_gpt: equivalent_with_platform_constraints
       claude_projects: reduced
       opencode: equivalent
+      openai_plugin: equivalent_runtime_dependent
 
 reduced_runtime_requirements:
   claude_projects:

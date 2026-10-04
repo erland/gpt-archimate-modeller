@@ -59,6 +59,18 @@ def zip_tree(src,out):
             zi.external_attr=(mode&0xffff)<<16
             z.writestr(zi,p.read_bytes())
 
+def zip_plugin_tree(src,out):
+    src=Path(src); out=Path(out); out.parent.mkdir(parents=True,exist_ok=True)
+    with zipfile.ZipFile(out,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=9) as z:
+        for p in sorted(x for x in src.rglob('*') if x.is_file()):
+            rel=p.relative_to(src).as_posix()
+            zi=zipfile.ZipInfo(rel,FIXED); zi.compress_type=zipfile.ZIP_DEFLATED; zi.create_system=3
+            rel_path=Path(rel)
+            is_script = 'scripts' in rel_path.parts and p.suffix in {'.py','.sh'}
+            mode = 0o100755 if is_script else 0o100644
+            zi.external_attr=(mode&0xffff)<<16
+            z.writestr(zi,p.read_bytes())
+
 def main():
     ap=argparse.ArgumentParser(); ap.add_argument('--version',required=True); ap.add_argument('--output-dir',default='dist'); a=ap.parse_args()
     version=a.version.strip(); outdir=ROOT/a.output_dir; shutil.rmtree(outdir,ignore_errors=True); outdir.mkdir(parents=True)
@@ -142,6 +154,92 @@ for transparency and parity assessment, not executable tools.
             '--version',version,
             '--output',str(outdir/f'archimate-yaml-ea-gpt-opencode-v{version}.zip')
         ],check=True)
+
+        pluginroot=td/f'archimate-yaml-ea-gpt-plugin-v{version}'
+        skill=pluginroot/'skills'/'archimate-modeller'
+        skill.mkdir(parents=True)
+        canonical=(ROOT/'gpt'/'SYSTEM_INSTRUCTION.md').read_text(encoding='utf-8').strip()
+        plugin_manifest={
+            '$schema':'https://agent-plugins.org/schemas/1.0.0/plugin.schema.json',
+            'name':'archimate-yaml-ea-gpt',
+            'version':version,
+            'description':'ArchiMate YAML EA GPT skills-first runtime for deterministic EA project modeling.'
+        }
+        (pluginroot/'plugin.json').write_text(json.dumps(plugin_manifest,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+        plugin_contract=json.loads((ROOT/'runtime'/'runtime-contract.json').read_text(encoding='utf-8'))
+        plugin_contract['runtime_id']='openai_plugin'
+        plugin_contract['runtime_compatibility']['openai_plugin']={
+            'status':'implemented',
+            'target':'equivalent_runtime_dependent',
+            'distribution':'archimate-yaml-ea-gpt-plugin-v<version>.zip'
+        }
+        plugin_contract['plugin_adapter']={
+            'mode':'skills_first',
+            'runtime_requirements':{
+                'filesystem_read':'required',
+                'filesystem_write':'required',
+                'code_execution':{'level':'required','language':'python','fallback':'block'},
+                'structured_data':'required',
+                'persistent_workspace':'required',
+                'archive_io':'required'
+            },
+            'script_resources':{
+                'packaged':sorted(CHAT_RUNTIME_SCRIPTS),
+                'mcp_required_for_resource_use':False
+            },
+            'mutation_policy':{
+                'approval':'ask',
+                'validation_before_and_after':True,
+                'no_false_pass':True
+            }
+        }
+        (pluginroot/'runtime-contract.json').write_text(json.dumps(plugin_contract,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+        shutil.copy2(ROOT/'runtime'/'archimate-tool-contract.json',pluginroot/'archimate-tool-contract.json')
+        skill_text=f'''---
+name: archimate-modeller
+description: Create, maintain, validate, analyse and export ArchiMate 3.2 Enterprise Architecture projects with YAML as source of truth.
+metadata:
+  source: canonical-project
+---
+
+## Runtime requirements
+
+- Filesystem read/write is required.
+- Persistent workspace state is required; conversation history is not authoritative project state.
+- Python code execution is required for canonical validation, mutation, analysis and packaging.
+- Archive I/O is required because the portable project authority is the complete EA project ZIP.
+- Run packaged scripts rather than simulating deterministic results.
+- Never report unrun verification as PASS.
+- Canonical mutation requires explicit approval and technical validation before and after the change.
+
+## Canonical behavior
+
+{canonical}
+
+## Packaged runtime
+
+The skill packages the canonical runtime scripts plus schemas, metamodel, package contracts, validation policies, migrations, queries, reports, views and templates needed by those tools.
+
+Scripts are skill resources, not MCP wrappers. Use compatible host Python execution directly when available.
+
+## Tool contract
+
+See ../../archimate-tool-contract.json and ../../runtime-contract.json for the canonical concrete and capability contracts.
+'''
+        (skill/'SKILL.md').write_text(skill_text,encoding='utf-8')
+        for rel in CHAT_DIRS:
+            if rel=='gpt':
+                continue
+            if (ROOT/rel).exists():
+                clean_copy(ROOT/rel,skill/rel)
+        copy_chat_runtime_scripts(skill/'scripts')
+        (pluginroot/'README.md').write_text(
+            f'# ArchiMate YAML EA GPT — OpenAI Plugin v{version}\n\n'
+            'Skills-first runtime with equivalent_runtime_dependent parity. '
+            'Full canonical project work requires a writable persistent workspace, archive I/O and compatible Python execution.\n',
+            encoding='utf-8'
+        )
+        zip_plugin_tree(pluginroot,outdir/f'archimate-yaml-ea-gpt-plugin-v{version}.zip')
 
         chatroot=td/f'archimate-yaml-ea-gpt-chat-v{version}'
         for rel in CHAT_FILES:

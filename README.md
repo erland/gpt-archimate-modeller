@@ -80,12 +80,13 @@ och `release/RELEASE-MANIFEST.yaml`.
 
 ## GitHub release och distributionspaket
 
-Repo-roten är katalogen där denna `README.md` ligger. GitHub Actions bygger fyra runtime-distributioner från samma canonical kontrakt:
+Repo-roten är katalogen där denna `README.md` ligger. GitHub Actions bygger fem runtime-distributioner från samma canonical kontrakt:
 
 - **Chat ZIP** — för uppladdning direkt i en ChatGPT-konversation.
 - **Custom GPT** — för registrering i GPT Builder.
 - **Claude Projects** — reduced parity med canonical behavior men utan antagen lokal tool-exekvering.
 - **OpenCode** — equivalent peer runtime med typade ArchiMate-tools och explicit `projectRoot`.
+- **OpenAI Plugin** — skills-first peer runtime med `equivalent_runtime_dependent` parity och paketerad Python-toolchain.
 
 Se [`docs/release-and-ci.md`](docs/release-and-ci.md).
 
@@ -95,7 +96,7 @@ Se [`docs/release-and-ci.md`](docs/release-and-ci.md).
 
 Projektet är migrerat till GPT Byggaren 1.5.0 utan att ändra canonical ArchiMate-beteende, projektformat eller stabil produktversion.
 
-Aktiva peer runtimes är fortsatt Chat ZIP, Custom GPT, Claude Projects och OpenCode. OpenAI Plugin är explicit bedömd som `not_active / reduced / advisory only` eftersom full parity kräver filesystem write, code execution, persistent workspace, archive I/O samt deterministisk validation/mutation.
+Projektet har fem aktiva peer runtimes: Chat ZIP, Custom GPT, Claude Projects, OpenCode och OpenAI Plugin. Plugin är `equivalent_runtime_dependent`: full canonical mutation, validation och Project ZIP packaging kräver filesystem write, persistent workspace, archive I/O och kompatibel Python code execution.
 
 Se:
 - [`docs/gpt-builder-1.5-runtime-migration.md`](docs/gpt-builder-1.5-runtime-migration.md)
@@ -129,5 +130,5 @@ Se [`docs/project-migration.md`](docs/project-migration.md).
 ## v1.0.0
 
 Step 48 slutför produktplanen 48/48. v1.0.0 låser format 0.2 som write-target,
-behåller läsning av format 0.1 med explicit `MIG-000002`, och publicerar fyra
+behåller läsning av format 0.1 med explicit `MIG-000002`, och publicerar fem
 runtime-distributioner från samma canonical contracts.

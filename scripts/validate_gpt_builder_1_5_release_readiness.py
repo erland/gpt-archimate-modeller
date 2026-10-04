@@ -22,15 +22,15 @@ def main():
     if status.get("state",{}).get("warnings"):
         errors.append("warnings must be empty")
 
-    expected=["chat_zip","custom_gpt","claude_projects","opencode"]
+    expected=["chat_zip","custom_gpt","claude_projects","opencode","openai_plugin"]
     if registry.get("active_targets")!=expected:
         errors.append("active runtime set mismatch")
     if contract.get("runtime_policy",{}).get("active")!=expected:
         errors.append("normalized contract active runtime set mismatch")
 
-    plugin=registry.get("inactive_targets",{}).get("openai_plugin",{})
-    if plugin.get("status")!="not_active" or plugin.get("compatibility")!="reduced":
-        errors.append("OpenAI Plugin must remain not_active/reduced")
+    plugin=registry.get("targets",{}).get("openai_plugin",{})
+    if plugin.get("status")!="active" or plugin.get("compatibility")!="equivalent_runtime_dependent":
+        errors.append("OpenAI Plugin must be active/equivalent_runtime_dependent")
 
     release=registry.get("release",{})
     if release.get("runtime_assets_from")!="active_targets":
@@ -50,7 +50,7 @@ def main():
         return 1
 
     print("OK: final GPT Builder 1.5 release readiness")
-    print("Migration 9/9 complete; four active runtimes; plugin advisory only; registry-driven release")
+    print("Migration 9/9 complete; five active runtimes; plugin equivalent-runtime-dependent; registry-driven release")
     return 0
 
 if __name__=="__main__":

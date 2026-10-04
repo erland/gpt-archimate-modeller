@@ -33,8 +33,9 @@ Aktiva runtimes:
 2. Custom GPT
 3. Claude Projects
 4. OpenCode
+5. OpenAI Plugin
 
-OpenAI Plugin ska bedömas explicit i 1.5.0 men inte aktiveras som full runtime om kärnkraven för filesystem write, code execution, persistent workspace, archive I/O, mutation och deterministisk validering inte kan uppfyllas.
+OpenAI Plugin är aktiv som `equivalent_runtime_dependent`. Full canonical körning kräver filesystem write, code execution, persistent workspace, archive I/O, kontrollerad mutation och deterministisk validering.
 
 ## Steg
 
@@ -57,7 +58,7 @@ Verifiera compiled instruction, Knowledge, plattformsbegränsningar och no-false
 Behåll Claude som reduced parity och OpenCode som equivalent med typade ArchiMate-tools och explicit projectRoot.
 
 ### 7. OpenAI Plugin compatibility assessment
-Dokumentera om Plugin är not_planned eller reduced/advisory. Ingen falsk tool/workspace parity.
+Aktivera skills-first Plugin, paketera canonical runtime-toolchain och CI-lås host-dependent parity, mutation approval och no-false-PASS.
 
 ### 8. Generalisera CI/release/readiness
 Säkerställ att registry, parity, evals och release assets följer 1.5.0-modellen.
@@ -76,8 +77,8 @@ Slutlig runtime-status:
 - Custom GPT — equivalent_with_platform_constraints
 - Claude Projects — reduced
 - OpenCode — equivalent
-- OpenAI Plugin — not_active / reduced / advisory only
+- OpenAI Plugin — equivalent_runtime_dependent
 
-CI och release använder samma GPT Byggaren 1.5.0-kontrakt. Release-assets härleds exakt från `runtime/distribution-registry.yaml`, och full plugin-parity får inte påstås utan verifierade filesystem/write/code execution/persistent workspace/archive/validation/mutation-capabilities.
+CI och release använder samma GPT Byggaren 1.5.0-kontrakt. Release-assets härleds exakt från `runtime/distribution-registry.yaml`, och Plugin-parity är runtime-dependent och full canonical körning får endast påstås när filesystem/write/code execution/persistent workspace/archive/validation/mutation-capabilities faktiskt finns.
 
 Den stabila produktversionen är fortsatt **1.0.0**, och produktplanen är fortsatt **48/48**.
