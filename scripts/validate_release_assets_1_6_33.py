@@ -6,6 +6,7 @@ import yaml
 p=argparse.ArgumentParser()
 p.add_argument("--version",required=True)
 p.add_argument("--dir",default="dist")
+p.add_argument("--print-paths",action="store_true")
 a=p.parse_args()
 root=Path(__file__).resolve().parents[1]
 cfg=yaml.safe_load((root/"gpt-project.yaml").read_text())
@@ -24,4 +25,9 @@ assert set(checks)==names
 for name in names:
     assert hashlib.sha256((directory/name).read_bytes()).hexdigest()==checks[name]
 assert (directory/"DELIVERY-MANIFEST.json").is_file()
-print("PASS: six archives, manifest and checksums")
+if a.print_paths:
+    for name in sorted(names): print((directory/name).resolve())
+    print((directory/"SHA256SUMS.txt").resolve())
+    print((directory/"DELIVERY-MANIFEST.json").resolve())
+else:
+    print("PASS: six archives, manifest and checksums")
