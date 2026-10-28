@@ -21,7 +21,7 @@ progress:
   release_ready: false
 verification:
   engine_selftest: pass_external_workspace
-  repository_inventory: partial
+  repository_inventory: targeted_sources_reviewed
   project_build: not_run
   project_tests: not_run
   runtime_parity: not_run
@@ -29,4 +29,5 @@ notes:
   - "Historisk 1.5-status bevaras i migration-status-1.5.yaml."
   - "Custom GPT kvarstår som historiskt stöd tills ny registry och CI verifierats."
   - "Migrationsplanen är påbörjad, inte en slutförd migration."
-next_step: "Inventera samtliga projektspecifika beteenden och föreslå Skill-arkitektur."
+  - "Statisk Python-beroendegranskare tillagd; körning och icke-Python-resurser återstår."
+next_step: "Kör Python-beroendegranskaren och komplettera manuell kartläggning av YAML, scheman, mallar och runtimeverktyg."
