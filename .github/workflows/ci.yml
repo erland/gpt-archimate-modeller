@@ -20,6 +20,17 @@ jobs:
           cache-dependency-path: requirements-dev.txt
       - name: Install dependencies
         run: python -m pip install -r requirements-dev.txt
+      - name: Audit Skill Python dependencies (migration 1.6.33)
+        run: |
+          python scripts/audit_skill_python_dependencies.py --output skill-python-dependencies.json
+          python -m json.tool skill-python-dependencies.json >/dev/null
+      - name: Upload Skill dependency audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: skill-python-dependency-audit
+          path: skill-python-dependencies.json
+          if-no-files-found: warn
       - name: Reject committed cache/build junk
         shell: bash
         run: |
