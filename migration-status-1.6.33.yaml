@@ -16,8 +16,8 @@ migration:
     - documentation_hygiene
     - final_verification
 progress:
-  active_step: documentation_hygiene
-  completed_steps: [inventory, project_model, engine, five_distributions]
+  active_step: final_verification
+  completed_steps: [inventory, project_model, engine, five_distributions, documentation_hygiene]
   release_ready: false
 verification:
   engine_selftest: pass_external_workspace
@@ -42,10 +42,14 @@ verification:
   project_tests: legacy_regression_ci_pass_runtime_tests_pending
   runtime_parity: documented_partial_host_tests_pending
   runtime_parity_report: docs/runtime-parity-1.6.33.md
-  release_wiring_audit: ci_pass_40660592486_reports_legacy_release_blockers
+  release_wiring_audit: ci_pass_40675708575_canonical_1_6_33_workflows
+  normal_build_workflow: ci_pass_40675708584
+  project_regression_ci: ci_pass_40675708664
+  release_asset_dry_run: ci_pass_40675708575_not_published
+  tagged_release_upload: not_executed
 notes:
   - "Historisk 1.5-status bevaras i migration-status-1.5.yaml."
   - "Custom GPT kvarstår som historiskt stöd tills ny registry och CI verifierats."
   - "Migrationsplanen är påbörjad, inte en slutförd migration."
   - "Statisk Python-beroendegranskare tillagd; körning och icke-Python-resurser återstår."
-next_step: "Migrera ordinarie bygg- och releaseworkflow till kanonisk 1.6.33-byggare med exakt artefaktvalidering; behåll release_ready false tills värdmiljö- och beteendetester är bedömda."
+next_step: "Genomför slutlig runtime-/värdmiljöbedömning och kontrollera ett faktiskt taggdrivet releaseflöde före release_ready och merge."
