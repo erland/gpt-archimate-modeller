@@ -54,3 +54,9 @@ Körning `40680562341` verifierar samma projektflöde i Chat ZIP, Claude Skills,
 De senaste kontrollerade körningarna på commit `bddf4a6` är godkända: ordinarie CI `40686039202`, distributionsbygge `40686039186` och migrationsvalidering `40686039203`. I de fyra uppackade Skill-runtimerna verifieras projektgenerering, ZIP-kontroll, modelländring med dry-run och apply, analysfråga samt Model Exchange-export/import. Claude Project är ett separat textbaserat distributionsmål och saknar motsvarande Python-hosttest.
 
 Merge innebär att projektet kan fortsätta med verifiering av de byggda distributionerna; det innebär **inte** att plattformsspecifik funktion, dynamiska beroenden eller en riktig GitHub Release har verifierats. Behåll `release_ready: false`; publicera ingen release före separat kontroll och beslut.
+
+## Fristående ArchiMate Engine ZIP
+
+Utöver de fem peer-runtimepaketen och det genererade projektpaketet byggs nu en separat `archimate-yaml-ea-gpt-engine-<version>.zip`. Den innehåller kanoniska Python-skript, CLI, `requirements.txt`, YAML-schema/metamodell, policyfiler och den serialiserade projektmallen. Byggkedjan verifierar Engine efter uppackning i en isolerad temporär katalog genom `python archimate_engine.py selftest` (skapa, validera, ändra, analysera, exportera/importera, paketera).
+
+Chat ZIP, Plugin, Claude Skills och OpenCode innehåller dessutom `requirements.txt` med deklarerade Pythonberoenden. Deras instruktioner förklarar att skript är runtime-resurser och inte garanterat registrerade verktyg. **Engine är en lokal Python-runtime, inte en MCP-server.** Ett värdsystem utan Python, filskrivning eller möjlighet att installera beroenden kan inte exekvera Engine ZIP direkt. Faktisk värdmiljöparitet kräver fortsatt separat acceptanstest. `release_ready: false` gäller fortfarande till publiceringsbeslut.
