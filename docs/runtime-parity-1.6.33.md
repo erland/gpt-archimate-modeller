@@ -29,7 +29,7 @@ PASS för projektlivscykel innebär att ett uppackat Skill kan skapa ett projekt
 
 1. Riktiga värdmiljötester för Chat, Claude, OpenCode och Plugin saknas. Claude Project kräver egen text-/bilageverifiering.
 2. Dynamiska importer, externa verktyg, värdberoenden och all dataresursåtkomst är inte fullständigt verifierade.
-3. Modellens verkliga analys-, ändrings- och import/exportfunktioner har inte funktionstestats i samtliga hosts.
+3. Analysfråga och ArchiMate Model Exchange export/import har funktionstestats i fyra uppackade Skills-runtimer (CI 40680562341). Modelländring och beteende i faktiska hosts återstår.
 4. Ordinarie distributionsbygge och taggdriven releasekonfiguration har migrerats till 1.6.33. Torrkörning av release-artefakter är godkänd, men en verklig taggdriven release och uppladdning har inte körts.
 5. Slutlig värdmiljöparitet och ändrings-/analys-/importexportbeteende är inte styrkt för varje host. Releasebeslutet är därför fortsatt BLOCKERAT.
 
@@ -42,3 +42,7 @@ Det finns **paketeringsparitet för fem mål** och **isolera­de Python-projektf
 Beslut: **NO-GO för release och merge just nu**. Godkända GitHub Actions på commit `984b224`: ordinarie CI `40675810402`, distributionsbygge `40675810408` och migrationsvalidering `40675810401`.
 
 Det finns ingen evidens för ett faktiskt publicerat 1.6.33-taggreleaseflöde eller värdmiljökörning av alla fem mål. Ett enhetligt ja-beslut skulle överdriva testtäckningen. Nästa verifieringspaket bör omfatta värdmiljötest för varje stödjande runtime, särskild granskning av Claude Project samt representativa tester för modelländring, analys och import/export. Först därefter prövas merge/release.
+
+## Utökad beteendeverifiering 2026-10-28
+
+Körning `40680562341` verifierar samma projektflöde i Chat ZIP, Claude Skills, OpenCode och OpenAI Plugin som uppackade ZIP-arkiv: skapa projekt, exekvera elementfråga, exportera ArchiMate Model Exchange XML och importera XML till förhandsgranskning. Ordinarie CI och distributionsbygge på motsvarande commit är också godkända. Testerna styrker skriptbeteende i isolerad Pythonmiljö, inte native host-integration eller ändringshantering. Releasebeslut: **villkorat NO-GO** tills resterande värdtester och kontrollerat taggdrivet releaseflöde bedömts.
