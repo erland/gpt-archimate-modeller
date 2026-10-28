@@ -25,4 +25,4 @@ Kontrollera ändringsförslag med dry-run före apply. Validera alltid projekt o
 
 ## Nedladdning av Engine
 
-Om skript inte kan köras i pluginmiljön: erbjud användaren [ArchiMate Engine {{VERSION}}](https://github.com/erland/gpt-archimate-modeller/releases/download/v{{VERSION}}/archimate-yaml-ea-gpt-engine-{{VERSION}}.zip) och be användaren bifoga ZIP-filen. Kontrollera att GitHub Release `v{{VERSION}}` och filen finns innan du beskriver länken som fungerande. Annars hänvisar du till [Releases](https://github.com/erland/gpt-archimate-modeller/releases). Att bifoga filen kräver fortfarande kompatibel Pythonexekvering.
+Om skript inte kan köras i pluginmiljön: erbjud användaren [ArchiMate Engine {{VERSION}}](https://github.com/erland/gpt-archimate-modeller/releases/download/v{{VERSION}}/archimate-modeller-engine-{{VERSION}}.zip) och be användaren bifoga ZIP-filen. Kontrollera att GitHub Release `v{{VERSION}}` och filen finns innan du beskriver länken som fungerande. Annars hänvisar du till [Releases](https://github.com/erland/gpt-archimate-modeller/releases). Att bifoga filen kräver fortfarande kompatibel Pythonexekvering.
