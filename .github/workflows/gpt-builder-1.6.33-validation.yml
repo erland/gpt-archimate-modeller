@@ -103,6 +103,8 @@ jobs:
           if-no-files-found: error
       - name: Verify scripts within five built runtime archives
         run: python scripts/verify_migration_skill_archives.py
+      - name: Smoke-test generated Skill data paths
+        run: python scripts/smoke_test_packaged_skill_data.py
       - name: Upload migration build output
         if: success()
         uses: actions/upload-artifact@v4
