@@ -18,7 +18,7 @@ for runtime,(pattern,prefix) in targets.items():
             if result.returncode:raise ValueError(f"{runtime}/{skill}/{script}: {(result.stdout+result.stderr)[-1200:]}")
             return result.stdout
         try:
-            project=stage/"ea"
+            project=stage/"parity"
             run("project-workflow","new_project.py","--id","parity","--name","Parity","--output-dir",stage)
             query=stage/"query.yaml"
             query.write_text("id: Q-PARITY\nfrom: elements\n",encoding="utf-8")
