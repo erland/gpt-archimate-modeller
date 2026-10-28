@@ -83,6 +83,8 @@ jobs:
         run: |
           set -euo pipefail
           python /tmp/gpt-byggaren-engine-1.6.33/scripts/validate_distributions.py --project-root .
+      - name: Verify transitive Skill Python imports
+        run: python scripts/verify_skill_python_closure.py
       - name: Verify scripts within five built runtime archives
         run: python scripts/verify_migration_skill_archives.py
       - name: Upload migration build output
