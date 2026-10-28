@@ -3,6 +3,9 @@ from pathlib import Path
 import argparse, json, sys, yaml, re, datetime as dt
 
 ROOT = Path(__file__).resolve().parents[1]
+# Runtime Skills bundle project data below assets; source checkout uses repository root.
+if (ROOT / "assets" / "schemas").is_dir():
+    ROOT = ROOT / "assets"
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from assemble_project import assemble
 from identity import expected_prefix_for_type, ID_RE
