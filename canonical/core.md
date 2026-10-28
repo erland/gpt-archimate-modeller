@@ -90,3 +90,11 @@ Ett uppdaterat projekt är inte färdigt förrän:
 3. change history är uppdaterad,
 4. ZIP-manifestet är regenererat,
 5. den slutliga ZIP-filen passerar Project ZIP contract.
+
+## Engine ZIP vid otillgänglig skriptexekvering
+
+Om ett arbetsflöde behöver Python-skript men de inte kan köras från den aktuella Skill-/pluginmiljön: använd i första hand tillgänglig lokal exekvering. Om den saknas och en kompatibel Pythonmiljö finns, ge användaren en **klickbar direktlänk** till den fristående ArchiMate Engine ZIP från **samma produktversion som den installerade distributionen**, och be användaren ladda ned och bifoga ZIP-filen. Konstruera länken enligt:
+
+`https://github.com/erland/gpt-archimate-modeller/releases/download/v<VERSION>/archimate-yaml-ea-gpt-engine-<VERSION>.zip`
+
+Där `<VERSION>` är den verkliga distributionsversionen, inte GPT Byggarens byggmotorversion. Verifiera att GitHub Release och tillgången faktiskt finns innan länken presenteras som tillgänglig. Om releasen inte finns, hänvisa till https://github.com/erland/gpt-archimate-modeller/releases och säg att den aktuella Engine-filen inte är publicerad; hitta inte på en fungerande nedladdningslänk. En bifogad ZIP innebär inte automatiskt att Python kan köras.
