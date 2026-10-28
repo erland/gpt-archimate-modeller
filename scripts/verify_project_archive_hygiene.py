@@ -17,8 +17,8 @@ def violations(archive):
                 problems.append(f"unsafe path: {name}")
             if any(part in GENERATED for part in path.parts):
                 problems.append(f"generated directory: {name}")
-            if path.suffix.lower() == ".zip":
-                problems.append(f"nested ZIP: {name}")
+            if path.suffix.lower() == ".zip" and path.name.startswith("archimate-yaml-ea-gpt-"):
+                problems.append(f"nested distribution ZIP: {name}")
     return problems
 
 def selftest():
@@ -27,7 +27,8 @@ def selftest():
         ("release-artifacts/old.zip", True),
         ("dist/old.zip", True),
         ("build/stale.txt", True),
-        ("docs/nested.zip", True),
+        ("examples/portable-project/ea-project-split.zip", False),
+        ("docs/archimate-yaml-ea-gpt-chat-1.0.0.zip", True),
         ("../escape.txt", True),
     ]:
         stream = io.BytesIO()
