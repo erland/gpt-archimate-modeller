@@ -66,6 +66,15 @@ skills:
         - scripts/validate_project_zip.py
         - scripts/safe_unpack.py
         - scripts/migrate_project.py
+        - scripts/apply_changes.py
+        - scripts/assemble_project.py
+        - scripts/identity.py
+        - scripts/model_index.py
+        - scripts/model_loader.py
+        - scripts/quality_check.py
+        - scripts/validate.py
+        - scripts/validate_temporal.py
+        - scripts/versioning.py
     - id: archimate-modeling
       name: ArchiMate-modellering
       description: "Modellera ArchiMate-element, relationer, identiteter och evidens."
@@ -78,6 +87,10 @@ skills:
         - scripts/assemble_project.py
         - scripts/validate.py
         - scripts/quality_check.py
+        - scripts/model_index.py
+        - scripts/model_loader.py
+        - scripts/validate_temporal.py
+        - scripts/versioning.py
     - id: architecture-analysis
       name: Arkitekturanalys
       description: "Analysera modellen med queries, påverkan, rapporter och views."
@@ -91,6 +104,10 @@ skills:
         - scripts/render_report.py
         - scripts/compile_view.py
         - scripts/export_diagram.py
+        - scripts/architecture_states.py
+        - scripts/assemble_project.py
+        - scripts/identity.py
+        - scripts/model_index.py
     - id: interoperability
       name: Import och export
       description: "ArchiMate Model Exchange-import/export med staging och spårbarhet."
@@ -100,6 +117,7 @@ skills:
       scripts:
         - scripts/import_model_exchange.py
         - scripts/export_model_exchange.py
+        - scripts/identity.py
         - scripts/assemble_project.py
 knowledge_architecture:
   canonical_root: knowledge
