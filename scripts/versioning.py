@@ -4,7 +4,10 @@ import yaml
 IMPACT_RANK={"patch":0,"minor":1,"major":2}
 
 def load_policy(root):
-    return yaml.safe_load((Path(root)/"versioning"/"policy.yaml").read_text(encoding="utf-8"))
+    path=Path(root)/"versioning"/"policy.yaml"
+    if not path.is_file() and (Path(root)/"assets"/"policy.yaml").is_file():
+        path=Path(root)/"assets"/"policy.yaml"
+    return yaml.safe_load(path.read_text(encoding="utf-8"))
 
 def compute_impact(change_set, policy):
     impacts=[policy["operation_impact"][op["op"]] for op in change_set["change_set"]["operations"]]
