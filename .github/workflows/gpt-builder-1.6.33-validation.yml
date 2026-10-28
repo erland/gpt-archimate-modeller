@@ -8,6 +8,9 @@ on:
       - 'migration-status-1.6.33.yaml'
       - 'scripts/**'
       - 'docs/runtime-parity-1.6.33.md'
+      - '.github/workflows/build-distributions.yml'
+      - '.github/workflows/release.yml'
+      - 'STATUS.md'
       - '.github/workflows/gpt-builder-1.6.33-validation.yml'
   workflow_dispatch:
 
@@ -113,6 +116,14 @@ jobs:
         run: python scripts/smoke_test_packaged_project_flow.py
       - name: Ensure runtime parity report remains attached to delivery
         run: test -s docs/runtime-parity-1.6.33.md
+      - name: Audit legacy release wiring
+        run: python scripts/audit_migration_release_wiring.py
+      - name: Upload release wiring audit
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-wiring-audit-1.6.33
+          path: release-wiring-audit-1.6.33.json
+          if-no-files-found: error
       - name: Upload migration build output
         if: success()
         uses: actions/upload-artifact@v4
