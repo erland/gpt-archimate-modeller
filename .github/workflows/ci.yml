@@ -24,12 +24,16 @@ jobs:
         run: |
           python scripts/audit_skill_python_dependencies.py --output skill-python-dependencies.json
           python -m json.tool skill-python-dependencies.json >/dev/null
+          python scripts/audit_skill_data_references.py --output skill-data-references.json
+          python -m json.tool skill-data-references.json >/dev/null
       - name: Upload Skill dependency audit
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: skill-python-dependency-audit
-          path: skill-python-dependencies.json
+          path: |
+            skill-python-dependencies.json
+            skill-data-references.json
           if-no-files-found: warn
       - name: Reject committed cache/build junk
         shell: bash
