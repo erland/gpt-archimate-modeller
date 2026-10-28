@@ -19,3 +19,7 @@ Python 3.10+, `PyYAML>=6,<7` och `jsonschema>=4,<5`. Installera från Engine ZIP
 Skills och skript innebär inte automatiskt att OpenCode har registrerat typade custom tools. Läs `.opencode/runtime-contract.json` för faktiska runtime-förutsättningar. Behåll alltid modellens YAML-filer som source of truth och leverera uppdaterade projekt som validerade ZIP-filer.
 
 Version: {{VERSION}}
+
+## Engine ZIP för denna version
+
+[ArchiMate Engine {{VERSION}}](https://github.com/erland/gpt-archimate-modeller/releases/download/v{{VERSION}}/archimate-yaml-ea-gpt-engine-{{VERSION}}.zip) publiceras i samma GitHub Release som denna distribution. Kontrollera att releasen finns innan du rekommenderar länken; annars använd [Releases](https://github.com/erland/gpt-archimate-modeller/releases).
