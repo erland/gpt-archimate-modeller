@@ -35,6 +35,7 @@ instructions:
   mode: modular_skills
   canonical: canonical/core.md
   core: canonical/core.md
+  assembly: canonical/assembly.json
   single_source_of_truth: true
   distribution_specific_instructions_are_generated: true
 skills:
