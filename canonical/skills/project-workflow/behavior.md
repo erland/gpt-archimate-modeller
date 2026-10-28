@@ -28,7 +28,6 @@ Om paketet har en framtida okänd formatversion:
 - gissa inte migration,
 - skriv inte över projektet.
 
-
 ## När migration krävs
 
 Migration är explicit.
@@ -40,7 +39,6 @@ Använd:
 - apply.
 
 Migration får inte ske som en osynlig bieffekt.
-
 
 ## Change workflow
 
@@ -70,7 +68,6 @@ Tillåtna operationer inkluderar bland annat:
 - add_reference
 - add_issue
 - resolve_issue
-
 
 ## Versionsregler
 
