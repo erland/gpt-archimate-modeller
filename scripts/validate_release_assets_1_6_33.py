@@ -14,6 +14,7 @@ cfg=yaml.safe_load((root/"gpt-project.yaml").read_text())
 project_id=cfg["project"]["id"]
 names={t["filename_pattern"].replace("<project-id>",project_id).replace("<version>",a.version) for t in cfg["build_system"]["runtime_targets"].values()}
 names.add(f"{project_id}-project-{a.version}.zip")
+names.add(f"{project_id}-engine-{a.version}.zip")
 directory=Path(a.dir)
 actual={x.name for x in directory.glob("*.zip")}
 assert actual==names, f"archive mismatch: {actual ^ names}"
@@ -39,4 +40,4 @@ if a.print_paths:
     print((directory/"SHA256SUMS.txt").resolve())
     print((directory/"DELIVERY-MANIFEST.json").resolve())
 else:
-    print("PASS: six archives, manifest and checksums")
+    print("PASS: seven archives (including Engine), manifest and checksums")
