@@ -77,6 +77,12 @@ def main():
             "type": kind, "file": path.name, "sha256": digest(path.read_bytes()),
             "size": path.stat().st_size,
         })
+    # Runtime ZIPs may have been postprocessed to add requirements.txt.
+    # Refresh every artifact hash and size, not just the newly added Engine.
+    for entry in delivery["artifacts"]:
+        actual = dist / entry["file"]
+        entry["sha256"] = digest(actual.read_bytes())
+        entry["size"] = actual.stat().st_size
     delivery["artifacts"].sort(key=lambda a: a["file"])
     manifest_path.write_text(json.dumps(delivery, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Built standalone Engine ZIP: {target}")
