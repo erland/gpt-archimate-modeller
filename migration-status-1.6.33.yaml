@@ -28,6 +28,7 @@ verification:
   canonical_section_coverage: 27_of_27_heading_sections_plus_preamble
   canonical_assembly: byte_exact_verified_against_original
   new_project_model: staged_with_explicit_script_entrypoints_unverified
+  canonical_engine_project_lint: ci_configured_awaiting_run
   project_build: not_run
   project_tests: not_run
   runtime_parity: not_run
@@ -36,4 +37,4 @@ notes:
   - "Custom GPT kvarstår som historiskt stöd tills ny registry och CI verifierats."
   - "Migrationsplanen är påbörjad, inte en slutförd migration."
   - "Statisk Python-beroendegranskare tillagd; körning och icke-Python-resurser återstår."
-next_step: "Kör kanonisk GPT Byggaren 1.6.33-projektvalidering och komplettera transitive Skill-resurser före distributionsbygge."
+next_step: "Granska 1.6.33-lint från GitHub Actions och korrigera schema-, resurs- och runtime-kontrakt innan bygge."
