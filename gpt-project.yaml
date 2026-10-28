@@ -1,0 +1,100 @@
+schema_version: 1
+project:
+  id: archimate-yaml-ea-gpt
+  name: ArchiMate YAML EA GPT
+  language: sv
+  description: "ArchiMate 3.2-modellering, analys och interoperabilitet med YAML-projektpaket."
+development:
+  plan: docs/gpt-builder-1.6.33-migration.md
+  status: migration-status-1.6.33.yaml
+  human_readable_status: STATUS.md
+structure:
+  canonical_root: canonical
+  instructions:
+    path: canonical
+    required: true
+  knowledge:
+    path: knowledge
+    required: true
+  schemas:
+    path: schemas
+    required: true
+  scripts:
+    path: scripts
+    required: true
+  tests:
+    path: tests
+    required: true
+  dist:
+    path: dist
+    generated: true
+  build:
+    path: build
+    generated: true
+instructions:
+  mode: modular_skills
+  canonical: canonical/core.md
+  core: canonical/core.md
+  single_source_of_truth: true
+  distribution_specific_instructions_are_generated: true
+skills:
+  contract_version: 1
+  mode: explicit
+  definitions:
+    - id: project-workflow
+      name: Projekt- och ändringshantering
+      description: "Öppna, skapa, ändra, migrera, validera och paketera EA-projekt."
+      source: canonical/skills/project-workflow/behavior.md
+      references: []
+      assets: []
+      scripts: []
+    - id: archimate-modeling
+      name: ArchiMate-modellering
+      description: "Modellera ArchiMate-element, relationer, identiteter och evidens."
+      source: canonical/skills/archimate-modeling/behavior.md
+      references: []
+      assets: []
+      scripts: []
+    - id: architecture-analysis
+      name: Arkitekturanalys
+      description: "Analysera modellen med queries, påverkan, rapporter och views."
+      source: canonical/skills/architecture-analysis/behavior.md
+      references: []
+      assets: []
+      scripts: []
+    - id: interoperability
+      name: Import och export
+      description: "ArchiMate Model Exchange-import/export med staging och spårbarhet."
+      source: canonical/skills/interoperability/behavior.md
+      references: []
+      assets: []
+      scripts: []
+runtime:
+  primary: none
+  chat_zip:
+    enabled: true
+  plugin:
+    enabled: true
+  claude:
+    enabled: true
+    mode: claude_project
+  claude_skills:
+    enabled: true
+  opencode:
+    enabled: true
+  custom_gpt:
+    enabled: false
+capabilities:
+  contract_version: 1
+  requirements:
+    filesystem:
+      read: required
+      write: required
+    code_execution:
+      level: required
+    structured_data:
+      level: required
+    persistent_workspace:
+      level: required
+    archive_io:
+      level: required
