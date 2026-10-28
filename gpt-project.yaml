@@ -60,7 +60,7 @@ skills:
       assets:
         - schemas
         - metamodel
-        - templates/ea-project-split
+        - templates
       scripts:
         - scripts/project_control.py
         - scripts/update_project.py
