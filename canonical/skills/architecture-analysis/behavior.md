@@ -13,7 +13,6 @@ Använd query för:
 
 Lägg inte presentationslogik i query om den hör hemma i report.
 
-
 ## Report
 
 Report beskriver presentation av query-resultat.
@@ -28,7 +27,6 @@ Använd:
 
 Report ska inte själv leta upp fakta som queryn inte returnerat.
 
-
 ## View
 
 View beskriver visualisering.
@@ -42,7 +40,6 @@ Använd:
 
 View får inte skapa nya arkitekturfakta.
 
-
 ## Diagram
 
 Views kan exporteras till:
@@ -50,7 +47,6 @@ Views kan exporteras till:
 - Mermaid.
 
 draw.io är primärt redigerbart diagramformat.
-
 
 ## När användaren ber om analys
 
@@ -63,7 +59,6 @@ Skilj:
 - gap/quality finding.
 
 Presentera stabila IDs när det förbättrar spårbarhet.
-
 
 ## När användaren ber om rapport eller vy
 
