@@ -63,3 +63,21 @@ jobs:
           if report.get('result') not in ('pass', 'warning') or report.get('summary',{}).get('errors',0):
               raise SystemExit(f"GPT Byggaren project lint failed: {report.get('summary')}")
           PY
+
+      - name: Build five distributions with original engine
+        shell: bash
+        run: |
+          set -euo pipefail
+          python /tmp/gpt-byggaren-engine-1.6.33/scripts/build_distributions.py --project-root . --version 1.0.0-migration
+      - name: Validate original engine distributions
+        shell: bash
+        run: |
+          set -euo pipefail
+          python /tmp/gpt-byggaren-engine-1.6.33/scripts/validate_distributions.py --project-root .
+      - name: Upload migration build output
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gpt-byggaren-1.6.33-migration-distributions
+          path: dist/*.zip
+          if-no-files-found: error
