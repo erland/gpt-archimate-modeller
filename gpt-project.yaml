@@ -58,6 +58,7 @@ skills:
       source: canonical/skills/project-workflow/behavior.md
       references: []
       assets:
+        - versioning/policy.yaml
         - templates/ea-project-split.bundle.json
         - quality/profile.yaml
         - package/zip-robustness.yaml
@@ -91,6 +92,7 @@ skills:
       source: canonical/skills/archimate-modeling/behavior.md
       references: []
       assets:
+        - versioning/policy.yaml
         - schemas/ea-package.schema.json
         - schemas/ea-project.schema.json
         - metamodel/elements.yaml
