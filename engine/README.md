@@ -29,3 +29,7 @@ All commands forward their remaining arguments to the canonical script in `scrip
 When a ChatGPT conversation can execute Python and install dependencies, attach the Engine ZIP, extract it and run `selftest`. Use the CLI for model changes, analysis, validation, XML import/export and ZIP packaging. A ChatGPT host without Python execution or filesystem write cannot run this ZIP; in that case use a compatible execution environment. Do not claim that merely attaching this ZIP automatically activates its commands.
 
 This archive includes the model schemas, metamodel, quality/version policies and serialized project templates required by the canonical scripts. Project data remains in separate YAML project directories/ZIPs.
+
+## Release och versionsmatchning
+
+Hämta alltid Engine ZIP från samma GitHub Release som den Chat-, Plugin-, Claude- eller OpenCode-distribution du använder. Filnamnet är `archimate-yaml-ea-gpt-engine-<version>.zip` och publiceras som en release-tillgång vid publicering. Se https://github.com/erland/gpt-archimate-modeller/releases .
