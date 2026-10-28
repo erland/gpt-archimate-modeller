@@ -58,6 +58,10 @@ skills:
       source: canonical/skills/project-workflow/behavior.md
       references: []
       assets:
+        - templates/ea-project-split.bundle.json
+        - quality/profile.yaml
+        - package/zip-robustness.yaml
+        - package/project-zip-contract.yaml
         - schemas/new-project.schema.json
         - schemas/ea-package.schema.json
         - schemas/ea-project.schema.json
