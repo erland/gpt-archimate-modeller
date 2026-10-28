@@ -97,7 +97,10 @@ skills:
       source: canonical/skills/interoperability/behavior.md
       references: []
       assets: []
-      scripts: []
+      scripts:
+        - scripts/import_model_exchange.py
+        - scripts/export_model_exchange.py
+        - scripts/assemble_project.py
 knowledge_architecture:
   canonical_root: knowledge
 runtime:
