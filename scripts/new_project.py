@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from pathlib import Path
-import argparse,json,shutil,sys,tempfile,yaml
+import argparse,base64,json,shutil,sys,tempfile,yaml
 sys.path.insert(0,str(Path(__file__).resolve().parent))
 from validate import validate
 from quality_check import load_yaml,run_quality,DEFAULT_PROFILE
@@ -57,7 +57,20 @@ def create(root,spec):
     if root.exists() and any(root.iterdir()):
         raise ValueError("Project output directory must be empty or not exist")
     root.parent.mkdir(parents=True,exist_ok=True)
-    shutil.copytree(TEMPLATE,root,dirs_exist_ok=True)
+    bundled = ROOT / "assets" / "ea-project-split.bundle.json"
+    if TEMPLATE.is_dir():
+        shutil.copytree(TEMPLATE,root,dirs_exist_ok=True)
+    elif bundled.is_file():
+        payload=json.loads(bundled.read_text(encoding="utf-8"))
+        if payload.get("format_version")!=1: raise ValueError("Unsupported bundled template version")
+        for name, encoded in payload["files"].items():
+            rel=Path(name)
+            if rel.is_absolute() or ".." in rel.parts: raise ValueError("Unsafe bundled template path")
+            dest=root/rel
+            dest.parent.mkdir(parents=True,exist_ok=True)
+            dest.write_bytes(base64.b64decode(encoded,validate=True))
+    else:
+        raise FileNotFoundError("EA project template not found")
     (root/"PACKAGE-MANIFEST.yaml").unlink(missing_ok=True)
 
     doc=read_yaml(root/"project.yaml")
