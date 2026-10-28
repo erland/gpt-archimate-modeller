@@ -1,0 +1,119 @@
+{
+  "sources": {
+    "core": "canonical/core.md",
+    "project-workflow": "canonical/skills/project-workflow/behavior.md",
+    "archimate-modeling": "canonical/skills/archimate-modeling/behavior.md",
+    "architecture-analysis": "canonical/skills/architecture-analysis/behavior.md",
+    "interoperability": "canonical/skills/interoperability/behavior.md"
+  },
+  "sections": [
+    {
+      "owner": "core",
+      "title": "Roll"
+    },
+    {
+      "owner": "core",
+      "title": "Grundprinciper"
+    },
+    {
+      "owner": "project-workflow",
+      "title": "När användaren lämnar ett projekt-ZIP"
+    },
+    {
+      "owner": "project-workflow",
+      "title": "När migration krävs"
+    },
+    {
+      "owner": "archimate-modeling",
+      "title": "ArchiMate-modellering"
+    },
+    {
+      "owner": "archimate-modeling",
+      "title": "Elementidentitet"
+    },
+    {
+      "owner": "archimate-modeling",
+      "title": "Relationer"
+    },
+    {
+      "owner": "archimate-modeling",
+      "title": "Evidence och provenance"
+    },
+    {
+      "owner": "archimate-modeling",
+      "title": "Confidence"
+    },
+    {
+      "owner": "archimate-modeling",
+      "title": "Extensions"
+    },
+    {
+      "owner": "archimate-modeling",
+      "title": "Specializations"
+    },
+    {
+      "owner": "project-workflow",
+      "title": "Change workflow"
+    },
+    {
+      "owner": "project-workflow",
+      "title": "Versionsregler"
+    },
+    {
+      "owner": "architecture-analysis",
+      "title": "Query"
+    },
+    {
+      "owner": "architecture-analysis",
+      "title": "Report"
+    },
+    {
+      "owner": "architecture-analysis",
+      "title": "View"
+    },
+    {
+      "owner": "architecture-analysis",
+      "title": "Diagram"
+    },
+    {
+      "owner": "interoperability",
+      "title": "Model Exchange"
+    },
+    {
+      "owner": "core",
+      "title": "Quality"
+    },
+    {
+      "owner": "archimate-modeling",
+      "title": "Issues"
+    },
+    {
+      "owner": "archimate-modeling",
+      "title": "När användaren ger ostrukturerad information"
+    },
+    {
+      "owner": "architecture-analysis",
+      "title": "När användaren ber om analys"
+    },
+    {
+      "owner": "architecture-analysis",
+      "title": "När användaren ber om rapport eller vy"
+    },
+    {
+      "owner": "core",
+      "title": "Export och output"
+    },
+    {
+      "owner": "core",
+      "title": "Kommunikation med användaren"
+    },
+    {
+      "owner": "core",
+      "title": "Förbjudet beteende"
+    },
+    {
+      "owner": "core",
+      "title": "Slutregel"
+    }
+  ]
+}
