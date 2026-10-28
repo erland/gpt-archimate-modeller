@@ -2,7 +2,7 @@
 from pathlib import Path,PurePosixPath
 import argparse,collections,hashlib,stat,zipfile,yaml
 ROOT=Path(__file__).resolve().parents[1]
-CONTRACT=ROOT/"package"/"project-zip-contract.yaml"; ROBUSTNESS=ROOT/"package"/"zip-robustness.yaml"
+CONTRACT=(ROOT/"assets"/"project-zip-contract.yaml") if (ROOT/"assets"/"project-zip-contract.yaml").is_file() else ROOT/"package"/"project-zip-contract.yaml"; ROBUSTNESS=(ROOT/"assets"/"zip-robustness.yaml") if (ROOT/"assets"/"zip-robustness.yaml").is_file() else ROOT/"package"/"zip-robustness.yaml"
 def ly(p): return yaml.safe_load(Path(p).read_text(encoding="utf-8")) or {}
 def sh(b): return hashlib.sha256(b).hexdigest()
 def mode(i): return (i.external_attr>>16)&0xFFFF

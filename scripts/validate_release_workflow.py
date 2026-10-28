@@ -8,7 +8,39 @@ WF=ROOT/".github/workflows/release.yml"
 BUILD_WF=ROOT/".github/workflows/build-distributions.yml"
 SCRIPT=ROOT/"scripts/build_release.sh"
 
+def validate_canonical_1_6_33():
+    errors=[]
+    release=WF.read_text(encoding="utf-8")
+    build=BUILD_WF.read_text(encoding="utf-8")
+    data=yaml.safe_load(release)
+    trigger=data.get("on",data.get(True))
+    if not isinstance(trigger,dict) or "workflow_dispatch" not in trigger or "published" not in (trigger.get("release",{}).get("types",[]) if isinstance(trigger.get("release"),dict) else []):
+        errors.append("release must support published releases and manual dispatch")
+    if data.get("permissions",{}).get("contents")!="write":
+        errors.append("release must have contents write")
+    for marker in ["Checkout released tag", "ref: ${{ steps.tag.outputs.tag }}",
+                   "build_distributions_1_6_33.sh", "validate_release_assets_1_6_33.py",
+                   "release-artifacts/DELIVERY-MANIFEST.json", "release-artifacts/SHA256SUMS.txt",
+                   "gh release upload"]:
+        if marker not in release: errors.append("release missing "+marker)
+    for marker in ["build_distributions_1_6_33.sh","DELIVERY-MANIFEST.json",
+                   "SHA256SUMS.txt","dist/*.zip"]:
+        if marker not in build: errors.append("build missing "+marker)
+    for marker in ["gpt-byggaren-engine-1.6.33.zip"]:
+        if marker not in release or marker not in build: errors.append("pinned engine missing "+marker)
+    if "gh release create" in release: errors.append("release creates a new GitHub release")
+    for file in ["scripts/build_distributions_1_6_33.sh","scripts/validate_release_assets_1_6_33.py"]:
+        if not (ROOT/file).is_file(): errors.append("missing "+file)
+    if errors:
+        print("FAILED")
+        for error in errors: print("-",error)
+        return 1
+    print("OK: pinned 1.6.33 release and build workflows with exact assets")
+    return 0
+
 def main():
+    if WF.is_file() and BUILD_WF.is_file() and "build_distributions_1_6_33.sh" in WF.read_text(encoding="utf-8"):
+        return validate_canonical_1_6_33()
     errors=[]
     for p in [WF,BUILD_WF,SCRIPT]:
         if not p.is_file():

@@ -6,7 +6,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from model_loader import load_model
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_PROFILE = ROOT / "quality" / "profile.yaml"
+DEFAULT_PROFILE = (ROOT / "assets" / "profile.yaml") if (ROOT / "assets" / "profile.yaml").is_file() else ROOT / "quality" / "profile.yaml"
 
 def load_yaml(path):
     return yaml.safe_load(Path(path).read_text(encoding="utf-8"))

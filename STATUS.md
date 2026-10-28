@@ -50,3 +50,15 @@ Följande är slutligt verifierat:
 5. taggdriven release bygger och validerar exakt de aktiva registry-distributionerna plus checksummor/metadata.
 
 Maskinläsbar migrationsstatus finns i `migration-status-1.5.yaml`.
+
+## Pågående migration till GPT Byggaren 1.6.33 (PR #8)
+
+Detta är en separat migration och **ersätter ännu inte** den stabila 1.5-releasekedjan som dokumenteras ovan. Produktversionen förblir 1.0.0 och YAML/ArchiMate-kontrakten ändras inte av distributionsmigreringen.
+
+- Fem peer-distributioner och ett projektarkiv har byggts och originalvaliderats med 1.6.33 i migrations-CI.
+- De fyra paketerade Skill-runtimernas Python-projektlivscykel har smoketestats från uppackade arkiv.
+- Claude Projects och riktiga Chat-/Plugin-/Claude-/OpenCode-värdmiljöer är ännu inte funktionellt verifierade.
+- Ordinarie `build-distributions.yml` och taggdriven `release.yml` använder fortfarande 1.5-baserade skript och validatorer; **de är inte bevis på en genomförd 1.6.33-release**.
+- Se `docs/runtime-parity-1.6.33.md` och `migration-status-1.6.33.yaml` för verifieringsomfattning och återstående blockerare.
+
+Release får inte kallas 1.6.33-klar förrän den ordinarie taggdrivna byggkedjan använder den nya motorn, levererar rätt fem runtimearkiv, har motsvarande release-asset-kontroll samt återstående värdtester bedömts. Ingen merge eller release har genomförts här.

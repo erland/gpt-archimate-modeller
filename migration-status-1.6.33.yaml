@@ -1,0 +1,60 @@
+schema_version: 1
+project:
+  id: archimate-yaml-ea-gpt
+  stable_product_version: 1.0.0
+  product_plan: 48/48
+migration:
+  source_builder_version: 1.5.0
+  target_builder_version: 1.6.33
+  strategy: behavior_preserving
+  plan: docs/gpt-builder-1.6.33-migration.md
+  steps:
+    - inventory
+    - project_model
+    - engine
+    - five_distributions
+    - documentation_hygiene
+    - final_verification
+progress:
+  active_step: final_verification
+  completed_steps: [inventory, project_model, engine, five_distributions, documentation_hygiene]
+  release_ready: false
+verification:
+  engine_selftest: pass_external_workspace
+  repository_inventory: targeted_sources_reviewed
+  python_dependency_audit: ci_pass_40633942493
+  non_python_resource_audit: candidate_scanner_ci_pass_40634222500
+  critical_resource_gate: ci_pass_40634529249
+  canonical_section_coverage: 27_of_27_heading_sections_plus_preamble
+  canonical_assembly: byte_exact_verified_against_original
+  new_project_model: canonical_lint_and_build_verified
+  canonical_engine_project_lint: ci_pass_with_3_fixture_duplicate_warnings
+  project_build: ci_pass_40655093469_six_archives
+  packaged_skill_scripts: ci_pass_40655636601
+  transitive_python_closure: ci_pass_40655636601
+  packaged_declared_data_resources: ci_pass_40655872978
+  dynamic_data_resource_closure: not_verified
+  root_relative_runtime_data_paths: packaged_asset_resolution_added_unverified
+  engine_directory_asset_validation: resolved_by_file_level_assets_ci_pass_40656891756
+  packaged_flat_assets_runtime_path: ci_pass_40657307001_16_skill_runtime_smokes
+  packaged_project_lifecycle: ci_pass_40658238859_four_runtimes
+  project_template_runtime_data: ci_pass_40658238859_four_packaged_skill_lifecycles
+  project_tests: legacy_regression_ci_pass_runtime_tests_pending
+  runtime_parity: documented_partial_host_tests_pending
+  runtime_parity_report: docs/runtime-parity-1.6.33.md
+  release_wiring_audit: ci_pass_40675708575_canonical_1_6_33_workflows
+  normal_build_workflow: ci_pass_40675708584
+  project_regression_ci: ci_pass_40675708664
+  release_asset_dry_run: ci_pass_40675708575_not_published
+  tagged_release_upload: not_executed
+  final_assessment: merge_go_release_no_go_pending_host_parity_and_tagged_release
+  merge_ready: true
+  packaged_analysis_exchange_roundtrip: ci_pass_40680562341_four_skill_runtimes
+  packaged_model_change: ci_pass_40685872796_four_runtime_dry_run_apply_validate
+notes:
+  - "Historisk 1.5-status bevaras i migration-status-1.5.yaml."
+  - "Custom GPT kvarstår som historiskt stöd tills ny registry och CI verifierats."
+  - "Migrationsplanen är påbörjad, inte en slutförd migration."
+  - "Statiska och isolerade runtime-smoketester är godkända; dynamiska beroenden och verkliga värdmiljöer är ännu inte fullständigt testade."
+  - "Slutbedömning uppdaterad 2026-10-28: GO för utvecklingsmerge, NO-GO för publicerad release tills värdmiljö- och taggtester är klara."
+next_step: "Merga PR #8 efter gröna kontroller, hämta de sex distributionerna och genomför separat host-/releaseanalys före publicering."

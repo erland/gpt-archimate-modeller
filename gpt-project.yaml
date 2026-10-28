@@ -1,0 +1,239 @@
+schema_version: 1
+project:
+  id: archimate-yaml-ea-gpt
+  name: ArchiMate YAML EA GPT
+  language: sv
+  description: "ArchiMate 3.2-modellering, analys och interoperabilitet med YAML-projektpaket."
+development:
+  plan: docs/gpt-builder-1.6.33-migration.md
+  status: migration-status-1.6.33.yaml
+  human_readable_status: STATUS.md
+structure:
+  canonical_root: canonical
+  instructions:
+    path: canonical
+    required: true
+  conversation_starters:
+    path: src/conversation-starters
+    required: false
+  runtime_policy:
+    path: src/runtime-policy
+    required: false
+  templates:
+    path: templates
+    required: false
+  knowledge:
+    path: knowledge
+    required: true
+  schemas:
+    path: schemas
+    required: true
+  scripts:
+    path: scripts
+    required: true
+  tests:
+    path: tests
+    required: true
+  dist:
+    path: dist
+    generated: true
+  build:
+    path: build
+    generated: true
+instructions:
+  mode: modular_skills
+  canonical: canonical/core.md
+  core: canonical/core.md
+  assembly: canonical/assembly.json
+  single_source_of_truth: true
+  distribution_specific_instructions_are_generated: true
+skills:
+  contract_version: 1
+  schema: schemas/skill-contract.schema.json
+  mode: inferred
+  definitions:
+    - id: project-workflow
+      name: Projekt- och ändringshantering
+      description: "Öppna, skapa, ändra, migrera, validera och paketera EA-projekt."
+      source: canonical/skills/project-workflow/behavior.md
+      references: []
+      assets:
+        - versioning/policy.yaml
+        - templates/ea-project-split.bundle.json
+        - quality/profile.yaml
+        - package/zip-robustness.yaml
+        - package/project-zip-contract.yaml
+        - schemas/new-project.schema.json
+        - schemas/ea-package.schema.json
+        - schemas/ea-project.schema.json
+        - metamodel/elements.yaml
+        - metamodel/relationships.yaml
+        - metamodel/relationship-matrix.yaml
+      scripts:
+        - scripts/project_control.py
+        - scripts/update_project.py
+        - scripts/new_project.py
+        - scripts/pack_project.py
+        - scripts/validate_project_zip.py
+        - scripts/safe_unpack.py
+        - scripts/migrate_project.py
+        - scripts/apply_changes.py
+        - scripts/assemble_project.py
+        - scripts/identity.py
+        - scripts/model_index.py
+        - scripts/model_loader.py
+        - scripts/quality_check.py
+        - scripts/validate.py
+        - scripts/validate_temporal.py
+        - scripts/versioning.py
+    - id: archimate-modeling
+      name: ArchiMate-modellering
+      description: "Modellera ArchiMate-element, relationer, identiteter och evidens."
+      source: canonical/skills/archimate-modeling/behavior.md
+      references: []
+      assets:
+        - versioning/policy.yaml
+        - schemas/ea-package.schema.json
+        - schemas/ea-project.schema.json
+        - metamodel/elements.yaml
+        - metamodel/relationships.yaml
+        - metamodel/relationship-matrix.yaml
+      scripts:
+        - scripts/apply_changes.py
+        - scripts/identity.py
+        - scripts/assemble_project.py
+        - scripts/validate.py
+        - scripts/quality_check.py
+        - scripts/model_index.py
+        - scripts/model_loader.py
+        - scripts/validate_temporal.py
+        - scripts/versioning.py
+    - id: architecture-analysis
+      name: Arkitekturanalys
+      description: "Analysera modellen med queries, påverkan, rapporter och views."
+      source: canonical/skills/architecture-analysis/behavior.md
+      references: []
+      assets:
+        - schemas/ea-package.schema.json
+        - schemas/ea-project.schema.json
+        - metamodel/elements.yaml
+        - metamodel/relationships.yaml
+        - metamodel/relationship-matrix.yaml
+      scripts:
+        - scripts/query.py
+        - scripts/impact_analysis.py
+        - scripts/model_loader.py
+        - scripts/render_report.py
+        - scripts/compile_view.py
+        - scripts/export_diagram.py
+        - scripts/architecture_states.py
+        - scripts/assemble_project.py
+        - scripts/identity.py
+        - scripts/model_index.py
+    - id: interoperability
+      name: Import och export
+      description: "ArchiMate Model Exchange-import/export med staging och spårbarhet."
+      source: canonical/skills/interoperability/behavior.md
+      references: []
+      assets:
+        - schemas/ea-package.schema.json
+        - schemas/ea-project.schema.json
+        - metamodel/elements.yaml
+        - metamodel/relationships.yaml
+        - metamodel/relationship-matrix.yaml
+      scripts:
+        - scripts/import_model_exchange.py
+        - scripts/export_model_exchange.py
+        - scripts/identity.py
+        - scripts/assemble_project.py
+knowledge_architecture:
+  canonical_root: knowledge
+runtime:
+  primary: none
+  chat_zip:
+    enabled: true
+    start_here_template: templates/START-HERE.chat.md.tpl
+  plugin:
+    enabled: true
+    mode: openai_plugin
+    layout:
+      manifest_file: plugin.json
+      skills: skills
+      references: references
+      assets: assets
+      scripts: scripts
+    templates:
+      readme: templates/README.plugin.md.tpl
+  claude:
+    enabled: true
+    mode: claude_project
+    project:
+      instructions: project/instructions.md
+      knowledge: project/knowledge
+      runtime_contract: project/runtime-contract.json
+    templates:
+      readme: templates/README.claude.md.tpl
+  claude_skills:
+    enabled: true
+  opencode:
+    enabled: true
+    mode: opencode_workspace
+    layout:
+      instructions: AGENTS.md
+      config: opencode.json
+      tools: .opencode/tools
+      runtime_scripts: scripts
+      runtime_contract: .opencode/runtime-contract.json
+      knowledge: knowledge
+    templates:
+      readme: templates/README.opencode.md.tpl
+  custom_gpt:
+    enabled: false
+capabilities:
+  contract_version: 1
+  schema: schemas/capability-contract.schema.json
+  recommendation_mode: inferred_from_use_case
+  requirements:
+    filesystem:
+      read: required
+      write: required
+    code_execution:
+      level: required
+    structured_data:
+      level: required
+    persistent_state:
+      level: required
+
+build_system:
+  targets: [project, chat, claude_project, claude_skills, opencode, plugin]
+  runtime_targets:
+    chat:
+      runtime_id: chatgpt_chat
+      runtime_key: chat_zip
+      builder: chat
+      artifact_type: chat_zip
+      filename_pattern: <project-id>-chat-<version>.zip
+    claude_project:
+      runtime_id: claude_project
+      runtime_key: claude
+      builder: claude
+      artifact_type: claude_project_zip
+      filename_pattern: <project-id>-claude-project-<version>.zip
+    claude_skills:
+      runtime_id: claude_skills
+      runtime_key: claude
+      builder: claude_skills
+      artifact_type: claude_skills_zip
+      filename_pattern: <project-id>-claude-skills-<version>.zip
+    opencode:
+      runtime_id: opencode
+      runtime_key: opencode
+      builder: opencode
+      artifact_type: opencode_zip
+      filename_pattern: <project-id>-opencode-<version>.zip
+    plugin:
+      runtime_id: openai_plugin
+      runtime_key: plugin
+      builder: plugin
+      artifact_type: plugin_zip
+      filename_pattern: <project-id>-plugin-<version>.zip
