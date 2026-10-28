@@ -90,6 +90,11 @@ jobs:
         run: |
           set -euo pipefail
           python /tmp/gpt-byggaren-engine-1.6.33/scripts/validate_distributions.py --project-root .
+      - name: Build and selftest standalone ArchiMate Engine ZIP
+        run: |
+          python scripts/add_runtime_requirements.py --version 1.0.0-migration
+          python scripts/build_archimate_engine_zip.py --version 1.0.0-migration
+          python scripts/verify_archimate_engine_zip.py --version 1.0.0-migration
       - name: Verify transitive Skill Python imports
         run: python scripts/verify_skill_python_closure.py
       - name: Audit non-Python resource candidates
@@ -139,7 +144,7 @@ jobs:
         run: python scripts/smoke_test_packaged_analysis_exchange.py
       - name: Smoke-test packaged model changes
         run: python scripts/smoke_test_packaged_model_change.py
-      - name: Validate exact 1.6.33 archives and checksums
+      - name: Validate seven release archives and checksums
         run: python scripts/validate_release_assets_1_6_33.py --version 1.0.0-migration --dir dist
       - name: Re-run via shared canonical build entrypoint
         run: bash scripts/build_distributions_1_6_33.sh 1.0.0-migration

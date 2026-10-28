@@ -90,3 +90,4 @@ Ett uppdaterat projekt är inte färdigt förrän:
 3. change history är uppdaterad,
 4. ZIP-manifestet är regenererat,
 5. den slutliga ZIP-filen passerar Project ZIP contract.
+
