@@ -6,6 +6,8 @@ on:
       - 'gpt-project.yaml'
       - 'canonical/**'
       - 'migration-status-1.6.33.yaml'
+      - 'scripts/**'
+      - 'docs/runtime-parity-1.6.33.md'
       - '.github/workflows/gpt-builder-1.6.33-validation.yml'
   workflow_dispatch:
 
@@ -109,6 +111,8 @@ jobs:
         run: python scripts/smoke_test_packaged_skill_data.py
       - name: Smoke-test full project lifecycle from extracted Skills
         run: python scripts/smoke_test_packaged_project_flow.py
+      - name: Ensure runtime parity report remains attached to delivery
+        run: test -s docs/runtime-parity-1.6.33.md
       - name: Upload migration build output
         if: success()
         uses: actions/upload-artifact@v4
