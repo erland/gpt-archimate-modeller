@@ -2,6 +2,7 @@
 import argparse
 from pathlib import Path
 import hashlib
+import json
 import yaml
 p=argparse.ArgumentParser()
 p.add_argument("--version",required=True)
@@ -24,7 +25,15 @@ for line in lines:
 assert set(checks)==names
 for name in names:
     assert hashlib.sha256((directory/name).read_bytes()).hexdigest()==checks[name]
-assert (directory/"DELIVERY-MANIFEST.json").is_file()
+manifest=json.loads((directory/"DELIVERY-MANIFEST.json").read_text(encoding="utf-8"))
+assert manifest["project"]==project_id and manifest["version"]==a.version
+entries={item["file"]:item for item in manifest["artifacts"]}
+expected=names|{"SHA256SUMS.txt"}
+assert set(entries)==expected, f"manifest entries mismatch: {set(entries) ^ expected}"
+for filename,entry in entries.items():
+    data=(directory/filename).read_bytes()
+    assert entry["sha256"]==hashlib.sha256(data).hexdigest(), f"manifest hash mismatch: {filename}"
+    assert entry["size"]==len(data), f"manifest size mismatch: {filename}
 if a.print_paths:
     for name in sorted(names): print((directory/name).resolve())
     print((directory/"SHA256SUMS.txt").resolve())
