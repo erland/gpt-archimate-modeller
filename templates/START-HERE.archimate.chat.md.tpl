@@ -19,3 +19,7 @@ Engine ZIP innehåller beroendelista (`PyYAML>=6,<7`, `jsonschema>=4,<5`), CLI o
 - `knowledge/` – kunskap
 
 Version: {{VERSION}}
+
+## Ladda ned Engine när skripten inte kan köras
+
+Om en körbar Pythonmiljö finns men Skill-skripten inte fungerar, be användaren bifoga [ArchiMate Engine {{VERSION}}](https://github.com/erland/gpt-archimate-modeller/releases/download/v{{VERSION}}/archimate-yaml-ea-gpt-engine-{{VERSION}}.zip). Länken gäller först när GitHub Release `v{{VERSION}}` har publicerats. Kontrollera tillgängligheten; annars hänvisa till [Releases](https://github.com/erland/gpt-archimate-modeller/releases) och förklara att den inte publicerats ännu.
