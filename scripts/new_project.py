@@ -12,7 +12,7 @@ ROOT=Path(__file__).resolve().parents[1]
 if (ROOT / "assets" / "schemas").is_dir():
     ROOT = ROOT / "assets"
 TEMPLATE=ROOT/"templates"/"ea-project-split"
-SCHEMA=ROOT/"schemas"/"new-project.schema.json"
+SCHEMA=(ROOT/"assets"/"new-project.schema.json") if (ROOT/"assets"/"new-project.schema.json").is_file() else ROOT/"schemas"/"new-project.schema.json"
 PARTITION_BY_PREFIX={"MOT":"motivation","STR":"strategy","BUS":"business","APP":"application",
                      "TEC":"technology","PHY":"physical","IMP":"implementation-migration","CMP":"composite"}
 COUNTERS=["MOT","STR","BUS","APP","TEC","PHY","IMP","CMP","REL","SRC","REF","ISS","OBS","RES","EV","CHG","STA","TRN"]
