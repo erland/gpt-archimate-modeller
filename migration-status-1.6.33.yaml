@@ -1,0 +1,32 @@
+schema_version: 1
+project:
+  id: archimate-yaml-ea-gpt
+  stable_product_version: 1.0.0
+  product_plan: 48/48
+migration:
+  source_builder_version: 1.5.0
+  target_builder_version: 1.6.33
+  strategy: behavior_preserving
+  plan: docs/gpt-builder-1.6.33-migration.md
+  steps:
+    - inventory
+    - project_model
+    - engine
+    - five_distributions
+    - documentation_hygiene
+    - final_verification
+progress:
+  active_step: inventory
+  completed_steps: []
+  release_ready: false
+verification:
+  engine_selftest: pass_external_workspace
+  repository_inventory: partial
+  project_build: not_run
+  project_tests: not_run
+  runtime_parity: not_run
+notes:
+  - "Historisk 1.5-status bevaras i migration-status-1.5.yaml."
+  - "Custom GPT kvarstår som historiskt stöd tills ny registry och CI verifierats."
+  - "Migrationsplanen är påbörjad, inte en slutförd migration."
+next_step: "Inventera samtliga projektspecifika beteenden och föreslå Skill-arkitektur."
