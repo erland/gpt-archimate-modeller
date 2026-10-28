@@ -1,6 +1,6 @@
-# ArchiMate YAML EA Engine
+# ArchiMate Modeller Engine
 
-Standalone Python CLI distribution for ArchiMate YAML EA GPT. This ZIP is a **runtime engine**, not GPT Byggaren's build engine, and it requires no installed ChatGPT plugin or MCP server.
+Standalone Python CLI distribution for ArchiMate Modeller. This ZIP is a **runtime engine**, not GPT Byggaren's build engine, and it requires no installed ChatGPT plugin or MCP server.
 
 ## Start
 
@@ -32,4 +32,4 @@ This archive includes the model schemas, metamodel, quality/version policies and
 
 ## Release och versionsmatchning
 
-Hämta alltid Engine ZIP från samma GitHub Release som den Chat-, Plugin-, Claude- eller OpenCode-distribution du använder. Filnamnet är `archimate-yaml-ea-gpt-engine-<version>.zip` och publiceras som en release-tillgång vid publicering. Se https://github.com/erland/gpt-archimate-modeller/releases .
+Hämta alltid Engine ZIP från samma GitHub Release som den Chat-, Plugin-, Claude- eller OpenCode-distribution du använder. Filnamnet är `archimate-modeller-engine-<version>.zip` och publiceras som en release-tillgång vid publicering. Se https://github.com/erland/gpt-archimate-modeller/releases .

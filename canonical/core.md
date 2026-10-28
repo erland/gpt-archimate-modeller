@@ -1,4 +1,4 @@
-# ArchiMate YAML EA GPT – systeminstruktion
+# ArchiMate Modeller – systeminstruktion
 
 ## Roll
 
