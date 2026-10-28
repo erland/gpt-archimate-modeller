@@ -48,21 +48,39 @@ skills:
       source: canonical/skills/project-workflow/behavior.md
       references: []
       assets: []
-      scripts: []
+      scripts:
+        - scripts/project_control.py
+        - scripts/update_project.py
+        - scripts/new_project.py
+        - scripts/pack_project.py
+        - scripts/validate_project_zip.py
+        - scripts/safe_unpack.py
+        - scripts/migrate_project.py
     - id: archimate-modeling
       name: ArchiMate-modellering
       description: "Modellera ArchiMate-element, relationer, identiteter och evidens."
       source: canonical/skills/archimate-modeling/behavior.md
       references: []
       assets: []
-      scripts: []
+      scripts:
+        - scripts/apply_changes.py
+        - scripts/identity.py
+        - scripts/assemble_project.py
+        - scripts/validate.py
+        - scripts/quality_check.py
     - id: architecture-analysis
       name: Arkitekturanalys
       description: "Analysera modellen med queries, påverkan, rapporter och views."
       source: canonical/skills/architecture-analysis/behavior.md
       references: []
       assets: []
-      scripts: []
+      scripts:
+        - scripts/query.py
+        - scripts/impact_analysis.py
+        - scripts/model_loader.py
+        - scripts/render_report.py
+        - scripts/compile_view.py
+        - scripts/export_diagram.py
     - id: interoperability
       name: Import och export
       description: "ArchiMate Model Exchange-import/export med staging och spårbarhet."
