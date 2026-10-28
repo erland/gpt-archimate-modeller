@@ -2,6 +2,20 @@
 
 Ett ZIP-baserat verktygs- och GPT-paket för att skapa, underhålla, analysera och exportera Enterprise Architecture-modeller med **ArchiMate 3.2** som semantisk kärna och **YAML som source of truth**.
 
+## GPT Byggaren 1.6.33: separat ArchiMate Engine ZIP
+
+Utöver fem runtimepaket och det genererade projektpaketet byggs nu en **sjunde ZIP-artefakt**: `archimate-yaml-ea-gpt-engine-<version>.zip`. Engine är en fristående Python-runtime med kanoniska skript, schemas, metamodell, projektmallar, CLI, `requirements.txt` och `selftest.py`. Den kräver inte ett installerat plugin eller en MCP-server.
+
+```bash
+python -m pip install -r requirements.txt
+python archimate_engine.py selftest
+python archimate_engine.py --help
+```
+
+Chat, Plugin och OpenCode kan använda Skill-skript där exekvering stöds; Engine ZIP är det dokumenterade alternativet när skripten inte kan köras direkt i värden. Att bifoga ZIP-filen aktiverar inte automatiskt verktyg. Se `engine/README.md` och `docs/runtime-parity-1.6.33.md`.
+
+Tidigare avsnitt om GPT Byggaren 1.5 nedan är historiska och beskriver inte den aktuella 1.6.33-distributionen.
+
 ## För användare
 
 Börja här:
