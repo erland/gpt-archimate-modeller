@@ -57,6 +57,6 @@ Merge innebär att projektet kan fortsätta med verifiering av de byggda distrib
 
 ## Fristående ArchiMate Engine ZIP
 
-Utöver de fem peer-runtimepaketen och det genererade projektpaketet byggs nu en separat `archimate-yaml-ea-gpt-engine-<version>.zip`. Den innehåller kanoniska Python-skript, CLI, `requirements.txt`, YAML-schema/metamodell, policyfiler och den serialiserade projektmallen. Byggkedjan verifierar Engine efter uppackning i en isolerad temporär katalog genom `python archimate_engine.py selftest` (skapa, validera, ändra, analysera, exportera/importera, paketera).
+Utöver de fem peer-runtimepaketen och det genererade projektpaketet byggs nu en separat `archimate-modeller-engine-<version>.zip`. Den innehåller kanoniska Python-skript, CLI, `requirements.txt`, YAML-schema/metamodell, policyfiler och den serialiserade projektmallen. Byggkedjan verifierar Engine efter uppackning i en isolerad temporär katalog genom `python archimate_engine.py selftest` (skapa, validera, ändra, analysera, exportera/importera, paketera).
 
 Chat ZIP, Plugin, Claude Skills och OpenCode innehåller dessutom `requirements.txt` med deklarerade Pythonberoenden. Deras instruktioner förklarar att skript är runtime-resurser och inte garanterat registrerade verktyg. **Engine är en lokal Python-runtime, inte en MCP-server.** Ett värdsystem utan Python, filskrivning eller möjlighet att installera beroenden kan inte exekvera Engine ZIP direkt. Faktisk värdmiljöparitet kräver fortsatt separat acceptanstest. `release_ready: false` gäller fortfarande till publiceringsbeslut.
