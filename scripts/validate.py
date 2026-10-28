@@ -11,6 +11,10 @@ from assemble_project import assemble
 from identity import expected_prefix_for_type, ID_RE
 from validate_temporal import validate_temporal
 
+def resource_yaml(name):
+    bundled = ROOT / "assets" / name
+    return bundled if bundled.is_file() else ROOT / "metamodel" / name
+
 def load_yaml(path):
     return yaml.safe_load(Path(path).read_text(encoding="utf-8"))
 
@@ -23,8 +27,8 @@ def add(results, severity, code, message, object_id=None):
     })
 
 def check_types(logical, results):
-    metamodel_elements = load_yaml(ROOT/"metamodel"/"elements.yaml")["elements"]
-    metamodel_rels = load_yaml(ROOT/"metamodel"/"relationships.yaml")["relationships"]
+    metamodel_elements = load_yaml(resource_yaml("elements.yaml"))["elements"]
+    metamodel_rels = load_yaml(resource_yaml("relationships.yaml"))["relationships"]
     known_e = {x["type"] for x in metamodel_elements}
     known_r = {x["type"] for x in metamodel_rels}
 
@@ -40,7 +44,7 @@ def check_types(logical, results):
             add(results, "error", "ARCH-REL-TYPE", f"Unknown ArchiMate relationship type {r.get('type')}", r.get("id"))
 
 def check_relationship_pairs(logical, results, strict_relationships=False):
-    rules = load_yaml(ROOT/"metamodel"/"relationship-matrix.yaml")
+    rules = load_yaml(resource_yaml("relationship-matrix.yaml"))
     table = {
         (x["source_type"], x["target_type"]): set(x["allowed"])
         for x in rules.get("validated_pairs", [])
