@@ -87,6 +87,14 @@ jobs:
         run: python scripts/verify_skill_python_closure.py
       - name: Audit non-Python resource candidates
         run: python scripts/audit_skill_data_references.py --output skill-data-references.json
+      - name: Report runtime data path blockers
+        run: python scripts/report_skill_runtime_data_paths.py > skill-runtime-data-paths.json
+      - name: Upload runtime data path blockers
+        uses: actions/upload-artifact@v4
+        with:
+          name: skill-runtime-data-paths-1.6.33
+          path: skill-runtime-data-paths.json
+          if-no-files-found: error
       - name: Upload non-Python resource audit
         uses: actions/upload-artifact@v4
         with:
