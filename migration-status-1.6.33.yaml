@@ -24,7 +24,7 @@ verification:
   repository_inventory: targeted_sources_reviewed
   python_dependency_audit: ci_pass_40633942493
   non_python_resource_audit: candidate_scanner_ci_pass_40634222500
-  critical_resource_gate: ci_configured_awaiting_run
+  critical_resource_gate: ci_pass_40634529249
   project_build: not_run
   project_tests: not_run
   runtime_parity: not_run
@@ -33,4 +33,4 @@ notes:
   - "Custom GPT kvarstår som historiskt stöd tills ny registry och CI verifierats."
   - "Migrationsplanen är påbörjad, inte en slutförd migration."
   - "Statisk Python-beroendegranskare tillagd; körning och icke-Python-resurser återstår."
-next_step: "Verifiera kritisk resursgate i CI och fortsätt med fullständig transitiv resursmappning innan gpt-project.yaml aktiveras."
+next_step: "Kartlägg resursisolering för fyra Skills och skapa validerad gpt-project.yaml med kanoniska motorn."
