@@ -30,16 +30,35 @@ jobs:
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
       - name: Test before packaging
         run: python scripts/run_tests.py --format text
-      - name: Build registry distributions
-        run: python scripts/build_all_distributions.py --version "${{ steps.version.outputs.version }}" --output-dir dist
-      - name: Validate registry distributions
-        run: python scripts/validate_all_distributions.py --manifest dist/distribution-build-manifest.json
+      - name: Download pinned GPT Byggaren engine
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fLSs --retry 3 \
+            'https://github.com/erland/gpt-byggaren/releases/download/v1.6.33/gpt-byggaren-engine-1.6.33.zip' \
+            -o /tmp/gpt-byggaren-engine-1.6.33.zip
+          python - <<'PY'
+          import zipfile
+          from pathlib import Path
+          src=Path('/tmp/gpt-byggaren-engine-1.6.33.zip')
+          root=Path('/tmp/gpt-byggaren-engine-1.6.33')
+          with zipfile.ZipFile(src) as archive:
+              for item in archive.infolist():
+                  p=Path(item.filename)
+                  if p.is_absolute() or '..' in p.parts or item.is_dir() and item.filename.startswith('/'):
+                      raise SystemExit(f'Unsafe engine archive entry: {item.filename}')
+              archive.extractall(root)
+          print('Extracted pinned engine',src.name)
+          PY
+      - name: Build and verify canonical 1.6.33 distributions
+        run: bash scripts/build_distributions_1_6_33.sh "${{ steps.version.outputs.version }}"
       - name: Upload workflow artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: archimate-yaml-ea-gpt-v${{ steps.version.outputs.version }}
+          name: archimate-yaml-ea-gpt-1.6.33-v${{ steps.version.outputs.version }}
           path: |
             dist/*.zip
-            dist/distribution-build-manifest.json
+            dist/DELIVERY-MANIFEST.json
+            dist/SHA256SUMS.txt
           if-no-files-found: error
           retention-days: 14
