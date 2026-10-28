@@ -116,6 +116,13 @@ jobs:
         run: python scripts/smoke_test_packaged_project_flow.py
       - name: Ensure runtime parity report remains attached to delivery
         run: test -s docs/runtime-parity-1.6.33.md
+      - name: Stage and verify tagged release asset layout without publishing
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p release-artifacts
+          cp dist/*.zip dist/DELIVERY-MANIFEST.json dist/SHA256SUMS.txt release-artifacts/
+          python scripts/validate_release_assets_1_6_33.py --version 1.0.0-migration --dir release-artifacts
       - name: Audit legacy release wiring
         run: python scripts/audit_migration_release_wiring.py
       - name: Upload release wiring audit
