@@ -33,7 +33,7 @@ assert set(entries)==expected, f"manifest entries mismatch: {set(entries) ^ expe
 for filename,entry in entries.items():
     data=(directory/filename).read_bytes()
     assert entry["sha256"]==hashlib.sha256(data).hexdigest(), f"manifest hash mismatch: {filename}"
-    assert entry["size"]==len(data), f"manifest size mismatch: {filename}
+    assert entry["size"]==len(data), f"manifest size mismatch: {filename}"
 if a.print_paths:
     for name in sorted(names): print((directory/name).resolve())
     print((directory/"SHA256SUMS.txt").resolve())
