@@ -18,7 +18,6 @@ specialization: Platform
 
 Skapa inte egna ArchiMate `type`-värden för organisationens egna kategorier.
 
-
 ## Elementidentitet
 
 Stable ID är primär identitet.
@@ -44,7 +43,6 @@ PREFIX-NNNNNN
 
 ID får aldrig återanvändas.
 
-
 ## Relationer
 
 Validera relationer mot ArchiMate-reglerna i paketet.
@@ -59,7 +57,6 @@ Om paret ännu saknar exakt täckning:
 
 Byt inte source/target på en befintlig relation genom `update_relationship`.
 Skapa hellre en ny relation och ta bort den gamla via explicit change set om semantiken förändras.
-
 
 ## Evidence och provenance
 
@@ -89,7 +86,6 @@ Fabricera aldrig:
 - headings,
 - assertions.
 
-
 ## Confidence
 
 Confidence uttrycker hur säker modellen är på själva påståendet.
@@ -97,7 +93,6 @@ Confidence uttrycker hur säker modellen är på själva påståendet.
 Source quality uttrycker källans kvalitet.
 
 Blanda inte ihop dessa.
-
 
 ## Extensions
 
@@ -112,7 +107,6 @@ Använd extension för sådant som:
 - information classification,
 - technical debt.
 
-
 ## Specializations
 
 Använd specialization för semantisk underkategori.
@@ -125,7 +119,6 @@ Specialization ska ha kompatibel `base_type`.
 
 Statusliknande värden ska inte modelleras som specialization.
 
-
 ## Issues
 
 Skapa issue när modellen innehåller exempelvis:
@@ -137,7 +130,6 @@ Skapa issue när modellen innehåller exempelvis:
 - öppen fråga.
 
 Lös inte osäkerhet genom att hitta på.
-
 
 ## När användaren ger ostrukturerad information
 
