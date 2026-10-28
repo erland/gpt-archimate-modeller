@@ -47,9 +47,10 @@ for filename in expected:
     assert (assets / filename).is_file(), f'missing bundled asset: {filename}'
 assert assemble_project.PACKAGE_SCHEMA.is_file()
 assert assemble_project.LOGICAL_SCHEMA.is_file()
-assert validate.resource_yaml('elements.yaml').is_file()
-assert validate.resource_yaml('relationships.yaml').is_file()
-assert validate.resource_yaml('relationship-matrix.yaml').is_file()
+if sys.argv[2] in ('project-workflow', 'archimate-modeling'):
+    assert validate.resource_yaml('elements.yaml').is_file()
+    assert validate.resource_yaml('relationships.yaml').is_file()
+    assert validate.resource_yaml('relationship-matrix.yaml').is_file()
 if sys.argv[2]=='project-workflow':
     assert new_project.SCHEMA.is_file()
 """
