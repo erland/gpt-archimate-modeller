@@ -124,6 +124,10 @@ jobs:
           name: release-wiring-audit-1.6.33
           path: release-wiring-audit-1.6.33.json
           if-no-files-found: error
+      - name: Validate exact 1.6.33 archives and checksums
+        run: python scripts/validate_release_assets_1_6_33.py --version 1.0.0-migration --dir dist
+      - name: Re-run via shared canonical build entrypoint
+        run: bash scripts/build_distributions_1_6_33.sh 1.0.0-migration
       - name: Upload migration build output
         if: success()
         uses: actions/upload-artifact@v4
