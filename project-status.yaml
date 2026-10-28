@@ -13,9 +13,10 @@ progress:
   skipped_steps: []
   inserted_steps: []
 state:
-  overall: in_progress
+  overall: blocked
   blocking_issues:
     - canonical_project_lint_not_yet_passing
+  warnings: []
 next_step:
   recommended: verify_canonical_lint
   title: Verifiera GPT Byggaren 1.6.33-lint
