@@ -29,7 +29,7 @@ PASS för projektlivscykel innebär att ett uppackat Skill kan skapa ett projekt
 
 1. Riktiga värdmiljötester för Chat, Claude, OpenCode och Plugin saknas. Claude Project kräver egen text-/bilageverifiering.
 2. Dynamiska importer, externa verktyg, värdberoenden och all dataresursåtkomst är inte fullständigt verifierade.
-3. Analysfråga och ArchiMate Model Exchange export/import har funktionstestats i fyra uppackade Skills-runtimer (CI 40680562341). Modelländring och beteende i faktiska hosts återstår.
+3. Analysfråga och ArchiMate Model Exchange export/import har funktionstestats i fyra uppackade Skills-runtimer (CI 40680562341). Modelländring har därefter också verifierats i fyra uppackade Skill-arkiv; beteende i faktiska hosts återstår.
 4. Ordinarie distributionsbygge och taggdriven releasekonfiguration har migrerats till 1.6.33. Torrkörning av release-artefakter är godkänd, men en verklig taggdriven release och uppladdning har inte körts.
 5. Slutlig värdmiljöparitet och ändrings-/analys-/importexportbeteende är inte styrkt för varje host. Releasebeslutet är därför fortsatt BLOCKERAT.
 
@@ -46,3 +46,11 @@ Det finns ingen evidens för ett faktiskt publicerat 1.6.33-taggreleaseflöde el
 ## Utökad beteendeverifiering 2026-10-28
 
 Körning `40680562341` verifierar samma projektflöde i Chat ZIP, Claude Skills, OpenCode och OpenAI Plugin som uppackade ZIP-arkiv: skapa projekt, exekvera elementfråga, exportera ArchiMate Model Exchange XML och importera XML till förhandsgranskning. Ordinarie CI och distributionsbygge på motsvarande commit är också godkända. Testerna styrker skriptbeteende i isolerad Pythonmiljö, inte native host-integration eller ändringshantering. Releasebeslut: **villkorat NO-GO** tills resterande värdtester och kontrollerat taggdrivet releaseflöde bedömts.
+
+## Mergebedömning 2026-10-28 – efter utökade tester
+
+**GO för merge av migrations-PR #8 som utvecklingssteg, men NO-GO för publicerad release.** Bedömningen ersätter ovanstående historiska NO-GO för merge, inte releasebegränsningarna.
+
+De senaste kontrollerade körningarna på commit `bddf4a6` är godkända: ordinarie CI `40686039202`, distributionsbygge `40686039186` och migrationsvalidering `40686039203`. I de fyra uppackade Skill-runtimerna verifieras projektgenerering, ZIP-kontroll, modelländring med dry-run och apply, analysfråga samt Model Exchange-export/import. Claude Project är ett separat textbaserat distributionsmål och saknar motsvarande Python-hosttest.
+
+Merge innebär att projektet kan fortsätta med verifiering av de byggda distributionerna; det innebär **inte** att plattformsspecifik funktion, dynamiska beroenden eller en riktig GitHub Release har verifierats. Behåll `release_ready: false`; publicera ingen release före separat kontroll och beslut.
