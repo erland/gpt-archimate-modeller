@@ -16,7 +16,7 @@ migration:
     - documentation_hygiene
     - final_verification
 progress:
-  active_step: project_model
+  active_step: five_distributions
   completed_steps: []
   release_ready: false
 verification:
@@ -28,13 +28,14 @@ verification:
   canonical_section_coverage: 27_of_27_heading_sections_plus_preamble
   canonical_assembly: byte_exact_verified_against_original
   new_project_model: staged_with_explicit_script_entrypoints_unverified
-  canonical_engine_project_lint: ci_configured_awaiting_run
-  project_build: not_run
-  project_tests: not_run
+  canonical_engine_project_lint: ci_pass_with_3_fixture_duplicate_warnings
+  project_build: ci_pass_40655093469_six_archives
+  packaged_skill_scripts: ci_pass_40655093469
+  project_tests: legacy_regression_ci_pass_runtime_tests_pending
   runtime_parity: not_run
 notes:
   - "Historisk 1.5-status bevaras i migration-status-1.5.yaml."
   - "Custom GPT kvarstår som historiskt stöd tills ny registry och CI verifierats."
   - "Migrationsplanen är påbörjad, inte en slutförd migration."
   - "Statisk Python-beroendegranskare tillagd; körning och icke-Python-resurser återstår."
-next_step: "Granska 1.6.33-lint från GitHub Actions och korrigera schema-, resurs- och runtime-kontrakt innan bygge."
+next_step: "Kontrollera transitiva Python- och dataresurser i runtime-arkiven och verifiera beteendeparitet innan release."
