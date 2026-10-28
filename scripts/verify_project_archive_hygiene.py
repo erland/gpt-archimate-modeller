@@ -4,6 +4,7 @@ import argparse
 import io
 import zipfile
 from pathlib import Path
+import yaml
 
 GENERATED = {"dist", "build", "release-artifacts", ".git", "__pycache__", ".pytest_cache", ".venv"}
 
@@ -49,7 +50,9 @@ def main():
         return
     if not args.version:
         parser.error("--version is required unless --selftest is used")
-    archives = list(Path(args.dir).glob(f"*-project-{args.version}.zip"))
+    project_root = Path(__file__).resolve().parents[1]
+    project_id = yaml.safe_load((project_root / "gpt-project.yaml").read_text(encoding="utf-8"))["project"]["id"]
+    archives = list(Path(args.dir).glob(f"{project_id}-project-{args.version}.zip"))
     if len(archives) != 1:
         raise SystemExit(f"FAIL: expected exactly one project ZIP, found {len(archives)}")
     problems = violations(archives[0])
