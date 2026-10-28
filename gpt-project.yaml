@@ -39,7 +39,8 @@ instructions:
   distribution_specific_instructions_are_generated: true
 skills:
   contract_version: 1
-  mode: explicit
+  mode: inferred
+  resource_policy: explicit
   definitions:
     - id: project-workflow
       name: Projekt- och ändringshantering
