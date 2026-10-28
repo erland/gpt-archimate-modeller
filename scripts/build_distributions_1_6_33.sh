@@ -31,3 +31,4 @@ python scripts/smoke_test_packaged_skill_data.py
 python scripts/smoke_test_packaged_project_flow.py
 
 python scripts/verify_archimate_engine_zip.py --version "$VERSION"
+python scripts/verify_engine_download_links.py --version "$VERSION"
