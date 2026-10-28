@@ -27,6 +27,7 @@ jobs:
           python scripts/audit_skill_data_references.py --output skill-data-references.json
           python -m json.tool skill-data-references.json >/dev/null
           python scripts/validate_skill_migration_prerequisites.py --output skill-migration-prerequisites.json
+          python scripts/validate_modular_instruction_parity.py
           python -m json.tool skill-migration-prerequisites.json >/dev/null
       - name: Upload Skill dependency audit
         if: always()
