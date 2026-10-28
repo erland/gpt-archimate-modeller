@@ -26,6 +26,8 @@ jobs:
           python -m json.tool skill-python-dependencies.json >/dev/null
           python scripts/audit_skill_data_references.py --output skill-data-references.json
           python -m json.tool skill-data-references.json >/dev/null
+          python scripts/validate_skill_migration_prerequisites.py --output skill-migration-prerequisites.json
+          python -m json.tool skill-migration-prerequisites.json >/dev/null
       - name: Upload Skill dependency audit
         if: always()
         uses: actions/upload-artifact@v4
@@ -34,6 +36,7 @@ jobs:
           path: |
             skill-python-dependencies.json
             skill-data-references.json
+            skill-migration-prerequisites.json
           if-no-files-found: warn
       - name: Reject committed cache/build junk
         shell: bash
