@@ -28,7 +28,6 @@ for runtime,(pattern,prefix) in targets.items():
             applied=run("project-workflow","apply_changes.py",project,change)
             assert "APPLIED" in applied
             run("project-workflow","validate.py",project)
-            result=run("architecture-analysis","query.py",project,stage/"query.yaml","--json") if False else ""
             assert "APP-000001" in (project/"model"/"elements"/"application.yaml").read_text()
             print(runtime+": model change PASS")
         except Exception as e:errors.append(str(e))
