@@ -3,8 +3,8 @@ from pathlib import Path
 import argparse,hashlib,json,zipfile,yaml
 from model_index import build_index, INDEX_NAME
 ROOT=Path(__file__).resolve().parents[1]
-ROBUSTNESS=ROOT/"package"/"zip-robustness.yaml"
-CONTRACT=ROOT/"package"/"project-zip-contract.yaml"
+ROBUSTNESS=(ROOT/"assets"/"zip-robustness.yaml") if (ROOT/"assets"/"zip-robustness.yaml").is_file() else ROOT/"package"/"zip-robustness.yaml"
+CONTRACT=(ROOT/"assets"/"project-zip-contract.yaml") if (ROOT/"assets"/"project-zip-contract.yaml").is_file() else ROOT/"package"/"project-zip-contract.yaml"
 FIXED_DT=(1980,1,1,0,0,0)
 def ly(p): return yaml.safe_load(Path(p).read_text(encoding="utf-8")) or {}
 def sha256(p):
