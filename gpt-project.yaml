@@ -40,8 +40,8 @@ instructions:
   distribution_specific_instructions_are_generated: true
 skills:
   contract_version: 1
+  schema: schemas/skill-contract.schema.json
   mode: inferred
-  resource_policy: explicit
   definitions:
     - id: project-workflow
       name: Projekt- och ändringshantering
@@ -106,6 +106,8 @@ runtime:
     enabled: false
 capabilities:
   contract_version: 1
+  schema: schemas/capability-contract.schema.json
+  recommendation_mode: inferred_from_use_case
   requirements:
     filesystem:
       read: required
@@ -114,7 +116,5 @@ capabilities:
       level: required
     structured_data:
       level: required
-    persistent_workspace:
-      level: required
-    archive_io:
+    persistent_state:
       level: required
