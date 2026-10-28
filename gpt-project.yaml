@@ -58,9 +58,12 @@ skills:
       source: canonical/skills/project-workflow/behavior.md
       references: []
       assets:
-        - schemas
-        - metamodel
-        - templates
+        - schemas/new-project.schema.json
+        - schemas/ea-package.schema.json
+        - schemas/ea-project.schema.json
+        - metamodel/elements.yaml
+        - metamodel/relationships.yaml
+        - metamodel/relationship-matrix.yaml
       scripts:
         - scripts/project_control.py
         - scripts/update_project.py
@@ -84,8 +87,11 @@ skills:
       source: canonical/skills/archimate-modeling/behavior.md
       references: []
       assets:
-        - schemas
-        - metamodel
+        - schemas/ea-package.schema.json
+        - schemas/ea-project.schema.json
+        - metamodel/elements.yaml
+        - metamodel/relationships.yaml
+        - metamodel/relationship-matrix.yaml
       scripts:
         - scripts/apply_changes.py
         - scripts/identity.py
@@ -102,8 +108,11 @@ skills:
       source: canonical/skills/architecture-analysis/behavior.md
       references: []
       assets:
-        - schemas
-        - metamodel
+        - schemas/ea-package.schema.json
+        - schemas/ea-project.schema.json
+        - metamodel/elements.yaml
+        - metamodel/relationships.yaml
+        - metamodel/relationship-matrix.yaml
       scripts:
         - scripts/query.py
         - scripts/impact_analysis.py
@@ -121,8 +130,11 @@ skills:
       source: canonical/skills/interoperability/behavior.md
       references: []
       assets:
-        - schemas
-        - metamodel
+        - schemas/ea-package.schema.json
+        - schemas/ea-project.schema.json
+        - metamodel/elements.yaml
+        - metamodel/relationships.yaml
+        - metamodel/relationship-matrix.yaml
       scripts:
         - scripts/import_model_exchange.py
         - scripts/export_model_exchange.py
