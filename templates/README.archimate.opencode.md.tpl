@@ -22,4 +22,4 @@ Version: {{VERSION}}
 
 ## Engine ZIP för denna version
 
-[ArchiMate Engine {{VERSION}}](https://github.com/erland/gpt-archimate-modeller/releases/download/v{{VERSION}}/archimate-yaml-ea-gpt-engine-{{VERSION}}.zip) publiceras i samma GitHub Release som denna distribution. Kontrollera att releasen finns innan du rekommenderar länken; annars använd [Releases](https://github.com/erland/gpt-archimate-modeller/releases).
+[ArchiMate Engine {{VERSION}}](https://github.com/erland/gpt-archimate-modeller/releases/download/v{{VERSION}}/archimate-modeller-engine-{{VERSION}}.zip) publiceras i samma GitHub Release som denna distribution. Kontrollera att releasen finns innan du rekommenderar länken; annars använd [Releases](https://github.com/erland/gpt-archimate-modeller/releases).
