@@ -25,7 +25,8 @@ verification:
   python_dependency_audit: ci_pass_40633942493
   non_python_resource_audit: candidate_scanner_ci_pass_40634222500
   critical_resource_gate: ci_pass_40634529249
-  canonical_section_coverage: 28_of_28_source_sections_mapped
+  canonical_section_coverage: 27_of_27_heading_sections_plus_preamble
+  canonical_assembly: byte_exact_verified_against_original
   new_project_model: staged_with_explicit_script_entrypoints_unverified
   project_build: not_run
   project_tests: not_run
@@ -35,4 +36,4 @@ notes:
   - "Custom GPT kvarstår som historiskt stöd tills ny registry och CI verifierats."
   - "Migrationsplanen är påbörjad, inte en slutförd migration."
   - "Statisk Python-beroendegranskare tillagd; körning och icke-Python-resurser återstår."
-next_step: "Verifiera gpt-project.yaml mot originalmotorn och fyll Skill-specifika resurser innan nya distributioner byggs."
+next_step: "Kör kanonisk GPT Byggaren 1.6.33-projektvalidering och komplettera transitive Skill-resurser före distributionsbygge."
