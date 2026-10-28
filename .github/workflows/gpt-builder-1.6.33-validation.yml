@@ -116,6 +116,10 @@ jobs:
         run: python scripts/smoke_test_packaged_project_flow.py
       - name: Ensure runtime parity report remains attached to delivery
         run: test -s docs/runtime-parity-1.6.33.md
+      - name: Reject nested release artifacts in project ZIP
+        run: |
+          python scripts/verify_project_archive_hygiene.py --selftest
+          python scripts/verify_project_archive_hygiene.py --version 1.0.0-migration
       - name: Stage and verify tagged release asset layout without publishing
         shell: bash
         run: |
