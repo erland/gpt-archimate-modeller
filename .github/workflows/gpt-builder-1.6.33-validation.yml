@@ -44,5 +44,22 @@ jobs:
           PY
       - name: Original engine selftest
         run: python /tmp/gpt-byggaren-engine-1.6.33/scripts/selftest_distribution_engine.py --source /tmp/gpt-byggaren-engine-1.6.33
+      - name: Install pinned engine contract schemas for validation
+        shell: bash
+        run: |
+          set -euo pipefail
+          for schema in capability-contract.schema.json skill-contract.schema.json project-status.schema.json; do
+            test -f "/tmp/gpt-byggaren-engine-1.6.33/schemas/$schema"
+            cp "/tmp/gpt-byggaren-engine-1.6.33/schemas/$schema" "schemas/$schema"
+          done
       - name: Original engine project lint
-        run: python /tmp/gpt-byggaren-engine-1.6.33/scripts/lint_gpt_project.py --project-root . --json | tee /tmp/gpt-builder-1.6.33-lint.json
+        shell: bash
+        run: |
+          set -euo pipefail
+          python /tmp/gpt-byggaren-engine-1.6.33/scripts/lint_gpt_project.py --project-root . --json | tee /tmp/gpt-builder-1.6.33-lint.json
+          python - <<'PY'
+          import json
+          report=json.load(open('/tmp/gpt-builder-1.6.33-lint.json',encoding='utf-8'))
+          if report.get('result') != 'pass' or report.get('summary',{}).get('errors',0):
+              raise SystemExit(f"GPT Byggaren project lint failed: {report.get('summary')}")
+          PY
