@@ -43,7 +43,7 @@ def main():
     template = ROOT / "templates" / "ea-project-split.bundle.json"
     if not template.is_file():
         raise SystemExit("Missing generated project template bundle; run generate_skill_template_bundle.py")
-    files["templates/ea-project-split.bundle.json"] = template.read_bytes()
+    files["assets/ea-project-split.bundle.json"] = template.read_bytes()
     files["VERSION"] = (args.version + "\n").encode()
     manifest = {
         "runtime_id": project_id + "-engine",
