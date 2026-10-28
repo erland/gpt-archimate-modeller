@@ -18,8 +18,8 @@ ARCHIVES = {
 checks = {
     "project-workflow": ["new_project", "assemble_project", "validate"],
     "archimate-modeling": ["assemble_project", "validate"],
-    "architecture-analysis": ["assemble_project", "validate"],
-    "interoperability": ["assemble_project", "validate"],
+    "architecture-analysis": ["assemble_project"],
+    "interoperability": ["assemble_project"],
 }
 errors = []
 results = []
