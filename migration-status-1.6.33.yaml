@@ -47,7 +47,8 @@ verification:
   project_regression_ci: ci_pass_40675708664
   release_asset_dry_run: ci_pass_40675708575_not_published
   tagged_release_upload: not_executed
-  final_assessment: conditional_no_go_pending_host_parity_and_real_tagged_release
+  final_assessment: merge_go_release_no_go_pending_host_parity_and_tagged_release
+  merge_ready: true
   packaged_analysis_exchange_roundtrip: ci_pass_40680562341_four_skill_runtimes
   packaged_model_change: ci_pass_40685872796_four_runtime_dry_run_apply_validate
 notes:
@@ -55,5 +56,5 @@ notes:
   - "Custom GPT kvarstår som historiskt stöd tills ny registry och CI verifierats."
   - "Migrationsplanen är påbörjad, inte en slutförd migration."
   - "Statiska och isolerade runtime-smoketester är godkända; dynamiska beroenden och verkliga värdmiljöer är ännu inte fullständigt testade."
-  - "Slutbedömning 2026-10-28: NO-GO för merge/release tills de återstående testerna är verifierade."
-next_step: "Granska återstående värdmiljöbegränsningar och avgör om PR kan mergas separat från en framtida release; testa därefter taggdriven release utan att publicera från PR."
+  - "Slutbedömning uppdaterad 2026-10-28: GO för utvecklingsmerge, NO-GO för publicerad release tills värdmiljö- och taggtester är klara."
+next_step: "Merga PR #8 efter gröna kontroller, hämta de sex distributionerna och genomför separat host-/releaseanalys före publicering."
