@@ -47,9 +47,11 @@ verification:
   project_regression_ci: ci_pass_40675708664
   release_asset_dry_run: ci_pass_40675708575_not_published
   tagged_release_upload: not_executed
+  final_assessment: no_go_pending_host_parity_and_real_tagged_release
 notes:
   - "Historisk 1.5-status bevaras i migration-status-1.5.yaml."
   - "Custom GPT kvarstår som historiskt stöd tills ny registry och CI verifierats."
   - "Migrationsplanen är påbörjad, inte en slutförd migration."
-  - "Statisk Python-beroendegranskare tillagd; körning och icke-Python-resurser återstår."
-next_step: "Genomför slutlig runtime-/värdmiljöbedömning och kontrollera ett faktiskt taggdrivet releaseflöde före release_ready och merge."
+  - "Statiska och isolerade runtime-smoketester är godkända; dynamiska beroenden och verkliga värdmiljöer är ännu inte fullständigt testade."
+  - "Slutbedömning 2026-10-28: NO-GO för merge/release tills de återstående testerna är verifierade."
+next_step: "Verifiera host-paritet per runtime, beteendetester för modelländring/analys/import-export och en kontrollerad taggdriven release före GO-beslut."
