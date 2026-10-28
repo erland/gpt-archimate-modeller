@@ -61,6 +61,8 @@ jobs:
             test -f "/tmp/gpt-byggaren-engine-1.6.33/templates/$template"
             cp "/tmp/gpt-byggaren-engine-1.6.33/templates/$template" "templates/$template"
           done
+      - name: Generate portable EA project template resource
+        run: python scripts/generate_skill_template_bundle.py
       - name: Original engine project lint
         shell: bash
         run: |
@@ -105,6 +107,8 @@ jobs:
         run: python scripts/verify_migration_skill_archives.py
       - name: Smoke-test generated Skill data paths
         run: python scripts/smoke_test_packaged_skill_data.py
+      - name: Smoke-test full project lifecycle from extracted Skills
+        run: python scripts/smoke_test_packaged_project_flow.py
       - name: Upload migration build output
         if: success()
         uses: actions/upload-artifact@v4
