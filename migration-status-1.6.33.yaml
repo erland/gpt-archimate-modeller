@@ -34,7 +34,8 @@ verification:
   transitive_python_closure: ci_pass_40655636601
   packaged_declared_data_resources: ci_pass_40655872978
   dynamic_data_resource_closure: not_verified
-  root_relative_runtime_data_paths: blocked_pending_layout_mapping
+  root_relative_runtime_data_paths: packaged_asset_resolution_added_unverified
+  engine_directory_asset_validation: blocked_original_1_6_33_claude_skills_is_file_check
   project_tests: legacy_regression_ci_pass_runtime_tests_pending
   runtime_parity: not_run
 notes:
@@ -42,4 +43,4 @@ notes:
   - "Custom GPT kvarstår som historiskt stöd tills ny registry och CI verifierats."
   - "Migrationsplanen är påbörjad, inte en slutförd migration."
   - "Statisk Python-beroendegranskare tillagd; körning och icke-Python-resurser återstår."
-next_step: "Åtgärda ROOT-relativa schema-, metamodel- och mallvägar i Skill-paketen och verifiera funktionella körningar innan release."
+next_step: "Åtgärda verifierad 1.6.33-validatorinkompatibilitet för katalogbaserade Skill-assets utan att kringgå originalmotorns releasekontroll."
