@@ -8,6 +8,9 @@ from pack_project import pack
 from validate_project_zip import validate_zip
 
 ROOT=Path(__file__).resolve().parents[1]
+# Runtime Skills bundle project data below assets; source checkout uses repository root.
+if (ROOT / "assets" / "schemas").is_dir():
+    ROOT = ROOT / "assets"
 TEMPLATE=ROOT/"templates"/"ea-project-split"
 SCHEMA=ROOT/"schemas"/"new-project.schema.json"
 PARTITION_BY_PREFIX={"MOT":"motivation","STR":"strategy","BUS":"business","APP":"application",
