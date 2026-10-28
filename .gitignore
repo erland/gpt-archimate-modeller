@@ -7,6 +7,7 @@ __pycache__/
 # Generated build/release output
 build/
 dist/
+release-artifacts/
 
 # Generated E2E evidence
 examples/end-to-end/result/
