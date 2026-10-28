@@ -85,6 +85,14 @@ jobs:
           python /tmp/gpt-byggaren-engine-1.6.33/scripts/validate_distributions.py --project-root .
       - name: Verify transitive Skill Python imports
         run: python scripts/verify_skill_python_closure.py
+      - name: Audit non-Python resource candidates
+        run: python scripts/audit_skill_data_references.py --output skill-data-references.json
+      - name: Upload non-Python resource audit
+        uses: actions/upload-artifact@v4
+        with:
+          name: skill-data-references-1.6.33
+          path: skill-data-references.json
+          if-no-files-found: error
       - name: Verify scripts within five built runtime archives
         run: python scripts/verify_migration_skill_archives.py
       - name: Upload migration build output
