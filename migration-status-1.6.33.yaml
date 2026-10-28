@@ -42,9 +42,10 @@ verification:
   project_tests: legacy_regression_ci_pass_runtime_tests_pending
   runtime_parity: documented_partial_host_tests_pending
   runtime_parity_report: docs/runtime-parity-1.6.33.md
+  release_wiring_audit: ci_pass_40660592486_reports_legacy_release_blockers
 notes:
   - "Historisk 1.5-status bevaras i migration-status-1.5.yaml."
   - "Custom GPT kvarstår som historiskt stöd tills ny registry och CI verifierats."
   - "Migrationsplanen är påbörjad, inte en slutförd migration."
   - "Statisk Python-beroendegranskare tillagd; körning och icke-Python-resurser återstår."
-next_step: "Granska releaseworkflow och projekthygien, inför 1.6.33 som ordinarie byggkedja först efter host- och beteendetester."
+next_step: "Migrera ordinarie bygg- och releaseworkflow till kanonisk 1.6.33-byggare med exakt artefaktvalidering; behåll release_ready false tills värdmiljö- och beteendetester är bedömda."
