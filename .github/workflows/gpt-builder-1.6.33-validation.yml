@@ -64,6 +64,15 @@ jobs:
               raise SystemExit(f"GPT Byggaren project lint failed: {report.get('summary')}")
           PY
 
+      - name: Install pinned engine runtime templates
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p templates
+          for template in START-HERE.chat.md.tpl README.claude.md.tpl README.opencode.md.tpl README.plugin.md.tpl; do
+            test -f "/tmp/gpt-byggaren-engine-1.6.33/templates/$template"
+            cp "/tmp/gpt-byggaren-engine-1.6.33/templates/$template" "templates/$template"
+          done
       - name: Build five distributions with original engine
         shell: bash
         run: |
