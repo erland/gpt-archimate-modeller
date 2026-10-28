@@ -16,8 +16,8 @@ migration:
     - documentation_hygiene
     - final_verification
 progress:
-  active_step: five_distributions
-  completed_steps: []
+  active_step: documentation_hygiene
+  completed_steps: [inventory, project_model, engine, five_distributions]
   release_ready: false
 verification:
   engine_selftest: pass_external_workspace
@@ -27,7 +27,7 @@ verification:
   critical_resource_gate: ci_pass_40634529249
   canonical_section_coverage: 27_of_27_heading_sections_plus_preamble
   canonical_assembly: byte_exact_verified_against_original
-  new_project_model: staged_with_explicit_script_entrypoints_unverified
+  new_project_model: canonical_lint_and_build_verified
   canonical_engine_project_lint: ci_pass_with_3_fixture_duplicate_warnings
   project_build: ci_pass_40655093469_six_archives
   packaged_skill_scripts: ci_pass_40655636601
@@ -40,10 +40,11 @@ verification:
   packaged_project_lifecycle: ci_pass_40658238859_four_runtimes
   project_template_runtime_data: ci_pass_40658238859_four_packaged_skill_lifecycles
   project_tests: legacy_regression_ci_pass_runtime_tests_pending
-  runtime_parity: not_run
+  runtime_parity: documented_partial_host_tests_pending
+  runtime_parity_report: docs/runtime-parity-1.6.33.md
 notes:
   - "Historisk 1.5-status bevaras i migration-status-1.5.yaml."
   - "Custom GPT kvarstår som historiskt stöd tills ny registry och CI verifierats."
   - "Migrationsplanen är påbörjad, inte en slutförd migration."
   - "Statisk Python-beroendegranskare tillagd; körning och icke-Python-resurser återstår."
-next_step: "Granska övriga data- och verktygsberoenden samt sammanställ runtimeparitet, återstående begränsningar och releasehygien."
+next_step: "Granska releaseworkflow och projekthygien, inför 1.6.33 som ordinarie byggkedja först efter host- och beteendetester."
