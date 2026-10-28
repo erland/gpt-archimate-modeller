@@ -57,7 +57,10 @@ skills:
       description: "Öppna, skapa, ändra, migrera, validera och paketera EA-projekt."
       source: canonical/skills/project-workflow/behavior.md
       references: []
-      assets: []
+      assets:
+        - schemas
+        - metamodel
+        - templates/ea-project-split
       scripts:
         - scripts/project_control.py
         - scripts/update_project.py
@@ -80,7 +83,9 @@ skills:
       description: "Modellera ArchiMate-element, relationer, identiteter och evidens."
       source: canonical/skills/archimate-modeling/behavior.md
       references: []
-      assets: []
+      assets:
+        - schemas
+        - metamodel
       scripts:
         - scripts/apply_changes.py
         - scripts/identity.py
@@ -96,7 +101,9 @@ skills:
       description: "Analysera modellen med queries, påverkan, rapporter och views."
       source: canonical/skills/architecture-analysis/behavior.md
       references: []
-      assets: []
+      assets:
+        - schemas
+        - metamodel
       scripts:
         - scripts/query.py
         - scripts/impact_analysis.py
@@ -113,7 +120,9 @@ skills:
       description: "ArchiMate Model Exchange-import/export med staging och spårbarhet."
       source: canonical/skills/interoperability/behavior.md
       references: []
-      assets: []
+      assets:
+        - schemas
+        - metamodel
       scripts:
         - scripts/import_model_exchange.py
         - scripts/export_model_exchange.py
