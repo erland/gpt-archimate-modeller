@@ -22,6 +22,8 @@ progress:
 verification:
   engine_selftest: pass_external_workspace
   repository_inventory: targeted_sources_reviewed
+  python_dependency_audit: ci_configured_awaiting_run
+  non_python_resource_audit: pending
   project_build: not_run
   project_tests: not_run
   runtime_parity: not_run
@@ -30,4 +32,4 @@ notes:
   - "Custom GPT kvarstår som historiskt stöd tills ny registry och CI verifierats."
   - "Migrationsplanen är påbörjad, inte en slutförd migration."
   - "Statisk Python-beroendegranskare tillagd; körning och icke-Python-resurser återstår."
-next_step: "Kör Python-beroendegranskaren och komplettera manuell kartläggning av YAML, scheman, mallar och runtimeverktyg."
+next_step: "Verifiera CI-granskningens JSON-artefakt och inventera YAML-, schema- och mallreferenser innan projektmodell aktiveras."
