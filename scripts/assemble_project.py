@@ -6,6 +6,9 @@ import sys
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
+# Runtime Skills bundle project data below assets; source checkout uses repository root.
+if (ROOT / "assets" / "schemas").is_dir():
+    ROOT = ROOT / "assets"
 PACKAGE_SCHEMA = ROOT / "schemas" / "ea-package.schema.json"
 LOGICAL_SCHEMA = ROOT / "schemas" / "ea-project.schema.json"
 
