@@ -133,6 +133,8 @@ jobs:
           if-no-files-found: error
       - name: Smoke-test packaged analysis and Model Exchange roundtrip
         run: python scripts/smoke_test_packaged_analysis_exchange.py
+      - name: Smoke-test packaged model changes
+        run: python scripts/smoke_test_packaged_model_change.py
       - name: Validate exact 1.6.33 archives and checksums
         run: python scripts/validate_release_assets_1_6_33.py --version 1.0.0-migration --dir dist
       - name: Re-run via shared canonical build entrypoint
