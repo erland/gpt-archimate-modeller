@@ -9,8 +9,8 @@ ROOT = Path(__file__).resolve().parents[1]
 # Runtime Skills bundle project data below assets; source checkout uses repository root.
 if (ROOT / "assets" / "schemas").is_dir():
     ROOT = ROOT / "assets"
-PACKAGE_SCHEMA = ROOT / "schemas" / "ea-package.schema.json"
-LOGICAL_SCHEMA = ROOT / "schemas" / "ea-project.schema.json"
+PACKAGE_SCHEMA = (ROOT / "assets" / "ea-package.schema.json") if (ROOT / "assets" / "ea-package.schema.json").is_file() else ROOT / "schemas" / "ea-package.schema.json"
+LOGICAL_SCHEMA = (ROOT / "assets" / "ea-project.schema.json") if (ROOT / "assets" / "ea-project.schema.json").is_file() else ROOT / "schemas" / "ea-project.schema.json"
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from identity import ID_RE, expected_prefix_for_type
