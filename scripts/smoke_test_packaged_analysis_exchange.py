@@ -21,7 +21,7 @@ for runtime,(pattern,prefix) in targets.items():
             project=stage/"parity"
             run("project-workflow","new_project.py","--id","parity","--name","Parity","--output-dir",stage)
             query=stage/"query.yaml"
-            query.write_text("id: Q-PARITY\nfrom: elements\n",encoding="utf-8")
+            query.write_text("query:\n  id: Q-PARITY\n  select: elements\n",encoding="utf-8")
             output=run("architecture-analysis","query.py",project,query,"--json")
             assert "query_result" in json.loads(output)
             xml=stage/"model.xml"
