@@ -26,7 +26,7 @@ verification:
   non_python_resource_audit: candidate_scanner_ci_pass_40634222500
   critical_resource_gate: ci_pass_40634529249
   canonical_section_coverage: 28_of_28_source_sections_mapped
-  new_project_model: staged_unverified
+  new_project_model: staged_with_explicit_script_entrypoints_unverified
   project_build: not_run
   project_tests: not_run
   runtime_parity: not_run
