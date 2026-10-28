@@ -21,8 +21,8 @@ cp templates/README.archimate.plugin.md.tpl templates/README.plugin.md.tpl
 cp templates/START-HERE.archimate.chat.md.tpl templates/START-HERE.chat.md.tpl
 python scripts/generate_skill_template_bundle.py
 python "$ENGINE_ROOT/scripts/build_distributions.py" --project-root . --version "$VERSION"
-python scripts/build_archimate_engine_zip.py --version "$VERSION"
 python "$ENGINE_ROOT/scripts/validate_distributions.py" --project-root .
+python scripts/build_archimate_engine_zip.py --version "$VERSION"
 python scripts/verify_project_archive_hygiene.py --version "$VERSION"
 python scripts/verify_skill_python_closure.py
 python scripts/verify_migration_skill_archives.py
