@@ -32,6 +32,8 @@ verification:
   project_build: ci_pass_40655093469_six_archives
   packaged_skill_scripts: ci_pass_40655636601
   transitive_python_closure: ci_pass_40655636601
+  packaged_declared_data_resources: ci_pass_40655872978
+  dynamic_data_resource_closure: not_verified
   project_tests: legacy_regression_ci_pass_runtime_tests_pending
   runtime_parity: not_run
 notes:
@@ -39,4 +41,4 @@ notes:
   - "Custom GPT kvarstår som historiskt stöd tills ny registry och CI verifierats."
   - "Migrationsplanen är påbörjad, inte en slutförd migration."
   - "Statisk Python-beroendegranskare tillagd; körning och icke-Python-resurser återstår."
-next_step: "Kontrollera Skill-specifika schemas och andra dataresurser samt kör funktionella runtime-smoketester före release."
+next_step: "Granska icke-Python-resursrapporten, mappa faktiska schema- och datainput per Skill och kör funktionella runtime-smoketester."
