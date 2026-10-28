@@ -37,7 +37,8 @@ verification:
   root_relative_runtime_data_paths: packaged_asset_resolution_added_unverified
   engine_directory_asset_validation: resolved_by_file_level_assets_ci_pass_40656891756
   packaged_flat_assets_runtime_path: ci_pass_40657307001_16_skill_runtime_smokes
-  project_template_runtime_data: not_verified
+  packaged_project_lifecycle: ci_pass_40658238859_four_runtimes
+  project_template_runtime_data: ci_pass_40658238859_four_packaged_skill_lifecycles
   project_tests: legacy_regression_ci_pass_runtime_tests_pending
   runtime_parity: not_run
 notes:
@@ -45,4 +46,4 @@ notes:
   - "Custom GPT kvarstår som historiskt stöd tills ny registry och CI verifierats."
   - "Migrationsplanen är påbörjad, inte en slutförd migration."
   - "Statisk Python-beroendegranskare tillagd; körning och icke-Python-resurser återstår."
-next_step: "Paketera projektmallens samtliga filer med bevarad katalogstruktur och kör ett verkligt new_project samt valideringsflöde i uppackade runtime-Skills."
+next_step: "Granska övriga data- och verktygsberoenden samt sammanställ runtimeparitet, återstående begränsningar och releasehygien."
