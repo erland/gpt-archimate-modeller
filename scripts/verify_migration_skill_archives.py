@@ -11,7 +11,11 @@ import yaml
 root = Path(__file__).resolve().parents[1]
 cfg = yaml.safe_load((root / "gpt-project.yaml").read_text(encoding="utf-8"))
 dist = root / "dist"
-expected = {s["id"]: [Path(p).name for p in s.get("scripts", [])] for s in cfg["skills"]["definitions"]}
+expected = {
+    s["id"]: {category: [Path(p).name for p in s.get(category, [])]
+               for category in ("scripts", "references", "assets")}
+    for s in cfg["skills"]["definitions"]
+}
 patterns = {
     "chat": ("*-chat-*.zip", "assistant/skills/"),
     "claude_skills": ("*-claude-skills-*.zip", "skills/"),
@@ -26,12 +30,14 @@ for runtime, (pattern, prefix) in patterns.items():
         continue
     with zipfile.ZipFile(archives[0]) as archive:
         names = set(archive.namelist())
-        for skill_id, scripts in expected.items():
+        for skill_id, resources in expected.items():
             if prefix + skill_id + "/SKILL.md" not in names:
                 errors.append(f"{runtime}/{skill_id}: missing SKILL.md")
-            for script in scripts:
-                if prefix + skill_id + "/scripts/" + script not in names:
-                    errors.append(f"{runtime}/{skill_id}: missing script {script}")
+            for category, basenames in resources.items():
+                for name in basenames:
+                    resource = prefix + skill_id + "/" + category + "/" + name
+                    if resource not in names and not any(p.startswith(resource + "/") for p in names):
+                        errors.append(f"{runtime}/{skill_id}: missing {category} resource {name}")
 # Claude Project is a text-first package: inspect instructions, not installed host Skills.
 claude = sorted(dist.glob("*-claude-project-*.zip"))
 if len(claude) != 1:
