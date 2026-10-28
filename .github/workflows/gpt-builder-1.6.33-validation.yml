@@ -148,5 +148,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: gpt-byggaren-1.6.33-migration-distributions
-          path: dist/*.zip
+          path: |
+            dist/*.zip
+            dist/DELIVERY-MANIFEST.json
+            dist/SHA256SUMS.txt
           if-no-files-found: error
