@@ -93,6 +93,7 @@ jobs:
       - name: Build and selftest standalone ArchiMate Engine ZIP
         run: |
           python scripts/add_runtime_requirements.py --version 1.0.0-migration
+          python scripts/inject_plugin_engine_fallback.py --version 1.0.0-migration
           python scripts/build_archimate_engine_zip.py --version 1.0.0-migration
           python scripts/verify_archimate_engine_zip.py --version 1.0.0-migration
       - name: Verify transitive Skill Python imports
